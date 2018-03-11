@@ -1,7 +1,6 @@
 import React from 'react'
 import { Stage, Layer, Rect, Text } from 'react-konva'
 
-import { ABI } from '../helpers/ABI'
 import canvasBg from '../assets/images/bg.png'
 import CanvasPixel from '../components/CanvasPixel'
 import withWeb3 from '../hoc/withWeb3'
@@ -29,6 +28,17 @@ class Canvas extends React.Component {
   componentDidMount () {
     this.watchForChanges()
 
+    // Temporary store canvas in local storage
+    const tempCanvas = window.localStorage.getItem('tempCanvas')
+
+    if (tempCanvas) {
+      this.setState({
+        pixels: JSON.parse(tempCanvas),
+        isLoading: false,
+      })
+      return
+    }
+
     this.props.Contract.getArtwork(0, { gas: 3000000 }, (error, result) => {
       if (!error) {
         const pixelsRGB = result.map(color => convertColorToRGB(color))
@@ -36,6 +46,8 @@ class Canvas extends React.Component {
           pixels: pixelsRGB,
           isLoading: false,
         })
+
+        window.localStorage.setItem('tempCanvas', JSON.stringify(pixelsRGB))
       }
       else {
         console.error(error)
@@ -87,8 +99,10 @@ class Canvas extends React.Component {
       <div>
         <h2>Canvas</h2>
         {this.state.isLoading && <p>Canvas loading...</p>}
-        <Stage width={canvasSize} height={canvasSize}
-               style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize, 'width': canvasSize }}>
+        <Stage
+            width={canvasSize}
+            height={canvasSize}
+            style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize, 'width': canvasSize }}>
           <Layer>
             {
               this.state.pixels.map((color, index) =>
@@ -102,7 +116,6 @@ class Canvas extends React.Component {
                 />
               )
             }
-
           </Layer>
         </Stage>
       </div>
