@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stage, Layer, Rect, Text } from 'react-konva'
+import { Stage, Layer, Line} from 'react-konva'
 
 import canvasBg from '../assets/images/bg.png'
 import CanvasPixel from '../components/CanvasPixel'
@@ -12,6 +12,20 @@ const convertColorToRGB = (color) => {
 
   return `rgb(${red}, ${green}, ${blue})`
 }
+
+const drawGrid = (pixelSize, canvasSize) => {
+  let grid = []
+
+  for (let i = 0; i <= (canvasSize / pixelSize); i++) {
+    const position = i * pixelSize
+    const length = canvasSize
+    grid.push(<Line points={[position, 0, position, length]} stroke="#eee" strokeWidth="1" key={`v-${i}`} />)
+    grid.push(<Line points={[0, position, length, position]} stroke="#eee" strokeWidth="1" key={`h-${i}`} />)
+  }
+
+  return grid
+}
+
 
 class Canvas extends React.Component {
   pixelSize = 14
@@ -102,7 +116,8 @@ class Canvas extends React.Component {
         <Stage
             width={canvasSize}
             height={canvasSize}
-            style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize, 'width': canvasSize }}>
+            style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize, 'width': canvasSize }}
+        >
           <Layer>
             {
               this.state.pixels.map((color, index) =>
@@ -116,6 +131,10 @@ class Canvas extends React.Component {
                 />
               )
             }
+          </Layer>
+
+          <Layer>
+            { drawGrid(this.pixelSize, canvasSize) }
           </Layer>
         </Stage>
       </div>
