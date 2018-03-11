@@ -129,7 +129,7 @@ export const ABI = [
         "type": "uint32"
       },
       {
-        "name": "index",
+        "name": "_index",
         "type": "uint32"
       },
       {
@@ -185,22 +185,17 @@ export const ABI = [
     "inputs": [
       {
         "indexed": false,
-        "name": "_artworkId",
+        "name": "artworkId",
         "type": "uint32"
       },
       {
         "indexed": false,
-        "name": "_x",
-        "type": "uint8"
+        "name": "index",
+        "type": "uint32"
       },
       {
         "indexed": false,
-        "name": "_y",
-        "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "name": "_color",
+        "name": "color",
         "type": "uint8"
       }
     ],
