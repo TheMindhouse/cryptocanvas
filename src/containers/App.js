@@ -9,20 +9,25 @@ import Home from './Homepage'
 import Canvas from './Canvas'
 import About from './About'
 
-const App = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-      </ul>
+class App extends React.Component {
+  render () {
+    return (
+      <Router>
+        <div>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/about'>About</Link></li>
+          </ul>
 
-      <hr />
+          <hr />
 
-      <Route exact path='/' component={Home} />
-      <Route path='/about' component={About} />
-      <Route path='/canvas/:id' component={Canvas} />
-    </div>
-  </Router>
-)
+          <Route exact path='/' component={Canvas} />
+          <Route path='/about' component={About} />
+          <Route path='/canvas/:id' component={Canvas} />
+        </div>
+      </Router>
+    )
+  }
+}
+
 export default App
