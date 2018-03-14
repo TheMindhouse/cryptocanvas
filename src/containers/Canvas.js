@@ -4,31 +4,11 @@ import { Stage, Layer, Line} from 'react-konva'
 import canvasBg from '../assets/images/bg.png'
 import CanvasPixel from '../components/CanvasPixel'
 import withWeb3 from '../hoc/withWeb3'
-
-const convertColorToRGB = (color) => {
-  const red = Math.round(((color & 0xE0) >>> 5) / 7.0 * 255.0)
-  const green = Math.round(((color & 0x1C) >>> 2) / 7.0 * 255.0)
-  const blue = Math.round((color & 0x03) / 3.0 * 255.0)
-
-  return `rgb(${red}, ${green}, ${blue})`
-}
-
-const drawGrid = (pixelSize, canvasSize) => {
-  let grid = []
-
-  for (let i = 0; i <= (canvasSize / pixelSize); i++) {
-    const position = i * pixelSize
-    const length = canvasSize
-    grid.push(<Line points={[position, 0, position, length]} stroke="#eee" strokeWidth="1" key={`v-${i}`} />)
-    grid.push(<Line points={[0, position, length, position]} stroke="#eee" strokeWidth="1" key={`h-${i}`} />)
-  }
-
-  return grid
-}
-
+import { Picker } from '../components/Picker/Picker'
+import { convertColorToRGB } from '../helpers/colors'
 
 class Canvas extends React.Component {
-  pixelSize = 14
+  pixelSize = 10
   canvasId = 0
 
   constructor () {
@@ -36,6 +16,8 @@ class Canvas extends React.Component {
     this.state = {
       pixels: [],
       isLoading: true,
+      currentColorHex: null,
+      currentColorIndex: null,
     }
   }
 
@@ -56,6 +38,7 @@ class Canvas extends React.Component {
     this.props.Contract.getArtwork(0, { gas: 3000000 }, (error, result) => {
       if (!error) {
         const pixelsRGB = result.map(color => convertColorToRGB(color))
+                                .map(([r, g, b]) => `rgb(${r}, ${g}, ${b})`)
         this.setState({
           pixels: pixelsRGB,
           isLoading: false,
@@ -69,6 +52,14 @@ class Canvas extends React.Component {
           isLoading: false,
         })
       }
+    })
+  }
+
+  changeColor = ({ color, index }) => {
+    console.log(`Change current color to (${color}, ${index})`);
+    this.setState({
+      currentColorHex: color,
+      currentColorIndex: index,
     })
   }
 
@@ -110,13 +101,12 @@ class Canvas extends React.Component {
     const gridCols = Math.sqrt(this.state.pixels.length)
     const canvasSize = gridCols * this.pixelSize
     return (
-      <div>
-        <h2>Canvas</h2>
+      <div style={{ display: 'flex' }}>
         {this.state.isLoading && <p>Canvas loading...</p>}
         <Stage
             width={canvasSize}
             height={canvasSize}
-            style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize, 'width': canvasSize }}
+            style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize * 1.6, 'width': canvasSize }}
         >
           <Layer>
             {
@@ -133,10 +123,12 @@ class Canvas extends React.Component {
             }
           </Layer>
 
-          <Layer>
-            { drawGrid(this.pixelSize, canvasSize) }
-          </Layer>
         </Stage>
+
+        <Picker
+          changeColor={this.changeColor}
+          currentColor={this.state.currentColorIndex}
+        />
       </div>
     )
   }

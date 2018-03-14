@@ -1,0 +1,10 @@
+.Picker {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.CurrentColor {
+    width: 100%;
+    height: 32px;
+    margin-bottom: 24px;
+}
