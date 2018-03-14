@@ -18,6 +18,7 @@ class Canvas extends React.Component {
       isLoading: true,
       currentColorHex: null,
       currentColorIndex: null,
+      hovering: null,
     }
   }
 
@@ -156,6 +157,17 @@ class Canvas extends React.Component {
     }
   }
 
+  onMouseOver = () => {
+    console.log('mouseover');
+    const stage = this.refs.canvas.getStage()
+    const gridCols = Math.sqrt(this.state.pixels.length)
+
+    const pos = stage.getPointerPosition()
+    const hovering = Math.floor(pos.y / this.pixelSize) * gridCols + Math.floor(pos.x / this.pixelSize)
+    this.setState({ hovering })
+    console.log(pos);
+  }
+
   render () {
     const gridCols = Math.sqrt(this.state.pixels.length)
     const canvasSize = gridCols * this.pixelSize
@@ -174,6 +186,7 @@ class Canvas extends React.Component {
             style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize * 1.6, 'width': canvasSize }}
             draggable="true"
             dragBoundFunc={this.dragBoundFunc}
+            onMouseOver={this.onMouseOver}
         >
           <Layer>
             {
@@ -188,6 +201,16 @@ class Canvas extends React.Component {
                 />
               )
             }
+          </Layer>
+
+          <Layer>
+            <CanvasPixel
+              color="rgb(0, 0, 0)"
+              index={this.state.hovering}
+              pixelSize={this.pixelSize}
+              gridCols={gridCols}
+              handlePixelClick={this.handlePixelClick}
+            />
           </Layer>
 
         </Stage>
