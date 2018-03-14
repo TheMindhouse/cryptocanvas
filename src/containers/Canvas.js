@@ -97,16 +97,83 @@ class Canvas extends React.Component {
     })
   }
 
+  setCanvasScale = (newScale) => {
+    console.log(`Set canvas zoom to ${newScale * 100}%`)
+
+    const stage = this.refs.canvas.getStage()
+
+    stage.scale({ x: newScale, y: newScale })
+
+
+    const x = stage.x()
+    const y = stage.y()
+
+    const maxX = (stage.scaleX() - 1) * stage.getWidth()
+    const maxY = (stage.scaleY() - 1) * stage.getHeight()
+
+    const newX = (x > 0)
+      ? 0
+      : (x < -maxX)
+        ? -maxX
+        : x
+    const newY = (y > 0)
+      ? 0
+      : (y < -maxY)
+        ? -maxY
+        : y
+
+    const newPos = {
+      x: newX,
+      y: newY
+    };
+    stage.position(newPos);
+
+    stage.batchDraw();
+  }
+
+  dragBoundFunc = (pos) => {
+    const stage = this.refs.canvas.getStage()
+
+    const x = pos.x
+    const y = pos.y
+    const maxX = (stage.scaleX() - 1) * stage.getWidth()
+    const maxY = (stage.scaleY() - 1) * stage.getHeight()
+
+    const newX = (x > 0)
+      ? 0
+      : (x < -maxX)
+        ? -maxX
+        : x
+    const newY = (y > 0)
+      ? 0
+      : (y < -maxY)
+        ? -maxY
+        : y
+
+    return {
+      x: newX,
+      y: newY
+    }
+  }
+
   render () {
     const gridCols = Math.sqrt(this.state.pixels.length)
     const canvasSize = gridCols * this.pixelSize
     return (
       <div style={{ display: 'flex' }}>
         {this.state.isLoading && <p>Canvas loading...</p>}
+        <div>
+          <p onClick={() => this.setCanvasScale(1)}>100%</p>
+          <p onClick={() => this.setCanvasScale(1.5)}>150%</p>
+          <p onClick={() => this.setCanvasScale(2)}>200%</p>
+        </div>
         <Stage
+            ref="canvas"
             width={canvasSize}
             height={canvasSize}
             style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize * 1.6, 'width': canvasSize }}
+            draggable="true"
+            dragBoundFunc={this.dragBoundFunc}
         >
           <Layer>
             {
