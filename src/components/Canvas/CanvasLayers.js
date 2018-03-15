@@ -45,9 +45,14 @@ class CanvasLayers extends React.Component {
    * Keeps pixel color popup directly under the mouse pointer
    */
   updatePixelColorPopupPosition = () => {
-    const mousePos = this.props.stage.getPointerPosition()
-    this.pixelColorPopup.x((mousePos.x / this.props.stage.scaleX()) - (this.props.pixelSize - 2) / 2)
-    this.pixelColorPopup.y((mousePos.y / this.props.stage.scaleY()) - (this.props.pixelSize - 2) / 2)
+    const {
+      stage,
+      scale,
+      pixelSize,
+    } = this.props
+    const mousePos = stage.getPointerPosition()
+    this.pixelColorPopup.x((mousePos.x / scale) - (stage.x() / scale) - (pixelSize - 2) / 2)
+    this.pixelColorPopup.y((mousePos.y / scale) - (stage.y() / scale) - (pixelSize - 2) / 2)
     this.pixelColorPopup.show()
     this.layerHighlight.draw()
   }

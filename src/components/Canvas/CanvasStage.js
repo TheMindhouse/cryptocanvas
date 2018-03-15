@@ -92,6 +92,7 @@ class CanvasStage extends React.Component {
                         gridColumns={gridColumns}
                         currentColorHex={this.props.currentColorHex}
                         stage={this.stage}
+                        scale={this.state.scale}
           />
 
         </Stage>
