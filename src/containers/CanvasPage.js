@@ -96,42 +96,6 @@ class CanvasPage extends React.Component {
     })
   }
 
-  onMouseOver = (evt) => {
-    if (!this.state.currentColorIndex) {
-      return
-    }
-    console.log(evt);
-
-    var box = evt.target
-    this.refs.layer2.clear()
-    this.refs.highlight.x(box.x())
-    this.refs.highlight.y(box.y())
-    this.refs.highlight.show()
-
-    const stage = this.refs.canvas.getStage()
-    const mousePos = stage.getPointerPosition()
-    this.refs.highlightColor.x((mousePos.x / stage.scaleX()) - (this.pixelSize - 2) / 2)
-    this.refs.highlightColor.y((mousePos.y / stage.scaleY()) - (this.pixelSize - 2) / 2)
-    this.refs.highlightColor.show()
-    this.refs.layer2.draw()
-  }
-
-  onMouseOut = (evt) => {
-    console.log(evt);
-
-    this.refs.highlight.hide()
-    this.refs.layer2.draw()
-  }
-
-  onMouseMove = (evt) => {
-    console.log(evt);
-    const stage = this.refs.canvas.getStage()
-    const mousePos = stage.getPointerPosition()
-    this.refs.highlightColor.x((mousePos.x / stage.scaleX()) - (this.pixelSize - 2) / 2)
-    this.refs.highlightColor.y((mousePos.y / stage.scaleY()) - (this.pixelSize - 2) / 2)
-    this.refs.layer2.draw()
-  }
-
   render () {
 
     return (

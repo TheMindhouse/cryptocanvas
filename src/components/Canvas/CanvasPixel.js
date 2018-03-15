@@ -3,8 +3,8 @@ import { Rect } from 'react-konva'
 
 class CanvasPixel extends React.PureComponent {
   render () {
-    const x = (this.props.index % this.props.gridCols) * this.props.pixelSize
-    const y = Math.floor(this.props.index / this.props.gridCols) * this.props.pixelSize
+    const x = (this.props.index % this.props.gridColumns) * this.props.pixelSize
+    const y = Math.floor(this.props.index / this.props.gridColumns) * this.props.pixelSize
     return (
       <Rect
         ref="pixel"
