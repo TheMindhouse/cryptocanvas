@@ -7,7 +7,7 @@ import withWeb3 from '../hoc/withWeb3'
 import { Picker } from '../components/Picker/Picker'
 import { convertColorToRGB } from '../helpers/colors'
 
-class Canvas extends React.Component {
+class CanvasPage extends React.Component {
   pixelSize = 10
   canvasId = 0
 
@@ -261,7 +261,7 @@ class Canvas extends React.Component {
               width={this.pixelSize - 2}
               height={this.pixelSize - 2}
               fill={this.state.currentColorHex}
-              visible={true}
+              visible={false}
               cornerRadius={this.pixelSize / 4}
               listening={false}
               stroke="#fff"
@@ -283,4 +283,4 @@ class Canvas extends React.Component {
   }
 }
 
-export default withWeb3(Canvas)
+export default withWeb3(CanvasPage)

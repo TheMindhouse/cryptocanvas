@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 import Home from './Homepage'
-import Canvas from './Canvas'
+import CanvasPage from './CanvasPage'
 import About from './About'
 
 class App extends React.Component {
@@ -21,9 +21,9 @@ class App extends React.Component {
 
           <hr />
 
-          <Route exact path='/' component={Canvas} />
+          <Route exact path='/' component={CanvasPage} />
           <Route path='/about' component={About} />
-          <Route path='/canvas/:id' component={Canvas} />
+          <Route path='/canvas/:id' component={CanvasPage} />
         </div>
       </Router>
     )
