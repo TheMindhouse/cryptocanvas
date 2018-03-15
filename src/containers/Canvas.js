@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stage, Layer, Line} from 'react-konva'
+import { Stage, Layer, Rect } from 'react-konva'
 
 import canvasBg from '../assets/images/bg.png'
 import CanvasPixel from '../components/CanvasPixel'
@@ -19,6 +19,7 @@ class Canvas extends React.Component {
       currentColorHex: null,
       currentColorIndex: null,
       hovering: null,
+      scale: 1
     }
   }
 
@@ -68,7 +69,7 @@ class Canvas extends React.Component {
     const color = Math.floor(Math.random() * Math.floor(256))
     console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
 
-    // this.updatePixel({ index, color })
+    this.updatePixel({ index, color })
     this.props.Contract.setPixel(this.canvasId, index, color)
   }
 
@@ -130,6 +131,8 @@ class Canvas extends React.Component {
     stage.position(newPos);
 
     stage.batchDraw();
+
+    this.setState({ scale: newScale })
   }
 
   dragBoundFunc = (pos) => {
@@ -157,22 +160,55 @@ class Canvas extends React.Component {
     }
   }
 
-  onMouseOver = () => {
-    console.log('mouseover');
-    const stage = this.refs.canvas.getStage()
-    const gridCols = Math.sqrt(this.state.pixels.length)
+  onMouseOver = (evt) => {
+    if (!this.state.currentColorIndex) {
+      return
+    }
+    console.log(evt);
 
-    const pos = stage.getPointerPosition()
-    const hovering = Math.floor(pos.y / this.pixelSize) * gridCols + Math.floor(pos.x / this.pixelSize)
-    this.setState({ hovering })
-    console.log(pos);
+    var box = evt.target
+    // console.log(`IN -> `, box);
+    // console.log('fill', box.attrs.fillOriginal, 'opacity', box.attrs.opacityOriginal);
+    this.refs.layer2.clear()
+    this.refs.highlight.x(box.x())
+    this.refs.highlight.y(box.y())
+    this.refs.highlight.show()
+    // this.refs.highlight.draw()
+
+    const stage = this.refs.canvas.getStage()
+    const mousePos = stage.getPointerPosition()
+    this.refs.highlightColor.x((mousePos.x / stage.scaleX()) - (this.pixelSize - 2) / 2)
+    this.refs.highlightColor.y((mousePos.y / stage.scaleY()) - (this.pixelSize - 2) / 2)
+    this.refs.highlightColor.show()
+    this.refs.layer2.draw()
+    // box.draw();
+    // this.refs.layer2.add(box)
+    // this.refs.layer2.draw()
+  }
+
+  onMouseOut = (evt) => {
+    console.log(evt);
+    var box = evt.target;
+
+    this.refs.highlight.hide()
+    this.refs.layer2.draw()
+  }
+
+  onMouseMove = (evt) => {
+    console.log(evt);
+    const stage = this.refs.canvas.getStage()
+    const mousePos = stage.getPointerPosition()
+    this.refs.highlightColor.x((mousePos.x / stage.scaleX()) - (this.pixelSize - 2) / 2)
+    this.refs.highlightColor.y((mousePos.y / stage.scaleY()) - (this.pixelSize - 2) / 2)
+    this.refs.layer2.draw()
   }
 
   render () {
     const gridCols = Math.sqrt(this.state.pixels.length)
     const canvasSize = gridCols * this.pixelSize
+
     return (
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
         {this.state.isLoading && <p>Canvas loading...</p>}
         <div>
           <p onClick={() => this.setCanvasScale(1)}>100%</p>
@@ -183,12 +219,13 @@ class Canvas extends React.Component {
             ref="canvas"
             width={canvasSize}
             height={canvasSize}
-            style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize * 1.6, 'width': canvasSize }}
+            style={{ 'background': `url(${canvasBg})`, 'backgroundSize': this.pixelSize * this.state.scale, 'width': canvasSize, 'cursor': 'pointer' }}
             draggable="true"
             dragBoundFunc={this.dragBoundFunc}
-            onMouseOver={this.onMouseOver}
         >
-          <Layer>
+          <Layer ref="layer"
+                 onMouseOver={this.onMouseOver}
+          >
             {
               this.state.pixels.map((color, index) =>
                 <CanvasPixel
@@ -203,16 +240,37 @@ class Canvas extends React.Component {
             }
           </Layer>
 
-          <Layer>
-            <CanvasPixel
-              color="rgb(0, 0, 0)"
-              index={this.state.hovering}
-              pixelSize={this.pixelSize}
-              gridCols={gridCols}
-              handlePixelClick={this.handlePixelClick}
+          <Layer ref="layer2"
+                 width={canvasSize}
+                 height={canvasSize}
+                 onMouseOut={this.onMouseOut}
+          >
+            <Rect
+              ref="highlight"
+              width={this.pixelSize}
+              height={this.pixelSize}
+              fill="#000"
+              opacity="0.4"
+              stroke="#fff"
+              strokeWidth="2"
+              visible={false}
+              onMouseMove={this.onMouseMove}
+            />
+            <Rect
+              ref="highlightColor"
+              x="0"
+              y="0"
+              width={this.pixelSize - 2}
+              height={this.pixelSize - 2}
+              fill={this.state.currentColorHex}
+              visible={true}
+              cornerRadius={this.pixelSize / 4}
+              listening={false}
+              shadowColor="#000"
+              shadowOpacity="0.6"
+              shadowBlur={this.pixelSize * 2}
             />
           </Layer>
-
         </Stage>
 
         <Picker
