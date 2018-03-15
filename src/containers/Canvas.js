@@ -251,8 +251,6 @@ class Canvas extends React.Component {
               height={this.pixelSize}
               fill="#000"
               opacity="0.4"
-              stroke="#fff"
-              strokeWidth="2"
               visible={false}
               onMouseMove={this.onMouseMove}
             />
@@ -266,8 +264,11 @@ class Canvas extends React.Component {
               visible={true}
               cornerRadius={this.pixelSize / 4}
               listening={false}
+              stroke="#fff"
+              strokeWidth="1"
               shadowColor="#000"
               shadowOpacity="0.6"
+              strokeScaleEnabled={false}
               shadowBlur={this.pixelSize * 2}
             />
           </Layer>
