@@ -24,26 +24,25 @@ class CanvasPage extends React.Component {
     this.watchForChanges()
 
     // Temporary store canvas in local storage
-    const tempCanvas = window.localStorage.getItem('tempCanvas')
-
-    if (tempCanvas) {
-      this.setState({
-        pixels: JSON.parse(tempCanvas),
-        isLoading: false,
-      })
-      return
-    }
+    // const tempCanvas = window.localStorage.getItem('tempCanvas')
+    //
+    // if (tempCanvas) {
+    //   this.setState({
+    //     pixels: JSON.parse(tempCanvas),
+    //     isLoading: false,
+    //   })
+    //   return
+    // }
 
     this.props.Contract.getArtwork(0, { gas: 3000000 }, (error, result) => {
       if (!error) {
-        const pixelsRGB = result.map(color => convertColorToRGB(color))
-                                .map(([r, g, b]) => `rgb(${r}, ${g}, ${b})`)
+        const pixels = result.map(color => parseInt(color))
         this.setState({
-          pixels: pixelsRGB,
+          pixels,
           isLoading: false,
         })
 
-        window.localStorage.setItem('tempCanvas', JSON.stringify(pixelsRGB))
+        window.localStorage.setItem('tempCanvas', JSON.stringify(pixels))
       }
       else {
         console.error(error)
@@ -63,7 +62,7 @@ class CanvasPage extends React.Component {
   }
 
   handlePixelClick = ({ index, x, y }) => {
-    const color = Math.floor(Math.random() * Math.floor(256))
+    const color = this.state.currentColorIndex
     console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
 
     this.updatePixel({ index, color })
@@ -73,7 +72,7 @@ class CanvasPage extends React.Component {
   updatePixel = ({ index, color }) => {
     const updatedPixels = [
       ...this.state.pixels.slice(0, index),
-      convertColorToRGB(color),
+      color,
       ...this.state.pixels.slice(index + 1, this.state.pixels.length)
     ]
 

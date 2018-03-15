@@ -1,5 +1,6 @@
 import React from 'react'
 import { Rect } from 'react-konva'
+import { hexPalette } from '../../helpers/colors'
 
 class CanvasPixel extends React.PureComponent {
   render () {
@@ -12,7 +13,7 @@ class CanvasPixel extends React.PureComponent {
         y={y}
         width={this.props.pixelSize}
         height={this.props.pixelSize}
-        fill={this.props.color}
+        fill={hexPalette[this.props.color]}
         opacity={(this.props.color === 'rgb(255, 255, 255)') ? 0 : 1}
       />
     )
