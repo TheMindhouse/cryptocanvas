@@ -93,6 +93,7 @@ class CanvasStage extends React.Component {
                         currentColorHex={this.props.currentColorHex}
                         stage={this.stage}
                         scale={this.state.scale}
+                        changePixelColor={this.props.changePixelColor}
           />
 
         </Stage>

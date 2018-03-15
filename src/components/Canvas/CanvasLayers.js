@@ -57,6 +57,15 @@ class CanvasLayers extends React.Component {
     this.layerHighlight.draw()
   }
 
+  changePixelColor = (event) => {
+    console.log(event)
+    const { x, y } = event.target.position()
+    const indexX = x / this.props.pixelSize
+    const indexY = y / this.props.pixelSize
+    const index = indexY * this.props.gridColumns + indexX
+    this.props.changePixelColor({ index, x: indexX, y: indexY })
+  }
+
   render () {
     return [
       <Layer onMouseOver={this.onMouseOver} key="0">
@@ -65,9 +74,8 @@ class CanvasLayers extends React.Component {
                    gridColumns={this.props.gridColumns} />
       </Layer>,
       <Layer ref={layer => this.layerHighlight = layer}
-             width={this.props.canvasSize}
-             height={this.props.canvasSize}
              onMouseOut={this.onMouseOut}
+             key="1"
       >
         <Rect
           ref={rect => this.pixelHighlight = rect}
@@ -77,6 +85,7 @@ class CanvasLayers extends React.Component {
           opacity="0.4"
           visible={false}
           onMouseMove={this.onMouseMove}
+          onClick={this.changePixelColor}
         />
         <Rect
           ref={rect => this.pixelColorPopup = rect}

@@ -106,6 +106,7 @@ class CanvasPage extends React.Component {
           pixelSize={this.pixelSize}
           pixels={this.state.pixels}
           currentColorHex={this.state.currentColorHex}
+          changePixelColor={this.handlePixelClick}
         />
 
         <Picker
