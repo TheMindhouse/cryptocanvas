@@ -14,7 +14,7 @@ class CanvasPixel extends React.PureComponent {
         width={this.props.pixelSize}
         height={this.props.pixelSize}
         fill={hexPalette[this.props.color]}
-        opacity={(this.props.color === 'rgb(255, 255, 255)') ? 0 : 1}
+        opacity={this.props.color}
       />
     )
   }

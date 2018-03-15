@@ -18,3 +18,7 @@
     height: 100%;
     display: block;
 }
+
+.PickerColor__color--reset {
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 45%, rgba(255, 0, 0, 0.5) 50%, #ffffff 55%, #ffffff 100%);
+}

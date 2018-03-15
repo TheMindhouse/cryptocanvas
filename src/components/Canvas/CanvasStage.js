@@ -80,7 +80,7 @@ class CanvasStage extends React.Component {
             'background': `url(${canvasBg})`,
             'backgroundSize': this.props.pixelSize * this.state.scale,
             'width': canvasSize,
-            'cursor': 'pointer'
+            'cursor': (this.props.currentColorHex || this.state.scale > 1) ? 'pointer' : 'default'
           }}
           draggable="true"
           dragBoundFunc={this.calculateNewPosition}

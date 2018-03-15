@@ -6,10 +6,31 @@ import './Picker.css'
 const COLOR_WIDTH = 16
 const PICKER_SIZE = COLOR_WIDTH * Math.sqrt(hexPalette.length)
 
+const getColorLabel = (color) => {
+  return (color > 0)
+    ? `#${color}`
+    : 'Choose a color'
+}
+
+const getPickerClass = (color) => {
+  let className = 'CurrentColor '
+  if (!color) {
+    return className + 'CurrentColor--empty'
+  }
+  if (color < 64) {
+    return className + 'CurrentColor--light'
+  }
+  return className + 'CurrentColor--dark'
+}
+
 export class Picker extends React.Component {
   render () {
+    const { currentColor } = this.props
     return <div>
-      <div className="CurrentColor" style={{ backgroundColor: hexPalette[ this.props.currentColor ] }} />
+      <div className={getPickerClass(currentColor)}
+           style={{ backgroundColor: hexPalette[ currentColor ] }}>
+        {getColorLabel(currentColor)}
+      </div>
       <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
         {hexPalette.map((color, index) =>
           <PickerColor
@@ -17,7 +38,7 @@ export class Picker extends React.Component {
             index={index}
             key={index}
             size={COLOR_WIDTH}
-            isSelected={this.props.currentColor === index}
+            isSelected={currentColor === index}
             changeColor={this.props.changeColor}
           />)}
       </div>

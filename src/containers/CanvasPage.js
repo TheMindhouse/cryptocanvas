@@ -24,15 +24,15 @@ class CanvasPage extends React.Component {
     this.watchForChanges()
 
     // Temporary store canvas in local storage
-    // const tempCanvas = window.localStorage.getItem('tempCanvas')
-    //
-    // if (tempCanvas) {
-    //   this.setState({
-    //     pixels: JSON.parse(tempCanvas),
-    //     isLoading: false,
-    //   })
-    //   return
-    // }
+    const tempCanvas = window.localStorage.getItem('tempCanvas')
+
+    if (tempCanvas) {
+      this.setState({
+        pixels: JSON.parse(tempCanvas),
+        isLoading: false,
+      })
+      return
+    }
 
     this.props.Contract.getArtwork(0, { gas: 3000000 }, (error, result) => {
       if (!error) {
