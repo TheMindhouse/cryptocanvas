@@ -8,18 +8,15 @@ import {
 import Home from './Homepage'
 import CanvasPage from './CanvasPage'
 import About from './About'
+import Header from '../components/Layout/Header'
 
 class App extends React.Component {
   render () {
     return (
       <Router>
         <div>
-          <ul>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/about'>About</Link></li>
-          </ul>
 
-          <hr />
+          <Header />
 
           <Route exact path='/' component={CanvasPage} />
           <Route path='/about' component={About} />

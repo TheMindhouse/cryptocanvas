@@ -1,0 +1,27 @@
+.Header {
+    max-width: 1100px;
+    padding: 40px 0 70px;
+    margin: 0 auto;
+}
+
+.Header__title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.Header__subtitle {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+.Header__menu {
+    list-style-type: none;
+}
+
+.Header__menu li {
+    display: inline-block;
+    padding: 0 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
