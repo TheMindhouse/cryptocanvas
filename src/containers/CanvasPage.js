@@ -1,128 +1,83 @@
 import React from 'react'
 
 import withWeb3 from '../hoc/withWeb3'
-import { Picker } from '../components/Picker/Picker'
-import { convertColorToRGB } from '../helpers/colors'
-import CanvasStage from '../components/Canvas/CanvasStage'
-import { Row, Col } from 'antd'
+import { Row } from 'antd'
 
 import './CanvasPage.css'
-import CanvasSidebar from '../components/CanvasSidebar/CanvasSidebar'
+import CanvasPagePainting from './CanvasPageStates/CanvasPagePainting'
+import CanvasPageBidding from './CanvasPageStates/CanvasPageBidding'
+import CanvasPageTrading from './CanvasPageStates/CanvasPageTrading'
+import CanvasPageLoading from './CanvasPageStates/CanvasPageLoading'
+import { CanvasInfoModel } from '../models/CanvasInfoModel'
+
+
+
+const CANVAS_STATES = {
+  painting: 0,
+  bidding: 1,
+  trading: 2,
+}
 
 class CanvasPage extends React.Component {
   pixelSize = 10
-  canvasId = 0
+  canvasId = 1
 
   constructor () {
     super()
+
     this.state = {
-      pixels: [],
       isLoading: true,
-      currentColorHex: null,
-      currentColorIndex: null,
-      hovering: null,
     }
   }
 
   componentDidMount () {
-    this.watchForChanges()
+    this.props.Contract.getCanvasInfo(0, { gas: 3000000 }, (error, result) => {
+      const canvasInfo = new CanvasInfoModel(result)
+      let canvasState
+      if (!error) {
+        const canvasStateKey = Object.keys(CANVAS_STATES).filter(key => CANVAS_STATES[ key ] === canvasInfo.canvasState)
+        canvasState = CANVAS_STATES[ canvasStateKey ]
+      } else {
+        console.error(error)
+      }
 
-    // Temporary store canvas in local storage
-    const tempCanvas = window.localStorage.getItem('tempCanvas')
-
-    if (tempCanvas) {
       this.setState({
-        pixels: JSON.parse(tempCanvas),
+        canvasState,
         isLoading: false,
       })
-      return
-    }
-
-    this.props.Contract.getArtwork(0, { gas: 3000000 }, (error, result) => {
-      if (!error) {
-        const pixels = result.map(color => parseInt(color))
-        this.setState({
-          pixels,
-          isLoading: false,
-        })
-
-        window.localStorage.setItem('tempCanvas', JSON.stringify(pixels))
-      }
-      else {
-        console.error(error)
-        this.setState({
-          isLoading: false,
-        })
-      }
-    })
-  }
-
-  changeColor = ({ color, index }) => {
-    console.log(`Change current color to (${color}, ${index})`)
-    this.setState({
-      currentColorHex: color,
-      currentColorIndex: index,
-    })
-  }
-
-  handlePixelClick = ({ index, x, y }) => {
-    const color = this.state.currentColorIndex
-    console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
-
-    this.updatePixel({ index, color })
-    this.props.Contract.setPixel(this.canvasId, index, color)
-  }
-
-  updatePixel = ({ index, color }) => {
-    const updatedPixels = [
-      ...this.state.pixels.slice(0, index),
-      color,
-      ...this.state.pixels.slice(index + 1, this.state.pixels.length)
-    ]
-
-    this.setState({ pixels: updatedPixels })
-  }
-
-  watchForChanges = () => {
-    const { blockNumber } = this.props.web3.eth
-    const pixelPaintedEvent = this.props.Contract.PixelPainted({}, { fromBlock: blockNumber, toBlock: 'latest' })
-
-    // watch for changes
-    pixelPaintedEvent.watch((error, result) => {
-      const index = parseInt(result.args.index, 10)
-      const color = parseInt(result.args.color, 10)
-
-      console.log(`[EVENT] Updated pixel color at (${index}) to ${color}`)
-      this.updatePixel({ index, color })
-      if (!error)
-        console.log(result)
     })
   }
 
   render () {
+    const {
+      isLoading,
+      canvasState,
+    } = this.state
 
     return (
-      <Row className="CanvasPage" type="flex" justify="space-around" align="top">
+      <div>
 
-        {this.state.isLoading && <p>Canvas loading...</p>}
+        {isLoading && <CanvasPageLoading canvasId={this.canvasId} />}
 
-        <CanvasStage
+        {!isLoading && canvasState === CANVAS_STATES.painting &&
+        <p>TEST</p> &&
+        <CanvasPagePainting
           pixelSize={this.pixelSize}
-          pixels={this.state.pixels}
-          currentColorHex={this.state.currentColorHex}
-          changePixelColor={this.handlePixelClick}
+          canvasId={this.canvasId}
+          Contract={this.props.Contract}
+          web3={this.props.web3}
         />
+        }
 
-        <div>
-          <CanvasSidebar />
-          <Picker
-            changeColor={this.changeColor}
-            currentColor={this.state.currentColorIndex}
-          />
-          <br />
-          <p>How can I place a pixel?</p>
-        </div>
-      </Row>
+        {!isLoading && canvasState === CANVAS_STATES.bidding &&
+        <CanvasPageBidding canvasId={this.canvasId} />
+        }
+
+        {!isLoading && canvasState === CANVAS_STATES.trading &&
+        <CanvasPageTrading canvasId={this.canvasId} />
+        }
+
+      </div>
     )
   }
 }

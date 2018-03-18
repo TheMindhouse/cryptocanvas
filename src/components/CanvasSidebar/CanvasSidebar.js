@@ -6,8 +6,8 @@ import './CanvasSidebar.css'
 const CanvasSidebar = (props) => {
   return (
     <div className="CanvasSidebar">
-      <h2 className="CanvasSidebar__title">Canvas #1</h2>
-      <h3 className="CanvasSidebar__status">Completed in 90%</h3>
+      <h2 className="CanvasSidebar__title">Canvas #{props.canvasId}</h2>
+      <h3 className="CanvasSidebar__status">3686 pixels out of 4096 painted (90%)</h3>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 .CanvasSidebar {
-
+    width: 350px;
 }
 
 .CanvasSidebar__title {
@@ -9,7 +9,7 @@
 }
 
 .CanvasSidebar__status {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     color: #777;
 }
