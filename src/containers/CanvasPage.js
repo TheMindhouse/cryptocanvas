@@ -4,6 +4,9 @@ import withWeb3 from '../hoc/withWeb3'
 import { Picker } from '../components/Picker/Picker'
 import { convertColorToRGB } from '../helpers/colors'
 import CanvasStage from '../components/Canvas/CanvasStage'
+import { Row, Col } from 'antd'
+
+import './CanvasPage.css'
 
 class CanvasPage extends React.Component {
   pixelSize = 10
@@ -54,7 +57,7 @@ class CanvasPage extends React.Component {
   }
 
   changeColor = ({ color, index }) => {
-    console.log(`Change current color to (${color}, ${index})`);
+    console.log(`Change current color to (${color}, ${index})`)
     this.setState({
       currentColorHex: color,
       currentColorIndex: index,
@@ -98,7 +101,8 @@ class CanvasPage extends React.Component {
   render () {
 
     return (
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <Row className="CanvasPage" type="flex" justify="space-around" align="middle">
+
         {this.state.isLoading && <p>Canvas loading...</p>}
 
         <CanvasStage
@@ -112,7 +116,7 @@ class CanvasPage extends React.Component {
           changeColor={this.changeColor}
           currentColor={this.state.currentColorIndex}
         />
-      </div>
+      </Row>
     )
   }
 }

@@ -3,6 +3,24 @@ import { Stage, Layer, Rect } from 'react-konva'
 import canvasBg from '../../assets/images/bg.png'
 import CanvasLayers from './CanvasLayers'
 
+import { Slider } from 'antd'
+
+import './CanvasStage.css'
+
+const marks = {
+  0: '100%',
+  1: '150%',
+  2: '200%',
+  3: '250%',
+  4: '300%',
+  5: '350%',
+  6: '400%',
+  7: '450%',
+  8: '500%',
+};
+
+const scales = [ 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 ]
+
 class CanvasStage extends React.Component {
   stage = {}
 
@@ -67,18 +85,25 @@ class CanvasStage extends React.Component {
 
     return (
       <div>
-        <div>
-          <p onClick={() => this.setCanvasScale(1)}>100%</p>
-          <p onClick={() => this.setCanvasScale(1.5)}>150%</p>
-          <p onClick={() => this.setCanvasScale(2)}>200%</p>
+        <div style={{display: 'none', margin: '0 auto'}}>
+
+          <Slider marks={marks}
+                  min={0}
+                  max={scales.length - 1}
+                  step={1}
+                  defaultValue={0}
+                  value={scales.indexOf(this.state.scale)}
+                  onChange={(i) => this.setCanvasScale(scales[i])} />
+
         </div>
         <Stage
+          className="CanvasStage"
           ref="canvas"
           width={canvasSize}
           height={canvasSize}
           style={{
             'background': `url(${canvasBg})`,
-            'backgroundSize': this.props.pixelSize * this.state.scale,
+            'backgroundSize': this.props.pixelSize,
             'width': canvasSize,
             'cursor': (this.props.currentColorHex || this.state.scale > 1) ? 'pointer' : 'default'
           }}
