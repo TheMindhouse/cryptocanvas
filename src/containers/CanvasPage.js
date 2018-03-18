@@ -7,6 +7,7 @@ import CanvasStage from '../components/Canvas/CanvasStage'
 import { Row, Col } from 'antd'
 
 import './CanvasPage.css'
+import CanvasSidebar from '../components/CanvasSidebar/CanvasSidebar'
 
 class CanvasPage extends React.Component {
   pixelSize = 10
@@ -101,7 +102,7 @@ class CanvasPage extends React.Component {
   render () {
 
     return (
-      <Row className="CanvasPage" type="flex" justify="space-around" align="middle">
+      <Row className="CanvasPage" type="flex" justify="space-around" align="top">
 
         {this.state.isLoading && <p>Canvas loading...</p>}
 
@@ -112,10 +113,15 @@ class CanvasPage extends React.Component {
           changePixelColor={this.handlePixelClick}
         />
 
-        <Picker
-          changeColor={this.changeColor}
-          currentColor={this.state.currentColorIndex}
-        />
+        <div>
+          <CanvasSidebar />
+          <Picker
+            changeColor={this.changeColor}
+            currentColor={this.state.currentColorIndex}
+          />
+          <br />
+          <p>How can I place a pixel?</p>
+        </div>
       </Row>
     )
   }

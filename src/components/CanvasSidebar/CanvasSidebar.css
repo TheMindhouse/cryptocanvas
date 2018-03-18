@@ -1,0 +1,15 @@
+.CanvasSidebar {
+
+}
+
+.CanvasSidebar__title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.CanvasSidebar__status {
+    font-size: 16px;
+    font-weight: 400;
+    color: #777;
+}
