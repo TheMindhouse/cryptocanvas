@@ -13,7 +13,7 @@ class CanvasLayers extends React.Component {
       return
     }
 
-    console.log(event)
+    // console.log(event)
     this.layerHighlight.clear()
     this.pixelHighlight.x(event.target.x())
     this.pixelHighlight.y(event.target.y())
@@ -27,7 +27,7 @@ class CanvasLayers extends React.Component {
    * @param event
    */
   onMouseOut = (event) => {
-    console.log(event)
+    // console.log(event)
     this.pixelHighlight.hide()
     this.layerHighlight.draw()
   }
@@ -37,7 +37,7 @@ class CanvasLayers extends React.Component {
    * @param event
    */
   onMouseMove = (event) => {
-    console.log(event)
+    // console.log(event)
     this.updatePixelColorPopupPosition()
   }
 
