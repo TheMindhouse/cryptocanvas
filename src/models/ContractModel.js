@@ -1,4 +1,5 @@
 import { CanvasInfo } from './CanvasInfo'
+import { Bid } from './Bid'
 
 const GAS_LIMIT = 3000000
 
@@ -47,11 +48,41 @@ export class ContractModel {
     })
   }
 
+  getLastBid (canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.getLastBidForArtwork(canvasId, (error, result) => {
+        if (error) {
+          console.error(error)
+          reject(error)
+          return
+        }
+        resolve(new Bid(result))
+      })
+    })
+  }
+
+  makeBid ({ canvasId, bidAmountInWei }) {
+    return new Promise((resolve, reject) => {
+      this.Contract.makeBid(canvasId, { value: bidAmountInWei, gas: this.gasLimit }, (error, result) => {
+        if (error) {
+          console.error(error)
+          reject(error)
+          return
+        }
+        resolve(result)
+      })
+    })
+  }
+
   /**
-   * Events
+   * Subscription to events
    */
 
-  PixelPainted (...args) {
+  PixelPaintedEvent (...args) {
     return this.Contract.PixelPainted(args)
+  }
+
+  BidPostedEvent (...args) {
+    return this.Contract.BidPosted(args)
   }
 }

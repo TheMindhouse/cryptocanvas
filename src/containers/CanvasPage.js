@@ -78,7 +78,12 @@ class CanvasPage extends React.Component {
         }
 
         {!isLoading && canvasState === CANVAS_STATES.bidding &&
-        <CanvasPageBidding canvasId={this.canvasId} />
+        <CanvasPageBidding
+          pixelSize={this.pixelSize}
+          canvasId={this.canvasId}
+          Contract={this.props.Contract}
+          web3={this.props.web3}
+        />
         }
 
         {!isLoading && canvasState === CANVAS_STATES.trading &&

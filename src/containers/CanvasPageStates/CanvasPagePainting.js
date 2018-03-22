@@ -25,8 +25,11 @@ class CanvasPagePainting extends React.Component {
   }
 
   componentDidMount () {
+    this.getCanvas()
     this.watchForChanges()
+  }
 
+  getCanvas = () => {
     // Temporary store canvas in local storage
     const tempCanvas = window.localStorage.getItem('tempCanvas2')
 
@@ -120,7 +123,7 @@ class CanvasPagePainting extends React.Component {
 
   watchForChanges = () => {
     const { blockNumber } = this.props.web3.eth
-    const pixelPaintedEvent = this.props.Contract.PixelPainted({}, { fromBlock: blockNumber, toBlock: 'latest' })
+    const pixelPaintedEvent = this.props.Contract.PixelPaintedEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
 
     // watch for changes
     pixelPaintedEvent.watch((error, result) => {
