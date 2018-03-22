@@ -2,15 +2,16 @@ import React from 'react'
 
 import { Picker } from '../../components/Picker/Picker'
 import CanvasStage from '../../components/Canvas/CanvasStage'
-import { Row } from 'antd'
+import { Row, Modal } from 'antd'
 
 import CanvasSidebar from '../../components/CanvasSidebar/CanvasSidebar'
+import { PixelPainted } from '../../models/PixelPainted'
+import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
+import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 
 class CanvasPagePainting extends React.Component {
   constructor (props) {
     super(props)
-
-    this.canvasId = this.props.canvasId
 
     this.state = {
       pixels: [],
@@ -66,8 +67,33 @@ class CanvasPagePainting extends React.Component {
     const color = this.state.currentColorIndex
     console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
 
-    this.updatePixel({ index, color })
-    this.props.Contract.setPixel(this.canvasId, index, color)
+    Modal.confirm({
+      title: 'Do you want to paint this pixel?',
+      content: <ConfirmPixelModal x={x} y={y} color={color} />,
+      okText: 'Yes, paint pixel',
+      okType: 'primary',
+      onOk: () => {
+        console.log('Pixel update requested')
+        this.props.Contract.setPixel({ canvasId: this.props.canvasId, index, color })
+          .then((result) => {
+            this.updatePixel({ index, color })
+            Modal.success({
+              title: 'Pixel successfully painted',
+              content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
+              'you will be rewarded approximate amount of money from the initial bid.',
+            })
+          })
+          .catch((error) => {
+            Modal.error({
+              title: 'Could not update pixel',
+              content: 'Make sure your address is able to paint the pixel again',
+            })
+          })
+      },
+      onCancel: () => {
+        console.log('Pixel update cancelled')
+      },
+    })
   }
 
   updatePixel = ({ index, color }) => {
@@ -86,9 +112,8 @@ class CanvasPagePainting extends React.Component {
 
     // watch for changes
     pixelPaintedEvent.watch((error, result) => {
-      const index = parseInt(result.args.index, 10)
-      const color = parseInt(result.args.color, 10)
-
+      const pixelPainted = new PixelPainted(result.args)
+      const { index, color } = pixelPainted
       console.log(`[EVENT] Updated pixel color at (${index}) to ${color}`)
       this.updatePixel({ index, color })
       if (!error)
@@ -97,21 +122,26 @@ class CanvasPagePainting extends React.Component {
   }
 
   render () {
-
     return (
       <Row className="CanvasPage" type="flex" justify="space-around" align="top">
 
-        {this.state.isLoading && <p>Canvas loading...</p>}
+        {this.state.isLoading && <CanvasStagePlaceholder />}
 
+        {!this.state.isLoading &&
         <CanvasStage
           pixelSize={this.props.pixelSize}
           pixels={this.state.pixels}
           currentColorHex={this.state.currentColorHex}
           changePixelColor={this.handlePixelClick}
         />
+        }
 
         <div>
-          <CanvasSidebar canvasId={this.canvasId} />
+          <CanvasSidebar
+            canvasId={this.props.canvasId}
+            paintedPixels={this.props.paintedPixels}
+            totalPixels={4096}
+          />
           <Picker
             changeColor={this.changeColor}
             currentColor={this.state.currentColorIndex}

@@ -1,17 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Row from 'antd/es/grid/row'
 import CanvasSidebarLoading from '../../components/CanvasSidebar/CanvasSidebarLoading'
+import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 
 const CanvasPageLoading = (props) => {
   return (
     <Row className="CanvasPage" type="flex" justify="space-around" align="top">
-
-      <div className="CanvasStage" style={{ background: '#ddd', width: '640px', height: '640px' }} />
-
-      <div>
-        <CanvasSidebarLoading canvasId={props.canvasId} />
-      </div>
+      <CanvasStagePlaceholder />
+      <CanvasSidebarLoading canvasId={props.canvasId} />
     </Row>
   )
 }

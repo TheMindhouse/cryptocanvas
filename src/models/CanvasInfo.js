@@ -1,4 +1,4 @@
-export class CanvasInfoModel {
+export class CanvasInfo {
   constructor (props) {
     this._id = parseInt(props[0], 10)
     this._paintedPixels = parseInt(props[1], 10)
@@ -17,7 +17,7 @@ export class CanvasInfoModel {
   }
 
   get paintedPixels () {
-    return this._paintedPixels
+    return this._paintedPixels ? this._paintedPixels : 0
   }
 
   get isFinished () {

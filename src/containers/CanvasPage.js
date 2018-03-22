@@ -1,16 +1,12 @@
 import React from 'react'
 
 import withWeb3 from '../hoc/withWeb3'
-import { Row } from 'antd'
 
 import './CanvasPage.css'
 import CanvasPagePainting from './CanvasPageStates/CanvasPagePainting'
 import CanvasPageBidding from './CanvasPageStates/CanvasPageBidding'
 import CanvasPageTrading from './CanvasPageStates/CanvasPageTrading'
 import CanvasPageLoading from './CanvasPageStates/CanvasPageLoading'
-import { CanvasInfoModel } from '../models/CanvasInfoModel'
-
-
 
 const CANVAS_STATES = {
   painting: 0,
@@ -20,7 +16,7 @@ const CANVAS_STATES = {
 
 class CanvasPage extends React.Component {
   pixelSize = 10
-  canvasId = 1
+  canvasId = 0
 
   constructor () {
     super()
@@ -31,21 +27,24 @@ class CanvasPage extends React.Component {
   }
 
   componentDidMount () {
-    this.props.Contract.getCanvasInfo(0, { gas: 3000000 }, (error, result) => {
-      const canvasInfo = new CanvasInfoModel(result)
-      let canvasState
-      if (!error) {
+    this.props.Contract.getCanvasInfo(this.canvasId)
+      .then((canvasInfo) => {
         const canvasStateKey = Object.keys(CANVAS_STATES).filter(key => CANVAS_STATES[ key ] === canvasInfo.canvasState)
-        canvasState = CANVAS_STATES[ canvasStateKey ]
-      } else {
-        console.error(error)
-      }
+        const canvasState = CANVAS_STATES[ canvasStateKey ]
 
-      this.setState({
-        canvasState,
-        isLoading: false,
+        this.setState({
+          canvasState,
+          paintedPixels: canvasInfo.paintedPixels,
+          canvasOwner: canvasInfo.owner,
+          isLoading: false,
+        })
       })
-    })
+      .catch(() => {
+        this.setState({
+          isLoading: false,
+          hasError: true,
+        })
+      })
   }
 
   render () {
@@ -60,9 +59,9 @@ class CanvasPage extends React.Component {
         {isLoading && <CanvasPageLoading canvasId={this.canvasId} />}
 
         {!isLoading && canvasState === CANVAS_STATES.painting &&
-        <p>TEST</p> &&
         <CanvasPagePainting
           pixelSize={this.pixelSize}
+          paintedPixels={this.state.paintedPixels}
           canvasId={this.canvasId}
           Contract={this.props.Contract}
           web3={this.props.web3}

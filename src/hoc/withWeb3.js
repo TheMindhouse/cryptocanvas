@@ -1,6 +1,7 @@
 import React from 'react'
 import getComponentDisplayName from '../helpers/getComponentDisplayName'
 import { ABI } from '../helpers/ABI'
+import { ContractModel } from '../models/ContractModel'
 
 const Web3 = window.Web3
 
@@ -23,8 +24,7 @@ const withWeb3 = (WrappedComponent) => {
       console.log('defaultAccount', window.web3.eth.defaultAccount)
 
       const ContractInstance = window.web3.eth.contract(ABI)
-
-      this.Contract = ContractInstance.at('0x186e3db75456bfbf3cd180ca51c3aa9bfcb4e772')
+      this.Contract = new ContractModel(ContractInstance.at('0x186e3db75456bfbf3cd180ca51c3aa9bfcb4e772'))
       console.log(this.Contract)
 
       // watch for changes
