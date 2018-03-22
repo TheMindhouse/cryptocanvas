@@ -9,6 +9,8 @@ import { PixelPainted } from '../../models/PixelPainted'
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 
+const COLOR_BLANK = 0
+
 class CanvasPagePainting extends React.Component {
   constructor (props) {
     super(props)
@@ -26,7 +28,7 @@ class CanvasPagePainting extends React.Component {
     this.watchForChanges()
 
     // Temporary store canvas in local storage
-    const tempCanvas = window.localStorage.getItem('tempCanvas')
+    const tempCanvas = window.localStorage.getItem('tempCanvas2')
 
     if (tempCanvas) {
       this.setState({
@@ -36,23 +38,20 @@ class CanvasPagePainting extends React.Component {
       return
     }
 
-    this.props.Contract.getArtwork(0, { gas: 3000000 }, (error, result) => {
-      if (!error) {
-        const pixels = result.map(color => parseInt(color))
+    this.props.Contract.getCanvas(this.props.canvasId)
+      .then((pixels) => {
         this.setState({
           pixels,
           isLoading: false,
         })
-
         window.localStorage.setItem('tempCanvas', JSON.stringify(pixels))
-      }
-      else {
+      })
+      .catch((error) => {
         console.error(error)
         this.setState({
           isLoading: false,
         })
-      }
-    })
+      })
   }
 
   changeColor = ({ color, index }) => {
@@ -76,12 +75,12 @@ class CanvasPagePainting extends React.Component {
         console.log('Pixel update requested')
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, index, color })
           .then((result) => {
-            this.updatePixel({ index, color })
-            Modal.success({
-              title: 'Pixel successfully painted',
-              content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
-              'you will be rewarded approximate amount of money from the initial bid.',
-            })
+            // this.updatePixel({ index, color })
+            // Modal.success({
+            //   title: 'Pixel successfully painted',
+            //   content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
+            //   'you will be rewarded approximate amount of money from the initial bid.',
+            // })
           })
           .catch((error) => {
             Modal.error({
@@ -103,7 +102,20 @@ class CanvasPagePainting extends React.Component {
       ...this.state.pixels.slice(index + 1, this.state.pixels.length)
     ]
 
-    this.setState({ pixels: updatedPixels })
+    this.setState({ pixels: updatedPixels }, this.checkIfFinishedPainting)
+  }
+
+  getNumberOfPaintedPixels = () => {
+    return this.state.pixels.filter(color => color !== COLOR_BLANK).length
+  }
+
+  checkIfFinishedPainting = () => {
+    const hasFinished = this.getNumberOfPaintedPixels() === this.state.pixels.length
+    console.log('--> Checking if painting has finished: ' + hasFinished)
+    if (hasFinished) {
+      console.log('[EVENT] - All the pixels have been painted!')
+      this.props.onFinishPainting()
+    }
   }
 
   watchForChanges = () => {
@@ -139,8 +151,8 @@ class CanvasPagePainting extends React.Component {
         <div>
           <CanvasSidebar
             canvasId={this.props.canvasId}
-            paintedPixels={this.props.paintedPixels}
-            totalPixels={4096}
+            paintedPixels={this.getNumberOfPaintedPixels()}
+            totalPixels={this.state.pixels.length}
           />
           <Picker
             changeColor={this.changeColor}

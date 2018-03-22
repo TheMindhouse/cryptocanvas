@@ -15,7 +15,7 @@ const CANVAS_STATES = {
 }
 
 class CanvasPage extends React.Component {
-  pixelSize = 10
+  pixelSize = 20
   canvasId = 0
 
   constructor () {
@@ -27,6 +27,10 @@ class CanvasPage extends React.Component {
   }
 
   componentDidMount () {
+    this.getCanvasInfo()
+  }
+
+  getCanvasInfo () {
     this.props.Contract.getCanvasInfo(this.canvasId)
       .then((canvasInfo) => {
         const canvasStateKey = Object.keys(CANVAS_STATES).filter(key => CANVAS_STATES[ key ] === canvasInfo.canvasState)
@@ -47,6 +51,10 @@ class CanvasPage extends React.Component {
       })
   }
 
+  onFinishPainting = () => {
+    this.setState({ isLoading: true }, this.getCanvasInfo)
+  }
+
   render () {
     const {
       isLoading,
@@ -65,6 +73,7 @@ class CanvasPage extends React.Component {
           canvasId={this.canvasId}
           Contract={this.props.Contract}
           web3={this.props.web3}
+          onFinishPainting={this.onFinishPainting}
         />
         }
 
