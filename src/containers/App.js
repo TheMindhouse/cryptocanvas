@@ -5,7 +5,7 @@ import {
   Link
 } from 'react-router-dom'
 
-import Home from './Homepage'
+import Homepage from './Homepage'
 import CanvasPage from './CanvasPage'
 import About from './About'
 import Header from '../components/Layout/Header'
@@ -18,7 +18,7 @@ class App extends React.Component {
 
           <Header />
 
-          <Route exact path='/' component={CanvasPage} />
+          <Route exact path='/' component={Homepage} />
           <Route path='/about' component={About} />
           <Route path='/canvas/:id' component={CanvasPage} />
         </div>
