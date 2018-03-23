@@ -5,9 +5,11 @@ import { Input, Button } from 'antd'
 class SubmitBid extends React.PureComponent {
   constructor (props) {
     super(props)
+
     this.state = {
-      bid: this.props.minimumBid || 0.1,
-      ethValue: 566.55
+      bid: null,
+      ethValue: 566.55,
+      error: null,
     }
   }
 
@@ -18,6 +20,11 @@ class SubmitBid extends React.PureComponent {
   }
 
   onSubmitBid = () => {
+    if (this.state.bid <= this.props.highestBidAmount) {
+      const error = 'Your bid must be higher than the current highest bid.'
+      this.setState({ error })
+      return
+    }
     this.props.submitBid(this.state.bid)
   }
 
@@ -29,9 +36,12 @@ class SubmitBid extends React.PureComponent {
     return (
       <div>
         <h2>Your bid</h2>
-        <Input type="number" addonAfter="ETH" defaultValue="0.1" onChange={this.updateBidAmount} onPressEnter={this.onSubmitBid} />
+        <Input type="text" addonAfter="ETH"
+               placeholder="Enter your offer"
+               onChange={this.updateBidAmount}
+               onPressEnter={this.onSubmitBid} />
         (${this.getAmountInUSD()})
-        <br /><br />
+        <p>{this.state.error}</p>
         <Button type="primary" onClick={this.onSubmitBid}>Submit Bid</Button>
       </div>
     )

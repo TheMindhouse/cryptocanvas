@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const HighestBid = (props) => {
+  console.log(props.highestBidAmount);
   if (props.highestBidAmount) {
     return (
       <div>

@@ -7,6 +7,8 @@ import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBi
 import { Bid } from '../../models/Bid'
 
 class CanvasPageBidding extends Component {
+  biddingTimer = null
+
   constructor (props) {
     super(props)
 
@@ -15,6 +17,7 @@ class CanvasPageBidding extends Component {
       isLoading: true,
       highestBidAmount: null,
       highestBidAddress: '',
+      biddingFinishTime: null,  // In seconds from Epoch
     }
   }
 
@@ -57,12 +60,25 @@ class CanvasPageBidding extends Component {
   }
 
   updateHighestBid = (bid) => {
-    console.log('Highest bid: ', bid)
-    this.setState({
-      highestBidAmount: this.props.web3.fromWei(bid.amount, 'ether'),
-      highestBidAddress: bid.bidder,
-    })
+    if (bid.amount) {
+      console.log('New highest bid: ', bid)
+      this.setState({
+        highestBidAmount: parseFloat(this.props.web3.fromWei(bid.amount, 'ether')),
+        highestBidAddress: bid.bidder,
+      })
 
+      if (!this.biddingTimer) {
+        this.setBiddingTimer(bid.finishTime)
+      }
+    }
+  }
+
+  setBiddingTimer = (finishTimeInSeconds) => {
+    this.setState({ biddingFinishTime: finishTimeInSeconds })
+    const biddingTimeLeftInMs = finishTimeInSeconds * 1000 - Date.now()
+    this.biddingTimer = setTimeout(() => {
+      this.onFinishBidding()
+    }, biddingTimeLeftInMs)
   }
 
   watchForChanges = () => {
@@ -100,6 +116,7 @@ class CanvasPageBidding extends Component {
             canvasId={this.props.canvasId}
             highestBidAmount={this.state.highestBidAmount}
             highestBidAddress={this.state.highestBidAddress}
+            biddingFinishTime={this.state.biddingFinishTime}
             submitBid={this.submitBid}
           />
         </div>

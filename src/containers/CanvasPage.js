@@ -52,6 +52,12 @@ class CanvasPage extends React.Component {
   }
 
   onFinishPainting = () => {
+    console.log('[EVENT] PAINTING FINISHED!');
+    this.setState({ isLoading: true }, this.getCanvasInfo)
+  }
+
+  onFinishBidding = () => {
+    console.log('[EVENT] BIDDING FINISHED!');
     this.setState({ isLoading: true }, this.getCanvasInfo)
   }
 
@@ -83,6 +89,7 @@ class CanvasPage extends React.Component {
           canvasId={this.canvasId}
           Contract={this.props.Contract}
           web3={this.props.web3}
+          onFinishBidding={this.onFinishBidding}
         />
         }
 

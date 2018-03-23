@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Divider } from 'antd'
 import HighestBid from './HighestBid'
 import SubmitBid from './SubmitBid'
+import BiddingTimeLeft from './BiddingTimeLeft'
 
 const CanvasSidebarBidding = (props) => {
   return (
@@ -19,12 +20,14 @@ const CanvasSidebarBidding = (props) => {
       <Divider />
 
       <SubmitBid
-        submitBid={props.submitBid} />
+        submitBid={props.submitBid}
+        highestBidAmount={props.highestBidAmount} />
 
       <Divider />
 
-      <h2>Bidding Time Left</h2>
-      <p>Bidding is open to anyone now. After the first bid is placed, bidding will remain available for the next 48 hours.</p>
+      <BiddingTimeLeft
+        biddingFinishTime={props.biddingFinishTime}
+        />
     </div>
   )
 }
