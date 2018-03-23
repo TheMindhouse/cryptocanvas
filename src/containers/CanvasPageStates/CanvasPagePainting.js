@@ -8,6 +8,7 @@ import CanvasSidebar from '../../components/CanvasSidebar/CanvasSidebar'
 import { PixelPainted } from '../../models/PixelPainted'
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
+import { getNumberOfPaintedPixels } from '../../helpers/colors'
 
 const COLOR_BLANK = 0
 
@@ -108,12 +109,8 @@ class CanvasPagePainting extends React.Component {
     this.setState({ pixels: updatedPixels }, this.checkIfFinishedPainting)
   }
 
-  getNumberOfPaintedPixels = () => {
-    return this.state.pixels.filter(color => color !== COLOR_BLANK).length
-  }
-
   checkIfFinishedPainting = () => {
-    const hasFinished = this.getNumberOfPaintedPixels() === this.state.pixels.length
+    const hasFinished = getNumberOfPaintedPixels(this.state.pixels) === this.state.pixels.length
     console.log('--> Checking if painting has finished: ' + hasFinished)
     if (hasFinished) {
       console.log('[EVENT] - All the pixels have been painted!')
@@ -154,7 +151,7 @@ class CanvasPagePainting extends React.Component {
         <div>
           <CanvasSidebar
             canvasId={this.props.canvasId}
-            paintedPixels={this.getNumberOfPaintedPixels()}
+            paintedPixels={getNumberOfPaintedPixels(this.state.pixels)}
             totalPixels={this.state.pixels.length}
           />
           <Picker

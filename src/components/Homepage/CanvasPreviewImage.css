@@ -1,0 +1,9 @@
+.CanvasPreviewImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CanvasPreviewImage__stage {
+    box-shadow: 0 12px 60px 0 rgba(0, 0, 0, 0.15);
+}

@@ -75,18 +75,16 @@ export class ContractModel {
   }
 
   getActiveCanvasIds () {
-    return Promise.resolve([0, 1, 4, 6, 8, 9])
-
-    // return new Promise((resolve, reject) => {
-    //   this.Contract.getActiveCanvasIds((error, result) => {
-    //     if (error) {
-    //       console.error(error)
-    //       reject(error)
-    //       return
-    //     }
-    //     resolve(parseInt(result, 10))
-    //   })
-    // })
+    return new Promise((resolve, reject) => {
+      this.Contract.getActiveCanvases((error, result) => {
+        if (error) {
+          console.error(error)
+          reject(error)
+          return
+        }
+        resolve(result.map(canvasId => parseInt(canvasId, 10)))
+      })
+    })
   }
 
   /**
