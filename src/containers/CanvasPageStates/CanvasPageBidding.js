@@ -77,7 +77,7 @@ class CanvasPageBidding extends Component {
     this.setState({ biddingFinishTime: finishTimeInSeconds })
     const biddingTimeLeftInMs = finishTimeInSeconds * 1000 - Date.now()
     this.biddingTimer = setTimeout(() => {
-      this.onFinishBidding()
+      this.props.onFinishBidding()
     }, biddingTimeLeftInMs)
   }
 

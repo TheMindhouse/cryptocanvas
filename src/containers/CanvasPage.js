@@ -16,10 +16,11 @@ const CANVAS_STATES = {
 
 class CanvasPage extends React.Component {
   pixelSize = 20
-  canvasId = 0
 
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
+    this.canvasId = props.match.params.id
 
     this.state = {
       isLoading: true,
@@ -94,7 +95,13 @@ class CanvasPage extends React.Component {
         }
 
         {!isLoading && canvasState === CANVAS_STATES.trading &&
-        <CanvasPageTrading canvasId={this.canvasId} />
+        <CanvasPageTrading
+          pixelSize={this.pixelSize}
+          canvasId={this.canvasId}
+          canvasOwner={this.state.canvasOwner}
+          Contract={this.props.Contract}
+          web3={this.props.web3}
+        />
         }
 
       </div>
