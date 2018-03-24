@@ -45,7 +45,7 @@ export class ContractModel {
 
   setPixel ({ canvasId, index, color }) {
     return new Promise((resolve, reject) => {
-      this.Contract.setPixel(canvasId, index, color, (error, result) => {
+      this.Contract.setPixel(canvasId, index, color, { gas: this.gasLimit }, (error, result) => {
         if (error) {
           console.error(error)
           reject(error)
@@ -58,7 +58,7 @@ export class ContractModel {
 
   getLastBid (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getLastBidForArtwork(canvasId, (error, result) => {
+      this.Contract.getLastBidForCanvas(canvasId, (error, result) => {
         if (error) {
           console.error(error)
           reject(error)

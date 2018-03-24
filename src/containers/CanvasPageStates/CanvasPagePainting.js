@@ -9,6 +9,7 @@ import { PixelPainted } from '../../models/PixelPainted'
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
+import withEvents from '../../hoc/withEvents'
 
 class CanvasPagePainting extends React.Component {
   constructor (props) {
@@ -129,6 +130,8 @@ class CanvasPagePainting extends React.Component {
       if (!error)
         console.log(result)
     })
+
+    this.props.events.push(pixelPaintedEvent)
   }
 
   render () {
@@ -164,4 +167,4 @@ class CanvasPagePainting extends React.Component {
   }
 }
 
-export default CanvasPagePainting
+export default withEvents(CanvasPagePainting)

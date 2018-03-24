@@ -1,4 +1,18 @@
-export const ABI = [
+[
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "BIDDING_DURATION",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
   {
     "constant": true,
     "inputs": [],
@@ -15,25 +29,73 @@ export const ABI = [
   },
   {
     "constant": true,
+    "inputs": [],
+    "name": "PIXEL_COUNT",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
     "inputs": [
       {
         "name": "_canvasId",
         "type": "uint32"
       }
     ],
-    "name": "getLastBidForCavas",
+    "name": "withdrawCommission",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "getArtwork",
     "outputs": [
       {
-        "name": "bidder",
-        "type": "address"
-      },
+        "name": "",
+        "type": "uint8[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "withdrawFees",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
       {
-        "name": "amount",
-        "type": "uint256"
-      },
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "getCanvasState",
+    "outputs": [
       {
-        "name": "finishTime",
-        "type": "uint256"
+        "name": "",
+        "type": "uint8"
       }
     ],
     "payable": false,
@@ -73,6 +135,179 @@ export const ABI = [
   },
   {
     "constant": true,
+    "inputs": [],
+    "name": "activeCanvasCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "COMMISSION",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "MAX_ACTIVE_CANVAS",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "STATE_NOT_FINISHED",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "artworkNoLongerForSale",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "enterBuyOffer",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "HEIGHT",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "withdrawReward",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_owner",
+        "type": "address"
+      }
+    ],
+    "name": "balanceOf",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "isArtworkFinished",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "calculateCommission",
+    "outputs": [
+      {
+        "name": "commission",
+        "type": "uint256"
+      },
+      {
+        "name": "isPaid",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [
       {
         "name": "_canvasId",
@@ -100,21 +335,12 @@ export const ABI = [
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      },
-      {
-        "name": "_pixelIndex",
-        "type": "uint32"
-      }
-    ],
-    "name": "getPixelAuthor",
+    "inputs": [],
+    "name": "MAX_CANVAS_COUNT",
     "outputs": [
       {
         "name": "",
-        "type": "address"
+        "type": "uint8"
       }
     ],
     "payable": false,
@@ -123,32 +349,25 @@ export const ABI = [
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "getCanvasInfo",
+    "inputs": [],
+    "name": "getPixelCount",
     "outputs": [
       {
-        "name": "id",
-        "type": "uint32"
-      },
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        "name": "paintedPixels",
-        "type": "uint32"
-      },
-      {
-        "name": "isFinished",
-        "type": "bool"
-      },
-      {
-        "name": "canvasState",
-        "type": "uint8"
-      },
-      {
-        "name": "owner",
+        "name": "",
         "type": "address"
       }
     ],
@@ -159,10 +378,147 @@ export const ABI = [
   {
     "constant": true,
     "inputs": [],
-    "name": "getArtworksCount",
+    "name": "getActiveCanvases",
     "outputs": [
       {
         "name": "",
+        "type": "uint32[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "buyArtwork",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "fees",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "makeBid",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "cancelBuyOffer",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "STATE_OWNED",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_index",
+        "type": "uint32"
+      },
+      {
+        "name": "_color",
+        "type": "uint8"
+      }
+    ],
+    "name": "setPixel",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_minPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "acceptBuyOffer",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "getLastBidForCanvas",
+    "outputs": [
+      {
+        "name": "bidder",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "finishTime",
         "type": "uint256"
       }
     ],
@@ -191,92 +547,12 @@ export const ABI = [
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "getArtwork",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [],
-    "name": "getActiveCanvases",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint32[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getPixelCount",
+    "name": "getArtworksCount",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "fees",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "isArtworkFinished",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "PIXEL_COUNT",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint32"
       }
     ],
     "payable": false,
@@ -300,49 +576,21 @@ export const ABI = [
   {
     "constant": true,
     "inputs": [],
+    "name": "WIDTH",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "STATE_INITIAL_BIDDING",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "MAX_CANVAS_COUNT",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "STATE_NOT_FINISHED",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "MAX_ACTIVE_CANVAS",
     "outputs": [
       {
         "name": "",
@@ -386,310 +634,52 @@ export const ABI = [
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [
       {
         "name": "_canvasId",
         "type": "uint32"
       }
     ],
-    "name": "calculateCommission",
+    "name": "getCanvasInfo",
     "outputs": [
       {
-        "name": "commission",
-        "type": "uint256"
+        "name": "id",
+        "type": "uint32"
       },
       {
-        "name": "isPaid",
+        "name": "paintedPixels",
+        "type": "uint32"
+      },
+      {
+        "name": "isFinished",
         "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "HEIGHT",
-    "outputs": [
+      },
       {
-        "name": "",
+        "name": "canvasState",
         "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "STATE_OWNED",
-    "outputs": [
+      },
       {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "COMMISSION",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "WIDTH",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "BIDDING_DURATION",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "activeCanvasCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "getCanvasState",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_owner",
+        "name": "owner",
         "type": "address"
       }
     ],
-    "name": "balanceOf",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      },
-      {
-        "name": "_index",
-        "type": "uint32"
-      },
-      {
-        "name": "_color",
-        "type": "uint8"
-      }
-    ],
-    "name": "setPixel",
-    "outputs": [
-      {
-        "name": "cooldownTime",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "withdrawReward",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "FeeWithdrawn",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "artworkNoLongerForSale",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "CommissionPaid",
-    "type": "event"
   },
   {
     "constant": false,
     "inputs": [],
-    "name": "withdrawFees",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
+    "name": "createCanvas",
+    "outputs": [
       {
-        "indexed": false,
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "CanvasFinished",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "cancelBuyOffer",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_id",
+        "name": "canvasId",
         "type": "uint256"
       }
     ],
-    "name": "CanvasCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_canvasId",
-        "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "name": "_index",
-        "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "name": "_color",
-        "type": "uint8"
-      }
-    ],
-    "name": "PixelPainted",
-    "type": "event"
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "constant": false,
@@ -704,81 +694,6 @@ export const ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "previousOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "canvasId",
-        "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "BuyOfferMade",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "makeBid",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "canvasId",
-        "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "BuyOfferCancelled",
-    "type": "event"
   },
   {
     "constant": false,
@@ -803,39 +718,26 @@ export const ABI = [
     "type": "function"
   },
   {
-    "anonymous": false,
+    "constant": true,
     "inputs": [
       {
-        "indexed": false,
-        "name": "_bidder",
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_pixelIndex",
+        "type": "uint32"
+      }
+    ],
+    "name": "getPixelAuthor",
+    "outputs": [
+      {
+        "name": "",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "_amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_finishTime",
-        "type": "uint256"
       }
     ],
-    "name": "BidPosted",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "buyArtwork",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -844,25 +746,17 @@ export const ABI = [
       {
         "name": "_canvasId",
         "type": "uint32"
-      }
-    ],
-    "name": "enterBuyOffer",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
+      },
       {
-        "indexed": false,
-        "name": "_canvasId",
-        "type": "uint32"
+        "name": "_minPrice",
+        "type": "uint256"
       }
     ],
-    "name": "ArtworkNoLongerForSale",
-    "type": "event"
+    "name": "offerArtworkForSale",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "anonymous": false,
@@ -884,6 +778,18 @@ export const ABI = [
       }
     ],
     "name": "ArtworkOfferedForSale",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "ArtworkNoLongerForSale",
     "type": "event"
   },
   {
@@ -914,18 +820,82 @@ export const ABI = [
     "type": "event"
   },
   {
-    "constant": false,
+    "anonymous": false,
     "inputs": [
       {
-        "name": "_canvasId",
-        "type": "uint32"
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
       }
     ],
-    "name": "withdrawCommission",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "FeeWithdrawn",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "canvasId",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "BuyOfferMade",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "canvasId",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "BuyOfferCancelled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_bidder",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_finishTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "BidPosted",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -945,53 +915,78 @@ export const ABI = [
     "type": "event"
   },
   {
-    "constant": false,
-    "inputs": [],
-    "name": "createCanvas",
-    "outputs": [
+    "anonymous": false,
+    "inputs": [
       {
-        "name": "canvasId",
+        "indexed": false,
+        "name": "_amount",
         "type": "uint256"
       }
     ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "CommissionPaid",
+    "type": "event"
   },
   {
-    "constant": false,
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
         "name": "_canvasId",
         "type": "uint32"
       },
       {
-        "name": "_minPrice",
-        "type": "uint256"
-      }
-    ],
-    "name": "acceptBuyOffer",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
+        "indexed": false,
+        "name": "_index",
         "type": "uint32"
       },
       {
-        "name": "_minPrice",
+        "indexed": false,
+        "name": "_color",
+        "type": "uint8"
+      }
+    ],
+    "name": "PixelPainted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "CanvasFinished",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_id",
         "type": "uint256"
       }
     ],
-    "name": "offerArtworkForSale",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "CanvasCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
   }
 ]

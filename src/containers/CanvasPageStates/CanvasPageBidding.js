@@ -5,6 +5,7 @@ import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebar from '../../components/CanvasSidebar/CanvasSidebar'
 import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBidding'
 import { Bid } from '../../models/Bid'
+import withEvents from '../../hoc/withEvents'
 
 class CanvasPageBidding extends Component {
   biddingTimer = null
@@ -92,6 +93,8 @@ class CanvasPageBidding extends Component {
       if (!error)
         console.log(result)
     })
+
+    this.props.events.push(bidPostedEvent)
   }
 
   submitBid = (bidAmountInEth) => {
@@ -128,4 +131,4 @@ class CanvasPageBidding extends Component {
 CanvasPageBidding.propTypes = {}
 CanvasPageBidding.defaultProps = {}
 
-export default CanvasPageBidding
+export default withEvents(CanvasPageBidding)

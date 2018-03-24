@@ -4,6 +4,7 @@ import { Col, Divider, Row } from 'antd'
 import withWeb3 from '../hoc/withWeb3'
 import CanvasPreview from '../components/Homepage/CanvasPreview'
 import CreateCanvas from '../components/Homepage/CreateCanvas'
+import withEvents from '../hoc/withEvents'
 
 const MAX_ACTIVE_CANVASES = 10
 
@@ -26,6 +27,8 @@ class Homepage extends Component {
       console.log('[EVENT] New canvas created');
       this.getActiveCanvasIds()
     })
+
+    this.props.events.push(canvasCreatedEvent)
   }
 
   getActiveCanvasIds = () => {
@@ -61,4 +64,4 @@ class Homepage extends Component {
 Homepage.propTypes = {}
 Homepage.defaultProps = {}
 
-export default withWeb3(Homepage)
+export default withEvents(withWeb3(Homepage))

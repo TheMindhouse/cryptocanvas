@@ -15,10 +15,12 @@ class CreateCanvas extends React.PureComponent {
     this.setState({ loading: true })
     this.props.Contract.createCanvas()
       .then(() => {
+        console.log('[USER] Requested new canvas create');
         Modal.success({
             title: 'Created new canvas',
             content: 'You need to wait a few minutes before it\'s updated in the blockchain',
           })
+        this.setState({ loading: false })
       })
   }
 
