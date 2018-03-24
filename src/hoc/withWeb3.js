@@ -24,7 +24,7 @@ const withWeb3 = (WrappedComponent) => {
       console.log('defaultAccount', window.web3.eth.defaultAccount)
 
       const ContractInstance = window.web3.eth.contract(ABI)
-      this.Contract = new ContractModel(ContractInstance.at('0x28a435af3834969dc4a74f4b4d5ee4d70ca82237'))
+      this.Contract = new ContractModel(ContractInstance.at('0x621bf505b176328b8a7831bcf4be2afe245dd5b2'))
       console.log(this.Contract)
 
       // watch for changes

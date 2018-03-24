@@ -948,7 +948,12 @@ export const ABI = [
     "constant": false,
     "inputs": [],
     "name": "createCanvas",
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "canvasId",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"

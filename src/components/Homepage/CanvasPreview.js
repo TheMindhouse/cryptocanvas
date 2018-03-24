@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './CanvasPreview.css'
+import './styles/CanvasPreview.css'
 import { Row, Spin } from 'antd'
 import { Link } from 'react-router-dom'
 import CanvasPreviewPlaceholder from './CanvasPreviewPlaceholder'
 import withWeb3 from '../../hoc/withWeb3'
 import CanvasPreviewImage from './CanvasPreviewImage'
-import { getNumberOfPaintedPixels, getPercentOfPixelsCompleted } from '../../helpers/colors'
+import { getPercentOfPixelsCompleted } from '../../helpers/colors'
 
 const getLinkToCanvas = id => `/canvas/${id}`
 const getLocalStorageName = id => `CanvasPreviewCache-#${id}`

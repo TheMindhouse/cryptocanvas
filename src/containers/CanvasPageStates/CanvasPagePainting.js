@@ -10,8 +10,6 @@ import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlacehold
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
 
-const COLOR_BLANK = 0
-
 class CanvasPagePainting extends React.Component {
   constructor (props) {
     super(props)

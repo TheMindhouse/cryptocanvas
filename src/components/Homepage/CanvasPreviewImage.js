@@ -4,7 +4,7 @@ import { Stage, Layer } from 'react-konva'
 import PixelsMap from '../Canvas/PixelsMap'
 
 import canvasBg from '../../assets/images/bg.png'
-import './CanvasPreviewImage.css'
+import './styles/CanvasPreviewImage.css'
 
 class CanvasPreviewImage extends React.PureComponent {
   pixelSize = 20

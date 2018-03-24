@@ -4,9 +4,17 @@ import { Bid } from './Bid'
 const GAS_LIMIT = 3000000
 
 export class ContractModel {
-  constructor (_Contract) {
-    this.Contract = _Contract
-    this.gasLimit = GAS_LIMIT
+  constructor (Contract) {
+    this._Contract = Contract
+    this._gasLimit = GAS_LIMIT
+  }
+
+  get Contract () {
+    return this._Contract
+  }
+
+  get gasLimit () {
+    return this._gasLimit
   }
 
   getCanvasInfo (canvasId) {
@@ -87,6 +95,19 @@ export class ContractModel {
     })
   }
 
+  createCanvas () {
+    return new Promise((resolve, reject) => {
+      this.Contract.createCanvas({}, (error, result, abc) => {
+        if (error) {
+          console.error(error)
+          reject(error)
+          return
+        }
+        resolve(parseInt(result, 10))
+      })
+    })
+  }
+
   /**
    * Subscription to events
    */
@@ -97,5 +118,9 @@ export class ContractModel {
 
   BidPostedEvent (...args) {
     return this.Contract.BidPosted(args)
+  }
+
+  CanvasCreatedEvent (...args) {
+    return this.Contract.CanvasCreated(args)
   }
 }
