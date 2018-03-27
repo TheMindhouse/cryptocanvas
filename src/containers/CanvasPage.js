@@ -20,7 +20,7 @@ class CanvasPage extends React.Component {
   constructor (props) {
     super(props)
 
-    this.canvasId = props.match.params.id
+    this.canvasId = parseInt(props.match.params.id, 10)
 
     this.state = {
       isLoading: true,
@@ -78,8 +78,6 @@ class CanvasPage extends React.Component {
           pixelSize={this.pixelSize}
           paintedPixels={this.state.paintedPixels}
           canvasId={this.canvasId}
-          Contract={this.props.Contract}
-          web3={this.props.web3}
           onFinishPainting={this.onFinishPainting}
         />
         }
@@ -88,8 +86,6 @@ class CanvasPage extends React.Component {
         <CanvasPageBidding
           pixelSize={this.pixelSize}
           canvasId={this.canvasId}
-          Contract={this.props.Contract}
-          web3={this.props.web3}
           onFinishBidding={this.onFinishBidding}
         />
         }
@@ -99,8 +95,6 @@ class CanvasPage extends React.Component {
           pixelSize={this.pixelSize}
           canvasId={this.canvasId}
           canvasOwner={this.state.canvasOwner}
-          Contract={this.props.Contract}
-          web3={this.props.web3}
         />
         }
 

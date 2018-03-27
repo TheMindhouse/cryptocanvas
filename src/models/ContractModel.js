@@ -1,109 +1,133 @@
 import { CanvasInfo } from './CanvasInfo'
 import { Bid } from './Bid'
+import { Transaction, TRANSACTION_TYPE } from './Transaction'
 
 const GAS_LIMIT = 3000000
+const GAS_PRICE = 2000000000
+
+const DEFAULT_CONFIG = {
+  gas: GAS_LIMIT,
+  gasPrice: GAS_PRICE
+}
 
 export class ContractModel {
   constructor (Contract) {
     this._Contract = Contract
-    this._gasLimit = GAS_LIMIT
   }
 
   get Contract () {
     return this._Contract
   }
 
-  get gasLimit () {
-    return this._gasLimit
-  }
-
-  getCanvasInfo (canvasId) {
-    return new Promise((resolve, reject) => {
-      this.Contract.getCanvasInfo(canvasId, { gas: this.gasLimit }, (error, result) => {
-        if (error) {
-          console.error(error)
-          reject(error)
-          return
-        }
-        resolve(new CanvasInfo(result))
-      })
-    })
-  }
-
-  getCanvas (canvasId) {
-    return new Promise((resolve, reject) => {
-      this.Contract.getArtwork(canvasId, { gas: this.gasLimit }, (error, result) => {
-        if (error) {
-          console.error(error)
-          reject(error)
-          return
-        }
-        resolve(result.map(pixel => parseInt(pixel)))
-      })
-    })
-  }
-
   setPixel ({ canvasId, index, color }) {
     return new Promise((resolve, reject) => {
-      this.Contract.setPixel(canvasId, index, color, { gas: this.gasLimit }, (error, result) => {
+      this.Contract.setPixel(canvasId, index, color, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
-          console.error(error)
+          console.log(error)
+          console.log('[ERROR] Set pixel failed')
           reject(error)
-          return
+        } else {
+          const tx = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.setPixel,
+            name: `Set pixel to #${color} on Canvas ${canvasId}`
+          }
+          resolve(new Transaction(tx))
         }
-        resolve(result)
-      })
-    })
-  }
-
-  getLastBid (canvasId) {
-    return new Promise((resolve, reject) => {
-      this.Contract.getLastBidForCanvas(canvasId, (error, result) => {
-        if (error) {
-          console.error(error)
-          reject(error)
-          return
-        }
-        resolve(new Bid(result))
       })
     })
   }
 
   makeBid ({ canvasId, bidAmountInWei }) {
     return new Promise((resolve, reject) => {
-      this.Contract.makeBid(canvasId, { value: bidAmountInWei, gas: this.gasLimit }, (error, result) => {
+      this.Contract.makeBid(canvasId, { ...DEFAULT_CONFIG, value: bidAmountInWei }, (error, txHash) => {
         if (error) {
-          console.error(error)
+          console.log(error)
+          console.log('[ERROR] Make bid failed')
           reject(error)
-          return
+        } else {
+          const tx = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.makeBid,
+            name: `Bid on Canvas #${canvasId}`
+          }
+          resolve(new Transaction(tx))
         }
-        resolve(result)
-      })
-    })
-  }
-
-  getActiveCanvasIds () {
-    return new Promise((resolve, reject) => {
-      this.Contract.getActiveCanvases((error, result) => {
-        if (error) {
-          console.error(error)
-          reject(error)
-          return
-        }
-        resolve(result.map(canvasId => parseInt(canvasId, 10)))
       })
     })
   }
 
   createCanvas () {
     return new Promise((resolve, reject) => {
-      this.Contract.createCanvas({}, (error, result, abc) => {
+      this.Contract.createCanvas({}, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
-          console.error(error)
+          console.log(error)
+          console.log('[ERROR] Create canvas failed')
           reject(error)
-          return
+        } else {
+          const tx = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.createCanvas,
+            name: 'Create Canvas'
+          }
+          resolve(new Transaction(tx))
         }
-        resolve(parseInt(result, 10))
+      })
+    })
+  }
+
+  /**
+   * View functions (free)
+   */
+
+  getActiveCanvasIds () {
+    return new Promise((resolve, reject) => {
+      this.Contract.getActiveCanvases(DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(result.map(canvasId => parseInt(canvasId, 10)))
+        }
+      })
+    })
+  }
+
+  getLastBid (canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.getLastBidForCanvas(canvasId, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(new Bid(result))
+        }
+      })
+    })
+  }
+
+  getCanvas (canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.getArtwork(canvasId, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(result.map(pixel => parseInt(pixel)))
+        }
+      })
+    })
+  }
+
+  getCanvasInfo (canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.getCanvasInfo(canvasId, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(new CanvasInfo(result))
+        }
       })
     })
   }

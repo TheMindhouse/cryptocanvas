@@ -5,6 +5,7 @@ import './styles/CreateCanvas.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { Spin, Modal } from 'antd'
 import { withRouter } from 'react-router-dom'
+import { updateTransactions } from '../../helpers/localStorage'
 
 class CreateCanvas extends React.PureComponent {
   state = {
@@ -14,12 +15,15 @@ class CreateCanvas extends React.PureComponent {
   onCreateCanvas = () => {
     this.setState({ loading: true })
     this.props.Contract.createCanvas()
-      .then(() => {
-        console.log('[USER] Requested new canvas create');
+      .then((tx) => {
+        updateTransactions(tx)
         Modal.success({
-            title: 'Created new canvas',
+            title: 'Create Canvas Transaction successfully sent',
             content: 'You need to wait a few minutes before it\'s updated in the blockchain',
           })
+        this.setState({ loading: false })
+      })
+      .catch(() => {
         this.setState({ loading: false })
       })
   }

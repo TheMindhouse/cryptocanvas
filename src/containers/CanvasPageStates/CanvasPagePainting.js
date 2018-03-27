@@ -10,6 +10,9 @@ import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlacehold
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
 import withEvents from '../../hoc/withEvents'
+import withWeb3 from '../../hoc/withWeb3'
+import { Transaction, TRANSACTION_TYPE } from '../../models/Transaction'
+import { updateTransactions } from '../../helpers/localStorage'
 
 class CanvasPagePainting extends React.Component {
   constructor (props) {
@@ -77,10 +80,10 @@ class CanvasPagePainting extends React.Component {
         console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, index, color })
           .then((tx) => {
-
-            this.updatePixel({ index, color })
+            updateTransactions(tx)
+            // this.updatePixel({ index, color })
             Modal.success({
-              title: 'Pixel successfully painted',
+              title: 'Paint Pixel Transaction sent',
               content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
               'you will be rewarded approximate amount of money from the initial bid.',
             })
@@ -166,4 +169,4 @@ class CanvasPagePainting extends React.Component {
   }
 }
 
-export default withEvents(CanvasPagePainting)
+export default withEvents(withWeb3(CanvasPagePainting))

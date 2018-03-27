@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import { Row } from 'antd'
 import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTrading'
+import withWeb3 from '../../hoc/withWeb3'
 
 class CanvasPageTrading extends Component {
   constructor (props) {
@@ -72,4 +73,4 @@ class CanvasPageTrading extends Component {
 CanvasPageTrading.propTypes = {}
 CanvasPageTrading.defaultProps = {}
 
-export default CanvasPageTrading
+export default withWeb3(CanvasPageTrading)

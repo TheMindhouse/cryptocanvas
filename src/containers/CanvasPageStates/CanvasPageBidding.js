@@ -6,6 +6,7 @@ import CanvasSidebar from '../../components/CanvasSidebar/CanvasSidebar'
 import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBidding'
 import { Bid } from '../../models/Bid'
 import withEvents from '../../hoc/withEvents'
+import withWeb3 from '../../hoc/withWeb3'
 
 class CanvasPageBidding extends Component {
   biddingTimer = null
@@ -130,4 +131,4 @@ class CanvasPageBidding extends Component {
 CanvasPageBidding.propTypes = {}
 CanvasPageBidding.defaultProps = {}
 
-export default withEvents(CanvasPageBidding)
+export default withEvents(withWeb3(CanvasPageBidding))
