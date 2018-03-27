@@ -15,7 +15,7 @@ const withEvents = (WrappedComponent) => {
           event.stopWatching()
         }
       })
-      console.log('Stopped watching for events');
+      // console.log('Stopped watching for events');
     }
 
     render () {

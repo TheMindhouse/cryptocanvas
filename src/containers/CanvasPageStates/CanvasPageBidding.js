@@ -25,7 +25,7 @@ class CanvasPageBidding extends Component {
   componentDidMount () {
     this.getCanvas()
     this.getHighestBid()
-    this.watchForChanges()
+    this.props.getBlockNumber().then(this.watchForChanges)
   }
 
   getCanvas = () => {
@@ -82,8 +82,7 @@ class CanvasPageBidding extends Component {
     }, biddingTimeLeftInMs)
   }
 
-  watchForChanges = () => {
-    const { blockNumber } = this.props.web3.eth
+  watchForChanges = (blockNumber) => {
     const bidPostedEvent = this.props.Contract.BidPostedEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
 
     bidPostedEvent.watch((error, result) => {

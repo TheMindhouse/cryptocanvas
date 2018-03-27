@@ -5,9 +5,11 @@ import { ContractModel } from '../models/ContractModel'
 
 const Web3 = window.Web3
 
+const CHECK_ACCOUNT_DELAY = 500
+
 const withWeb3 = (WrappedComponent) => {
   class withWeb3 extends React.Component {
-    constructor(props) {
+    constructor (props) {
       super(props)
 
       // TODO keep web3 and contract in Redux?
@@ -19,22 +21,46 @@ const withWeb3 = (WrappedComponent) => {
       }
 
       this.web3 = window.web3
-      // console.log(window.web3)
 
       // Set default account
-      window.web3.eth.defaultAccount = window.web3.eth.accounts[0]
-      // console.log('defaultAccount', window.web3.eth.defaultAccount)
+      window.web3.eth.defaultAccount = window.web3.eth.accounts[ 0 ]
 
       const ContractInstance = window.web3.eth.contract(ABI)
-      this.Contract = new ContractModel(ContractInstance.at('0x13274fe19c0178208bcbee397af8167a7be27f6f'))
-      // console.log(this.Contract)
+      this.Contract = new ContractModel(ContractInstance.at('0x8cdaf0cd259887258bc13a92c0a6da92698644c0'))
 
-      // watch for changes
-      // this.Contract.allEvents().watch(function(error, event){
-      //   console.log('[EVENT] all events')
-      //   if (!error)
-      //     console.log(event);
-      // });
+      this.state = {
+        account: this.web3.eth.accounts[ 0 ]
+      }
+    }
+
+    componentDidMount () {
+      this.checkAccountInterval = setInterval(() => {
+        this.checkAccount()
+      }, CHECK_ACCOUNT_DELAY)
+    }
+
+    componentWillUnmount () {
+      window.clearInterval(this.checkAccountInterval)
+    }
+
+    checkAccount = () => {
+      const account = this.web3.eth.accounts[ 0 ]
+      if (account !== this.state.account) {
+        this.setState({ account })
+      }
+    }
+
+    getBlockNumber = () => {
+      return new Promise((resolve, reject) => {
+        this.web3.eth.getBlockNumber((error, result) => {
+          if (error) {
+            console.error(error)
+            reject(error)
+          } else {
+            resolve(result)
+          }
+        })
+      })
     }
 
     render () {
@@ -43,9 +69,10 @@ const withWeb3 = (WrappedComponent) => {
       } = this.props
 
       const injectedProps = {
-        web3: this.web3,
-        Contract: this.Contract
-      };
+        Contract: this.Contract,
+        account: this.state.account,
+        getBlockNumber: this.getBlockNumber,
+      }
 
       const props = Object.assign(
         {},

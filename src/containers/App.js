@@ -9,6 +9,7 @@ import Homepage from './Homepage'
 import CanvasPage from './CanvasPage'
 import About from './About'
 import Header from '../components/Layout/Header'
+import AccountStatus from '../components/Layout/AccountStatus'
 
 class App extends React.Component {
   render () {
@@ -17,6 +18,7 @@ class App extends React.Component {
         <div>
 
           <Header />
+          <AccountStatus />
 
           <Route exact path='/' component={Homepage} />
           <Route path='/about' component={About} />

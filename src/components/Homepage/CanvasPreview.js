@@ -27,15 +27,15 @@ class CanvasPreview extends React.Component {
 
   getCanvas = () => {
     // Temporary store canvas in local storage
-    const tempCanvas = window.localStorage.getItem(getLocalStorageName(this.props.canvasId))
-
-    if (tempCanvas) {
-      this.setState({
-        pixels: JSON.parse(tempCanvas),
-        isLoading: false,
-      })
-      return
-    }
+    // const tempCanvas = window.localStorage.getItem(getLocalStorageName(this.props.canvasId))
+    //
+    // if (tempCanvas) {
+    //   this.setState({
+    //     pixels: JSON.parse(tempCanvas),
+    //     isLoading: false,
+    //   })
+    //   return
+    // }
 
     this.props.Contract.getCanvas(this.props.canvasId)
       .then((pixels) => {

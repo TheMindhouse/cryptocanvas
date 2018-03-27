@@ -15,11 +15,10 @@ class Homepage extends Component {
 
   componentDidMount () {
     this.getActiveCanvasIds()
-    this.watchForChanges()
+    this.props.getBlockNumber().then(this.watchForChanges)
   }
 
-  watchForChanges = () => {
-    const { blockNumber } = this.props.web3.eth
+  watchForChanges = (blockNumber) => {
     const canvasCreatedEvent = this.props.Contract.CanvasCreatedEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
 
     // watch for changes

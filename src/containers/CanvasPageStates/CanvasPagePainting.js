@@ -26,7 +26,7 @@ class CanvasPagePainting extends React.Component {
 
   componentDidMount () {
     this.getCanvas()
-    this.watchForChanges()
+    this.props.getBlockNumber().then(this.watchForChanges)
   }
 
   getCanvas = () => {
@@ -67,7 +67,6 @@ class CanvasPagePainting extends React.Component {
 
   handlePixelClick = ({ index, x, y }) => {
     const color = this.state.currentColorIndex
-    console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
 
     Modal.confirm({
       title: 'Do you want to paint this pixel?',
@@ -75,15 +74,16 @@ class CanvasPagePainting extends React.Component {
       okText: 'Yes, paint pixel',
       okType: 'primary',
       onOk: () => {
-        console.log('Pixel update requested')
+        console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, index, color })
-          .then((result) => {
-            // this.updatePixel({ index, color })
-            // Modal.success({
-            //   title: 'Pixel successfully painted',
-            //   content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
-            //   'you will be rewarded approximate amount of money from the initial bid.',
-            // })
+          .then((tx) => {
+
+            this.updatePixel({ index, color })
+            Modal.success({
+              title: 'Pixel successfully painted',
+              content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
+              'you will be rewarded approximate amount of money from the initial bid.',
+            })
           })
           .catch((error) => {
             Modal.error({
@@ -117,8 +117,7 @@ class CanvasPagePainting extends React.Component {
     }
   }
 
-  watchForChanges = () => {
-    const { blockNumber } = this.props.web3.eth
+  watchForChanges = (blockNumber) => {
     const pixelPaintedEvent = this.props.Contract.PixelPaintedEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
 
     // watch for changes
