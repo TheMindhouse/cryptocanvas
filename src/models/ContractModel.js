@@ -93,6 +93,19 @@ export class ContractModel {
     })
   }
 
+  getCanvasCount () {
+    return new Promise((resolve, reject) => {
+      this.Contract.getArtworksCount(DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(parseInt(result, 10))
+        }
+      })
+    })
+  }
+
   getLastBid (canvasId) {
     return new Promise((resolve, reject) => {
       this.Contract.getLastBidForCanvas(canvasId, DEFAULT_CONFIG, (error, result) => {

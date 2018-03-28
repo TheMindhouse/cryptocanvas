@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
-import { Col, Divider, Row } from 'antd'
+import { Divider, Row } from 'antd'
 import withWeb3 from '../hoc/withWeb3'
-import CanvasPreview from '../components/Homepage/CanvasPreview'
-import CreateCanvas from '../components/Homepage/CreateCanvas'
 import withEvents from '../hoc/withEvents'
-
-const MAX_ACTIVE_CANVASES = 10
+import ActiveCanvases from './Homepage/ActiveCanvases'
+import FinishedCanvases from './Homepage/FinishedCanvases'
 
 class Homepage extends Component {
   state = {
     activeCanvasIds: [],
+    finishedCanvasIds: [],
   }
 
   componentDidMount () {
     this.getActiveCanvasIds()
+      .then(() => this.getFinishedCanvasIds())
+
     this.props.getBlockNumber().then(this.watchForChanges)
   }
 
@@ -21,39 +22,38 @@ class Homepage extends Component {
     const canvasCreatedEvent = this.props.Contract.CanvasCreatedEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
 
     // watch for changes
-    canvasCreatedEvent.watch((error, result) => {
-      console.log('[EVENT] New canvas created');
+    canvasCreatedEvent.watch(() => {
+      console.log('[EVENT] New canvas created')
       this.getActiveCanvasIds()
+        .then(() => this.getFinishedCanvasIds())
     })
 
     this.props.events.push(canvasCreatedEvent)
   }
 
   getActiveCanvasIds = () => {
-    this.props.Contract.getActiveCanvasIds().then(activeCanvasIds => this.setState({ activeCanvasIds }))
+    return this.props.Contract.getActiveCanvasIds()
+      .then(activeCanvasIds => this.setState({ activeCanvasIds }))
+  }
+
+  getFinishedCanvasIds = () => {
+    this.props.Contract.getCanvasCount()
+      .then((canvasCount) => {
+        console.log('Total canvases: ' + canvasCount)
+        console.log('Active canvases: ' + this.state.activeCanvasIds)
+        const finishedCanvasIds = Array.from(new Array(canvasCount), (val, index) => index)
+          .filter(id => !this.state.activeCanvasIds.includes(id))
+        console.log('Finished canvases: ' + finishedCanvasIds)
+        this.setState({ finishedCanvasIds })
+      })
   }
 
   render () {
     return (
       <Row className="container">
-        <Row gutter={100}>
-          <h2>Paint</h2>
-          {this.state.activeCanvasIds.map((canvasId, index) =>
-            <Col span={6} key={index}>
-              <CanvasPreview canvasId={canvasId} />
-            </Col>
-          )}
-          {this.state.activeCanvasIds.length < MAX_ACTIVE_CANVASES &&
-          <Col span={6}>
-            <CreateCanvas />
-          </Col>
-          }
-        </Row>
-
-        <br />
+        <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
         <Divider />
-
-        <h2>Canvas Gallery</h2>
+        <FinishedCanvases canvasIds={this.state.finishedCanvasIds} />
       </Row>
     )
   }
