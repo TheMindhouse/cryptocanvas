@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Input, Button } from 'antd'
 
 class SubmitBid extends React.PureComponent {

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Stage, Layer } from 'react-konva'
 import PixelsMap from '../Canvas/PixelsMap'
 

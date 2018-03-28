@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import './styles/CreateCanvas.css'
 import withWeb3 from '../../hoc/withWeb3'

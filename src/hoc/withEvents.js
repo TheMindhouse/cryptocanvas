@@ -10,7 +10,7 @@ const withEvents = (WrappedComponent) => {
     events = []
 
     componentWillUnmount () {
-      this.events.map(event => {
+      this.events.forEach(event => {
         if (typeof event.stopWatching === 'function') {
           event.stopWatching()
         }

@@ -113,7 +113,7 @@ export class ContractModel {
           console.log(error)
           reject(error)
         } else {
-          resolve(result.map(pixel => parseInt(pixel)))
+          resolve(result.map(pixel => parseInt(pixel, 10)))
         }
       })
     })

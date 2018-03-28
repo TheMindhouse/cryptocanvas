@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Row from 'antd/es/grid/row'
 import CanvasStage from '../../components/Canvas/CanvasStage'
-import CanvasSidebar from '../../components/CanvasSidebar/CanvasSidebar'
 import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBidding'
 import { Bid } from '../../models/Bid'
 import withEvents from '../../hoc/withEvents'

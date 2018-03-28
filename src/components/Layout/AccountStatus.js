@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import './styles/AccountStatus.css'
 import withWeb3 from '../../hoc/withWeb3'
@@ -44,15 +43,15 @@ class AccountStatus extends React.PureComponent {
   checkTransactions = () => {
     getTransactions()
       .filter(tx => tx.status === TRANSACTION_STATUS.pending)
-      .map(tx => {
+      .forEach(tx => {
         console.log(`Checking transaction - ${tx.hash}`)
         window.web3.eth.getTransaction(tx.hash, (error, result) => {
           if (!error && result) {
             if (result.blockNumber) {
-              const updatedTransaction = {
+              const updatedTransaction = new Transaction({
                 ...tx,
                 status: TRANSACTION_STATUS.completed,
-              }
+              })
               updateTransactions(updatedTransaction)
             }
           }

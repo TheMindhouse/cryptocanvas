@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import { Row } from 'antd'
 import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTrading'

@@ -1,18 +1,3 @@
-export const convertColorToRGB = (color) => {
-  const red = Math.round(((color & 0xE0) >>> 5) / 7.0 * 255.0)
-  const green = Math.round(((color & 0x1C) >>> 2) / 7.0 * 255.0)
-  const blue = Math.round((color & 0x03) / 3.0 * 255.0)
-
-  return [ red, green, blue ]
-}
-
-export const RGBToHex = function (r, g, b) {
-  const bin = r << 16 | g << 8 | b
-  return (function (h) {
-    return new Array(7 - h.length).join('0') + h
-  })(bin.toString(16).toUpperCase())
-}
-
 /**
  * Get number of pixels which are painted (have a color different than 0)
  * @param pixels {Array} - array of numbers from 0 to 255

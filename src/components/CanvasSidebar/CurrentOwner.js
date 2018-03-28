@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { cutAddress } from '../../helpers/strings'
 import { Alert } from 'antd'
 

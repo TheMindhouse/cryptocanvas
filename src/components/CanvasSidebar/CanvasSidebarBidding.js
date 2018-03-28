@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Divider } from 'antd'
 import HighestBid from './HighestBid'
 import SubmitBid from './SubmitBid'

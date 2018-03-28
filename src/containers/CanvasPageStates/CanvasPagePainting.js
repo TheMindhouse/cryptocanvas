@@ -11,7 +11,6 @@ import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
-import { Transaction, TRANSACTION_TYPE } from '../../models/Transaction'
 import { updateTransactions } from '../../helpers/localStorage'
 
 class CanvasPagePainting extends React.Component {

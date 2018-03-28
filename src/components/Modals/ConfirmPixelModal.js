@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { hexPalette } from '../../helpers/colors'
 
 const ConfirmPixelModal = ({x, y, color }) => {

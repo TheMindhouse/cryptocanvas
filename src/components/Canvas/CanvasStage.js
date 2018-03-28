@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stage, Layer, Rect } from 'react-konva'
+import { Stage } from 'react-konva'
 import canvasBg from '../../assets/images/bg.png'
 import CanvasLayers from './CanvasLayers'
 

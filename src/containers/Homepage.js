@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Col, Divider, Row } from 'antd'
 import withWeb3 from '../hoc/withWeb3'
 import CanvasPreview from '../components/Homepage/CanvasPreview'

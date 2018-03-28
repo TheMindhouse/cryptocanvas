@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import './styles/CanvasPreview.css'
-import { Row, Spin } from 'antd'
+import { Row } from 'antd'
 import { Link } from 'react-router-dom'
 import CanvasPreviewPlaceholder from './CanvasPreviewPlaceholder'
 import withWeb3 from '../../hoc/withWeb3'
