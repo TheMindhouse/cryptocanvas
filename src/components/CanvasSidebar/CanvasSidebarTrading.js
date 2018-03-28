@@ -14,7 +14,10 @@ const CanvasSidebarTrading = (props) => {
 
       <Divider />
 
-      <CurrentOwner canvasOwner={props.canvasOwner} />
+      <CurrentOwner
+        canvasOwner={props.canvasOwner}
+        isUserCanvasOwner={props.isUserCanvasOwner}
+      />
 
     </div>
   )

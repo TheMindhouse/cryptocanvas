@@ -42,10 +42,10 @@ class AccountStatus extends React.PureComponent {
   }
 
   checkTransactions = () => {
-    console.log('Checking transactions...')
-    getTransactions(this.props.canvasId)
+    getTransactions()
       .filter(tx => tx.status === TRANSACTION_STATUS.pending)
       .map(tx => {
+        console.log(`Checking transaction - ${tx.hash}`)
         window.web3.eth.getTransaction(tx.hash, (error, result) => {
           if (!error && result) {
             if (result.blockNumber) {

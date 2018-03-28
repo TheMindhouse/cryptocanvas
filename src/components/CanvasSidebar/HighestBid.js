@@ -1,11 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Alert } from 'antd'
 
 const HighestBid = (props) => {
   console.log(props.highestBidAmount);
   if (props.highestBidAmount) {
     return (
       <div>
+        { props.isUserHighestBidder &&
+          <Alert message="Your bid is currently the highest!" type="success" showIcon />
+        }
         <h2>Current Highest Bid</h2>
         <h3>{props.highestBidAmount} ETH</h3>
         <p>by {props.highestBidAddress}</p>

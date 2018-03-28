@@ -72,6 +72,8 @@ const withWeb3 = (WrappedComponent) => {
         Contract: this.Contract,
         account: this.state.account,
         getBlockNumber: this.getBlockNumber,
+        toWei: this.web3.toWei,
+        fromWei: this.web3.fromWei,
       }
 
       const props = Object.assign(

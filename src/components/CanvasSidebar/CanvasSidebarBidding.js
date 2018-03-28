@@ -14,6 +14,7 @@ const CanvasSidebarBidding = (props) => {
       <Divider />
 
       <HighestBid
+        isUserHighestBidder={props.isUserHighestBidder}
         highestBidAmount={props.highestBidAmount}
         highestBidAddress={props.highestBidAddress} />
 

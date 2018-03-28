@@ -7,6 +7,7 @@ import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBi
 import { Bid } from '../../models/Bid'
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
+import { updateTransactions } from '../../helpers/localStorage'
 
 class CanvasPageBidding extends Component {
   biddingTimer = null
@@ -65,7 +66,7 @@ class CanvasPageBidding extends Component {
     if (bid.amount) {
       console.log('New highest bid: ', bid)
       this.setState({
-        highestBidAmount: parseFloat(this.props.web3.fromWei(bid.amount, 'ether')),
+        highestBidAmount: parseFloat(this.props.fromWei(bid.amount, 'ether')),
         highestBidAddress: bid.bidder,
       })
 
@@ -98,9 +99,11 @@ class CanvasPageBidding extends Component {
   }
 
   submitBid = (bidAmountInEth) => {
-    const bidAmountInWei = this.props.web3.toWei(bidAmountInEth, 'ether')
+    const bidAmountInWei = this.props.toWei(bidAmountInEth, 'ether')
     console.log(`User posting new bid: ${bidAmountInEth} (${bidAmountInWei} Wei)`)
+
     this.props.Contract.makeBid({ canvasId: this.props.canvasId, bidAmountInWei })
+      .then(transaction => updateTransactions(transaction))
   }
 
   render () {
@@ -117,6 +120,7 @@ class CanvasPageBidding extends Component {
         <div>
           <CanvasSidebarBidding
             canvasId={this.props.canvasId}
+            isUserHighestBidder={this.props.account === this.state.highestBidAmount}
             highestBidAmount={this.state.highestBidAmount}
             highestBidAddress={this.state.highestBidAddress}
             biddingFinishTime={this.state.biddingFinishTime}

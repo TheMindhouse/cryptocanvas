@@ -63,6 +63,7 @@ class CanvasPageTrading extends Component {
           <CanvasSidebarTrading
             canvasId={this.props.canvasId}
             canvasOwner={this.props.canvasOwner}
+            isUserCanvasOwner={this.props.account === this.props.canvasOwner}
           />
         </div>
       </Row>
