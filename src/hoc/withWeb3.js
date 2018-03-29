@@ -26,7 +26,10 @@ const withWeb3 = (WrappedComponent) => {
       window.web3.eth.defaultAccount = window.web3.eth.accounts[ 0 ]
 
       const ContractInstance = window.web3.eth.contract(ABI)
-      this.Contract = new ContractModel(ContractInstance.at('0x8cdaf0cd259887258bc13a92c0a6da92698644c0'))
+      this.Contract = new ContractModel(ContractInstance.at('0x4ae3dbb5025ab0da0864bedfdcb1ebfcef1ee144'))
+
+      // todo Temporary for dev
+      window.contract = this.Contract
 
       this.state = {
         account: this.web3.eth.accounts[ 0 ]
@@ -74,6 +77,7 @@ const withWeb3 = (WrappedComponent) => {
         getBlockNumber: this.getBlockNumber,
         toWei: this.web3.toWei,
         fromWei: this.web3.fromWei,
+        getTransactionReceipt: this.web3.eth.getTransactionReceipt,
       }
 
       const props = Object.assign(

@@ -4,8 +4,10 @@ import './styles/AccountStatus.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { cutAddress } from '../../helpers/strings'
 import { clearTransactions, getTransactions, updateTransactions } from '../../helpers/localStorage'
-import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
+import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../../models/Transaction'
 import { Divider } from 'antd'
+
+const CHECK_TRANSACTIONS_DELAY = 2000
 
 const StatusDisconnected = () =>
   <div>
@@ -32,7 +34,7 @@ class AccountStatus extends React.PureComponent {
     this.timer = setInterval(() => {
       this.checkTransactions()
       this.updateTransactions()
-    }, 1000)
+    }, CHECK_TRANSACTIONS_DELAY)
   }
 
   componentWillUnmount () {
@@ -45,15 +47,10 @@ class AccountStatus extends React.PureComponent {
       .filter(tx => tx.status === TRANSACTION_STATUS.pending)
       .forEach(tx => {
         console.log(`Checking transaction - ${tx.hash}`)
-        window.web3.eth.getTransaction(tx.hash, (error, result) => {
+        this.props.getTransactionReceipt(tx.hash, (error, result) => {
           if (!error && result) {
-            if (result.blockNumber) {
-              const updatedTransaction = new Transaction({
-                ...tx,
-                status: TRANSACTION_STATUS.completed,
-              })
-              updateTransactions(updatedTransaction)
-            }
+            const status = TRANSACTION_RECEIPT_STATUS[ Number(result.status) ]
+            updateTransactions(new Transaction({ ...tx, status }))
           }
         })
       })

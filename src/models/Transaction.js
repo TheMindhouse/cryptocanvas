@@ -4,6 +4,11 @@ export const TRANSACTION_STATUS = {
   failed: 'failed'
 }
 
+export const TRANSACTION_RECEIPT_STATUS = {
+  0: TRANSACTION_STATUS.failed,
+  1: TRANSACTION_STATUS.completed,
+}
+
 export const TRANSACTION_TYPE = {
   createCanvas: 'createCanvas',
   setPixel: 'setPixel',

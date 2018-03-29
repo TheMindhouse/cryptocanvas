@@ -57,7 +57,11 @@ class CanvasPageBidding extends Component {
   }
 
   getHighestBid = () => {
-    this.props.Contract.getLastBid(this.props.canvasId).then(this.updateHighestBid)
+    this.props.Contract.getLastBid(this.props.canvasId)
+      .then((bid) => {
+      console.log(bid)
+      this.updateHighestBid(bid)
+    })
   }
 
   updateHighestBid = (bid) => {
@@ -118,7 +122,7 @@ class CanvasPageBidding extends Component {
         <div>
           <CanvasSidebarBidding
             canvasId={this.props.canvasId}
-            isUserHighestBidder={this.props.account === this.state.highestBidAmount}
+            isUserHighestBidder={this.props.account === this.state.highestBidAddress}
             highestBidAmount={this.state.highestBidAmount}
             highestBidAddress={this.state.highestBidAddress}
             biddingFinishTime={this.state.biddingFinishTime}
