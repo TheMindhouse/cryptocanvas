@@ -5,13 +5,9 @@ import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTr
 import withWeb3 from '../../hoc/withWeb3'
 
 class CanvasPageTrading extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      pixels: [],
-      isLoading: true,
-    }
+  state = {
+    pixels: [],
+    isLoading: true,
   }
 
   componentDidMount () {
@@ -45,7 +41,6 @@ class CanvasPageTrading extends Component {
         })
       })
   }
-
 
   render () {
     return (

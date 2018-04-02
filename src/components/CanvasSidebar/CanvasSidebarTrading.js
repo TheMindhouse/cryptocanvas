@@ -1,25 +1,141 @@
 import React from 'react'
-import { Divider } from 'antd'
+import { Divider, Modal } from 'antd'
 import CurrentOwner from './CurrentOwner'
+import MarketStatus from './MarketStatus'
+import withWeb3 from '../../hoc/withWeb3'
+import { updateTransactions } from '../../helpers/localStorage'
 
-const CanvasSidebarTrading = (props) => {
-  return (
-    <div className="CanvasSidebar">
-      <h2 className="CanvasSidebar__title">Canvas #{props.canvasId}</h2>
-      <h3 className="CanvasSidebar__status">Completed</h3>
+class CanvasSidebarTrading extends React.PureComponent {
+  constructor () {
+    super()
+    this.state = {
+      currentBuyOffer: {},
+      currentSellOffer: {},
+    }
+  }
 
-      <Divider />
+  componentDidMount () {
+    this.getCurrentBuyOffer()
+    this.getCurrentSellOffer()
+  }
 
-      <CurrentOwner
-        canvasOwner={props.canvasOwner}
-        isUserCanvasOwner={props.isUserCanvasOwner}
-      />
+  getCurrentBuyOffer = () => {
+    this.props.Contract.getCurrentBuyOffer(this.props.canvasId)
+      .then(currentBuyOffer => {
+        console.log(currentBuyOffer)
+        return this.setState({ currentBuyOffer })
+      })
+  }
 
-    </div>
-  )
+  getCurrentSellOffer = () => {
+    this.props.Contract.getCurrentSellOffer(this.props.canvasId)
+      .then(currentSellOffer => {
+        console.log(currentSellOffer)
+        return this.setState({ currentSellOffer })
+      })
+  }
+
+  submitSellOffer = (offerInEth) => {
+    const offerInWei = this.props.toWei(offerInEth, 'ether')
+    console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    this.props.Contract.offerForSale(this.props.canvasId, offerInWei)
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Offer for Sale Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+
+      })
+  }
+
+  submitBuyOffer = (offerInEth) => {
+    const offerInWei = this.props.toWei(offerInEth, 'ether')
+    console.log(`[USER] New buy offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    this.props.Contract.makeBuyOffer(this.props.canvasId, offerInWei)
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Buy Offer Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+
+      })
+  }
+
+  cancelBuyOffer = () => {
+    this.props.Contract.cancelBuyOffer(this.props.canvasId)
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Cancel Buy Offer Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+
+      })
+  }
+
+  acceptBuyOffer = (priceInEth) => {
+    // const priceInWei = this.props.toWei(priceInEth, 'ether')
+    const priceInWei = this.props.toWei(0, 'ether')
+    this.props.Contract.acceptBuyOffer(this.props.canvasId, priceInWei)
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Accept Buy Offer Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+
+      })
+  }
+
+  acceptSellOffer = (priceInEth) => {
+    const priceInWei = this.props.toWei(priceInEth, 'ether')
+    this.props.Contract.acceptSellOffer(this.props.canvasId, priceInWei)
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Buy Canvas Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+
+      })
+  }
+
+  render () {
+    return (
+      <div className="CanvasSidebar">
+        <h2 className="CanvasSidebar__title">Canvas #{this.props.canvasId}</h2>
+        <h3 className="CanvasSidebar__status">Completed</h3>
+
+        <Divider />
+
+        <CurrentOwner
+          canvasOwner={this.props.canvasOwner}
+          isUserCanvasOwner={this.props.isUserCanvasOwner}
+        />
+
+        <Divider />
+
+        <MarketStatus
+          userAddress={this.props.account}
+          isUserCanvasOwner={this.props.isUserCanvasOwner}
+          currentBuyOffer={this.state.currentBuyOffer}
+          currentSellOffer={this.state.currentSellOffer}
+          submitBuyOffer={this.submitBuyOffer}
+          submitSellOffer={this.submitSellOffer}
+          cancelBuyOffer={this.cancelBuyOffer}
+          acceptBuyOffer={this.acceptBuyOffer}
+          acceptSellOffer={this.acceptSellOffer}
+          fromWei={this.props.fromWei}
+        />
+
+      </div>
+    )
+  }
 }
 
 CanvasSidebarTrading.propTypes = {}
 CanvasSidebarTrading.defaultProps = {}
 
-export default CanvasSidebarTrading
+export default withWeb3(CanvasSidebarTrading)

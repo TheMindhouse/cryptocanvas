@@ -15,7 +15,10 @@ export const TRANSACTION_TYPE = {
   makeBid: 'makeBid',
   buyOffer: 'buyOffer',
   cancelBuyOffer: 'cancelBuyOffer',
-  sellOffer: 'sellOffer',
+  acceptBuyOffer: 'acceptBuyOffer',
+  offerForSale: 'offerForSale',
+  offerForSaleToAddress: 'offerForSaleToAddress',
+  acceptSellOffer: 'acceptSellOffer',
   withdrawReward: 'withdrawReward',
 }
 

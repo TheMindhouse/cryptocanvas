@@ -26,7 +26,7 @@ const withWeb3 = (WrappedComponent) => {
       window.web3.eth.defaultAccount = window.web3.eth.accounts[ 0 ]
 
       const ContractInstance = window.web3.eth.contract(ABI)
-      this.Contract = new ContractModel(ContractInstance.at('0x4ae3dbb5025ab0da0864bedfdcb1ebfcef1ee144'))
+      this.Contract = new ContractModel(ContractInstance.at('0x9340334871026429ada20d9e234559305930db1b'))
 
       // todo Temporary for dev
       window.contract = this.Contract
