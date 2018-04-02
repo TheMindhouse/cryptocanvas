@@ -174,6 +174,25 @@ export class ContractModel {
     })
   }
 
+  cancelSellOffer (canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.artworkNoLongerForSale(canvasId, DEFAULT_CONFIG, (error, txHash) => {
+        if (error) {
+          console.log(error)
+          console.log('[ERROR] Cancel sell offer failed')
+          reject(error)
+        } else {
+          const tx = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.cancelSellOffer,
+            name: `Cancel Sell Offer for Canvas #${canvasId}`
+          }
+          resolve(new Transaction(tx))
+        }
+      })
+    })
+  }
+
   acceptSellOffer (canvasId, priceInWei) {
     return new Promise((resolve, reject) => {
       this.Contract.buyArtwork(canvasId, { ...DEFAULT_CONFIG, value: priceInWei }, (error, txHash) => {
@@ -302,5 +321,25 @@ export class ContractModel {
 
   CanvasCreatedEvent (...args) {
     return this.Contract.CanvasCreated(args)
+  }
+
+  BuyOfferMadeEvent (...args) {
+    return this.Contract.BuyOfferMade(args)
+  }
+
+  BuyOfferCancelledEvent (...args) {
+    return this.Contract.BuyOfferCancelled(args)
+  }
+
+  SellOfferMadeEvent (...args) {
+    return this.Contract.ArtworkOfferedForSale(args)
+  }
+
+  SellOfferCancelledEvent (...args) {
+    return this.Contract.ArtworkNoLongerForSale(args)
+  }
+
+  CanvasSoldEvent (...args) {
+    return this.Contract.ArtworkSold(args)
   }
 }

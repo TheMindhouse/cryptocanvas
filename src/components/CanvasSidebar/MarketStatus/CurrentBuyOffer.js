@@ -34,7 +34,7 @@ const CurrentBuyOffer = (props) => {
         props.isUserCanvasOwner &&
         <div>
           <Button type="primary" size="default" onClick={confirmAcceptBuyOffer}>
-            Accept Buy Offer for {props.price} ETH
+            Sell this Canvas now for {props.price} ETH
           </Button>
           <br /><br />
         </div>

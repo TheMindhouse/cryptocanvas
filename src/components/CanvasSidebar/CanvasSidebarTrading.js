@@ -4,6 +4,7 @@ import CurrentOwner from './CurrentOwner'
 import MarketStatus from './MarketStatus'
 import withWeb3 from '../../hoc/withWeb3'
 import { updateTransactions } from '../../helpers/localStorage'
+import withEvents from '../../hoc/withEvents'
 
 class CanvasSidebarTrading extends React.PureComponent {
   constructor () {
@@ -17,6 +18,7 @@ class CanvasSidebarTrading extends React.PureComponent {
   componentDidMount () {
     this.getCurrentBuyOffer()
     this.getCurrentSellOffer()
+    this.props.getBlockNumber().then(this.watchForChanges)
   }
 
   getCurrentBuyOffer = () => {
@@ -35,6 +37,29 @@ class CanvasSidebarTrading extends React.PureComponent {
       })
   }
 
+  watchForChanges = (blockNumber) => {
+    const buyOfferMadeEvent = this.props.Contract.BuyOfferMadeEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
+    const buyOfferCancelledEvent = this.props.Contract.BuyOfferCancelledEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
+    const sellOfferMadeEvent = this.props.Contract.SellOfferMadeEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
+    const sellOfferCancelledEvent = this.props.Contract.SellOfferCancelledEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
+    const canvasSoldEvent = this.props.Contract.CanvasSoldEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
+
+    buyOfferMadeEvent.watch(this.getCurrentBuyOffer)
+    buyOfferCancelledEvent.watch(this.getCurrentBuyOffer)
+    sellOfferMadeEvent.watch(this.getCurrentSellOffer)
+    sellOfferCancelledEvent.watch(this.getCurrentSellOffer)
+    // todo - fix canvas sold event handling
+    // canvasSoldEvent.watch(() => { return window.location.reload()})
+
+    this.props.events.push(
+      buyOfferMadeEvent,
+      buyOfferCancelledEvent,
+      sellOfferMadeEvent,
+      sellOfferCancelledEvent,
+      canvasSoldEvent
+      )
+  }
+
   submitSellOffer = (offerInEth) => {
     const offerInWei = this.props.toWei(offerInEth, 'ether')
     console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
@@ -43,6 +68,20 @@ class CanvasSidebarTrading extends React.PureComponent {
         updateTransactions(transaction)
         Modal.success({
           title: 'Offer for Sale Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+
+      })
+  }
+
+  submitSellOfferToAddress = (offerInEth, receiverAddress) => {
+    const offerInWei = this.props.toWei(offerInEth, 'ether')
+    console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    this.props.Contract.offerForSaleToAddress(this.props.canvasId, offerInWei, receiverAddress)
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Offer for Sale to Address Transaction sent',
           content: 'It will be visible for others in a few minutes, after the blockchain updates.',
         })
 
@@ -124,6 +163,7 @@ class CanvasSidebarTrading extends React.PureComponent {
           currentSellOffer={this.state.currentSellOffer}
           submitBuyOffer={this.submitBuyOffer}
           submitSellOffer={this.submitSellOffer}
+          submitSellOfferToAddress={this.submitSellOfferToAddress}
           cancelBuyOffer={this.cancelBuyOffer}
           acceptBuyOffer={this.acceptBuyOffer}
           acceptSellOffer={this.acceptSellOffer}
@@ -138,4 +178,4 @@ class CanvasSidebarTrading extends React.PureComponent {
 CanvasSidebarTrading.propTypes = {}
 CanvasSidebarTrading.defaultProps = {}
 
-export default withWeb3(CanvasSidebarTrading)
+export default withEvents(withWeb3(CanvasSidebarTrading))

@@ -59,9 +59,9 @@ class CanvasPageBidding extends Component {
   getHighestBid = () => {
     this.props.Contract.getLastBid(this.props.canvasId)
       .then((bid) => {
-      console.log(bid)
-      this.updateHighestBid(bid)
-    })
+        console.log(bid)
+        this.updateHighestBid(bid)
+      })
   }
 
   updateHighestBid = (bid) => {
