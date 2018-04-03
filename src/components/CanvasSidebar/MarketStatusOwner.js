@@ -27,6 +27,7 @@ const MarketStatusOwner = (props) => {
         price={props.web3.fromWei(props.currentSellOffer.price)}
         submitSellOffer={props.submitSellOffer}
         submitSellOfferToAddress={props.submitSellOfferToAddress}
+        cancelSellOffer={props.cancelSellOffer}
         />
 
       <Divider dashed={true} />
