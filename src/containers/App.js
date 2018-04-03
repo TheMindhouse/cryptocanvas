@@ -9,7 +9,6 @@ import CanvasPage from './CanvasPage'
 import About from './About'
 import Header from '../components/Layout/Header'
 import AccountStatus from '../components/Layout/AccountStatus'
-import Test from '../components/Test'
 import { Web3Provider } from '../stores/Web3Provider'
 
 class App extends React.Component {
