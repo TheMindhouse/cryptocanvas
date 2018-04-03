@@ -12,7 +12,7 @@ const CHECK_TRANSACTIONS_DELAY = 2000
 const StatusDisconnected = () =>
   <div>
     <b>Ethereum Not Connected</b><br />
-    <span>Sign in to MetaMask</span>
+    <span>Log in to MetaMask</span>
   </div>
 
 const StatusConnected = ({ account }) =>
@@ -47,7 +47,7 @@ class AccountStatus extends React.PureComponent {
       .filter(tx => tx.status === TRANSACTION_STATUS.pending)
       .forEach(tx => {
         console.log(`Checking transaction - ${tx.hash}`)
-        this.props.getTransactionReceipt(tx.hash, (error, result) => {
+        this.props.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
           if (!error && result) {
             const status = TRANSACTION_RECEIPT_STATUS[ Number(result.status) ]
             updateTransactions(new Transaction({ ...tx, status }))

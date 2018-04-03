@@ -20,7 +20,9 @@ class OfferForSale extends React.PureComponent {
           modal={this.props.modal}
           onModalSubmit={this.onModalSubmit}
         />
-        <Button type="primary" onClick={this.props.modal.show}>Offer For Sale</Button>
+        <Button type="primary" onClick={this.props.modal.show}>
+          {this.props.isEdit ? 'Edit Sell Offer' : 'Offer For Sale'}
+        </Button>
       </div>
     )
   }

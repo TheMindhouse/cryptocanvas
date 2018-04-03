@@ -163,14 +163,14 @@ class CanvasSidebarTrading extends React.PureComponent {
 
         <CurrentOwner
           canvasOwner={this.props.canvasOwner}
-          isUserCanvasOwner={this.props.isUserCanvasOwner}
+          isUserCanvasOwner={this.props.account === this.props.canvasOwner}
         />
 
         <Divider />
 
         <MarketStatus
           userAddress={this.props.account}
-          isUserCanvasOwner={this.props.isUserCanvasOwner}
+          isUserCanvasOwner={this.props.account === this.props.canvasOwner}
           currentBuyOffer={this.state.currentBuyOffer}
           currentSellOffer={this.state.currentSellOffer}
           submitBuyOffer={this.submitBuyOffer}
@@ -180,7 +180,6 @@ class CanvasSidebarTrading extends React.PureComponent {
           cancelSellOffer={this.cancelSellOffer}
           acceptBuyOffer={this.acceptBuyOffer}
           acceptSellOffer={this.acceptSellOffer}
-          fromWei={this.props.web3.fromWei}
         />
 
       </div>

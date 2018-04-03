@@ -1,47 +1,22 @@
 import React from 'react'
 import { cutAddress } from '../../../helpers/strings'
-import { Alert, Button, Modal } from 'antd'
 
-const CurrentBuyOffer = (props) => {
-  const confirmAcceptBuyOffer = () => {
-    Modal.confirm({
-      title: 'Confirm Canvas Sale',
-      content: <span>Do you want to sell this Canvas for <b>{props.price} ETH?</b></span>,
-      okText: 'Yes, sell this Canvas',
-      okType: 'primary',
-      onOk: () => props.acceptBuyOffer(props.price),
-    })
-  }
+const BuyOfferInfo = ({ price, from }) => (
+  <p>
+    There is an active Buy Offer for: <b>{price} ETH</b><br />
+    <small>from {cutAddress(from)}</small>
+  </p>
+)
 
-  return (
-    <div>
-      <p>
-        This Canvas has an active buy offer for: <b>{props.price} ETH</b><br />
-        <small>from {cutAddress(props.from)}</small>
-      </p>
+const NoActiveOffer = () => (
+  <p>There are no active Buy Offers.</p>
+)
 
-      {
-        props.isUsersOffer &&
-        <div>
-          <Alert message="Your Buy Offer is the highest" type="success" showIcon />
-          <br />
-          <Button type="default" size="default" onClick={props.cancelBuyOffer}>Cancel Buy Offer</Button>
-          <br /><br />
-        </div>
-      }
-
-      {
-        props.isUserCanvasOwner &&
-        <div>
-          <Button type="primary" size="default" onClick={confirmAcceptBuyOffer}>
-            Sell this Canvas now for {props.price} ETH
-          </Button>
-          <br /><br />
-        </div>
-      }
-    </div>
-  )
-}
+const CurrentBuyOffer = (props) => (
+  props.hasOffer
+    ? <BuyOfferInfo {...props} />
+    : <NoActiveOffer />
+)
 
 CurrentBuyOffer.propTypes = {}
 CurrentBuyOffer.defaultProps = {}

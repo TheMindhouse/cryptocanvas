@@ -16,7 +16,7 @@ class MakeBuyOffer extends React.PureComponent {
           modal={this.props.modal}
           onModalSubmit={this.onModalSubmit}
           />
-        <Button type="primary" onClick={this.props.modal.show}>Make Buy Offer</Button>
+        <Button type="primary" onClick={this.props.modal.show}>{ this.props.isEdit ? "Edit Buy Offer" : "Make Buy Offer" }</Button>
       </div>
     )
   }
