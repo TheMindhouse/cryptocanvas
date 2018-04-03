@@ -1,19 +1,22 @@
 import React from 'react'
-import { Divider } from 'antd'
+import { Alert, Divider } from 'antd'
 
 import './styles/AccountStatus.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { cutAddress } from '../../helpers/strings'
 import { clearTransactions, getTransactions, updateTransactions } from '../../helpers/localStorage'
 import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../../models/Transaction'
+import AccountTransactions from './AccountTransactions'
 
 const CHECK_TRANSACTIONS_DELAY = 2000
 
 const StatusDisconnected = () =>
-  <div>
-    <b>Ethereum Not Connected</b><br />
-    <span>Log in to MetaMask</span>
-  </div>
+  <Alert
+    message="Log in to MetaMask"
+    description="Ethereum available but not connected"
+    type="error"
+    showIcon
+  />
 
 const StatusConnected = ({ account }) =>
   <div>
@@ -62,21 +65,32 @@ class AccountStatus extends React.PureComponent {
     })
   }
 
+  onClearTransactions = () => {
+    this.setState({ transactions: [] })
+    clearTransactions()
+  }
+
   render () {
     return (
       <div className="AccountStatus">
         {!this.props.account && <StatusDisconnected />}
-        {this.props.account && <StatusConnected account={this.props.account} />}
-        <Divider />
-        {!this.state.transactions.length && <p>No transactions yet</p>}
         {
-          this.state.transactions.map((tx, index) =>
-            <div key={index}>
-              <b>{tx.name}</b> - {tx.status}
-            </div>)
+          this.props.account &&
+          <div>
+            <StatusConnected account={this.props.account} />
+            {
+              this.state.transactions.length > 0 &&
+              <div>
+                <Divider />
+                <AccountTransactions
+                  transactions={this.state.transactions}
+                  onClear={this.onClearTransactions}
+                />
+              </div>
+            }
+          </div>
         }
-        <Divider />
-        <b onClick={clearTransactions}>Clear</b>
+
       </div>
     )
   }
