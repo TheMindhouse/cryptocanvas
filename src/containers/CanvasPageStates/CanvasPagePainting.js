@@ -1,16 +1,15 @@
 import React from 'react'
-
-import { Picker } from '../../components/Picker/Picker'
-import CanvasStage from '../../components/Canvas/CanvasStage'
 import { Row, Modal } from 'antd'
 
+import withEvents from '../../hoc/withEvents'
+import withWeb3 from '../../hoc/withWeb3'
+import { Picker } from '../../components/Picker/Picker'
+import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebar from '../../components/CanvasSidebar/CanvasSidebar'
 import { PixelPainted } from '../../models/PixelPainted'
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
-import withEvents from '../../hoc/withEvents'
-import withWeb3 from '../../hoc/withWeb3'
 import { updateTransactions } from '../../helpers/localStorage'
 
 class CanvasPagePainting extends React.Component {

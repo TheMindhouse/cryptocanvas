@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import CanvasStage from '../../components/Canvas/CanvasStage'
 import { Row } from 'antd'
-import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTrading'
 import withWeb3 from '../../hoc/withWeb3'
+import CanvasStage from '../../components/Canvas/CanvasStage'
+import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTrading'
 
 class CanvasPageTrading extends Component {
   state = {

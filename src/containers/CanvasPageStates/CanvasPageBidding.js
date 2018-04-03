@@ -3,9 +3,9 @@ import Row from 'antd/es/grid/row'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBidding'
 import { Bid } from '../../models/Bid'
+import { updateTransactions } from '../../helpers/localStorage'
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
-import { updateTransactions } from '../../helpers/localStorage'
 
 class CanvasPageBidding extends Component {
   biddingTimer = null
@@ -68,7 +68,7 @@ class CanvasPageBidding extends Component {
     if (bid.amount) {
       console.log('New highest bid: ', bid)
       this.setState({
-        highestBidAmount: parseFloat(this.props.fromWei(bid.amount, 'ether')),
+        highestBidAmount: parseFloat(this.props.web3.fromWei(bid.amount, 'ether')),
         highestBidAddress: bid.bidder,
       })
 
@@ -101,7 +101,7 @@ class CanvasPageBidding extends Component {
   }
 
   submitBid = (bidAmountInEth) => {
-    const bidAmountInWei = this.props.toWei(bidAmountInEth, 'ether')
+    const bidAmountInWei = this.props.web3.toWei(bidAmountInEth, 'ether')
     console.log(`User posting new bid: ${bidAmountInEth} (${bidAmountInWei} Wei)`)
 
     this.props.Contract.makeBid({ canvasId: this.props.canvasId, bidAmountInWei })

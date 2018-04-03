@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Divider, Row } from 'antd'
-import withWeb3 from '../hoc/withWeb3'
 import withEvents from '../hoc/withEvents'
+import withWeb3 from '../hoc/withWeb3'
 import ActiveCanvases from './Homepage/ActiveCanvases'
 import FinishedCanvases from './Homepage/FinishedCanvases'
 

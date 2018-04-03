@@ -1,11 +1,11 @@
 import React from 'react'
+import { Divider } from 'antd'
 
 import './styles/AccountStatus.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { cutAddress } from '../../helpers/strings'
 import { clearTransactions, getTransactions, updateTransactions } from '../../helpers/localStorage'
 import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../../models/Transaction'
-import { Divider } from 'antd'
 
 const CHECK_TRANSACTIONS_DELAY = 2000
 

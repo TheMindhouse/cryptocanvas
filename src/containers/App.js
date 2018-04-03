@@ -9,21 +9,25 @@ import CanvasPage from './CanvasPage'
 import About from './About'
 import Header from '../components/Layout/Header'
 import AccountStatus from '../components/Layout/AccountStatus'
+import Test from '../components/Test'
+import { Web3Provider } from '../stores/Web3Provider'
 
 class App extends React.Component {
   render () {
     return (
-      <Router>
-        <div>
+      <Web3Provider>
+        <Router>
+          <div>
+            <Header />
+            <AccountStatus />
 
-          <Header />
-          <AccountStatus />
-
-          <Route exact path='/' component={Homepage} />
-          <Route path='/about' component={About} />
-          <Route path='/canvas/:id' component={CanvasPage} />
-        </div>
-      </Router>
+            <Test />
+            <Route exact path='/' component={Homepage} />
+            <Route path='/about' component={About} />
+            <Route path='/canvas/:id' component={CanvasPage} />
+          </div>
+        </Router>
+      </Web3Provider>
     )
   }
 }

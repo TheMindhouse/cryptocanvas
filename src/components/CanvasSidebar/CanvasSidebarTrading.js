@@ -61,7 +61,7 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   submitSellOffer = (offerInEth) => {
-    const offerInWei = this.props.toWei(offerInEth, 'ether')
+    const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
     console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.offerForSale(this.props.canvasId, offerInWei)
       .then(transaction => {
@@ -75,7 +75,7 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   submitSellOfferToAddress = (offerInEth, receiverAddress) => {
-    const offerInWei = this.props.toWei(offerInEth, 'ether')
+    const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
     console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.offerForSaleToAddress(this.props.canvasId, offerInWei, receiverAddress)
       .then(transaction => {
@@ -101,7 +101,7 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   submitBuyOffer = (offerInEth) => {
-    const offerInWei = this.props.toWei(offerInEth, 'ether')
+    const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
     console.log(`[USER] New buy offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.makeBuyOffer(this.props.canvasId, offerInWei)
       .then(transaction => {
@@ -127,8 +127,8 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   acceptBuyOffer = (priceInEth) => {
-    // const priceInWei = this.props.toWei(priceInEth, 'ether')
-    const priceInWei = this.props.toWei(0, 'ether')
+    // const priceInWei = this.props.web3.toWei(priceInEth, 'ether')
+    const priceInWei = this.props.web3.toWei(0, 'ether')
     this.props.Contract.acceptBuyOffer(this.props.canvasId, priceInWei)
       .then(transaction => {
         updateTransactions(transaction)
@@ -141,7 +141,7 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   acceptSellOffer = (priceInEth) => {
-    const priceInWei = this.props.toWei(priceInEth, 'ether')
+    const priceInWei = this.props.web3.toWei(priceInEth, 'ether')
     this.props.Contract.acceptSellOffer(this.props.canvasId, priceInWei)
       .then(transaction => {
         updateTransactions(transaction)
@@ -180,7 +180,7 @@ class CanvasSidebarTrading extends React.PureComponent {
           cancelSellOffer={this.cancelSellOffer}
           acceptBuyOffer={this.acceptBuyOffer}
           acceptSellOffer={this.acceptSellOffer}
-          fromWei={this.props.fromWei}
+          fromWei={this.props.web3.fromWei}
         />
 
       </div>

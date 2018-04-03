@@ -1,9 +1,8 @@
 import React from 'react'
+import { Spin, Modal } from 'antd'
 
 import './styles/CreateCanvas.css'
 import withWeb3 from '../../hoc/withWeb3'
-import { Spin, Modal } from 'antd'
-import { withRouter } from 'react-router-dom'
 import { updateTransactions } from '../../helpers/localStorage'
 
 class CreateCanvas extends React.PureComponent {
@@ -46,4 +45,4 @@ class CreateCanvas extends React.PureComponent {
 CreateCanvas.propTypes = {}
 CreateCanvas.defaultProps = {}
 
-export default withRouter(withWeb3(CreateCanvas))
+export default withWeb3(CreateCanvas)
