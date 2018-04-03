@@ -1,36 +1,28 @@
 import React from 'react'
-import { Button, Input } from 'antd'
+import { Button} from 'antd'
+import withModal from '../../../hoc/withModal'
+import MakeBuyOfferModal from '../../Modals/MakeBuyOfferModal'
 
 class MakeBuyOffer extends React.PureComponent {
-  state = {
-    offer: null
+  onModalSubmit = (offerValue) => {
+    this.props.submitOffer(offerValue)
+    this.props.modal.close()
   }
 
-  update = (event) => {
-    this.setState({ offer: event.currentTarget.value })
-  }
-
-  onSubmitOffer = () => {
-    this.props.submitOffer(this.state.offer)
-  }
-
-  render() {
+  render () {
     return (
       <div>
-        <p>You can make a Buy Offer for this Canvas. If the owner accepts it,
-          the Canvas ownership will be transferred to you automatically.</p>
-        <Input type="text" addonAfter="ETH"
-               placeholder="Enter your Buy Offer"
-               onChange={this.update}
-               onPressEnter={this.onSubmitOffer} />
-        <p />
-        <Button type="primary" onClick={this.onSubmitOffer}>Submit Buy Offer</Button>
+        <MakeBuyOfferModal
+          modal={this.props.modal}
+          onModalSubmit={this.onModalSubmit}
+          />
+        <Button type="primary" onClick={this.props.modal.show}>Make Buy Offer</Button>
       </div>
-    );
+    )
   }
 }
 
 MakeBuyOffer.propTypes = {}
 MakeBuyOffer.defaultProps = {}
 
-export default MakeBuyOffer
+export default withModal(MakeBuyOffer)

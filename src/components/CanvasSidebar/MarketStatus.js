@@ -10,23 +10,6 @@ const MarketStatus = (props) => {
     <div>
       <h2>Market Status</h2>
       {
-        props.currentBuyOffer.hasOffer &&
-        <CurrentBuyOffer
-          price={props.fromWei(props.currentBuyOffer.price)}
-          from={props.currentBuyOffer.buyer}
-          isUsersOffer={props.currentBuyOffer.buyer === props.userAddress}
-          isUserCanvasOwner={props.isUserCanvasOwner}
-          acceptBuyOffer={props.acceptBuyOffer}
-          cancelBuyOffer={props.cancelBuyOffer}
-        />
-      }
-
-      {
-        !props.currentBuyOffer.hasOffer &&
-        <p>There are no active Buy Offers.</p>
-      }
-
-      {
         props.currentSellOffer.isForSale &&
         <CurrentSellOffer
           price={props.fromWei(props.currentSellOffer.price)}
@@ -53,6 +36,23 @@ const MarketStatus = (props) => {
       {
         props.isUserCanvasOwner && props.currentSellOffer.isForSale &&
         <CancelSellOffer cancelSellOffer={props.cancelSellOffer}/>
+      }
+
+      {
+        props.currentBuyOffer.hasOffer &&
+        <CurrentBuyOffer
+          price={props.fromWei(props.currentBuyOffer.price)}
+          from={props.currentBuyOffer.buyer}
+          isUsersOffer={props.currentBuyOffer.buyer === props.userAddress}
+          isUserCanvasOwner={props.isUserCanvasOwner}
+          acceptBuyOffer={props.acceptBuyOffer}
+          cancelBuyOffer={props.cancelBuyOffer}
+        />
+      }
+
+      {
+        !props.currentBuyOffer.hasOffer &&
+        <p>There are no active Buy Offers.</p>
       }
 
       {
