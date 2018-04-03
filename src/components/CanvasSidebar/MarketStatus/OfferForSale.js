@@ -41,14 +41,13 @@ class OfferForSale extends React.Component {
           okText="Submit Sell Offer"
         >
           <p>
-            You can offer this Canvas for sale. If anyone accepts it and sends Ether,
+            As the Owner of this Canvas you can offer it for sale. If anyone accepts the offer and sends Ether,
             the Canvas ownership will be transferred automatically.
           </p>
           <Input type="text" addonAfter="ETH"
                  placeholder="Enter your Sell Offer"
                  onChange={this.update}
                  onPressEnter={this.onSubmitSellOffer}
-                 autofocus
           />
           <br /><br />
           <small>You can restrict this offer to a specific address</small>

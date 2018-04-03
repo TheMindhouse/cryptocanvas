@@ -3,23 +3,27 @@ import OfferForSale from './MarketStatus/OfferForSale'
 import MakeBuyOffer from './MarketStatus/MakeBuyOffer'
 import CurrentBuyOffer from './MarketStatus/CurrentBuyOffer'
 import CurrentSellOffer from './MarketStatus/CurrentSellOffer'
+import CancelSellOffer from './MarketStatus/CancelSellOffer'
 
 const MarketStatus = (props) => {
   return (
     <div>
       <h2>Market Status</h2>
-      {props.currentBuyOffer.hasOffer &&
-      <CurrentBuyOffer
-        price={props.fromWei(props.currentBuyOffer.price)}
-        from={props.currentBuyOffer.buyer}
-        isUsersOffer={props.currentBuyOffer.buyer === props.userAddress}
-        isUserCanvasOwner={props.isUserCanvasOwner}
-        acceptBuyOffer={props.acceptBuyOffer}
-        cancelBuyOffer={props.cancelBuyOffer}
-      />
+      {
+        props.currentBuyOffer.hasOffer &&
+        <CurrentBuyOffer
+          price={props.fromWei(props.currentBuyOffer.price)}
+          from={props.currentBuyOffer.buyer}
+          isUsersOffer={props.currentBuyOffer.buyer === props.userAddress}
+          isUserCanvasOwner={props.isUserCanvasOwner}
+          acceptBuyOffer={props.acceptBuyOffer}
+          cancelBuyOffer={props.cancelBuyOffer}
+        />
       }
-      {!props.currentBuyOffer.hasOffer &&
-      <p>There are no active Buy Offers.</p>
+
+      {
+        !props.currentBuyOffer.hasOffer &&
+        <p>There are no active Buy Offers.</p>
       }
 
       {
@@ -45,7 +49,16 @@ const MarketStatus = (props) => {
           submitSellOfferToAddress={props.submitSellOfferToAddress}
         />
       }
-      {!props.isUserCanvasOwner && <MakeBuyOffer submitOffer={props.submitBuyOffer} />}
+
+      {
+        props.isUserCanvasOwner && props.currentSellOffer.isForSale &&
+        <CancelSellOffer cancelSellOffer={props.cancelSellOffer}/>
+      }
+
+      {
+        !props.isUserCanvasOwner &&
+        <MakeBuyOffer submitOffer={props.submitBuyOffer} />
+      }
     </div>
   )
 }

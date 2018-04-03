@@ -88,6 +88,18 @@ class CanvasSidebarTrading extends React.PureComponent {
       })
   }
 
+  cancelSellOffer = () => {
+    this.props.Contract.cancelSellOffer(this.props.canvasId)
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Remove Sell Offer Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+
+      })
+  }
+
   submitBuyOffer = (offerInEth) => {
     const offerInWei = this.props.toWei(offerInEth, 'ether')
     console.log(`[USER] New buy offer: ${offerInWei} WEI (${offerInEth} ETH)`)
@@ -165,6 +177,7 @@ class CanvasSidebarTrading extends React.PureComponent {
           submitSellOffer={this.submitSellOffer}
           submitSellOfferToAddress={this.submitSellOfferToAddress}
           cancelBuyOffer={this.cancelBuyOffer}
+          cancelSellOffer={this.cancelSellOffer}
           acceptBuyOffer={this.acceptBuyOffer}
           acceptSellOffer={this.acceptSellOffer}
           fromWei={this.props.fromWei}
