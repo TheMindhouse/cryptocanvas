@@ -21,7 +21,6 @@ class App extends React.Component {
             <Header />
             <AccountStatus />
 
-            <Test />
             <Route exact path='/' component={Homepage} />
             <Route path='/about' component={About} />
             <Route path='/canvas/:id' component={CanvasPage} />

@@ -6,7 +6,7 @@ const Web3Context = React.createContext()
 
 const CONTRACT_ADDRESS = '0x9340334871026429ada20d9e234559305930db1b'
 const WEB3_HTTP_PROVIDER = 'http://localhost:8545'
-const CHECK_ACCOUNT_DELAY = 500
+const CHECK_ACCOUNT_DELAY = 2000
 
 const Web3 = window.Web3
 

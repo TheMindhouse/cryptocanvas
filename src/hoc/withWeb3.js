@@ -4,10 +4,6 @@ import { Web3Context } from '../stores/Web3Provider'
 
 const withWeb3 = (WrappedComponent) => {
   class withWeb3 extends React.Component {
-    constructor (props) {
-      super(props)
-      console.log('Setting up withWeb3 HOC')
-    }
     render () {
       return (
         <Web3Context.Consumer>
