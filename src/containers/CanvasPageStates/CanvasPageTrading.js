@@ -58,6 +58,7 @@ class CanvasPageTrading extends Component {
             canvasId={this.props.canvasId}
             canvasOwner={this.props.canvasOwner}
             isUserCanvasOwner={this.props.account === this.props.canvasOwner}
+            onCanvasSold={this.props.onCanvasSold}
           />
         </div>
       </Row>

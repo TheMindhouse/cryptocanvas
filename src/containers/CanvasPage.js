@@ -31,7 +31,8 @@ class CanvasPage extends React.Component {
     this.getCanvasInfo()
   }
 
-  getCanvasInfo () {
+  getCanvasInfo = () => {
+    console.log(`Getting info for Canvas #${this.canvasId}`);
     this.props.Contract.getCanvasInfo(this.canvasId)
       .then((canvasInfo) => {
         const canvasStateKey = Object.keys(CANVAS_STATES).filter(key => CANVAS_STATES[ key ] === canvasInfo.canvasState)
@@ -95,6 +96,7 @@ class CanvasPage extends React.Component {
           pixelSize={this.pixelSize}
           canvasId={this.canvasId}
           canvasOwner={this.state.canvasOwner}
+          onCanvasSold={this.getCanvasInfo}
         />
         }
 

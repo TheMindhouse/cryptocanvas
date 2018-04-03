@@ -48,8 +48,11 @@ class CanvasSidebarTrading extends React.PureComponent {
     buyOfferCancelledEvent.watch(this.getCurrentBuyOffer)
     sellOfferMadeEvent.watch(this.getCurrentSellOffer)
     sellOfferCancelledEvent.watch(this.getCurrentSellOffer)
-    // todo - fix canvas sold event handling
-    // canvasSoldEvent.watch(() => { return window.location.reload()})
+    canvasSoldEvent.watch(() => {
+      this.getCurrentSellOffer()
+      this.getCurrentBuyOffer()
+      this.props.onCanvasSold()
+    })
 
     this.props.events.push(
       buyOfferMadeEvent,
