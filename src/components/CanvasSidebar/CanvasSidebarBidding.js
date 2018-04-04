@@ -19,11 +19,15 @@ const CanvasSidebarBidding = (props) => {
 
       <Divider />
 
-      <SubmitBid
-        submitBid={props.submitBid}
-        highestBidAmount={props.highestBidAmount} />
-
-      <Divider />
+      {
+        props.userAccount &&
+          <div>
+            <SubmitBid
+              submitBid={props.submitBid}
+              highestBidAmount={props.highestBidAmount} />
+            <Divider />
+          </div>
+      }
 
       <BiddingTimeLeft
         biddingFinishTime={props.biddingFinishTime}

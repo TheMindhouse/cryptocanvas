@@ -27,7 +27,10 @@ class CanvasPagePainting extends React.Component {
 
   componentDidMount () {
     this.getCanvas()
-    this.props.getBlockNumber().then(this.watchForChanges)
+
+    if (this.props.eventsSupported) {
+      this.props.getBlockNumber().then(this.watchForChanges)
+    }
   }
 
   getCanvas = () => {
@@ -157,7 +160,8 @@ class CanvasPagePainting extends React.Component {
           />
           <Picker
             changeColor={this.changeColor}
-            currentColor={this.state.currentColorIndex}
+            currentColor={this.account ? this.state.currentColorIndex : undefined}
+            isEnabled={this.account !== undefined}
           />
           <br />
           <p>How can I place a pixel?</p>

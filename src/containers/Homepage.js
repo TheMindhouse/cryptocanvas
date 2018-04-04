@@ -15,7 +15,9 @@ class Homepage extends Component {
     this.getActiveCanvasIds()
       .then(() => this.getFinishedCanvasIds())
 
-    this.props.getBlockNumber().then(this.watchForChanges)
+    if (this.props.eventsSupported) {
+      this.props.getBlockNumber().then(this.watchForChanges)
+    }
   }
 
   watchForChanges = (blockNumber) => {

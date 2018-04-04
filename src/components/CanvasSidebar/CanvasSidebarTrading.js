@@ -18,7 +18,10 @@ class CanvasSidebarTrading extends React.PureComponent {
   componentDidMount () {
     this.getCurrentBuyOffer()
     this.getCurrentSellOffer()
-    this.props.getBlockNumber().then(this.watchForChanges)
+
+    if (this.props.eventsSupported) {
+      this.props.getBlockNumber().then(this.watchForChanges)
+    }
   }
 
   getCurrentBuyOffer = () => {

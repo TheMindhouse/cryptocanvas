@@ -1,7 +1,5 @@
 import React from 'react'
 import CurrentSellOffer from './MarketStatus/CurrentSellOffer'
-import OfferForSale from './MarketStatus/OfferForSale'
-import CancelSellOffer from './MarketStatus/CancelSellOffer'
 import CurrentBuyOffer from './MarketStatus/CurrentBuyOffer'
 import withWeb3 from '../../hoc/withWeb3'
 import AcceptBuyOffer from './MarketStatus/AcceptBuyOffer'

@@ -16,9 +16,9 @@ class CreateCanvas extends React.PureComponent {
       .then((tx) => {
         updateTransactions(tx)
         Modal.success({
-            title: 'Create Canvas Transaction successfully sent',
-            content: 'You need to wait a few minutes before it\'s updated in the blockchain',
-          })
+          title: 'Create Canvas Transaction successfully sent',
+          content: 'You need to wait a few minutes before it\'s updated in the blockchain',
+        })
         this.setState({ loading: false })
       })
       .catch(() => {
@@ -27,18 +27,20 @@ class CreateCanvas extends React.PureComponent {
   }
 
   render () {
-    return (
-      <div className="CreateCanvas" onClick={this.onCreateCanvas}>
-        <div className="CreateCanvas__content">
-          <Spin spinning={this.state.loading} className="CreateCanvas__spinner">
+    return this.props.account
+      ? (
+        <div className="CreateCanvas" onClick={this.onCreateCanvas}>
+          <div className="CreateCanvas__content">
+            <Spin spinning={this.state.loading} className="CreateCanvas__spinner">
             <span>
               Create<br />
               new canvas
             </span>
-          </Spin>
+            </Spin>
+          </div>
         </div>
-      </div>
-    )
+      )
+      : null
   }
 }
 

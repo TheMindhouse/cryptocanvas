@@ -10,6 +10,14 @@ import AccountTransactions from './AccountTransactions'
 
 const CHECK_TRANSACTIONS_DELAY = 2000
 
+const StatusMetaMaskNotAvailable = () => (
+  <p>
+    To participate in drawing and trading<br/>
+    CryptoCanvas on this site, download<br />
+    the <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> Chrome plugin.
+  </p>
+)
+
 const StatusDisconnected = () =>
   <Alert
     message="Log in to MetaMask"
@@ -73,7 +81,16 @@ class AccountStatus extends React.PureComponent {
   render () {
     return (
       <div className="AccountStatus">
-        {!this.props.account && <StatusDisconnected />}
+        {
+          !this.props.account && this.props.metamaskAvailable &&
+          <StatusDisconnected />
+        }
+
+        {
+          !this.props.account && !this.props.metamaskAvailable &&
+          <StatusMetaMaskNotAvailable />
+        }
+
         {
           this.props.account &&
           <div>

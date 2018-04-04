@@ -25,7 +25,10 @@ class CanvasPageBidding extends Component {
   componentDidMount () {
     this.getCanvas()
     this.getHighestBid()
-    this.props.getBlockNumber().then(this.watchForChanges)
+
+    if (this.props.eventsSupported) {
+      this.props.getBlockNumber().then(this.watchForChanges)
+    }
   }
 
   getCanvas = () => {
@@ -122,6 +125,7 @@ class CanvasPageBidding extends Component {
         <div>
           <CanvasSidebarBidding
             canvasId={this.props.canvasId}
+            userAccount={this.props.account}
             isUserHighestBidder={this.props.account === this.state.highestBidAddress}
             highestBidAmount={this.state.highestBidAmount}
             highestBidAddress={this.state.highestBidAddress}

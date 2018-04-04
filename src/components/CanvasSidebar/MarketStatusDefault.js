@@ -21,6 +21,7 @@ const MarketStatusDefault = (props) => {
 
       {
         props.currentSellOffer.isForSale &&
+        props.account &&
         <AcceptSellOffer
           offerReceiver={props.currentSellOffer.onlySellTo}
           isUserOfferReceiver={props.currentSellOffer.onlySellTo === props.userAddress}
@@ -37,12 +38,15 @@ const MarketStatusDefault = (props) => {
         acceptBuyOffer={props.acceptBuyOffer}
       />
 
-      <BuyOfferActions
-        hasOffer={props.currentBuyOffer.hasOffer}
-        isUsersOffer={props.currentBuyOffer.buyer === props.userAddress}
-        submitBuyOffer={props.submitBuyOffer}
-        cancelBuyOffer={props.cancelBuyOffer}
-      />
+      {
+        props.account &&
+        <BuyOfferActions
+          hasOffer={props.currentBuyOffer.hasOffer}
+          isUsersOffer={props.currentBuyOffer.buyer === props.userAddress}
+          submitBuyOffer={props.submitBuyOffer}
+          cancelBuyOffer={props.cancelBuyOffer}
+        />
+      }
 
     </div>
   )

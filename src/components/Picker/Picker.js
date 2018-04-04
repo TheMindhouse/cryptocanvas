@@ -32,6 +32,12 @@ export class Picker extends React.Component {
         {getColorLabel(currentColor)}
       </div>
       <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
+        {
+          !this.props.isEnabled &&
+          <div className="PickerDisabled">
+            <span>Enable Ethereum to paint on the Canvas</span>
+          </div>
+        }
         {hexPalette.map((color, index) =>
           <PickerColor
             color={color}

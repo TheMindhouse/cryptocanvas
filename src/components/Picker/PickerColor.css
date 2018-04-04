@@ -5,6 +5,12 @@
     cursor: pointer;
 }
 
+.PickerColor--disabled {
+    cursor: default !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
 .PickerColor--selected,
 .PickerColor:hover {
     outline: 2px solid rgba(255, 255, 255, 1);
