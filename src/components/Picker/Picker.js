@@ -33,7 +33,7 @@ export class Picker extends React.Component {
       </div>
       <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
         {
-          !this.props.isEnabled &&
+          this.props.isDisabled &&
           <div className="PickerDisabled">
             <span>Enable Ethereum to paint on the Canvas</span>
           </div>

@@ -1,18 +1,20 @@
 import React from 'react'
-import { Alert, Divider } from 'antd'
+import { Alert } from 'antd'
 
 import './styles/AccountStatus.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { cutAddress } from '../../helpers/strings'
 import { clearTransactions, getTransactions, updateTransactions } from '../../helpers/localStorage'
 import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../../models/Transaction'
-import AccountTransactions from './AccountTransactions'
+import withModal from '../../hoc/withModal'
+import TransactionsModal from '../Modals/TransactionsModal'
+import { TransactionsSummary } from './TransactionsSummary'
 
 const CHECK_TRANSACTIONS_DELAY = 2000
 
 const StatusMetaMaskNotAvailable = () => (
   <p>
-    To participate in drawing and trading<br/>
+    To participate in drawing and trading<br />
     CryptoCanvas on this site, download<br />
     the <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> Chrome plugin.
   </p>
@@ -98,11 +100,13 @@ class AccountStatus extends React.PureComponent {
             {
               this.state.transactions.length > 0 &&
               <div>
-                <Divider />
-                <AccountTransactions
+                <TransactionsModal
+                  modal={this.props.modal}
                   transactions={this.state.transactions}
                   onClear={this.onClearTransactions}
                 />
+                {/*<TransactionsSummary transactions={this.state.transactions} />*/}
+                <span onClick={this.props.modal.show}>Show Transactions</span>
               </div>
             }
           </div>
@@ -116,4 +120,4 @@ class AccountStatus extends React.PureComponent {
 AccountStatus.propTypes = {}
 AccountStatus.defaultProps = {}
 
-export default withWeb3(AccountStatus)
+export default withWeb3(withModal(AccountStatus))

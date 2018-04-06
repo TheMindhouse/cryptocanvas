@@ -160,8 +160,8 @@ class CanvasPagePainting extends React.Component {
           />
           <Picker
             changeColor={this.changeColor}
-            currentColor={this.account ? this.state.currentColorIndex : undefined}
-            isEnabled={this.account !== undefined}
+            currentColor={this.props.account ? this.state.currentColorIndex : undefined}
+            isDisabled={!this.props.account}
           />
           <br />
           <p>How can I place a pixel?</p>
