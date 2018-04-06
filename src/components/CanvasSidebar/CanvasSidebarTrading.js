@@ -5,6 +5,7 @@ import MarketStatus from './MarketStatus'
 import withWeb3 from '../../hoc/withWeb3'
 import { updateTransactions } from '../../helpers/localStorage'
 import withEvents from '../../hoc/withEvents'
+import WithdrawReward from './WithdrawReward'
 
 class CanvasSidebarTrading extends React.PureComponent {
   constructor () {
@@ -187,6 +188,16 @@ class CanvasSidebarTrading extends React.PureComponent {
           acceptBuyOffer={this.acceptBuyOffer}
           acceptSellOffer={this.acceptSellOffer}
         />
+
+        <Divider />
+
+        {
+          this.props.account &&
+          <WithdrawReward
+            canvasId={this.props.canvasId}
+            userAddress={this.props.account}
+          />
+        }
 
       </div>
     )

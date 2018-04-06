@@ -3,6 +3,7 @@ import { Bid } from './Bid'
 import { Transaction, TRANSACTION_TYPE } from './Transaction'
 import { CanvasSellOffer } from './CanvasSellOffer'
 import { CanvasBuyOffer } from './CanvasBuyOffer'
+import { PainterReward } from './PainterReward'
 
 const GAS_LIMIT = 3000000
 const GAS_PRICE = 2000000000
@@ -212,6 +213,26 @@ export class ContractModel {
     })
   }
 
+  withdrawReward (canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.withdrawReward(canvasId, { ...DEFAULT_CONFIG }, (error, txHash) => {
+        if (error) {
+          console.log(error)
+          console.log('[ERROR] Withdraw reward failed')
+          reject(error)
+        } else {
+          const tx = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.withdrawReward,
+            name: `Withdraw Reward for Canvas #${canvasId}`
+          }
+          resolve(new Transaction(tx))
+        }
+      })
+    })
+
+  }
+
   /**
    * View functions (free)
    */
@@ -302,6 +323,19 @@ export class ContractModel {
           reject(error)
         } else {
           resolve(new CanvasSellOffer(result))
+        }
+      })
+    })
+  }
+
+  getRewardInfo (canvasId, userAddress = '') {
+    return new Promise((resolve, reject) => {
+      this.Contract.calculateReward(canvasId, userAddress, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(new PainterReward(result))
         }
       })
     })
