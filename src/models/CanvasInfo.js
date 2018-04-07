@@ -5,11 +5,6 @@ export class CanvasInfo {
     this._isFinished = props[2]
     this._canvasState = parseInt(props[3], 10)
     this._owner = props[4]
-    this._props = props
-  }
-
-  get props () {
-    return this._props
   }
 
   get id () {

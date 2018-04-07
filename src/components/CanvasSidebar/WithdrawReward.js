@@ -1,8 +1,9 @@
 import React from 'react'
 import withWeb3 from '../../hoc/withWeb3'
-import WithdrawButton from './PainterReward/WithdrawButton'
 import { updateTransactions } from '../../helpers/localStorage'
 import { Modal } from 'antd'
+import WithReward from './PainterReward/WithReward'
+import WithoutReward from './PainterReward/WithoutReward'
 
 class WithdrawReward extends React.Component {
   state = {
@@ -45,27 +46,20 @@ class WithdrawReward extends React.Component {
       isWithdrawn,
     } = this.state.painterReward
 
-    const rewardInEth = this.props.web3.fromWei(rewardValue)
-
     return (
       <div>
         <h2>Co-Painter Reward</h2>
 
-        <p>You have painted <b>{paintedPixels}</b> pixels of this Canvas.</p>
-        <p>
-          Your reward for painting is <span title={rewardInEth + ' ETH'}>
-            <b>{parseFloat(Number(rewardInEth).toFixed(5))}</b>
-          </span> ETH.
-        </p>
-
         {
-          rewardValue > 0 &&
-          <WithdrawButton
-            amount={rewardInEth}
-            address={this.props.userAddress}
-            onWithdraw={this.onWithdraw}
-            isWithdrawn={isWithdrawn}
-          />
+          paintedPixels ?
+            <WithReward
+              paintedPixels={paintedPixels}
+              rewardInEth={this.props.web3.fromWei(rewardValue)}
+              isWithdrawn={isWithdrawn}
+              userAddress={this.props.userAddress}
+              onWithdraw={this.onWithdraw}
+            />
+            : <WithoutReward />
         }
 
       </div>
