@@ -7,12 +7,7 @@ import CanvasPagePainting from './CanvasPageStates/CanvasPagePainting'
 import CanvasPageBidding from './CanvasPageStates/CanvasPageBidding'
 import CanvasPageTrading from './CanvasPageStates/CanvasPageTrading'
 import CanvasPageLoading from './CanvasPageStates/CanvasPageLoading'
-
-const CANVAS_STATES = {
-  painting: 0,
-  bidding: 1,
-  trading: 2,
-}
+import { CANVAS_STATES } from '../models/CanvasState'
 
 class CanvasPage extends React.Component {
   pixelSize = 20
@@ -35,11 +30,11 @@ class CanvasPage extends React.Component {
     console.log(`Getting info for Canvas #${this.canvasId}`);
     this.props.Contract.getCanvasInfo(this.canvasId)
       .then((canvasInfo) => {
-        const canvasStateKey = Object.keys(CANVAS_STATES).filter(key => CANVAS_STATES[ key ] === canvasInfo.canvasState)
-        const canvasState = CANVAS_STATES[ canvasStateKey ]
+        // const canvasStateKey = Object.keys(CANVAS_STATES).filter(key => CANVAS_STATES[ key ] === canvasInfo.canvasState)
+        // const canvasState = new CanvasState(this.canvasId, canvasInfo.canvasState) CANVAS_STATES[ canvasStateKey ]
 
         this.setState({
-          canvasState,
+          canvasState: canvasInfo.canvasState,
           paintedPixels: canvasInfo.paintedPixels,
           canvasOwner: canvasInfo.owner,
           isLoading: false,
@@ -74,7 +69,7 @@ class CanvasPage extends React.Component {
 
         {isLoading && <CanvasPageLoading canvasId={this.canvasId} />}
 
-        {!isLoading && canvasState === CANVAS_STATES.painting &&
+        {!isLoading && canvasState.state === CANVAS_STATES.active &&
         <CanvasPagePainting
           pixelSize={this.pixelSize}
           paintedPixels={this.state.paintedPixels}
@@ -83,7 +78,7 @@ class CanvasPage extends React.Component {
         />
         }
 
-        {!isLoading && canvasState === CANVAS_STATES.bidding &&
+        {!isLoading && canvasState.state === CANVAS_STATES.bidding &&
         <CanvasPageBidding
           pixelSize={this.pixelSize}
           canvasId={this.canvasId}
@@ -91,7 +86,7 @@ class CanvasPage extends React.Component {
         />
         }
 
-        {!isLoading && canvasState === CANVAS_STATES.trading &&
+        {!isLoading && canvasState.state === CANVAS_STATES.completed &&
         <CanvasPageTrading
           pixelSize={this.pixelSize}
           canvasId={this.canvasId}

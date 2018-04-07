@@ -61,8 +61,12 @@ class CanvasPreview extends React.Component {
         </Link>
         <Row gutter={20} type="flex" justify="space-between" className="CanvasPreview__info">
           <h3>Canvas #{this.props.canvasId}</h3>
-          <h3>{getPercentOfPixelsCompleted(this.state.pixels)}</h3>
+          {
+            this.props.showPercentCompleted &&
+            <h3>{getPercentOfPixelsCompleted(this.state.pixels)}</h3>
+          }
         </Row>
+        {this.props.extraRender && this.props.extraRender(this.state)}
       </div>
     )
   }

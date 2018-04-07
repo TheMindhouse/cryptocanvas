@@ -12,7 +12,7 @@ class ActiveCanvases extends React.PureComponent {
         <h2>Paint</h2>
         {this.props.activeCanvasIds.map((canvasId, index) =>
           <Col span={6} key={index}>
-            <CanvasPreview canvasId={canvasId} />
+            <CanvasPreview canvasId={canvasId} showPercentCompleted={true} />
           </Col>
         )}
         {this.props.activeCanvasIds.length < MAX_ACTIVE_CANVASES &&

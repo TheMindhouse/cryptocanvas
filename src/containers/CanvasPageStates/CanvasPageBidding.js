@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Row from 'antd/es/grid/row'
+import { Row, Modal } from 'antd'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBidding'
 import { Bid } from '../../models/Bid'
@@ -62,22 +62,25 @@ class CanvasPageBidding extends Component {
   getHighestBid = () => {
     this.props.Contract.getLastBid(this.props.canvasId)
       .then((bid) => {
-        console.log(bid)
-        this.updateHighestBid(bid)
+        if (bid.amount !== this.state.highestBidAmount) {
+          console.log('New highest bid: ', bid)
+          this.updateHighestBid(bid)
+        }
       })
   }
 
   updateHighestBid = (bid) => {
     if (bid.amount) {
-      console.log('New highest bid: ', bid)
       this.setState({
-        highestBidAmount: parseFloat(this.props.web3.fromWei(bid.amount, 'ether')),
+        highestBidAmount: bid.amount,
         highestBidAddress: bid.bidder,
       })
 
       if (!this.biddingTimer) {
         this.setBiddingTimer(bid.finishTime)
       }
+    } else {
+      console.log('Empty bid, skipping!')
     }
   }
 
@@ -108,7 +111,13 @@ class CanvasPageBidding extends Component {
     console.log(`User posting new bid: ${bidAmountInEth} (${bidAmountInWei} Wei)`)
 
     this.props.Contract.makeBid({ canvasId: this.props.canvasId, bidAmountInWei })
-      .then(transaction => updateTransactions(transaction))
+      .then(transaction => {
+        updateTransactions(transaction)
+        Modal.success({
+          title: 'Make a Bid Transaction sent',
+          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
+        })
+      })
   }
 
   render () {
@@ -127,7 +136,7 @@ class CanvasPageBidding extends Component {
             canvasId={this.props.canvasId}
             userAccount={this.props.account}
             isUserHighestBidder={this.props.account === this.state.highestBidAddress}
-            highestBidAmount={this.state.highestBidAmount}
+            highestBidAmount={parseFloat(this.props.web3.fromWei(this.state.highestBidAmount, 'ether'))}
             highestBidAddress={this.state.highestBidAddress}
             biddingFinishTime={this.state.biddingFinishTime}
             submitBid={this.submitBid}

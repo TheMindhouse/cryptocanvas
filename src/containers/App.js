@@ -5,8 +5,9 @@ import {
 } from 'react-router-dom'
 
 import Homepage from './Homepage'
-import CanvasPage from './CanvasPage'
+import Marketplace from './Marketplace'
 import About from './About'
+import CanvasPage from './CanvasPage'
 import Header from '../components/Layout/Header'
 import AccountStatus from '../components/Account/AccountStatus'
 import { Web3Provider } from '../stores/Web3Provider'
@@ -21,6 +22,7 @@ class App extends React.Component {
             <AccountStatus />
 
             <Route exact path='/' component={Homepage} />
+            <Route path='/trade' component={Marketplace} />
             <Route path='/about' component={About} />
             <Route path='/canvas/:id' component={CanvasPage} />
           </div>

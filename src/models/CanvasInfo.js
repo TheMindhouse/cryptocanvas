@@ -1,9 +1,11 @@
+import { CanvasState } from './CanvasState'
+
 export class CanvasInfo {
   constructor (props) {
     this._id = parseInt(props[0], 10)
     this._paintedPixels = parseInt(props[1], 10)
     this._isFinished = props[2]
-    this._canvasState = parseInt(props[3], 10)
+    this._canvasState = new CanvasState(this.id, parseInt(props[3], 10))
     this._owner = props[4]
   }
 

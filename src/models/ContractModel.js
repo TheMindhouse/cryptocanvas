@@ -4,6 +4,7 @@ import { Transaction, TRANSACTION_TYPE } from './Transaction'
 import { CanvasSellOffer } from './CanvasSellOffer'
 import { CanvasBuyOffer } from './CanvasBuyOffer'
 import { PainterReward } from './PainterReward'
+import { CanvasState } from './CanvasState'
 
 const GAS_LIMIT = 3000000
 const GAS_PRICE = 2000000000
@@ -297,6 +298,19 @@ export class ContractModel {
           reject(error)
         } else {
           resolve(new CanvasInfo(result))
+        }
+      })
+    })
+  }
+
+  getCanvasState (canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.getCanvasState(canvasId, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(new CanvasState(canvasId, parseInt(result, 10)))
         }
       })
     })

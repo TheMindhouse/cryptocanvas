@@ -2,7 +2,6 @@ import React from 'react'
 import { Alert } from 'antd'
 
 const HighestBid = (props) => {
-  console.log(props.highestBidAmount);
   if (props.highestBidAmount) {
     return (
       <div>
