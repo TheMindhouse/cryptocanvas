@@ -5,6 +5,10 @@
 }
 
 .Header__title {
+    text-decoration: none !important;
+}
+
+.Header__title > * {
     font-size: 40px;
     font-weight: bold;
 }
@@ -23,4 +27,18 @@
     padding: 0 30px;
     font-weight: bold;
     font-size: 18px;
+}
+
+.Header__menu-link {
+    color: #222;
+    border-bottom: 2px solid transparent;
+    text-decoration: none !important;
+}
+
+.Header__menu-link:hover {
+    color: #222;
+}
+
+.Header__menu-link--active {
+    border-color: #222;
 }

@@ -15,11 +15,13 @@ const WithReward = (props) => {
 
   return (
     <div>
-      <p>You have painted <b>{props.paintedPixels}</b> pixels of this Canvas.</p>
+      <p>
+        You've painted <b>{props.paintedPixels}</b> final pixels of this Canvas <span className="emoji-rocket" /> <span className="emoji-hands" />
+      </p>
       <p>
         Your reward for painting is <span title={props.rewardInEth + ' ETH'}>
             <b>{parseFloat(Number(props.rewardInEth).toFixed(5))}</b>
-          </span> ETH <span className="emoji-rocket" /> <span className="emoji-hands" />
+          </span> ETH.
       </p>
 
       <Button
