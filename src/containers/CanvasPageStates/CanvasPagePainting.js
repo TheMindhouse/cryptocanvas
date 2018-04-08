@@ -117,7 +117,7 @@ class CanvasPagePainting extends React.Component {
     console.log('--> Checking if painting has finished: ' + hasFinished)
     if (hasFinished) {
       console.log('[EVENT] - All the pixels have been painted!')
-      this.props.onFinishPainting()
+      this.props.onPaintingFinished()
     }
   }
 

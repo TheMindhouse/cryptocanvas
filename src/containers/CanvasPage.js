@@ -48,12 +48,12 @@ class CanvasPage extends React.Component {
       })
   }
 
-  onFinishPainting = () => {
+  onPaintingFinished = () => {
     console.log('[EVENT] PAINTING FINISHED!');
     this.setState({ isLoading: true }, this.getCanvasInfo)
   }
 
-  onFinishBidding = () => {
+  onBiddingFinished = () => {
     console.log('[EVENT] BIDDING FINISHED!');
     this.setState({ isLoading: true }, this.getCanvasInfo)
   }
@@ -74,7 +74,7 @@ class CanvasPage extends React.Component {
           pixelSize={this.pixelSize}
           paintedPixels={this.state.paintedPixels}
           canvasId={this.canvasId}
-          onFinishPainting={this.onFinishPainting}
+          onPaintingFinished={this.onPaintingFinished}
         />
         }
 
@@ -82,7 +82,7 @@ class CanvasPage extends React.Component {
         <CanvasPageBidding
           pixelSize={this.pixelSize}
           canvasId={this.canvasId}
-          onFinishBidding={this.onFinishBidding}
+          onBiddingFinished={this.onBiddingFinished}
         />
         }
 

@@ -64,6 +64,7 @@ class HighestBidWatcher extends React.Component<Props, State> {
     }
     const biddingTimeLeftInMs = this.state.highestBid.finishTime * 1000 - Date.now()
     this.biddingTimer = setTimeout(() => {
+      console.log('[EVENT] BIDDING FINISHED!!!');
       this.props.onBiddingFinished()
     }, biddingTimeLeftInMs)
   }

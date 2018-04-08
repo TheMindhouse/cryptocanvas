@@ -4,7 +4,7 @@ import ABI from '../helpers/ABI.json'
 
 const Web3Context = React.createContext()
 
-const CONTRACT_ADDRESS = '0x5be967a1060754b5634effd8424c1a4f02f494a3'
+const CONTRACT_ADDRESS = '0x4ca647bd911fdc0bfb99a76c42e4e738dbfacc2a'
 // const CONTRACT_ADDRESS = '0x4C17FDf7ADeA0317cb346c65727F055870745B9a'
 const WEB3_HTTP_PROVIDER = 'http://localhost:8545'
 // const WEB3_HTTP_PROVIDER = 'https://ropsten.infura.io/ML50g9METlqvSTgwiJTm'
