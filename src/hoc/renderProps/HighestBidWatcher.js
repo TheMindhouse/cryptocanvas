@@ -1,13 +1,29 @@
-import React, { Component } from 'react'
+// @flow
+import * as React from 'react'
 import { Bid } from '../../models/Bid'
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
+import { ContractModel } from '../../models/ContractModel'
 
-class HighestBidWatcher extends Component {
+type Props = {
+  eventsSupported: boolean,
+  getBlockNumber: () => Promise<number>,
+  onBiddingFinished: () => void,
+  Contract: ContractModel,
+  canvasId: number,
+  events: Array<any>,
+  render: (State) => React.Node
+}
+
+type State = {
+  highestBid?: Bid
+}
+
+class HighestBidWatcher extends React.Component<Props, State> {
   biddingTimer = null
 
   state = {
-    highestBid: null
+    highestBid: {}
   }
 
   componentDidMount () {
@@ -41,6 +57,9 @@ class HighestBidWatcher extends Component {
   }
 
   setBiddingTimer = () => {
+    if (!this.state.highestBid) {
+      return
+    }
     const biddingTimeLeftInMs = this.state.highestBid.finishTime * 1000 - Date.now()
     this.biddingTimer = setTimeout(() => {
       this.props.onBiddingFinished()
@@ -68,8 +87,5 @@ class HighestBidWatcher extends Component {
     return this.props.render(this.state)
   }
 }
-
-HighestBidWatcher.propTypes = {}
-HighestBidWatcher.defaultProps = {}
 
 export default withEvents(withWeb3(HighestBidWatcher))
