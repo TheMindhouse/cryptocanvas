@@ -61,7 +61,7 @@ class CanvasPage extends React.Component {
   render () {
     const {
       isLoading,
-      canvasState,
+      canvasState = {},
     } = this.state
 
     return (

@@ -42,11 +42,13 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   watchForChanges = (blockNumber) => {
-    const buyOfferMadeEvent = this.props.Contract.BuyOfferMadeEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
-    const buyOfferCancelledEvent = this.props.Contract.BuyOfferCancelledEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
-    const sellOfferMadeEvent = this.props.Contract.SellOfferMadeEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
-    const sellOfferCancelledEvent = this.props.Contract.SellOfferCancelledEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
-    const canvasSoldEvent = this.props.Contract.CanvasSoldEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
+    const options = [{ _canvasId: this.props.canvasId }, { fromBlock: blockNumber, toBlock: 'latest' }]
+
+    const buyOfferMadeEvent = this.props.Contract.BuyOfferMadeEvent(...options)
+    const buyOfferCancelledEvent = this.props.Contract.BuyOfferCancelledEvent(...options)
+    const sellOfferMadeEvent = this.props.Contract.SellOfferMadeEvent(...options)
+    const sellOfferCancelledEvent = this.props.Contract.SellOfferCancelledEvent(...options)
+    const canvasSoldEvent = this.props.Contract.CanvasSoldEvent(...options)
 
     buyOfferMadeEvent.watch(this.getCurrentBuyOffer)
     buyOfferCancelledEvent.watch(this.getCurrentBuyOffer)

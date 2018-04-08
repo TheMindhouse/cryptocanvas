@@ -6,11 +6,15 @@ const HighestBid = (props) => {
     return (
       <div>
         <h2>Current Highest Bid</h2>
-        { props.isUserHighestBidder &&
-        <Alert message="Your bid is currently the highest!" type="success" showIcon />
+        {
+          props.isUserHighestBidder &&
+          <div>
+            <Alert message="Your bid is currently the highest!" type="success" showIcon />
+            <br />
+          </div>
         }
-        <h3>{props.highestBidAmount} ETH</h3>
-        <p>by {props.highestBidAddress}</p>
+        <h2>{props.highestBidAmount} ETH</h2>
+        <small>by {props.highestBidAddress}</small>
       </div>
     )
   }

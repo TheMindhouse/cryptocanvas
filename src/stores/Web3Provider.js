@@ -4,7 +4,7 @@ import ABI from '../helpers/ABI.json'
 
 const Web3Context = React.createContext()
 
-const CONTRACT_ADDRESS = '0x9340334871026429ada20d9e234559305930db1b'
+const CONTRACT_ADDRESS = '0x5be967a1060754b5634effd8424c1a4f02f494a3'
 // const CONTRACT_ADDRESS = '0x4C17FDf7ADeA0317cb346c65727F055870745B9a'
 const WEB3_HTTP_PROVIDER = 'http://localhost:8545'
 // const WEB3_HTTP_PROVIDER = 'https://ropsten.infura.io/ML50g9METlqvSTgwiJTm'
@@ -28,6 +28,10 @@ class Web3Provider extends React.Component {
     } else {
       console.log('Metamask not found - using Infura!')
       window.web3 = new Web3(new Web3.providers.HttpProvider(WEB3_HTTP_PROVIDER))
+
+      // todo - temporary for dev purposes
+      metamaskAvailable = true
+      eventsSupported = true
     }
 
     eventsSupported
@@ -37,10 +41,12 @@ class Web3Provider extends React.Component {
     const account = metamaskAvailable ? window.web3.eth.accounts[ 0 ] : undefined
 
     // Set default account
-    // window.web3.eth.defaultAccount = account
+    window.web3.eth.defaultAccount = account
 
     const ContractInstance = window.web3.eth.contract(ABI)
     const Contract = new ContractModel(ContractInstance.at(CONTRACT_ADDRESS))
+
+    window.Contract = Contract
 
     this.state = {
       account,

@@ -93,7 +93,7 @@ class CanvasPageBidding extends Component {
   }
 
   watchForChanges = (blockNumber) => {
-    const bidPostedEvent = this.props.Contract.BidPostedEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
+    const bidPostedEvent = this.props.Contract.BidPostedEvent({ _canvasId: this.props.canvasId }, { fromBlock: blockNumber, toBlock: 'latest' })
 
     bidPostedEvent.watch((error, result) => {
       const bid = new Bid(result.args)

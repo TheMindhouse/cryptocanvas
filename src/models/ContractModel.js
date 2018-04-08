@@ -360,34 +360,34 @@ export class ContractModel {
    */
 
   PixelPaintedEvent (...args) {
-    return this.Contract.PixelPainted(args)
+    return this.Contract.PixelPainted(...args)
   }
 
   BidPostedEvent (...args) {
-    return this.Contract.BidPosted(args)
+    return this.Contract.BidPosted(...args)
   }
 
   CanvasCreatedEvent (...args) {
-    return this.Contract.CanvasCreated(args)
+    return this.Contract.CanvasCreated(...args)
   }
 
   BuyOfferMadeEvent (...args) {
-    return this.Contract.BuyOfferMade(args)
+    return this.Contract.BuyOfferMade(...args)
   }
 
   BuyOfferCancelledEvent (...args) {
-    return this.Contract.BuyOfferCancelled(args)
+    return this.Contract.BuyOfferCancelled(...args)
   }
 
   SellOfferMadeEvent (...args) {
-    return this.Contract.ArtworkOfferedForSale(args)
+    return this.Contract.ArtworkOfferedForSale(...args)
   }
 
   SellOfferCancelledEvent (...args) {
-    return this.Contract.ArtworkNoLongerForSale(args)
+    return this.Contract.ArtworkNoLongerForSale(...args)
   }
 
   CanvasSoldEvent (...args) {
-    return this.Contract.ArtworkSold(args)
+    return this.Contract.ArtworkSold(...args)
   }
 }

@@ -16,23 +16,11 @@ class Marketplace extends Component {
   componentDidMount () {
     this.getActiveCanvasIds()
       .then(activeCanvasIds => this.getFinishedCanvasIds(activeCanvasIds))
-
-    if (this.props.eventsSupported) {
-      this.props.getBlockNumber().then(this.watchForChanges)
-    }
   }
 
-  watchForChanges = (blockNumber) => {
-    const canvasCreatedEvent = this.props.Contract.CanvasCreatedEvent({}, { fromBlock: blockNumber, toBlock: 'latest' })
-
-    // watch for changes
-    canvasCreatedEvent.watch(() => {
-      console.log('[EVENT] New canvas created')
-      this.getActiveCanvasIds()
-        .then(activeCanvasIds => this.getFinishedCanvasIds(activeCanvasIds))
-    })
-
-    this.props.events.push(canvasCreatedEvent)
+  onBiddingFinished = () => {
+    this.getActiveCanvasIds()
+      .then(activeCanvasIds => this.getFinishedCanvasIds(activeCanvasIds))
   }
 
   getActiveCanvasIds = () => this.props.Contract.getActiveCanvasIds()
@@ -63,7 +51,10 @@ class Marketplace extends Component {
   render () {
     return (
       <Row className="container">
-        <BiddingCanvases canvasIds={this.state.biddingCanvasIds} />
+        <BiddingCanvases
+          canvasIds={this.state.biddingCanvasIds}
+          onBiddingFinished={this.onBiddingFinished}
+        />
         <Divider />
         <FinishedCanvases canvasIds={this.state.completedCanvasIds} />
       </Row>

@@ -748,7 +748,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "canvasId",
         "type": "uint32"
       },
@@ -770,7 +770,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_canvasId",
         "type": "uint32"
       }
@@ -782,7 +782,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "canvasId",
         "type": "uint32"
       },
@@ -821,7 +821,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "canvasId",
         "type": "uint32"
       },
@@ -843,7 +843,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "canvasId",
         "type": "uint32"
       },
@@ -864,6 +864,11 @@
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": true,
+        "name": "_canvasId",
+        "type": "uint32"
+      },
       {
         "indexed": false,
         "name": "_bidder",
@@ -887,6 +892,11 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
         "indexed": false,
         "name": "_address",
         "type": "address"
@@ -904,6 +914,11 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
         "indexed": false,
         "name": "_amount",
         "type": "uint256"
@@ -916,7 +931,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_canvasId",
         "type": "uint32"
       },
@@ -938,7 +953,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_canvasId",
         "type": "uint32"
       }
@@ -950,7 +965,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_id",
         "type": "uint256"
       }
