@@ -1,6 +1,6 @@
 .CreateCanvas {
-    width: 120px;
-    height: 120px;
+    width: 128px;
+    height: 128px;
     position: relative;
     background: #ddd;
     box-shadow: 0 12px 60px 0 rgba(0, 0, 0, 0.15);

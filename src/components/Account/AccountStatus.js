@@ -4,11 +4,11 @@ import { Alert } from 'antd'
 import './styles/AccountStatus.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { cutAddress } from '../../helpers/strings'
-import { clearTransactions, getTransactions, updateTransactions } from '../../helpers/localStorage'
 import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../../models/Transaction'
 import withModal from '../../hoc/withModal'
 import TransactionsModal from '../Modals/TransactionsModal'
 import { TransactionsSummary } from './TransactionsSummary'
+import { LocalStorageManager } from '../../localStorage'
 
 const CHECK_TRANSACTIONS_DELAY = 2000
 
@@ -39,7 +39,7 @@ class AccountStatus extends React.PureComponent {
     super(props)
 
     this.state = {
-      transactions: getTransactions()
+      transactions: LocalStorageManager.transactions.getTransactions()
     }
   }
 
@@ -56,14 +56,14 @@ class AccountStatus extends React.PureComponent {
   }
 
   checkTransactions = () => {
-    getTransactions()
+    LocalStorageManager.transactions.getTransactions()
       .filter(tx => tx.status === TRANSACTION_STATUS.pending)
       .forEach(tx => {
         console.log(`Checking transaction - ${tx.hash}`)
         this.props.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
           if (!error && result) {
             const status = TRANSACTION_RECEIPT_STATUS[ Number(result.status) ]
-            updateTransactions(new Transaction({ ...tx, status }))
+            LocalStorageManager.transactions.updateTransactions(new Transaction({ ...tx, status }))
           }
         })
       })
@@ -71,13 +71,13 @@ class AccountStatus extends React.PureComponent {
 
   updateTransactions = () => {
     this.setState({
-      transactions: getTransactions()
+      transactions: LocalStorageManager.transactions.getTransactions()
     })
   }
 
   onClearTransactions = () => {
     this.setState({ transactions: [] })
-    clearTransactions()
+    LocalStorageManager.transactions.clearTransactions()
   }
 
   render () {

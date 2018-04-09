@@ -7,9 +7,9 @@ import CanvasPreviewPlaceholder from './CanvasPreviewPlaceholder'
 import withWeb3 from '../../hoc/withWeb3'
 import CanvasPreviewImage from './CanvasPreviewImage'
 import { getPercentOfPixelsCompleted } from '../../helpers/colors'
+import { LocalStorageManager } from '../../localStorage'
 
 const getLinkToCanvas = id => `/canvas/${id}`
-const getLocalStorageName = id => `CanvasPreviewCache-#${id}`
 
 class CanvasPreview extends React.Component {
   constructor () {
@@ -25,16 +25,14 @@ class CanvasPreview extends React.Component {
   }
 
   getCanvas = () => {
-    // Temporary store canvas in local storage
-    // const tempCanvas = window.localStorage.getItem(getLocalStorageName(this.props.canvasId))
-    //
-    // if (tempCanvas) {
-    //   this.setState({
-    //     pixels: JSON.parse(tempCanvas),
-    //     isLoading: false,
-    //   })
-    //   return
-    // }
+    // Get cached canvas pixels from Local Storage
+    const canvasPixelsCache = LocalStorageManager.canvasPixels.getCanvasPixels(this.props.canvasId)
+    if (canvasPixelsCache) {
+      return this.setState({
+        pixels: canvasPixelsCache,
+        isLoading: false,
+      })
+    }
 
     this.props.Contract.getCanvas(this.props.canvasId)
       .then((pixels) => {
@@ -42,7 +40,12 @@ class CanvasPreview extends React.Component {
           pixels,
           isLoading: false,
         })
-        window.localStorage.setItem(getLocalStorageName(this.props.canvasId), JSON.stringify(pixels))
+        // Update pixels cache in Local Storage
+        LocalStorageManager.canvasPixels.updateCanvasCache({
+          canvasId: this.props.canvasId,
+          pixelsMap: pixels,
+          withExpirationDate: getPercentOfPixelsCompleted(pixels) !== 100
+        })
       })
       .catch((error) => {
         console.error(error)
@@ -62,8 +65,8 @@ class CanvasPreview extends React.Component {
         <Row gutter={20} type="flex" justify="space-between" className="CanvasPreview__info">
           <h3>Canvas #{this.props.canvasId}</h3>
           {
-            this.props.showPercentCompleted &&
-            <h3>{getPercentOfPixelsCompleted(this.state.pixels)}</h3>
+            this.props.showPercentCompleted && this.state.pixels.length > 0 &&
+            <h3>{getPercentOfPixelsCompleted(this.state.pixels)}%</h3>
           }
         </Row>
         {this.props.extraRender && this.props.extraRender(this.state)}

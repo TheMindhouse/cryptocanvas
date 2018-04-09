@@ -10,7 +10,7 @@ import { PixelPainted } from '../../models/PixelPainted'
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
-import { updateTransactions } from '../../helpers/localStorage'
+import { LocalStorageManager } from '../../localStorage'
 
 class CanvasPagePainting extends React.Component {
   constructor (props) {
@@ -81,13 +81,13 @@ class CanvasPagePainting extends React.Component {
         console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, index, color })
           .then((tx) => {
-            updateTransactions(tx)
+            LocalStorageManager.transactions.updateTransactions(tx)
             // this.updatePixel({ index, color })
-            Modal.success({
-              title: 'Paint Pixel Transaction sent',
-              content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
-              'you will be rewarded approximate amount of money from the initial bid.',
-            })
+            // Modal.success({
+            //   title: 'Paint Pixel Transaction sent',
+            //   content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
+            //   'you will be rewarded approximate amount of money from the initial bid.',
+            // })
           })
           .catch((error) => {
             Modal.error({

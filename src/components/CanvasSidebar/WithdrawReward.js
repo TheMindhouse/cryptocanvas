@@ -1,9 +1,9 @@
 import React from 'react'
 import withWeb3 from '../../hoc/withWeb3'
-import { updateTransactions } from '../../helpers/localStorage'
 import { Modal } from 'antd'
 import WithReward from './PainterReward/WithReward'
 import WithoutReward from './PainterReward/WithoutReward'
+import { LocalStorageManager } from '../../localStorage'
 
 class WithdrawReward extends React.Component {
   state = {
@@ -27,7 +27,7 @@ class WithdrawReward extends React.Component {
     console.log('[USER] Painter reward withdraw requested');
     this.props.Contract.withdrawReward(this.props.canvasId)
       .then(tx => {
-        updateTransactions(tx)
+        LocalStorageManager.transactions.updateTransactions(tx)
         Modal.success({
           title: 'Withdraw Reward Transaction sent',
           content: 'You should see the reward on your account after a few minutes, when the blockchain updates.',

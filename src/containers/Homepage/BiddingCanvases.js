@@ -7,7 +7,6 @@ import HighestBidWatcher from '../../hoc/renderProps/HighestBidWatcher'
 class BiddingCanvases extends React.PureComponent {
   render () {
     const { onBiddingFinished } = this.props
-    console.log('onBiddingFinished: ', onBiddingFinished)
     return (
       <Row gutter={100}>
         <h2>Initial Bidding</h2>

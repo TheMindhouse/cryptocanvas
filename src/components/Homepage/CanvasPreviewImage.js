@@ -6,7 +6,7 @@ import canvasBg from '../../assets/images/bg.png'
 import './styles/CanvasPreviewImage.css'
 
 class CanvasPreviewImage extends React.PureComponent {
-  pixelSize = 20
+  pixelSize = 10
 
   render () {
     const gridColumns = Math.sqrt(this.props.pixels.length)

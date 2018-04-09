@@ -3,7 +3,7 @@ import { Spin, Modal } from 'antd'
 
 import './styles/CreateCanvas.css'
 import withWeb3 from '../../hoc/withWeb3'
-import { updateTransactions } from '../../helpers/localStorage'
+import { LocalStorageManager } from '../../localStorage'
 
 class CreateCanvas extends React.PureComponent {
   state = {
@@ -14,7 +14,7 @@ class CreateCanvas extends React.PureComponent {
     this.setState({ loading: true })
     this.props.Contract.createCanvas()
       .then((tx) => {
-        updateTransactions(tx)
+        LocalStorageManager.transactions.updateTransactions(tx)
         Modal.success({
           title: 'Create Canvas Transaction successfully sent',
           content: 'You need to wait a few minutes before it\'s updated in the blockchain',
