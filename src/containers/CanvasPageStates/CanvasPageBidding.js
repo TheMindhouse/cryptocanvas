@@ -27,7 +27,7 @@ class CanvasPageBidding extends Component {
     const canvasCache = LocalStorageManager.canvasPixels.getCanvasCache(this.props.canvasId)
     if (canvasCache && !canvasCache.expirationDate) {
       return this.setState({
-        pixels: canvasCache,
+        pixels: canvasCache.pixelsMap,
         isLoading: false,
       })
     }
