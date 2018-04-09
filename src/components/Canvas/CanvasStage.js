@@ -3,23 +3,24 @@ import { Stage } from 'react-konva'
 import canvasBg from '../../assets/images/bg.png'
 import CanvasLayers from './CanvasLayers'
 
-import { Slider } from 'antd'
+// import { Slider } from 'antd'
 
-import './CanvasStage.css'
+import './styles/CanvasStage.css'
+import { CanvasPixelPopup } from './CanvasPixelPopup'
 
-const marks = {
-  0: '100%',
-  1: '150%',
-  2: '200%',
-  3: '250%',
-  4: '300%',
-  5: '350%',
-  6: '400%',
-  7: '450%',
-  8: '500%',
-};
+// const marks = {
+//   0: '100%',
+//   1: '150%',
+//   2: '200%',
+//   3: '250%',
+//   4: '300%',
+//   5: '350%',
+//   6: '400%',
+//   7: '450%',
+//   8: '500%',
+// };
 
-const scales = [ 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 ]
+// const scales = [ 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 ]
 
 class CanvasStage extends React.Component {
   stage = {}
@@ -28,6 +29,13 @@ class CanvasStage extends React.Component {
     super()
     this.state = {
       scale: 1,
+      pixelPopup: {
+        index: null,
+        position: {
+          x: null,
+          y: null,
+        }
+      }
     }
   }
 
@@ -79,25 +87,70 @@ class CanvasStage extends React.Component {
     }
   }
 
+  onMouseEnter = (event) => {
+    // console.log('Out from canvas', event);
+    this.setState({ isHovering: true })
+  }
+
+  onMouseLeave = (event) => {
+    // console.log('Out from canvas', event);
+    this.setState({ isHovering: false })
+  }
+
+  showPixelPopup = (event) => {
+      console.log(event)
+    const pixelPopup = {
+        index: event.target.index,
+        position: {
+          x: event.target.x(),
+          y: event.target.y(),
+        }
+    }
+    this.setState({ pixelPopup })
+  }
+
+  closePixelPopup = () => {
+    // todo make pixelPopup a class
+    this.setState({ pixelPopup: {
+        index: null,
+        position: {
+          x: null,
+          y: null,
+        }
+      }
+    })
+  }
+
+
   render () {
     const gridColumns = Math.sqrt(this.props.pixels.length)
     const canvasSize = gridColumns * this.props.pixelSize
 
     return (
-      <div>
-        <div style={{display: 'none', margin: '0 auto'}}>
+      <div className="CanvasStage"
+           onMouseEnter={this.onMouseEnter}
+           onMouseLeave={this.onMouseLeave}
+      >
+        {/*<div style={{display: 'none', margin: '0 auto'}}>*/}
+          {/*<Slider marks={marks}*/}
+                  {/*min={0}*/}
+                  {/*max={scales.length - 1}*/}
+                  {/*step={1}*/}
+                  {/*defaultValue={0}*/}
+                  {/*value={scales.indexOf(this.state.scale)}*/}
+                  {/*onChange={(i) => this.setCanvasScale(scales[i])} />*/}
 
-          <Slider marks={marks}
-                  min={0}
-                  max={scales.length - 1}
-                  step={1}
-                  defaultValue={0}
-                  value={scales.indexOf(this.state.scale)}
-                  onChange={(i) => this.setCanvasScale(scales[i])} />
+        {/*</div>*/}
 
-        </div>
+        <CanvasPixelPopup
+          index={this.state.pixelPopup.index}
+          position={this.state.pixelPopup.position}
+          color={this.props.pixels[this.state.pixelPopupIndex]}
+          pixelSize={this.props.pixelSize}
+          onClose={this.closePixelPopup}
+        />
+
         <Stage
-          className="CanvasStage"
           ref="canvas"
           width={canvasSize}
           height={canvasSize}
@@ -119,6 +172,8 @@ class CanvasStage extends React.Component {
                         stage={this.stage}
                         scale={this.state.scale}
                         changePixelColor={this.props.changePixelColor}
+                        isHovering={this.state.isHovering}
+                        onPixelClick={this.showPixelPopup}
           />
 
         </Stage>

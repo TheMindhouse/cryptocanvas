@@ -1,8 +1,9 @@
 import React from 'react'
 
 import './CanvasSidebar.css'
+import { Picker } from '../Picker/Picker'
 
-const CanvasSidebar = (props) => {
+const CanvasSidebarPainting = (props) => {
   const percentCompleted = parseInt((props.paintedPixels / props.totalPixels) * 100, 10)
   return (
     <div className="CanvasSidebar">
@@ -13,11 +14,21 @@ const CanvasSidebar = (props) => {
           {props.paintedPixels} {props.paintedPixels !== 1 ? 'pixels' : 'pixel'} out of {props.totalPixels} painted ({percentCompleted}%)
         </h3>
       }
+
+      <Picker
+        changeColor={props.changeColor}
+        currentColor={props.currentColor}
+        isDisabled={props.isPickerDisabled}
+      />
+
+      <br />
+      <p>How can I place a pixel?</p>
+
     </div>
   )
 }
 
-CanvasSidebar.propTypes = {}
-CanvasSidebar.defaultProps = {}
+CanvasSidebarPainting.propTypes = {}
+CanvasSidebarPainting.defaultProps = {}
 
-export default CanvasSidebar
+export default CanvasSidebarPainting

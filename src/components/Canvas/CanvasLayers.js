@@ -3,7 +3,7 @@ import { Layer, Rect } from 'react-konva'
 
 import PixelsMap from './PixelsMap'
 
-class CanvasLayers extends React.Component {
+class CanvasLayers extends React.PureComponent {
   /**
    * On mouse hovering a pixel, highlight the pixel and show color popup
    * @param event
@@ -58,7 +58,7 @@ class CanvasLayers extends React.Component {
   }
 
   changePixelColor = (event) => {
-    console.log(event)
+    // console.log(event)
     const { x, y } = event.target.position()
     const indexX = x / this.props.pixelSize
     const indexY = y / this.props.pixelSize
@@ -68,7 +68,7 @@ class CanvasLayers extends React.Component {
 
   render () {
     return [
-      <Layer onMouseOver={this.onMouseOver} key="0">
+      <Layer onMouseOver={this.onMouseOver} onClick={this.props.onPixelClick} key="0">
         <PixelsMap pixels={this.props.pixels}
                    pixelSize={this.props.pixelSize}
                    gridColumns={this.props.gridColumns} />

@@ -5,7 +5,7 @@ import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
 import { Picker } from '../../components/Picker/Picker'
 import CanvasStage from '../../components/Canvas/CanvasStage'
-import CanvasSidebar from '../../components/CanvasSidebar/CanvasSidebar'
+import CanvasSidebarPainting from '../../components/CanvasSidebar/CanvasSidebarPainting'
 import { PixelPainted } from '../../models/PixelPainted'
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
@@ -21,7 +21,6 @@ class CanvasPagePainting extends React.Component {
       isLoading: true,
       currentColorHex: null,
       currentColorIndex: null,
-      hovering: null,
     }
   }
 
@@ -123,7 +122,10 @@ class CanvasPagePainting extends React.Component {
   }
 
   watchForChanges = (blockNumber) => {
-    const pixelPaintedEvent = this.props.Contract.PixelPaintedEvent({ _canvasId: this.props.canvasId }, { fromBlock: blockNumber, toBlock: 'latest' })
+    const pixelPaintedEvent = this.props.Contract.PixelPaintedEvent({ _canvasId: this.props.canvasId }, {
+      fromBlock: blockNumber,
+      toBlock: 'latest'
+    })
 
     // watch for changes
     pixelPaintedEvent.watch((error, result) => {
@@ -131,8 +133,6 @@ class CanvasPagePainting extends React.Component {
       const { index, color } = pixelPainted
       console.log(`[EVENT] Updated pixel color at (${index}) to ${color}`)
       this.updatePixel({ index, color })
-      if (!error)
-        console.log(result)
     })
 
     this.props.events.push(pixelPaintedEvent)
@@ -144,29 +144,24 @@ class CanvasPagePainting extends React.Component {
 
         {this.state.isLoading && <CanvasStagePlaceholder />}
 
-        {!this.state.isLoading &&
-        <CanvasStage
-          pixelSize={this.props.pixelSize}
-          pixels={this.state.pixels}
-          currentColorHex={this.state.currentColorHex}
-          changePixelColor={this.handlePixelClick}
-        />
+        {
+          !this.state.isLoading &&
+          <CanvasStage
+            pixelSize={this.props.pixelSize}
+            pixels={this.state.pixels}
+            currentColorHex={this.state.currentColorHex}
+            changePixelColor={this.handlePixelClick}
+          />
         }
 
-        <div>
-          <CanvasSidebar
-            canvasId={this.props.canvasId}
-            paintedPixels={getNumberOfPaintedPixels(this.state.pixels)}
-            totalPixels={this.state.pixels.length}
-          />
-          <Picker
-            changeColor={this.changeColor}
-            currentColor={this.props.account ? this.state.currentColorIndex : undefined}
-            isDisabled={!this.props.account}
-          />
-          <br />
-          <p>How can I place a pixel?</p>
-        </div>
+        <CanvasSidebarPainting
+          canvasId={this.props.canvasId}
+          paintedPixels={getNumberOfPaintedPixels(this.state.pixels)}
+          totalPixels={this.state.pixels.length}
+          changeColor={this.changeColor}
+          currentColor={this.props.account ? this.state.currentColorIndex : undefined}
+          isPickerDisabled={!this.props.account}
+        />
       </Row>
     )
   }
