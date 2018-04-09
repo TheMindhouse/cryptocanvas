@@ -34,24 +34,15 @@ class CanvasPagePainting extends React.Component {
   }
 
   getCanvas = () => {
-    // Temporary store canvas in local storage
-    const tempCanvas = window.localStorage.getItem('tempCanvas2')
-
-    if (tempCanvas) {
-      this.setState({
-        pixels: JSON.parse(tempCanvas),
-        isLoading: false,
-      })
-      return
-    }
-
+    // In Painting state we never get Canvas from the Cache, we always want to have it fresh from the blockchain
     this.props.Contract.getCanvas(this.props.canvasId)
       .then((pixels) => {
         this.setState({
           pixels,
           isLoading: false,
         })
-        window.localStorage.setItem('tempCanvas', JSON.stringify(pixels))
+        // Save it to storage for homepage Preview component
+        this.updateLocalStorageCache(pixels)
       })
       .catch((error) => {
         console.error(error)
@@ -59,6 +50,15 @@ class CanvasPagePainting extends React.Component {
           isLoading: false,
         })
       })
+  }
+
+  updateLocalStorageCache = (pixels) => {
+    // Update pixels cache in Local Storage
+    LocalStorageManager.canvasPixels.updateCanvasCache({
+      canvasId: this.props.canvasId,
+      pixelsMap: pixels,
+      withExpirationDate: true
+    })
   }
 
   changeColor = ({ color, index }) => {
@@ -110,6 +110,7 @@ class CanvasPagePainting extends React.Component {
     ]
 
     this.setState({ pixels: updatedPixels }, this.checkIfFinishedPainting)
+    this.updateLocalStorageCache(updatedPixels)
   }
 
   checkIfFinishedPainting = () => {

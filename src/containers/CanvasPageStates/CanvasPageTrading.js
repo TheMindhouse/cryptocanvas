@@ -3,6 +3,7 @@ import { Row } from 'antd'
 import withWeb3 from '../../hoc/withWeb3'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTrading'
+import { LocalStorageManager } from '../../localStorage'
 
 class CanvasPageTrading extends Component {
   state = {
@@ -15,15 +16,13 @@ class CanvasPageTrading extends Component {
   }
 
   getCanvas = () => {
-    // Temporary store canvas in local storage
-    const tempCanvas = window.localStorage.getItem('tempCanvas2')
-
-    if (tempCanvas) {
-      this.setState({
-        pixels: JSON.parse(tempCanvas),
+    // Get cached canvas pixels from Local Storage
+    const canvasCache = LocalStorageManager.canvasPixels.getCanvasCache(this.props.canvasId)
+    if (canvasCache && !canvasCache.expirationDate) {
+      return this.setState({
+        pixels: canvasCache,
         isLoading: false,
       })
-      return
     }
 
     this.props.Contract.getCanvas(this.props.canvasId)
@@ -32,7 +31,12 @@ class CanvasPageTrading extends Component {
           pixels,
           isLoading: false,
         })
-        window.localStorage.setItem('tempCanvas', JSON.stringify(pixels))
+        // Update pixels cache in Local Storage
+        LocalStorageManager.canvasPixels.updateCanvasCache({
+          canvasId: this.props.canvasId,
+          pixelsMap: pixels,
+          withExpirationDate: false
+        })
       })
       .catch((error) => {
         console.error(error)

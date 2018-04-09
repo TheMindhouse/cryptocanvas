@@ -10,7 +10,7 @@ const getSavedCanvases = () => {
   return JSON.parse(canvases).map(canvas => new CanvasPixelsCache(canvas))
 }
 
-const getCanvasPixels = (canvasId: number): ?Array<number> => {
+const getCanvasCache = (canvasId: number): ?CanvasPixelsCache => {
   const savedCanvas: ?CanvasPixelsCache = getSavedCanvases().find((canvas: CanvasPixelsCache): boolean => canvas.canvasId === canvasId)
 
   if (!savedCanvas) {
@@ -24,7 +24,7 @@ const getCanvasPixels = (canvasId: number): ?Array<number> => {
   }
 
   console.log(`STORAGE: Returning data for Canvas #${savedCanvas.canvasId}. Expires on ${moment(savedCanvas.expirationDate).calendar()}`)
-  return savedCanvas.pixelsMap
+  return savedCanvas
 }
 
 const removeFromSavedCanvases = (savedCanvas: CanvasPixelsCache): void => {
@@ -80,6 +80,6 @@ const getExpirationDate = () => {
 const isExpired = (expirationDate: Date): boolean => new Date(expirationDate) < new Date()
 
 export const canvasPixels = {
-  getCanvasPixels,
+  getCanvasCache,
   updateCanvasCache,
 }

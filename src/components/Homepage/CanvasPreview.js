@@ -26,10 +26,10 @@ class CanvasPreview extends React.Component {
 
   getCanvas = () => {
     // Get cached canvas pixels from Local Storage
-    const canvasPixelsCache = LocalStorageManager.canvasPixels.getCanvasPixels(this.props.canvasId)
-    if (canvasPixelsCache) {
+    const canvasCache = LocalStorageManager.canvasPixels.getCanvasCache(this.props.canvasId)
+    if (canvasCache) {
       return this.setState({
-        pixels: canvasPixelsCache,
+        pixels: canvasCache.pixelsMap,
         isLoading: false,
       })
     }

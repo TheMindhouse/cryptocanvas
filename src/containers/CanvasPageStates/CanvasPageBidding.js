@@ -5,6 +5,8 @@ import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBi
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
 import HighestBidWatcher from '../../hoc/renderProps/HighestBidWatcher'
+import { LocalStorageManager } from '../../localStorage'
+import { getPercentOfPixelsCompleted } from '../../helpers/colors'
 
 class CanvasPageBidding extends Component {
   constructor (props) {
@@ -21,15 +23,13 @@ class CanvasPageBidding extends Component {
   }
 
   getCanvas = () => {
-    // Temporary store canvas in local storage
-    const tempCanvas = window.localStorage.getItem('tempCanvas2')
-
-    if (tempCanvas) {
-      this.setState({
-        pixels: JSON.parse(tempCanvas),
+    // Get cached canvas pixels from Local Storage
+    const canvasCache = LocalStorageManager.canvasPixels.getCanvasCache(this.props.canvasId)
+    if (canvasCache && !canvasCache.expirationDate) {
+      return this.setState({
+        pixels: canvasCache,
         isLoading: false,
       })
-      return
     }
 
     this.props.Contract.getCanvas(this.props.canvasId)
@@ -38,7 +38,12 @@ class CanvasPageBidding extends Component {
           pixels,
           isLoading: false,
         })
-        window.localStorage.setItem('tempCanvas', JSON.stringify(pixels))
+        // Update pixels cache in Local Storage
+        LocalStorageManager.canvasPixels.updateCanvasCache({
+          canvasId: this.props.canvasId,
+          pixelsMap: pixels,
+          withExpirationDate: false
+        })
       })
       .catch((error) => {
         console.error(error)
