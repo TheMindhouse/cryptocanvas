@@ -8,8 +8,7 @@ const MAX_ACTIVE_CANVASES = 10
 class ActiveCanvases extends React.PureComponent {
   render () {
     return (
-      <Row gutter={100}>
-        <h2>Paint</h2>
+      <Row gutter={100} type="flex">
         {this.props.activeCanvasIds.map((canvasId, index) =>
           <Col span={6} key={index}>
             <CanvasPreview canvasId={canvasId} showPercentCompleted={true} />

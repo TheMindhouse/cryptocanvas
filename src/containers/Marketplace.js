@@ -51,11 +51,13 @@ class Marketplace extends Component {
   render () {
     return (
       <Row className="container">
+        <h2>Initial Bidding</h2>
         <BiddingCanvases
           canvasIds={this.state.biddingCanvasIds}
           onBiddingFinished={this.onBiddingFinished}
         />
         <Divider />
+        <h2>Finished Canvas Gallery</h2>
         <FinishedCanvases canvasIds={this.state.completedCanvasIds} />
       </Row>
     )

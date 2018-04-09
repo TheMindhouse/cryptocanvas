@@ -53,8 +53,10 @@ class Homepage extends Component {
   render () {
     return (
       <Row className="container">
+        <h2>Paint</h2>
         <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
         <Divider />
+        <h2>Finished Canvas Gallery</h2>
         <FinishedCanvases canvasIds={this.state.finishedCanvasIds} />
       </Row>
     )

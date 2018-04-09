@@ -7,9 +7,12 @@ const CanvasSidebar = (props) => {
   return (
     <div className="CanvasSidebar">
       <h2 className="CanvasSidebar__title">Canvas #{props.canvasId}</h2>
-      <h3 className="CanvasSidebar__status">
-        {props.paintedPixels} {props.paintedPixels !== 1 ? 'pixels' : 'pixel'} out of {props.totalPixels} painted ({percentCompleted}%)
-      </h3>
+      {
+        props.totalPixels > 0 &&
+        <h3 className="CanvasSidebar__status">
+          {props.paintedPixels} {props.paintedPixels !== 1 ? 'pixels' : 'pixel'} out of {props.totalPixels} painted ({percentCompleted}%)
+        </h3>
+      }
     </div>
   )
 }

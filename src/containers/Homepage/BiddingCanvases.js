@@ -8,8 +8,6 @@ class BiddingCanvases extends React.PureComponent {
   render () {
     const { onBiddingFinished } = this.props
     return (
-      <Row gutter={100}>
-        <h2>Initial Bidding</h2>
         <Row gutter={100} type="flex">
           {this.props.canvasIds.map((canvasId, index) =>
             <Col span={6} key={index}>
@@ -24,7 +22,6 @@ class BiddingCanvases extends React.PureComponent {
               />
             </Col>
           )}
-        </Row>
       </Row>
     )
   }

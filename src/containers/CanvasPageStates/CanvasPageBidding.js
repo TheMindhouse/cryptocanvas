@@ -6,7 +6,6 @@ import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
 import HighestBidWatcher from '../../hoc/renderProps/HighestBidWatcher'
 import { LocalStorageManager } from '../../localStorage'
-import { getPercentOfPixelsCompleted } from '../../helpers/colors'
 
 class CanvasPageBidding extends Component {
   constructor (props) {
