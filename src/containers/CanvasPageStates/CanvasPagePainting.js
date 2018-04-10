@@ -68,7 +68,7 @@ class CanvasPagePainting extends React.Component {
     })
   }
 
-  handlePixelClick = ({ index, x, y }) => {
+  changePixelColor = ({ id, x, y }) => {
     const color = this.state.currentColorIndex
 
     Modal.confirm({
@@ -78,7 +78,7 @@ class CanvasPagePainting extends React.Component {
       okType: 'primary',
       onOk: () => {
         console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
-        this.props.Contract.setPixel({ canvasId: this.props.canvasId, index, color })
+        this.props.Contract.setPixel({ canvasId: this.props.canvasId, index: id, color })
           .then((tx) => {
             LocalStorageManager.transactions.updateTransactions(tx)
             // this.updatePixel({ index, color })
@@ -150,7 +150,7 @@ class CanvasPagePainting extends React.Component {
             pixelSize={this.props.pixelSize}
             pixels={this.state.pixels}
             currentColorHex={this.state.currentColorHex}
-            changePixelColor={this.handlePixelClick}
+            changePixelColor={this.changePixelColor}
           />
         }
 

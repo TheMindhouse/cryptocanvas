@@ -1,0 +1,5 @@
+.PixelHoverColorPopup {
+    position: absolute;
+    z-index: 11;
+    pointer-events: none;
+}

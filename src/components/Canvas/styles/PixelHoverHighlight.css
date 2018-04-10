@@ -1,0 +1,6 @@
+.PixelHoverHighlight {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    pointer-events: none;
+}
