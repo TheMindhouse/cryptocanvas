@@ -19,7 +19,6 @@ class KonvaStage extends React.PureComponent<Props> {
           'background': `url(${canvasBg})`,
           'backgroundSize': this.props.pixelSize,
           'width': this.props.canvasSize,
-          'cursor': (this.props.currentColorHex || this.props.scale > 1) ? 'pointer' : 'default'
         }}
         draggable={false}
       >

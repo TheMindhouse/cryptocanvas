@@ -1,8 +1,13 @@
 // @flow
 import * as React from 'react'
 import './styles/PixelHoverColorPopup.css'
+import type { MouseCoords } from '../../types/MouseCoords'
 
-type Props = {}
+type Props = {
+  mousePosition: MouseCoords,
+  pixelSize: number,
+  color: string,
+}
 
 class PixelHoverColorPopup extends React.PureComponent<Props> {
   static defaultProps = {}
