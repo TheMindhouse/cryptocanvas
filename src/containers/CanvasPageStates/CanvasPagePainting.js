@@ -147,6 +147,7 @@ class CanvasPagePainting extends React.Component {
         {
           !this.state.isLoading &&
           <CanvasStage
+            canvasId={this.props.canvasId}
             pixelSize={this.props.pixelSize}
             pixels={this.state.pixels}
             currentColorHex={this.state.currentColorHex}

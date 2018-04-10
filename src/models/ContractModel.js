@@ -355,6 +355,20 @@ export class ContractModel {
     })
   }
 
+  getPixelAuthor (canvasId, pixelIndex) {
+    return new Promise((resolve, reject) => {
+      this.Contract.getPixelAuthor(canvasId, pixelIndex, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+
+  }
+
   /**
    * Subscription to events
    */

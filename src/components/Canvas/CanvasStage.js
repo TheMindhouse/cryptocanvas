@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import './styles/CanvasStage.css'
-import PixelInfoPopup from './PixelInfoPopup'
+import PixelInfoPopup from '../PixelInfoPopup/PixelInfoPopup'
 import { PixelHoverHighlight } from './PixelHoverHighlight'
 import { PixelHoverColorPopup } from './PixelHoverColorPopup'
 import { KonvaStage } from './KonvaStage'
@@ -9,6 +9,7 @@ import type { PixelIndex } from '../../types/PixelIndex'
 import type { MouseCoords } from '../../types/MouseCoords'
 
 type Props = {
+  canvasId: number,
   currentColorHex: string,
   changePixelColor: Function,
   pixelSize: number,
@@ -85,8 +86,9 @@ class CanvasStage extends React.Component<Props, State> {
           this.state.pixelPopup &&
           <PixelInfoPopup
             pixelPopup={this.state.pixelPopup}
-            color={this.props.pixels[ this.state.pixelPopup.id ]}
+            colorId={this.props.pixels[ this.state.pixelPopup.id ]}
             pixelSize={this.props.pixelSize}
+            canvasId={this.props.canvasId}
             onClose={this.closePixelPopup}
           />
         }

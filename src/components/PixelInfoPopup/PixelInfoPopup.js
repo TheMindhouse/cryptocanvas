@@ -4,20 +4,23 @@ import './styles/PixelInfoPopup.css'
 import { Card } from 'antd'
 import type { PixelIndex } from '../../types/PixelIndex'
 import withWeb3 from '../../hoc/withWeb3'
+import { ColorPreview } from '../ColorPreview/ColorPreview'
+import PixelInfoPopupPainter from './PixelInfoPopupPainter'
 
 type Props = {
   pixelPopup: PixelIndex,
-  color: number,
+  colorId: number,
+  canvasId: number,
   pixelSize: number,
   onClose: () => void,
 }
 
-const POPUP_WIDTH = 300
+const POPUP_WIDTH = 210
 
 class PixelInfoPopup extends React.PureComponent<Props> {
   static defaultProps = {}
 
-  render() {
+  render () {
     if (!this.props.pixelPopup) {
       return null
     }
@@ -29,15 +32,19 @@ class PixelInfoPopup extends React.PureComponent<Props> {
       <div className="PixelInfoPopup" style={{ left, top }}>
         <Card className="PixelInfoPopup__card"
               title={'Pixel #' + this.props.pixelPopup.id}
-              extra={<a onClick={this.props.onClose}>close</a>} style={{ width: 300 }}>
-          <h4>Color: #{this.props.color}</h4>
-          <a href="#">copy color</a>
+              extra={<a onClick={this.props.onClose}>close</a>} style={{ width: POPUP_WIDTH }}>
+          <ColorPreview colorId={this.props.colorId} />
+          <br />
           <h4>Painter:</h4>
-          <span>Loading...</span>
+          {
+            this.props.colorId > 0
+            ? <PixelInfoPopupPainter pixelId={this.props.pixelPopup.id} canvasId={this.props.canvasId}/>
+            : <span>No painter yet, be the first!</span>
+          }
         </Card>
       </div>
     )
   }
 }
 
-export default withWeb3(PixelInfoPopup)
+export default PixelInfoPopup
