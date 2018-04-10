@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import './styles/CanvasStage.css'
-import { CanvasPixelPopup } from './CanvasPixelPopup'
+import PixelInfoPopup from './PixelInfoPopup'
 import { PixelHoverHighlight } from './PixelHoverHighlight'
 import { PixelHoverColorPopup } from './PixelHoverColorPopup'
 import { KonvaStage } from './KonvaStage'
@@ -83,7 +83,7 @@ class CanvasStage extends React.Component<Props, State> {
       <div className="CanvasStage" onMouseLeave={this.onMouseLeave}>
         {
           this.state.pixelPopup &&
-          <CanvasPixelPopup
+          <PixelInfoPopup
             pixelPopup={this.state.pixelPopup}
             color={this.props.pixels[ this.state.pixelPopup.id ]}
             pixelSize={this.props.pixelSize}

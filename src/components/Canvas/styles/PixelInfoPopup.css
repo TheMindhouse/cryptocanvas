@@ -1,15 +1,15 @@
-.CanvasPixelPopup {
+.PixelInfoPopup {
     position: absolute;
-    z-index: 2;
+    z-index: 12;
 }
 
-.CanvasPixelPopup__card {
+.PixelInfoPopup__card {
     position: absolute;
     bottom: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.CanvasPixelPopup__card::after {
+.PixelInfoPopup__card::after {
     top: 100%;
     left: 50%;
     border: solid transparent;

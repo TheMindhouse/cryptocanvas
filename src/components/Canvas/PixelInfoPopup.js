@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react'
-import './styles/CanvasPixelPopup.css'
+import './styles/PixelInfoPopup.css'
 import { Card } from 'antd'
 import type { PixelIndex } from '../../types/PixelIndex'
+import withWeb3 from '../../hoc/withWeb3'
 
 type Props = {
   pixelPopup: PixelIndex,
@@ -13,7 +14,7 @@ type Props = {
 
 const POPUP_WIDTH = 300
 
-class CanvasPixelPopup extends React.PureComponent<Props> {
+class PixelInfoPopup extends React.PureComponent<Props> {
   static defaultProps = {}
 
   render() {
@@ -25,8 +26,8 @@ class CanvasPixelPopup extends React.PureComponent<Props> {
     const top = (this.props.pixelPopup.y * this.props.pixelSize)
 
     return (
-      <div className="CanvasPixelPopup" style={{ left, top }}>
-        <Card className="CanvasPixelPopup__card"
+      <div className="PixelInfoPopup" style={{ left, top }}>
+        <Card className="PixelInfoPopup__card"
               title={'Pixel #' + this.props.pixelPopup.id}
               extra={<a onClick={this.props.onClose}>close</a>} style={{ width: 300 }}>
           <h4>Color: #{this.props.color}</h4>
@@ -39,4 +40,4 @@ class CanvasPixelPopup extends React.PureComponent<Props> {
   }
 }
 
-export { CanvasPixelPopup }
+export default withWeb3(PixelInfoPopup)
