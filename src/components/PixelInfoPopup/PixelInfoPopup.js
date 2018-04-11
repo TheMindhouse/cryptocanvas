@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import './styles/PixelInfoPopup.css'
-import { Card } from 'antd'
+import { Card, Icon } from 'antd'
 import type { PixelIndex } from '../../types/PixelIndex'
 import withWeb3 from '../../hoc/withWeb3'
 import { ColorPreview } from '../ColorPreview/ColorPreview'
@@ -32,7 +32,8 @@ class PixelInfoPopup extends React.PureComponent<Props> {
       <div className="PixelInfoPopup" style={{ left, top }}>
         <Card className="PixelInfoPopup__card"
               title={'Pixel #' + this.props.pixelPopup.id}
-              extra={<a onClick={this.props.onClose}>close</a>} style={{ width: POPUP_WIDTH }}>
+              extra={<Icon type="close" style={{ fontSize: 16, color: '#222' }} onClick={this.props.onClose} />}
+              style={{ width: POPUP_WIDTH }}>
           <ColorPreview colorId={this.props.colorId} />
           <br />
           <h4>Painter:</h4>
