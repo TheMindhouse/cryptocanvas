@@ -3,22 +3,29 @@ import * as React from 'react'
 import './styles/PixelInfoPopup.css'
 import { Card, Icon } from 'antd'
 import type { PixelIndex } from '../../types/PixelIndex'
-import withWeb3 from '../../hoc/withWeb3'
-import { ColorPreview } from '../ColorPreview/ColorPreview'
 import PixelInfoPopupPainter from './PixelInfoPopupPainter'
+import { ClickableColorPreview } from '../ColorPreview/ClickableColorPreview'
 
 type Props = {
   pixelPopup: PixelIndex,
   colorId: number,
   canvasId: number,
   pixelSize: number,
+  onCopyColor: (colorId: number) => void,
   onClose: () => void,
 }
 
 const POPUP_WIDTH = 210
 
+
 class PixelInfoPopup extends React.PureComponent<Props> {
   static defaultProps = {}
+
+  onCopyColor = () => {
+    this.props.onCopyColor(this.props.colorId)
+    this.props.onClose()
+  }
+
 
   render () {
     if (!this.props.pixelPopup) {
@@ -32,9 +39,12 @@ class PixelInfoPopup extends React.PureComponent<Props> {
       <div className="PixelInfoPopup" style={{ left, top }}>
         <Card className="PixelInfoPopup__card"
               title={'Pixel #' + this.props.pixelPopup.id}
-              extra={<Icon type="close" style={{ fontSize: 16, color: '#222' }} onClick={this.props.onClose} />}
+              extra={<a onClick={this.props.onClose}><Icon type="close" style={{ fontSize: 16, color: '#222' }} /></a>}
               style={{ width: POPUP_WIDTH }}>
-          <ColorPreview colorId={this.props.colorId} />
+          <ClickableColorPreview
+            colorId={this.props.colorId}
+            onClick={this.onCopyColor}
+          />
           <br />
           <h4>Painter:</h4>
           {

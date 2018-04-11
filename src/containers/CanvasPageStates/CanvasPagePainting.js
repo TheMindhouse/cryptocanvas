@@ -19,8 +19,7 @@ class CanvasPagePainting extends React.Component {
     this.state = {
       pixels: [],
       isLoading: true,
-      currentColorHex: null,
-      currentColorIndex: null,
+      activeColorId: null,
     }
   }
 
@@ -60,16 +59,15 @@ class CanvasPagePainting extends React.Component {
     })
   }
 
-  changeColor = ({ color, index }) => {
-    console.log(`Change current color to (${color}, ${index})`)
+  changeActiveColor = (colorId) => {
+    console.log(`Change current color to #${colorId}`)
     this.setState({
-      currentColorHex: color,
-      currentColorIndex: index,
+      activeColorId: colorId,
     })
   }
 
   changePixelColor = ({ id, x, y }) => {
-    const color = this.state.currentColorIndex
+    const color = this.state.activeColorId
 
     Modal.confirm({
       title: 'Do you want to paint this pixel?',
@@ -150,8 +148,9 @@ class CanvasPagePainting extends React.Component {
             canvasId={this.props.canvasId}
             pixelSize={this.props.pixelSize}
             pixels={this.state.pixels}
-            currentColorHex={this.state.currentColorHex}
+            activeColorId={this.state.activeColorId}
             changePixelColor={this.changePixelColor}
+            changeActiveColor={this.changeActiveColor}
           />
         }
 
@@ -159,7 +158,7 @@ class CanvasPagePainting extends React.Component {
           canvasId={this.props.canvasId}
           paintedPixels={getNumberOfPaintedPixels(this.state.pixels)}
           totalPixels={this.state.pixels.length}
-          changeColor={this.changeColor}
+          changeActiveColor={this.changeActiveColor}
           currentColor={this.props.account ? this.state.currentColorIndex : undefined}
           isPickerDisabled={!this.props.account}
         />

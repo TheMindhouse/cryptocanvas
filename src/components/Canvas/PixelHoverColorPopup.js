@@ -2,11 +2,12 @@
 import * as React from 'react'
 import './styles/PixelHoverColorPopup.css'
 import type { MouseCoords } from '../../types/MouseCoords'
+import { hexPalette } from '../../helpers/colors'
 
 type Props = {
   mousePosition: MouseCoords,
   pixelSize: number,
-  color: string,
+  colorId: number,
 }
 
 class PixelHoverColorPopup extends React.PureComponent<Props> {
@@ -20,7 +21,7 @@ class PixelHoverColorPopup extends React.PureComponent<Props> {
         transform: `translate(${x}px, ${y}px`,
         width: this.props.pixelSize,
         height: this.props.pixelSize,
-        backgroundColor: this.props.color,
+        backgroundColor: hexPalette[this.props.colorId],
       }}>
       </div>
     )

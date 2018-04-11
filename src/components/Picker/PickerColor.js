@@ -1,26 +1,29 @@
+// @flow
 import React from 'react'
 
 import './PickerColor.css'
+import { hexPalette } from '../../helpers/colors'
 
-export const PickerColor = (props) => {
-  const changeColor = () => {
-    const { color, index } = props
-    if (index === 0) {
-      props.changeColor({ color: null, index: null })
-      return
-    }
-    props.changeColor({ color, index })
+type Props = {
+  colorId: number,
+  size: number,
+  changeActiveColor: (number) => void,
+  isSelected: boolean,
+}
+
+export const PickerColor = (props: Props) => {
+  const changeActiveColor = () => {
+    props.changeActiveColor(props.colorId)
   }
 
   return (
     <div className={'PickerColor ' + (props.isSelected ? 'PickerColor--selected' : '')}
          style={{ width: props.size, height: props.size }}
-         onClick={changeColor}>
-      <span className={'PickerColor__color ' + (props.index === 0 ? 'PickerColor__color--reset' : '')}
-            style={{ backgroundColor: props.color }} />
+         onClick={changeActiveColor}>
+      <span className={'PickerColor__color ' + (props.colorId === 0 ? 'PickerColor__color--reset' : '')}
+            style={{ backgroundColor: hexPalette[props.colorId] }} />
     </div>
   )
 }
 
-PickerColor.propTypes = {}
 PickerColor.defaultProps = {}

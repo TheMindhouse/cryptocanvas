@@ -20,14 +20,13 @@ export class Picker extends React.Component {
               <span>Enable Ethereum to paint on the Canvas</span>
             </div>
           }
-          {hexPalette.map((color, index) =>
+          {hexPalette.map((hex, colorId) =>
             <PickerColor
-              color={color}
-              index={index}
-              key={index}
+              colorId={colorId}
+              key={colorId}
               size={COLOR_WIDTH}
-              isSelected={currentColor === index}
-              changeColor={this.props.changeColor}
+              isSelected={currentColor === colorId}
+              changeActiveColor={this.props.changeActiveColor}
             />)}
         </div>
       </div>

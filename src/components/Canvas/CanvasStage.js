@@ -10,10 +10,11 @@ import type { MouseCoords } from '../../types/MouseCoords'
 
 type Props = {
   canvasId: number,
-  currentColorHex: string,
-  changePixelColor: Function,
   pixelSize: number,
   pixels: Array<number>,
+  activeColorId: number,
+  changePixelColor: (PixelIndex) => void,
+  changeActiveColor: (number) => void,
 }
 
 type State = {
@@ -50,7 +51,7 @@ class CanvasStage extends React.Component<Props, State> {
     const y: number = event.nativeEvent.layerY
     const indexObj: PixelIndex = this.getPixelIndexByMouseCoordinates({ x, y })
 
-    if (this.props.currentColorHex) {
+    if (this.props.activeColorId) {
       this.props.changePixelColor(indexObj)
     } else {
       this.showPixelPopup(indexObj)
@@ -89,6 +90,7 @@ class CanvasStage extends React.Component<Props, State> {
             colorId={this.props.pixels[ this.state.pixelPopup.id ]}
             pixelSize={this.props.pixelSize}
             canvasId={this.props.canvasId}
+            onCopyColor={this.props.changeActiveColor}
             onClose={this.closePixelPopup}
           />
         }
@@ -103,10 +105,10 @@ class CanvasStage extends React.Component<Props, State> {
 
         {
           this.state.mousePosition &&
-          this.props.currentColorHex &&
+          this.props.activeColorId > 0 &&
           <PixelHoverColorPopup
             mousePosition={this.state.mousePosition}
-            color={this.props.currentColorHex}
+            colorId={this.props.activeColorId}
             pixelSize={this.props.pixelSize}
           />
         }
@@ -117,7 +119,6 @@ class CanvasStage extends React.Component<Props, State> {
         >
           <KonvaStage
             canvasSize={canvasSize}
-            currentColorHex={this.props.currentColorHex}
             pixels={this.props.pixels}
             gridColumns={gridColumns}
             pixelSize={this.props.pixelSize}

@@ -16,7 +16,7 @@ const CanvasSidebarPainting = (props) => {
       }
 
       <Picker
-        changeColor={props.changeColor}
+        changeActiveColor={props.changeActiveColor}
         currentColor={props.currentColor}
         isDisabled={props.isPickerDisabled}
       />
