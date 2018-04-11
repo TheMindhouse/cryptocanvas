@@ -74,7 +74,7 @@ class CanvasPagePainting extends React.Component {
     Modal.confirm({
       title: 'Do you want to paint this pixel?',
       content: <ConfirmPixelModal x={x} y={y} color={color} />,
-      okText: 'Yes, paint pixel',
+      okText: 'Paint Pixel',
       okType: 'primary',
       onOk: () => {
         console.log(`User set pixel color at (${x}, ${y}) to ${color}`)

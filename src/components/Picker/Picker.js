@@ -2,40 +2,21 @@ import React from 'react'
 import { hexPalette } from '../../helpers/colors'
 import { PickerColor } from './PickerColor'
 import './Picker.css'
+import { ColorPreview } from '../ColorPreview/ColorPreview'
 
 const COLOR_WIDTH = 16
 const PICKER_SIZE = COLOR_WIDTH * Math.sqrt(hexPalette.length)
-
-const getColorLabel = (color) => {
-  return (color > 0)
-    ? `#${color}`
-    : 'Choose a color'
-}
-
-const getPickerClass = (color) => {
-  let className = 'CurrentColor '
-  if (!color) {
-    return className + 'CurrentColor--empty'
-  }
-  if (color < 64) {
-    return className + 'CurrentColor--light'
-  }
-  return className + 'CurrentColor--dark'
-}
 
 export class Picker extends React.Component {
   render () {
     const { currentColor } = this.props
     return (
       <div>
-        <div className={getPickerClass(currentColor)}
-             style={{ backgroundColor: hexPalette[ currentColor ] }}>
-          {getColorLabel(currentColor)}
-        </div>
+        <ColorPreview colorId={this.props.currentColor} style={{ width: PICKER_SIZE, margin: '30px 0'}}/>
         <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
           {
             this.props.isDisabled &&
-            <div className="PickerDisabled">
+            <div className="Picker__DisabledOverlay">
               <span>Enable Ethereum to paint on the Canvas</span>
             </div>
           }

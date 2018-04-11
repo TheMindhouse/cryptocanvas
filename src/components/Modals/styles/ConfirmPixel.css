@@ -1,0 +1,10 @@
+.ConfirmPixel {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 25px;
+}
+
+.ConfirmPixel_Coords {
+    font-size: 20px;
+    margin-right: 10px;
+    font-weight: bold;
+}
