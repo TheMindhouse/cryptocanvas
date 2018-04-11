@@ -5,7 +5,7 @@ import { hexPalette } from '../../helpers/colors'
 
 type Props = {
   colorId: number,
-  style: ?Object,
+  style?: Object,
 }
 
 class ColorPreview extends React.PureComponent<Props> {

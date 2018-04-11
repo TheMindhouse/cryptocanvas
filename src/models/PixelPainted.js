@@ -1,12 +1,12 @@
 export class PixelPainted {
   constructor (props) {
-    this._artworkId = parseInt(props._artworkId, 10)
-    this._color = parseInt(props._color, 10)
-    this._index = parseInt(props._index, 10)
+    this._canvasId = parseInt(props.canvasId, 10)
+    this._color = parseInt(props.color, 10)
+    this._index = parseInt(props.index, 10)
   }
 
-  get artworkId () {
-    return this._artworkId
+  get canvasId () {
+    return this._canvasId
   }
 
   get color () {

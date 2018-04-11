@@ -49,7 +49,7 @@
         "type": "uint32"
       }
     ],
-    "name": "getArtwork",
+    "name": "getBitmap",
     "outputs": [
       {
         "name": "",
@@ -58,6 +58,52 @@
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_minPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "offerCanvasForSale",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getCanvasCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "buyCanvas",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -82,6 +128,20 @@
       {
         "name": "",
         "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "minimumBidAmount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -121,12 +181,73 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "isCanvasFinished",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "activeCanvasCount",
     "outputs": [
       {
         "name": "",
         "type": "uint32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "canvasNoLongerForSale",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMinimumBidAmount",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getTime",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -173,20 +294,6 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "artworkNoLongerForSale",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -244,25 +351,6 @@
       {
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "isArtworkFinished",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
       }
     ],
     "payable": false,
@@ -335,6 +423,29 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "countPaintedPixelsByAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "getPixelCount",
     "outputs": [
@@ -349,22 +460,13 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
+    "inputs": [
       {
-        "name": "",
-        "type": "address"
+        "name": "_state",
+        "type": "uint8"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getActiveCanvases",
+    "name": "getCanvasByState",
     "outputs": [
       {
         "name": "",
@@ -376,17 +478,17 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        "name": "_canvasId",
-        "type": "uint32"
+        "name": "",
+        "type": "address"
       }
     ],
-    "name": "buyArtwork",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -520,7 +622,7 @@
         "type": "uint32"
       }
     ],
-    "name": "getArtworkPaintedPixels",
+    "name": "getCanvasPaintedPixels",
     "outputs": [
       {
         "name": "",
@@ -534,7 +636,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getArtworksCount",
+    "name": "COMMISSION_DIVIDER",
     "outputs": [
       {
         "name": "",
@@ -546,17 +648,39 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "MINIMUM_BID_AMOUNT",
-    "outputs": [
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
-        "type": "uint256"
+        "name": "_canvasId",
+        "type": "uint32"
       }
     ],
+    "name": "secure",
+    "outputs": [],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_minPrice",
+        "type": "uint256"
+      },
+      {
+        "name": "_receiver",
+        "type": "address"
+      }
+    ],
+    "name": "offerCanvasForSaleToAddress",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -637,7 +761,7 @@
         "type": "uint32"
       },
       {
-        "name": "isFinished",
+        "name": "isSecured",
         "type": "bool"
       },
       {
@@ -682,28 +806,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      },
-      {
-        "name": "_minPrice",
-        "type": "uint256"
-      },
-      {
-        "name": "_receiver",
-        "type": "address"
-      }
-    ],
-    "name": "offerArtworkForSaleToAddress",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [
       {
@@ -727,24 +829,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      },
-      {
-        "name": "_minPrice",
-        "type": "uint256"
-      }
-    ],
-    "name": "offerArtworkForSale",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -763,7 +847,7 @@
         "type": "address"
       }
     ],
-    "name": "ArtworkOfferedForSale",
+    "name": "CanvasOfferedForSale",
     "type": "event"
   },
   {
@@ -771,11 +855,11 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_canvasId",
+        "name": "canvasId",
         "type": "uint32"
       }
     ],
-    "name": "ArtworkNoLongerForSale",
+    "name": "CanvasNoLongerForSale",
     "type": "event"
   },
   {
@@ -802,7 +886,7 @@
         "type": "address"
       }
     ],
-    "name": "ArtworkSold",
+    "name": "CanvasSold",
     "type": "event"
   },
   {
@@ -866,22 +950,22 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_canvasId",
+        "name": "canvasId",
         "type": "uint32"
       },
       {
         "indexed": false,
-        "name": "_bidder",
+        "name": "bidder",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_amount",
+        "name": "amount",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "_finishTime",
+        "name": "finishTime",
         "type": "uint256"
       }
     ],
@@ -893,17 +977,17 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_canvasId",
+        "name": "canvasId",
         "type": "uint32"
       },
       {
         "indexed": false,
-        "name": "_address",
+        "name": "toAddress",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_amount",
+        "name": "amount",
         "type": "uint256"
       }
     ],
@@ -915,7 +999,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_canvasId",
+        "name": "canvasId",
         "type": "uint32"
       },
       {
@@ -932,17 +1016,17 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_canvasId",
+        "name": "canvasId",
         "type": "uint32"
       },
       {
         "indexed": false,
-        "name": "_index",
+        "name": "index",
         "type": "uint32"
       },
       {
         "indexed": false,
-        "name": "_color",
+        "name": "color",
         "type": "uint8"
       }
     ],
@@ -954,7 +1038,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_canvasId",
+        "name": "canvasId",
         "type": "uint32"
       }
     ],
@@ -966,7 +1050,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_id",
+        "name": "canvasId",
         "type": "uint256"
       }
     ],

@@ -14,38 +14,24 @@ class Marketplace extends Component {
   }
 
   componentDidMount () {
-    this.getActiveCanvasIds()
-      .then(activeCanvasIds => this.getFinishedCanvasIds(activeCanvasIds))
+    this.getBiddingCanvasIds()
+    this.getCompletedCanvasIds()
   }
 
-  onBiddingFinished = () => {
-    this.getActiveCanvasIds()
-      .then(activeCanvasIds => this.getFinishedCanvasIds(activeCanvasIds))
+  onBiddingFinished = (canvasId) => {
+    const biddingCanvasIds = this.state.biddingCanvasIds.filter(id => id !== canvasId)
+    const completedCanvasIds = [...this.state.completedCanvasIds, canvasId]
+    this.setState({ biddingCanvasIds, completedCanvasIds })
   }
 
-  getActiveCanvasIds = () => this.props.Contract.getActiveCanvasIds()
+  getBiddingCanvasIds = () => {
+    this.props.Contract.getCanvasIdsByState(CANVAS_STATES.bidding)
+      .then(biddingCanvasIds => this.setState({ biddingCanvasIds }))
+  }
 
-  getCanvasState = (canvasId) => this.props.Contract.getCanvasState(canvasId)
-
-  getFinishedCanvasIds = (activeCanvasIds) => {
-    this.props.Contract.getCanvasCount()
-      .then((canvasCount) => {
-        const finishedCanvasIds = Array.from(new Array(canvasCount), (val, index) => index)
-          .filter(id => !activeCanvasIds.includes(id))
-        console.log('Finished canvases: ' + finishedCanvasIds)
-
-        const pCanvasStates = finishedCanvasIds.map(canvasId => this.getCanvasState(canvasId))
-
-        Promise.all(pCanvasStates).then((canvasStates) => {
-          const biddingCanvasIds = canvasStates.filter(canvasState => canvasState.state === CANVAS_STATES.bidding)
-            .map(canvasState => canvasState.canvasId)
-          const completedCanvasIds = canvasStates.filter(canvasState => canvasState.state === CANVAS_STATES.completed)
-            .map(canvasState => canvasState.canvasId)
-          console.log('Bidding canvases: ' + biddingCanvasIds)
-          console.log('Completed canvases: ' + completedCanvasIds)
-          this.setState({ biddingCanvasIds, completedCanvasIds })
-        })
-      })
+  getCompletedCanvasIds = () => {
+    this.props.Contract.getCanvasIdsByState(CANVAS_STATES.completed)
+      .then(completedCanvasIds => this.setState({ completedCanvasIds }))
   }
 
   render () {

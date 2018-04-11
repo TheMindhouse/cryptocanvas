@@ -4,7 +4,7 @@ export const CANVAS_STATES = {
   completed: 'completed',
 }
 
-const BLOCKCHAIN_CANVAS_STATES = {
+export const BLOCKCHAIN_CANVAS_STATES = {
   0: CANVAS_STATES.active,
   1: CANVAS_STATES.bidding,
   2: CANVAS_STATES.completed,

@@ -4,7 +4,7 @@ import { Transaction, TRANSACTION_TYPE } from './Transaction'
 import { CanvasSellOffer } from './CanvasSellOffer'
 import { CanvasBuyOffer } from './CanvasBuyOffer'
 import { PainterReward } from './PainterReward'
-import { CanvasState } from './CanvasState'
+import { BLOCKCHAIN_CANVAS_STATES, CanvasState } from './CanvasState'
 
 const GAS_LIMIT = 3000000
 const GAS_PRICE = 2000000000
@@ -140,7 +140,7 @@ export class ContractModel {
 
   offerForSale (canvasId, price) {
     return new Promise((resolve, reject) => {
-      this.Contract.offerArtworkForSale(canvasId, price, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.offerCanvasForSale(canvasId, price, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Offer for sale failed')
@@ -159,7 +159,7 @@ export class ContractModel {
 
   offerForSaleToAddress (canvasId, price, receiverAddress) {
     return new Promise((resolve, reject) => {
-      this.Contract.offerArtworkForSaleToAddress(canvasId, price, receiverAddress, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.offerCanvasForSaleToAddress(canvasId, price, receiverAddress, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Offer for sale to address failed')
@@ -178,7 +178,7 @@ export class ContractModel {
 
   cancelSellOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.artworkNoLongerForSale(canvasId, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.canvasNoLongerForSale(canvasId, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Cancel sell offer failed')
@@ -197,7 +197,7 @@ export class ContractModel {
 
   acceptSellOffer (canvasId, priceInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.buyArtwork(canvasId, { ...DEFAULT_CONFIG, value: priceInWei }, (error, txHash) => {
+      this.Contract.buyCanvas(canvasId, { ...DEFAULT_CONFIG, value: priceInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Buy Canvas failed')
@@ -238,9 +238,13 @@ export class ContractModel {
    * View functions (free)
    */
 
-  getActiveCanvasIds () {
+  getCanvasIdsByState (canvasState) {
+    const state = Object.entries(BLOCKCHAIN_CANVAS_STATES).findIndex(state => state[1] === canvasState)
+    if (state < 0) {
+      return Promise.reject('Incorrect state')
+    }
     return new Promise((resolve, reject) => {
-      this.Contract.getActiveCanvases(DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCanvasByState(state, DEFAULT_CONFIG, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -253,7 +257,7 @@ export class ContractModel {
 
   getCanvasCount () {
     return new Promise((resolve, reject) => {
-      this.Contract.getArtworksCount(DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCanvasCount(DEFAULT_CONFIG, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -279,7 +283,7 @@ export class ContractModel {
 
   getCanvas (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getArtwork(canvasId, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getBitmap(canvasId, DEFAULT_CONFIG, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -394,14 +398,14 @@ export class ContractModel {
   }
 
   SellOfferMadeEvent (...args) {
-    return this.Contract.ArtworkOfferedForSale(...args)
+    return this.Contract.CanvasOfferedForSale(...args)
   }
 
   SellOfferCancelledEvent (...args) {
-    return this.Contract.ArtworkNoLongerForSale(...args)
+    return this.Contract.CanvasNoLongerForSale(...args)
   }
 
   CanvasSoldEvent (...args) {
-    return this.Contract.ArtworkSold(...args)
+    return this.Contract.CanvasSold(...args)
   }
 }

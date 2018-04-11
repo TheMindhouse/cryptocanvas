@@ -6,7 +6,7 @@ import withWeb3 from '../../hoc/withWeb3'
 import { ContractModel } from '../../models/ContractModel'
 
 type Props = {
-  onBiddingFinished: () => void,
+  onBiddingFinished: (number) => void,
   canvasId: number,
   render: (State) => React.Node,
   // withEvents
@@ -65,7 +65,7 @@ class HighestBidWatcher extends React.Component<Props, State> {
     const biddingTimeLeftInMs = this.state.highestBid.finishTime * 1000 - Date.now()
     this.biddingTimer = setTimeout(() => {
       console.log('[EVENT] BIDDING FINISHED!!!');
-      this.props.onBiddingFinished()
+      this.props.onBiddingFinished(this.props.canvasId)
     }, biddingTimeLeftInMs)
   }
 

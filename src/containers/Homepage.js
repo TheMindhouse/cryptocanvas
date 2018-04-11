@@ -4,6 +4,7 @@ import withEvents from '../hoc/withEvents'
 import withWeb3 from '../hoc/withWeb3'
 import ActiveCanvases from './Homepage/ActiveCanvases'
 import FinishedCanvases from './Homepage/FinishedCanvases'
+import { CANVAS_STATES } from '../models/CanvasState'
 
 class Homepage extends Component {
   state = {
@@ -34,7 +35,7 @@ class Homepage extends Component {
   }
 
   getActiveCanvasIds = () => {
-    return this.props.Contract.getActiveCanvasIds()
+    return this.props.Contract.getCanvasIdsByState(CANVAS_STATES.active)
       .then(activeCanvasIds => this.setState({ activeCanvasIds }))
   }
 
