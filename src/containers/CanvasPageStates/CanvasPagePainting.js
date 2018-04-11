@@ -3,7 +3,6 @@ import { Row, Modal } from 'antd'
 
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
-import { Picker } from '../../components/Picker/Picker'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarPainting from '../../components/CanvasSidebar/CanvasSidebarPainting'
 import { PixelPainted } from '../../models/PixelPainted'
@@ -159,7 +158,7 @@ class CanvasPagePainting extends React.Component {
           paintedPixels={getNumberOfPaintedPixels(this.state.pixels)}
           totalPixels={this.state.pixels.length}
           changeActiveColor={this.changeActiveColor}
-          currentColor={this.props.account ? this.state.currentColorIndex : undefined}
+          activeColorId={this.props.account ? this.state.activeColorId : undefined}
           isPickerDisabled={!this.props.account}
         />
       </Row>

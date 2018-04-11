@@ -12,7 +12,7 @@ export class Picker extends React.Component {
     const { currentColor } = this.props
     return (
       <div>
-        <ColorPreview colorId={this.props.currentColor} style={{ width: PICKER_SIZE, margin: '30px 0'}}/>
+        <ColorPreview colorId={this.props.activeColorId} style={{ width: PICKER_SIZE, margin: '30px 0'}}/>
         <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
           {
             this.props.isDisabled &&
