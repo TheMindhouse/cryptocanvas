@@ -26,7 +26,6 @@ class PixelInfoPopup extends React.PureComponent<Props> {
     this.props.onClose()
   }
 
-
   render () {
     if (!this.props.pixelPopup) {
       return null

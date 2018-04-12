@@ -598,6 +598,10 @@
     "name": "getLastBidForCanvas",
     "outputs": [
       {
+        "name": "canvasId",
+        "type": "uint32"
+      },
+      {
         "name": "bidder",
         "type": "address"
       },

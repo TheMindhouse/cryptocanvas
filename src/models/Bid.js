@@ -1,6 +1,6 @@
 export class Bid {
   constructor (props) {
-    if (props._bidder) {
+    if (props.bidder) {
       // Bid from event
       this._canvasId = parseInt(props.canvasId, 10)
       this._bidder = props.bidder

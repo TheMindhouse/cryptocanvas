@@ -2,10 +2,12 @@
 import * as React from 'react'
 import './styles/PixelHoverHighlight.css'
 import type { PixelIndex } from '../../types/PixelIndex'
+import { Icon } from 'antd'
 
 type Props = {
   pixelSize: number,
   pixelHovered: PixelIndex,
+  showDetailsIcon: boolean,
 }
 
 class PixelHoverHighlight extends React.Component<Props> {
@@ -26,6 +28,8 @@ class PixelHoverHighlight extends React.Component<Props> {
         width: pixelSize,
         height: pixelSize,
       }}>
+        { this.props.showDetailsIcon && <Icon type="search" /> }
+
       </div>
     )
   }

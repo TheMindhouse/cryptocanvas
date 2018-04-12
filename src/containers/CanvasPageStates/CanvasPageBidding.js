@@ -59,6 +59,7 @@ class CanvasPageBidding extends Component {
         {this.state.isLoading && <p>Canvas loading...</p>}
 
         <CanvasStage
+          canvasId={this.props.canvasId}
           pixelSize={this.props.pixelSize}
           pixels={this.state.pixels}
         />

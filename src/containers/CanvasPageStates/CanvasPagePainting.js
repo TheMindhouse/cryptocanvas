@@ -59,6 +59,7 @@ class CanvasPagePainting extends React.Component {
   }
 
   changeActiveColor = (colorId) => {
+    if (!this.props.account) { return }
     console.log(`Change current color to #${colorId}`)
     this.setState({
       activeColorId: colorId,

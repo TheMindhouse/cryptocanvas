@@ -100,6 +100,7 @@ class CanvasStage extends React.Component<Props, State> {
           <PixelHoverHighlight
             pixelHovered={this.state.pixelHovered}
             pixelSize={this.props.pixelSize}
+            showDetailsIcon={!this.props.activeColorId}
           />
         }
 

@@ -10,7 +10,7 @@ import CanvasPageLoading from './CanvasPageStates/CanvasPageLoading'
 import { CANVAS_STATES } from '../models/CanvasState'
 
 class CanvasPage extends React.Component {
-  pixelSize = 10
+  pixelSize = 20
 
   constructor (props) {
     super(props)
