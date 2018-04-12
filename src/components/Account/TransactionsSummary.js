@@ -17,7 +17,7 @@ const TransactionsSummary = ({ transactions }) => {
               acc[2] = acc[2] + 1
               return acc
           }
-        }, [0, 0, 0]).map((val, i) => <p>{val}</p>)
+        }, [0, 0, 0]).map((val, i) => <p key={i}>{val}</p>)
       }
     </div>
   )

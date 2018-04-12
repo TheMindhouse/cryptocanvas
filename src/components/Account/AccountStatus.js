@@ -4,13 +4,10 @@ import { Alert } from 'antd'
 import './styles/AccountStatus.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { cutAddress } from '../../helpers/strings'
-import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../../models/Transaction'
 import withModal from '../../hoc/withModal'
 import TransactionsModal from '../Modals/TransactionsModal'
 import { TransactionsSummary } from './TransactionsSummary'
-import { LocalStorageManager } from '../../localStorage'
-
-const CHECK_TRANSACTIONS_DELAY = 2000
+import withTransactions from '../../hoc/withTransactions'
 
 const StatusMetaMaskNotAvailable = () => (
   <p>
@@ -35,51 +32,6 @@ const StatusConnected = ({ account }) =>
   </div>
 
 class AccountStatus extends React.PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      transactions: LocalStorageManager.transactions.getTransactions()
-    }
-  }
-
-  componentDidMount () {
-    this.timer = setInterval(() => {
-      this.checkTransactions()
-      this.updateTransactions()
-    }, CHECK_TRANSACTIONS_DELAY)
-  }
-
-  componentWillUnmount () {
-    window.clearInterval(this.timer)
-    this.timer = null
-  }
-
-  checkTransactions = () => {
-    LocalStorageManager.transactions.getTransactions()
-      .filter(tx => tx.status === TRANSACTION_STATUS.pending)
-      .forEach(tx => {
-        console.log(`Checking transaction - ${tx.hash}`)
-        this.props.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
-          if (!error && result) {
-            const status = TRANSACTION_RECEIPT_STATUS[ Number(result.status) ]
-            LocalStorageManager.transactions.updateTransactions(new Transaction({ ...tx, status }))
-          }
-        })
-      })
-  }
-
-  updateTransactions = () => {
-    this.setState({
-      transactions: LocalStorageManager.transactions.getTransactions()
-    })
-  }
-
-  onClearTransactions = () => {
-    this.setState({ transactions: [] })
-    LocalStorageManager.transactions.clearTransactions()
-  }
-
   render () {
     return (
       <div className="AccountStatus">
@@ -98,14 +50,14 @@ class AccountStatus extends React.PureComponent {
           <div>
             <StatusConnected account={this.props.account} />
             {
-              this.state.transactions.length > 0 &&
+              this.props.txStore.transactions.length > 0 &&
               <div>
                 <TransactionsModal
                   modal={this.props.modal}
-                  transactions={this.state.transactions}
-                  onClear={this.onClearTransactions}
+                  transactions={this.props.txStore.transactions}
+                  onClear={this.props.txStore.clearTransactions}
                 />
-                {/*<TransactionsSummary transactions={this.state.transactions} />*/}
+                <TransactionsSummary transactions={this.props.txStore.transactions} />
                 <span onClick={this.props.modal.show}>Show Transactions</span>
               </div>
             }
@@ -120,4 +72,4 @@ class AccountStatus extends React.PureComponent {
 AccountStatus.propTypes = {}
 AccountStatus.defaultProps = {}
 
-export default withWeb3(withModal(AccountStatus))
+export default withTransactions(withWeb3(withModal(AccountStatus)))
