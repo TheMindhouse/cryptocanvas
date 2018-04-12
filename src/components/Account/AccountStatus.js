@@ -27,11 +27,16 @@ const StatusDisconnected = () =>
 
 const StatusConnected = ({ account }) =>
   <div>
-    <b>Connected to Ethereum</b><br />
-    <span>{cutAddress(account)}</span>
+    <span className="AccountStatus__info">Account & Transactions</span><br />
+    <span className="AccountStatus__address">{cutAddress(account)}</span>
   </div>
 
 class AccountStatus extends React.PureComponent {
+  onClearTransactions = () => {
+    this.props.modal.close()
+    this.props.txStore.clearTransactions()
+  }
+
   render () {
     return (
       <div className="AccountStatus">
@@ -55,10 +60,12 @@ class AccountStatus extends React.PureComponent {
                 <TransactionsModal
                   modal={this.props.modal}
                   transactions={this.props.txStore.transactions}
-                  onClear={this.props.txStore.clearTransactions}
+                  onClear={this.onClearTransactions}
                 />
-                <TransactionsSummary transactions={this.props.txStore.transactions} />
-                <span onClick={this.props.modal.show}>Show Transactions</span>
+                <TransactionsSummary
+                  transactions={this.props.txStore.transactions}
+                  onShowAll={this.props.modal.show}
+                />
               </div>
             }
           </div>
