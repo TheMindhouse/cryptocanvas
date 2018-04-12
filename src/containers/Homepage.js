@@ -53,13 +53,21 @@ class Homepage extends Component {
 
   render () {
     return (
-      <Row className="container">
-        <h2>Paint</h2>
-        <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
-        <Divider />
-        <h2>Finished Canvas Gallery</h2>
-        <FinishedCanvases canvasIds={this.state.finishedCanvasIds} />
-      </Row>
+      <div>
+        <div className="containerWrapper" style={{ marginBottom: 100 }}>
+          <Row className="container">
+            <h1>Paint</h1>
+            <br />
+            <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
+          </Row>
+        </div>
+        {/*<div className="containerWrapper">*/}
+          {/*<Row className="container">*/}
+            {/*<h2>Finished Canvas Gallery</h2>*/}
+            {/*<FinishedCanvases canvasIds={this.state.finishedCanvasIds} />*/}
+          {/*</Row>*/}
+        {/*</div>*/}
+      </div>
     )
   }
 }
