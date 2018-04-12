@@ -10,6 +10,7 @@ import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlacehold
 import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
 import { LocalStorageManager } from '../../localStorage'
+import type { PixelIndex } from '../../types/PixelIndex'
 
 class CanvasPagePainting extends React.Component {
   constructor (props) {
@@ -66,25 +67,25 @@ class CanvasPagePainting extends React.Component {
     })
   }
 
-  changePixelColor = ({ id, x, y }) => {
-    const color = this.state.activeColorId
+  changePixelColor = (pixelIndex: PixelIndex) => {
+    const colorId = this.state.activeColorId
 
     Modal.confirm({
       title: 'Do you want to paint this pixel?',
-      content: <ConfirmPixelModal x={x} y={y} color={color} />,
+      content: <ConfirmPixelModal x={pixelIndex.x} y={pixelIndex.y} color={colorId} />,
       okText: 'Paint Pixel',
       okType: 'primary',
       onOk: () => {
-        console.log(`User set pixel color at (${x}, ${y}) to ${color}`)
-        this.props.Contract.setPixel({ canvasId: this.props.canvasId, index: id, color })
+        console.log(`User set pixel color at (${pixelIndex.x}, ${pixelIndex.y}) to ${colorId}`)
+        this.props.Contract.setPixel({ canvasId: this.props.canvasId, pixelIndex, colorId })
           .then((tx) => {
             LocalStorageManager.transactions.updateTransactions(tx)
             // this.updatePixel({ index, color })
-            // Modal.success({
-            //   title: 'Paint Pixel Transaction sent',
-            //   content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
-            //   'you will be rewarded approximate amount of money from the initial bid.',
-            // })
+            Modal.success({
+              title: 'Paint Pixel Transaction sent',
+              content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
+              'you will be rewarded approximate amount of money from the initial bid.',
+            })
           })
           .catch((error) => {
             Modal.error({

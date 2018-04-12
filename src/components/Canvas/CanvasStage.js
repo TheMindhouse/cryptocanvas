@@ -7,6 +7,7 @@ import { PixelHoverColorPopup } from './PixelHoverColorPopup'
 import { KonvaStage } from './KonvaStage'
 import type { PixelIndex } from '../../types/PixelIndex'
 import type { MouseCoords } from '../../types/MouseCoords'
+import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
 
 type Props = {
   canvasId: number,
@@ -103,6 +104,11 @@ class CanvasStage extends React.Component<Props, State> {
             showDetailsIcon={!this.props.activeColorId}
           />
         }
+
+        <UserPaintedLoadingPixels
+          pixelSize={this.props.pixelSize}
+          canvasId={this.props.canvasId}
+        />
 
         {
           this.state.mousePosition &&

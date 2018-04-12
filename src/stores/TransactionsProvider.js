@@ -1,6 +1,6 @@
 import React from 'react'
 import { LocalStorageManager } from '../localStorage'
-import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../models/Transaction'
+import { TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../models/Transaction'
 import withWeb3 from '../hoc/withWeb3'
 
 export const TransactionsContext = React.createContext()
@@ -42,7 +42,7 @@ class TransactionsProvider extends React.Component {
         this.props.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
           if (!error && result) {
             const status = TRANSACTION_RECEIPT_STATUS[ Number(result.status) ]
-            LocalStorageManager.transactions.updateTransactions(new Transaction({ ...tx, status }))
+            LocalStorageManager.transactions.updateTransactions({ ...tx, status })
           }
         })
       })
@@ -55,7 +55,7 @@ class TransactionsProvider extends React.Component {
 
   render () {
     return (
-      <TransactionsContext.Provider value={this.state} onClearTransactions={this.onClearTransactions}>
+      <TransactionsContext.Provider value={this.state}>
         {this.props.children}
       </TransactionsContext.Provider>
     )

@@ -1,11 +1,19 @@
-import { Transaction } from '../models/Transaction'
+import { Transaction, TRANSACTION_TYPE } from '../models/Transaction'
+import { TransactionWithPixel } from '../models/TransactionWithPixel'
 
 const STORAGE_KEY = 'USER_TX'
 
 const getTransactions = () => {
   const transactions = window.localStorage.getItem(STORAGE_KEY)
   if (transactions) {
-    return JSON.parse(transactions).map(tx => new Transaction(tx))
+    return JSON.parse(transactions).map(tx => {
+      switch (tx.type) {
+        case TRANSACTION_TYPE.setPixel:
+          return new TransactionWithPixel(tx)
+        default:
+          return new Transaction(tx)
+      }
+    })
   }
   return []
 }
