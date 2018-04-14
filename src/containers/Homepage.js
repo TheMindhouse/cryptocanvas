@@ -56,7 +56,7 @@ class Homepage extends Component {
       <div>
         <div className="containerWrapper" style={{ marginBottom: 100 }}>
           <Row className="container">
-            <h1>Paint</h1>
+            <h2><b>Paint</b></h2>
             <br />
             <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
           </Row>
