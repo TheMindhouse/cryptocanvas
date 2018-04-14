@@ -54,19 +54,21 @@ class Homepage extends Component {
   render () {
     return (
       <div>
-        <div className="containerWrapper" style={{ marginBottom: 100 }}>
+        <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="container">
-            <h2><b>Paint</b></h2>
-            <br />
-            <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
+            <h2>
+              <b>CryptoCanvas</b> is a limited set of collectible 64x64 pixel artworks <b>living on the Ethereum blockchain</b>.
+              Each canvas is created by you, the CryptoCanvas community, thus it has multiple authors, who create a
+              unique piece of art by collaborating together.
+            </h2>
           </Row>
         </div>
-        {/*<div className="containerWrapper">*/}
-          {/*<Row className="container">*/}
-            {/*<h2>Finished Canvas Gallery</h2>*/}
-            {/*<FinishedCanvases canvasIds={this.state.finishedCanvasIds} />*/}
-          {/*</Row>*/}
-        {/*</div>*/}
+        <Row className="container" style={{ textAlign: 'center' }}>
+          <h1><b>Canvases Available for Painting</b></h1>
+          <h3>They are still not finished, so you can jump in and paint some pixels!</h3>
+          <br /><br />
+          <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
+        </Row>
       </div>
     )
   }

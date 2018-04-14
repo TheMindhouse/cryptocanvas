@@ -127,7 +127,7 @@ const About = () => (
           To put it simply: <b>everything</b>. Unlike other projects, we store all pieces of information on the
           blockchain. That includes information about every single pixel of the canvas and its author.
           Storing this amount of data on the blockchain would be very expensive for one person, but with the
-          collaborative effort it becomes possible.
+          collaborative effort, it becomes possible.
         </p>
 
         <h2 id="is-the-number-of-canvases-limited"><b>Is the number of canvases limited?</b></h2>
