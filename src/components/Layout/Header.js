@@ -44,7 +44,7 @@ const Header = (props: Props) => {
         {
           props.account &&
           <li>
-            <NavLink to="/account"
+            <NavLink to={`/account/${props.account}`}
                      className="Header__menu-link"
                      activeClassName="Header__menu-link--active">
               My Account
@@ -61,9 +61,9 @@ const Header = (props: Props) => {
                 placement="bottom"
                 trigger="hover"
               >
-              <span className="Header__menu-link  Header__menu-link--disabled">
-                My Account
-              </span>
+                <span className="Header__menu-link  Header__menu-link--disabled">
+                  My Account
+                </span>
               </Popover>
           </li>
         }

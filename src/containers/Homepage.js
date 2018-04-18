@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Divider, Row } from 'antd'
+import { Row } from 'antd'
 import withEvents from '../hoc/withEvents'
 import withWeb3 from '../hoc/withWeb3'
 import ActiveCanvases from './Homepage/ActiveCanvases'
-import FinishedCanvases from './Homepage/FinishedCanvases'
 import { CANVAS_STATES } from '../models/CanvasState'
 import { Link } from 'react-router-dom'
 

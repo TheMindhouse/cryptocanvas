@@ -2,7 +2,7 @@ import React from 'react'
 
 import withWeb3 from '../hoc/withWeb3'
 
-import './CanvasPage.css'
+import './styles/CanvasPage.css'
 import CanvasPagePainting from './CanvasPageStates/CanvasPagePainting'
 import CanvasPageBidding from './CanvasPageStates/CanvasPageBidding'
 import CanvasPageTrading from './CanvasPageStates/CanvasPageTrading'
