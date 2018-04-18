@@ -20,3 +20,11 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+.AccountStatus__address a {
+    color: #222;
+}
+
+.AccountStatus__address a:hover {
+    text-decoration: underline;
+}

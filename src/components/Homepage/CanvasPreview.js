@@ -34,7 +34,7 @@ class CanvasPreview extends React.Component {
       })
     }
 
-    this.props.Contract.getCanvas(this.props.canvasId)
+    return this.props.Contract.getCanvas(this.props.canvasId)
       .then((pixels) => {
         this.setState({
           pixels,

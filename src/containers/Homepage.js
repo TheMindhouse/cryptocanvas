@@ -5,6 +5,7 @@ import withWeb3 from '../hoc/withWeb3'
 import ActiveCanvases from './Homepage/ActiveCanvases'
 import FinishedCanvases from './Homepage/FinishedCanvases'
 import { CANVAS_STATES } from '../models/CanvasState'
+import { Link } from 'react-router-dom'
 
 class Homepage extends Component {
   state = {
@@ -66,6 +67,7 @@ class Homepage extends Component {
         <Row className="container" style={{ textAlign: 'center' }}>
           <h1><b>Canvases Available for Painting</b></h1>
           <h3>They are still not finished, so you can jump in and paint some pixels!</h3>
+          <h5>or read <Link to="/about">How it works</Link></h5>
           <br /><br />
           <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
         </Row>

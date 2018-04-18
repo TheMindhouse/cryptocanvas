@@ -1,10 +1,17 @@
+// @flow
 import React from 'react'
-import { Row } from 'antd'
+import { Popover, Row, Tooltip } from 'antd'
 
 import './styles/Header.css'
 import { Link, NavLink } from 'react-router-dom'
+import withWeb3 from '../../hoc/withWeb3'
 
-const Header = () => {
+type Props = {
+  // from withWeb3
+  account?: string,
+}
+
+const Header = (props: Props) => {
   return (
     <Row className="Header" justify="space-between" type="flex" align="middle">
       <div>
@@ -33,6 +40,33 @@ const Header = () => {
             About
           </NavLink>
         </li>
+
+        {
+          props.account &&
+          <li>
+            <NavLink to="/account"
+                     className="Header__menu-link"
+                     activeClassName="Header__menu-link--active">
+              My Account
+            </NavLink>
+          </li>
+        }
+
+        {
+          !props.account &&
+          <li>
+              <Popover
+                content={<span>Log into MetaMask to manage your account. See <Link to="/help#installing-metamask">Installing MetaMask</Link></span>}
+                title=""
+                placement="bottom"
+                trigger="hover"
+              >
+              <span className="Header__menu-link  Header__menu-link--disabled">
+                My Account
+              </span>
+              </Popover>
+          </li>
+        }
       </ul>
     </Row>
   )
@@ -41,4 +75,4 @@ const Header = () => {
 Header.propTypes = {}
 Header.defaultProps = {}
 
-export default Header
+export default withWeb3(Header)

@@ -33,39 +33,6 @@
       {
         "name": "_canvasId",
         "type": "uint32"
-      }
-    ],
-    "name": "withdrawCommission",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "getBitmap",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
       },
       {
         "name": "_minPrice",
@@ -76,6 +43,29 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "getPaintedPixelsCountByAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -94,22 +84,8 @@
   },
   {
     "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "buyCanvas",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [],
-    "name": "withdrawFees",
+    "name": "withdraw",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -216,20 +192,6 @@
     "constant": false,
     "inputs": [
       {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "canvasNoLongerForSale",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
         "name": "_amount",
         "type": "uint256"
       }
@@ -297,20 +259,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "enterBuyOffer",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "HEIGHT",
@@ -322,20 +270,6 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "withdrawReward",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -414,29 +348,6 @@
     "outputs": [
       {
         "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_address",
-        "type": "address"
-      },
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "countPaintedPixelsByAddress",
-    "outputs": [
-      {
-        "name": "",
         "type": "uint32"
       }
     ],
@@ -456,6 +367,39 @@
     ],
     "payable": false,
     "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "acceptSellOffer",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "getPendingWithdrawal",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -492,17 +436,17 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "fees",
-    "outputs": [
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
-        "type": "uint256"
+        "name": "_canvasId",
+        "type": "uint32"
       }
     ],
+    "name": "addRewardToPendingWithdrawals",
+    "outputs": [],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -595,6 +539,25 @@
         "type": "uint32"
       }
     ],
+    "name": "getCanvasBitmap",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
     "name": "getLastBidForCanvas",
     "outputs": [
       {
@@ -612,25 +575,6 @@
       {
         "name": "finishTime",
         "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_canvasId",
-        "type": "uint32"
-      }
-    ],
-    "name": "getCanvasPaintedPixels",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint32"
       }
     ],
     "payable": false,
@@ -659,7 +603,21 @@
         "type": "uint32"
       }
     ],
-    "name": "secure",
+    "name": "makeBuyOffer",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "cancelSellOffer",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -716,6 +674,20 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "addCommissionToPendingWithdrawals",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -765,16 +737,35 @@
         "type": "uint32"
       },
       {
-        "name": "isSecured",
-        "type": "bool"
-      },
-      {
         "name": "canvasState",
         "type": "uint8"
       },
       {
+        "name": "initialBiddingFinishTime",
+        "type": "uint256"
+      },
+      {
         "name": "owner",
         "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      }
+    ],
+    "name": "getCanvasPaintedPixelsCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32"
       }
     ],
     "payable": false,
@@ -897,18 +888,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "FeeWithdrawn",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "name": "canvasId",
         "type": "uint32"
@@ -995,7 +974,7 @@
         "type": "uint256"
       }
     ],
-    "name": "MoneyPaid",
+    "name": "RewardAddedToWithdrawals",
     "type": "event"
   },
   {
@@ -1008,11 +987,50 @@
       },
       {
         "indexed": false,
-        "name": "_amount",
+        "name": "amount",
         "type": "uint256"
       }
     ],
-    "name": "CommissionPaid",
+    "name": "CommissionAddedToWithdrawals",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "receiver",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Withdrawal",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "oldBalance",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "newBalance",
+        "type": "uint256"
+      }
+    ],
+    "name": "BalanceChanged",
     "type": "event"
   },
   {

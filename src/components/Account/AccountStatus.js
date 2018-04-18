@@ -8,6 +8,7 @@ import withModal from '../../hoc/withModal'
 import TransactionsModal from '../Modals/TransactionsModal'
 import { TransactionsSummary } from './TransactionsSummary'
 import withTransactions from '../../hoc/withTransactions'
+import { Link } from 'react-router-dom'
 
 const StatusMetaMaskNotAvailable = () => (
   <p>
@@ -28,7 +29,7 @@ const StatusDisconnected = () =>
 const StatusConnected = ({ account }) =>
   <div>
     <span className="AccountStatus__info">Account & Transactions</span><br />
-    <span className="AccountStatus__address">{cutAddress(account)}</span>
+    <span className="AccountStatus__address"><Link to="/account">{cutAddress(account)}</Link></span>
   </div>
 
 class AccountStatus extends React.PureComponent {

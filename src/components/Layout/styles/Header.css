@@ -35,10 +35,15 @@
     text-decoration: none !important;
 }
 
-.Header__menu-link:hover {
+.Header__menu-link:not(.Header__menu-link--disabled):hover {
     color: #222;
 }
 
 .Header__menu-link--active {
     border-color: #222;
+}
+
+.Header__menu-link--disabled {
+    color: #999;
+    cursor: default;
 }
