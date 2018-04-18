@@ -44,14 +44,14 @@ const About = () => (
             href="https://www.larvalabs.com/cryptopunks" target="_blank" rel="noopener noreferrer">CryptoPunks</a> and <a
             href="https://cryptokitties.co" target="_blank" rel="noopener noreferrer">CryptoKitties</a>. They showed us
           there is a completely new approach to developing apps and creating a community. However, we realized they
-          still heavily rely on the centralized servers - the blockchain stores only some ID or DNA numbers which can
+          still heavily rely on the centralized servers &ndash; the blockchain stores only some ID or DNA numbers which can
           turn into a Punk or a Kitty only when interpreted by the creators' servers.</p>
 
-        <p>We started to wonder whether it would be possible to store ALL the data on the blockchain, which would result
-          in a truly decentralized, independent app.</p>
+        <p>We started to wonder whether it would be possible to store <b>all</b> the data on the blockchain, which would
+          result in a truly decentralized, independent app.</p>
 
         <p>As it turned out, storing any larger amount of data on the blockchain is insanely expensive. And here, the
-          second inspiration struck us - <a href="https://redditblog.com/2017/04/18/place-part-two/" target="_blank"
+          second inspiration struck us &ndash; <a href="https://redditblog.com/2017/04/18/place-part-two/" target="_blank"
                                             rel="noopener noreferrer">Reddit Place</a>, a unique experiment performed by
           the Reddit community. It is a 1000x1000 pixel artwork created together by thousands of participants. It proved
           that human creativity and ability to cooperate is endless and given the right opportunity, can result in some
