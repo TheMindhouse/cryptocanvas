@@ -70,7 +70,7 @@ class HighestBidWatcher extends React.Component<Props, State> {
   }
 
   watchForChanges = (blockNumber) => {
-    const bidPostedEvent = this.props.Contract.BidPostedEvent({ _canvasId: this.props.canvasId }, {
+    const bidPostedEvent = this.props.Contract.BidPostedEvent({ canvasId: this.props.canvasId }, {
       fromBlock: blockNumber,
       toBlock: 'latest'
     })

@@ -121,7 +121,7 @@ class CanvasPagePainting extends React.Component {
   }
 
   watchForChanges = (blockNumber) => {
-    const pixelPaintedEvent = this.props.Contract.PixelPaintedEvent({ _canvasId: this.props.canvasId }, {
+    const pixelPaintedEvent = this.props.Contract.PixelPaintedEvent({ canvasId: this.props.canvasId }, {
       fromBlock: blockNumber,
       toBlock: 'latest'
     })
