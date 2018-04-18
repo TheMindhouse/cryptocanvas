@@ -871,12 +871,12 @@
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "from",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "to",
         "type": "address"
       }
@@ -937,7 +937,7 @@
         "type": "uint32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "bidder",
         "type": "address"
       },
@@ -964,7 +964,7 @@
         "type": "uint32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "toAddress",
         "type": "address"
       },
@@ -1050,6 +1050,11 @@
         "indexed": false,
         "name": "color",
         "type": "uint8"
+      },
+      {
+        "indexed": true,
+        "name": "painter",
+        "type": "address"
       }
     ],
     "name": "PixelPainted",
