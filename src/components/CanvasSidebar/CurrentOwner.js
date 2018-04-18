@@ -5,7 +5,7 @@ import { Alert } from 'antd'
 const CurrentOwner = (props) => {
   return (
     <div>
-      <h2>Current Owner</h2>
+      <h2><b>Current Owner</b></h2>
       <h3>{cutAddress(props.canvasOwner)}</h3>
       {
         props.isUserCanvasOwner &&

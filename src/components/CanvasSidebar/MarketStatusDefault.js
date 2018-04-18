@@ -10,7 +10,7 @@ const IS_OWNER = false
 const MarketStatusDefault = (props) => {
   return (
     <div>
-      <h2>Market Status</h2>
+      <h2><b>Market Status</b></h2>
       <CurrentSellOffer
         isForSale={props.currentSellOffer.isForSale}
         price={props.web3.fromWei(props.currentSellOffer.price)}

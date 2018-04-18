@@ -25,11 +25,11 @@ class BiddingTimeLeft extends React.PureComponent {
   render () {
     return (
       <div>
-        <h2>Bidding Time Left</h2>
+        <h2><b>Bidding Time Left</b></h2>
         {this.props.biddingFinishTime &&
         <div>
-          <h3><Countdown date={this.props.biddingFinishTime * 1000} /></h3>
-          <p><Moment date={new Date(this.props.biddingFinishTime * 1000)} /></p>
+          <h2><Countdown date={this.props.biddingFinishTime * 1000} /></h2>
+          <p><Moment date={new Date(this.props.biddingFinishTime * 1000)} format="dddd, MMMM Do YYYY, h:mm:ss a"/></p>
         </div>
         }
 

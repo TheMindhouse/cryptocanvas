@@ -86,7 +86,7 @@ export class ContractModel {
 
   makeBuyOffer (canvasId, valueInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.enterBuyOffer(canvasId, { ...DEFAULT_CONFIG, value: valueInWei }, (error, txHash) => {
+      this.Contract.makeBuyOffer(canvasId, { ...DEFAULT_CONFIG, value: valueInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Make buy offer failed')
@@ -182,7 +182,7 @@ export class ContractModel {
 
   cancelSellOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.canvasNoLongerForSale(canvasId, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.cancelSellOffer(canvasId, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Cancel sell offer failed')
@@ -201,7 +201,7 @@ export class ContractModel {
 
   acceptSellOffer (canvasId, priceInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.buyCanvas(canvasId, { ...DEFAULT_CONFIG, value: priceInWei }, (error, txHash) => {
+      this.Contract.acceptSellOffer(canvasId, { ...DEFAULT_CONFIG, value: priceInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Buy Canvas failed')

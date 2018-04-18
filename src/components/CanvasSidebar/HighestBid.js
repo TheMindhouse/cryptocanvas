@@ -1,11 +1,12 @@
 import React from 'react'
 import { Alert } from 'antd'
+import { cutAddress } from '../../helpers/strings'
 
 const HighestBid = (props) => {
   if (props.highestBidAmount) {
     return (
       <div>
-        <h2>Current Highest Bid</h2>
+        <h2><b>Current Highest Bid</b></h2>
         {
           props.isUserHighestBidder &&
           <div>
@@ -14,13 +15,13 @@ const HighestBid = (props) => {
           </div>
         }
         <h2>{props.highestBidAmount} ETH</h2>
-        <small>by {props.highestBidAddress}</small>
+        <small>by {cutAddress(props.highestBidAddress)}</small>
       </div>
     )
   }
   return (
     <div>
-      <h2>Current Highest Bid</h2>
+      <h2><b>Current Highest Bid</b></h2>
       <p>No bids yet</p>
     </div>
   )

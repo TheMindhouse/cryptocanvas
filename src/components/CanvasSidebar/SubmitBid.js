@@ -34,7 +34,7 @@ class SubmitBid extends React.PureComponent {
   render () {
     return (
       <div>
-        <h2>Your bid</h2>
+        <h2><b>Your bid</b></h2>
         <Input type="text" addonAfter="ETH"
                placeholder="Enter your offer"
                onChange={this.updateBidAmount}
