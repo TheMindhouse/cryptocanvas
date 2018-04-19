@@ -4,11 +4,10 @@ import ABI from '../helpers/ABI.json'
 
 const Web3Context = React.createContext()
 
-// const CONTRACT_ADDRESS = '0x00ae27b2cbdcb6571f39db83b65278e597d065ab'
-const CONTRACT_ADDRESS = '0x546cfbe2f6a33f3b15f3c2990b88ed0ea420f50f'
-// const CONTRACT_ADDRESS = '0x4C17FDf7ADeA0317cb346c65727F055870745B9a'
-const WEB3_HTTP_PROVIDER = 'http://localhost:8545'
-// const WEB3_HTTP_PROVIDER = 'https://ropsten.infura.io/ML50g9METlqvSTgwiJTm'
+// const CONTRACT_ADDRESS = '0x2ee58b1ef60566cd2c8270a6af236753bc2c8128'
+const CONTRACT_ADDRESS = '0xaf9700ea86214bc54046fec9e2e3d1cd710f4982' // Ropsten
+// const WEB3_HTTP_PROVIDER = 'http://localhost:8545'
+const WEB3_HTTP_PROVIDER = 'https://ropsten.infura.io/ML50g9METlqvSTgwiJTm'
 const CHECK_ACCOUNT_DELAY = 2000
 
 const Web3 = window.Web3
@@ -31,8 +30,8 @@ class Web3Provider extends React.Component {
       window.web3 = new Web3(new Web3.providers.HttpProvider(WEB3_HTTP_PROVIDER))
 
       // todo - temporary for dev purposes
-      metamaskAvailable = true
-      eventsSupported = true
+      // metamaskAvailable = true
+      // eventsSupported = true
     }
 
     eventsSupported
