@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { Alert, Icon, Popover, Row } from 'antd'
+import { Alert, Row } from 'antd'
 import withWeb3 from '../hoc/withWeb3'
 import PixelsPainted from '../components/Account/PixelsPainted'
 import AccountBalance from '../components/Account/AccountBalance'

@@ -2,6 +2,7 @@ import React from 'react'
 
 import './CanvasSidebar.css'
 import { Picker } from '../Picker/Picker'
+import { PaintingHelp } from './PaintingHelp'
 
 const CanvasSidebarPainting = (props) => {
   const percentCompleted = parseInt((props.paintedPixels / props.totalPixels) * 100, 10)
@@ -22,7 +23,7 @@ const CanvasSidebarPainting = (props) => {
       />
 
       <br />
-      <p>How can I place a pixel?</p>
+      <PaintingHelp />
 
     </div>
   )
