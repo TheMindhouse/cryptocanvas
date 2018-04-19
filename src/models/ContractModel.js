@@ -35,7 +35,7 @@ export class ContractModel {
           const tx: TransactionWithPixel = {
             hash: txHash,
             type: TRANSACTION_TYPE.setPixel,
-            name: `Set pixel to #${colorId} on Canvas ${canvasId}`,
+            name: `Set pixel #${pixelIndex} to color #${colorId} on Canvas #${canvasId}`,
             canvasId: canvasId,
             colorId: colorId,
             pixelIndex: pixelIndex,
