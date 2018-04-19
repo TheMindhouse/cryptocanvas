@@ -8,8 +8,7 @@ import withWeb3 from '../../hoc/withWeb3'
 import CanvasPreviewImage from './CanvasPreviewImage'
 import { getPercentOfPixelsCompleted } from '../../helpers/colors'
 import { LocalStorageManager } from '../../localStorage'
-
-const getLinkToCanvas = id => `/canvas/${id}`
+import { URLHelper } from '../../helpers/URLhelper'
 
 class CanvasPreview extends React.Component {
   constructor () {
@@ -58,7 +57,7 @@ class CanvasPreview extends React.Component {
   render () {
     return (
       <div className="CanvasPreview">
-        <Link to={getLinkToCanvas(this.props.canvasId)}>
+        <Link to={URLHelper.canvas(this.props.canvasId)}>
           {this.state.isLoading && <CanvasPreviewPlaceholder />}
           {!this.state.isLoading && <CanvasPreviewImage pixels={this.state.pixels} />}
         </Link>

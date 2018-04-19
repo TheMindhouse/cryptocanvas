@@ -48,7 +48,7 @@ class WithdrawReward extends React.Component {
 
     return (
       <div>
-        <h2><b>Co-Painter Reward</b></h2>
+        <h2><b>Painter Reward</b></h2>
 
         {
           paintedPixels ?

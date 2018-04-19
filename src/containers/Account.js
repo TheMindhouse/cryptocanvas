@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import { Alert, Icon, Popover, Row } from 'antd'
-import { HashLink } from 'react-router-hash-link'
 import withWeb3 from '../hoc/withWeb3'
 import PixelsPainted from '../components/Account/PixelsPainted'
 import AccountBalance from '../components/Account/AccountBalance'
@@ -20,27 +19,33 @@ type Props = {
 class Account extends React.PureComponent<Props> {
   static defaultProps = {}
 
-  account = this.props.match.params.address
-
   render () {
+    const urlAccountAddress = this.props.match.params.address
     return (
       <div>
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="container">
             <h1><b>Account Details</b></h1>
-            <h2>{this.account}</h2>
+            <h2>{urlAccountAddress}</h2>
           </Row>
         </div>
 
         <Row className="container">
 
+          <Alert type="success" message="This is your account" showIcon />
+
+          <br />
+
           <AccountBalanceHeader />
-          <AccountBalance accountAddress={this.account}/>
+          <AccountBalance accountAddress={urlAccountAddress}/>
 
           <br /><br />
 
           <h2><b>Pixels Painted</b></h2>
-          <PixelsPainted accountAddress={this.account}/>
+          <PixelsPainted accountAddress={urlAccountAddress}/>
+
+          <br /><br />
+
         </Row>
       </div>
     )
