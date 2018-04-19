@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { Divider, Row } from 'antd'
+import { Row, Spin } from 'antd'
 import withEvents from '../hoc/withEvents'
 import withWeb3 from '../hoc/withWeb3'
 import FinishedCanvases from './Homepage/FinishedCanvases'
 import { CANVAS_STATES } from '../models/CanvasState'
 import BiddingCanvases from './Homepage/BiddingCanvases'
-import { Link } from 'react-router-dom'
+import './styles/Marketplace.css'
 
 class Marketplace extends Component {
   state = {
-    biddingCanvasIds: [],
-    completedCanvasIds: [],
+    biddingCanvasIds: null,
+    completedCanvasIds: null,
   }
 
   componentDidMount () {
@@ -50,17 +50,31 @@ class Marketplace extends Component {
           <h1><b>Initial Bidding</b></h1>
           <h3>Waiting for you to make a bid, which will be distributed across all of the painters.</h3>
           <br /><br />
-          <BiddingCanvases
-            canvasIds={this.state.biddingCanvasIds}
-            onBiddingFinished={this.onBiddingFinished}
-          />
+          {!this.state.biddingCanvasIds && <Spin />}
+          {
+            this.state.biddingCanvasIds && (
+              this.state.biddingCanvasIds.length > 0
+                ? <BiddingCanvases
+                  canvasIds={this.state.biddingCanvasIds}
+                  onBiddingFinished={this.onBiddingFinished}
+                />
+                : <p className="NoCanvasInfo">No canvases here.</p>
+            )
+          }
         </Row>
 
         <Row className="container" style={{ textAlign: 'center' }}>
           <h1><b>Finished Canvas Gallery</b></h1>
           <h3>You can admire them and you can buy them.</h3>
           <br /><br />
-          <FinishedCanvases canvasIds={this.state.completedCanvasIds} />
+          {!this.state.completedCanvasIds && <Spin />}
+          {
+            this.state.completedCanvasIds && (
+              this.state.completedCanvasIds.length > 0
+                ? <FinishedCanvases canvasIds={this.state.completedCanvasIds} />
+                : <p className="NoCanvasInfo">No finished canvases yet.</p>
+            )
+          }
         </Row>
       </div>
     )
