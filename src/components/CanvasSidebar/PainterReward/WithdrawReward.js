@@ -1,22 +1,45 @@
+// @flow
 import React from 'react'
-import withWeb3 from '../../hoc/withWeb3'
+import withWeb3 from '../../../hoc/withWeb3'
 import { Modal } from 'antd'
-import WithReward from './PainterReward/WithReward'
-import WithoutReward from './PainterReward/WithoutReward'
-import { LocalStorageManager } from '../../localStorage'
+import WithReward from './WithReward'
+import WithoutReward from './WithoutReward'
+import { LocalStorageManager } from '../../../localStorage/index'
+import { Bid } from '../../../models/Bid'
+import { PainterReward } from '../../../models/PainterReward'
+import { ContractModel } from '../../../models/ContractModel'
 
-class WithdrawReward extends React.Component {
+type Props = {
+  canvasId: number,
+  // from withWeb3
+  Contract: ContractModel,
+  account: string,
+  web3: Object,
+}
+
+type State = {
+  painterReward: PainterReward,
+  lastBid: Bid,
+}
+
+class WithdrawReward extends React.Component<Props, State> {
   state = {
-    painterReward: {}
+    painterReward: {},
+    lastBid: null,
   }
 
   componentDidMount () {
-    this.getRewardInfo()
-    this.watchForChanges()
+    this.getLastBid()
+      .then(() => this.getRewardInfo())
+  }
+
+  getLastBid = () => {
+    return this.props.Contract.getLastBid(this.props.canvasId)
+      .then((lastBid: Bid) => this.setState({ lastBid }))
   }
 
   getRewardInfo = () => {
-    this.props.Contract.getRewardInfo(this.props.canvasId, this.props.userAddress)
+    this.props.Contract.getRewardInfo(this.props.canvasId, this.props.account)
       .then(painterReward => {
         console.log(painterReward)
         this.setState({ painterReward })
@@ -35,10 +58,6 @@ class WithdrawReward extends React.Component {
       })
   }
 
-  watchForChanges = () => {
-
-  }
-
   render() {
     const {
       paintedPixels,
@@ -49,14 +68,17 @@ class WithdrawReward extends React.Component {
     return (
       <div>
         <h2><b>Painter Reward</b></h2>
-
+        {
+          this.state.lastBid &&
+          <p>Canvas was sold during Initial Bidding for <b>{this.props.web3.fromWei(this.state.lastBid.amount)} ETH</b>.</p>
+        }
         {
           paintedPixels ?
             <WithReward
               paintedPixels={paintedPixels}
               rewardInEth={this.props.web3.fromWei(rewardValue)}
               isWithdrawn={isWithdrawn}
-              userAddress={this.props.userAddress}
+              userAddress={this.props.account}
               onWithdraw={this.onWithdraw}
             />
             : <WithoutReward />
@@ -66,8 +88,5 @@ class WithdrawReward extends React.Component {
     );
   }
 }
-
-WithdrawReward.propTypes = {}
-WithdrawReward.defaultProps = {}
 
 export default withWeb3(WithdrawReward)

@@ -4,7 +4,7 @@ import CurrentOwner from './CurrentOwner'
 import MarketStatus from './MarketStatus'
 import withWeb3 from '../../hoc/withWeb3'
 import withEvents from '../../hoc/withEvents'
-import WithdrawReward from './WithdrawReward'
+import WithdrawReward from './PainterReward/WithdrawReward'
 import { LocalStorageManager } from '../../localStorage'
 
 class CanvasSidebarTrading extends React.PureComponent {
@@ -195,10 +195,7 @@ class CanvasSidebarTrading extends React.PureComponent {
 
         {
           this.props.account &&
-          <WithdrawReward
-            canvasId={this.props.canvasId}
-            userAddress={this.props.account}
-          />
+          <WithdrawReward canvasId={this.props.canvasId} />
         }
 
       </div>
