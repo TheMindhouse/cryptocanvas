@@ -24,13 +24,13 @@ class WithdrawReward extends React.Component {
   }
 
   onWithdraw = () => {
-    console.log('[USER] Painter reward withdraw requested');
-    this.props.Contract.withdrawReward(this.props.canvasId)
+    console.log('[USER] Add painter reward to Account Balance requested');
+    this.props.Contract.addRewardToAccountBalance(this.props.canvasId)
       .then(tx => {
         LocalStorageManager.transactions.updateTransactions(tx)
         Modal.success({
-          title: 'Withdraw Reward Transaction sent',
-          content: 'You should see the reward on your account after a few minutes, when the blockchain updates.',
+          title: 'Add Reward to Account Balance Transaction sent',
+          content: 'You should be able to withdraw the reward from your Account Balance after a few minutes, when the blockchain updates.',
         })
       })
   }

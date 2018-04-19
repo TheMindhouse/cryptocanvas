@@ -218,24 +218,42 @@ export class ContractModel {
     })
   }
 
-  withdrawReward (canvasId) {
+  addRewardToAccountBalance (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.withdrawReward(canvasId, { ...DEFAULT_CONFIG }, (error, txHash) => {
+      this.Contract.addRewardToPendingWithdrawals(canvasId, { ...DEFAULT_CONFIG }, (error, txHash) => {
         if (error) {
           console.log(error)
-          console.log('[ERROR] Withdraw reward failed')
+          console.log('[ERROR] Add Reward to Account Balance failed')
           reject(error)
         } else {
           const tx = {
             hash: txHash,
-            type: TRANSACTION_TYPE.withdrawReward,
-            name: `Withdraw Reward for Canvas #${canvasId}`
+            type: TRANSACTION_TYPE.addRewardToBalance,
+            name: `Add Reward for Canvas #${canvasId} to Account Balance`
           }
           resolve(new Transaction(tx))
         }
       })
     })
+  }
 
+  withdrawBalance () {
+    return new Promise((resolve, reject) => {
+      this.Contract.withdraw({ ...DEFAULT_CONFIG }, (error, txHash) => {
+        if (error) {
+          console.log(error)
+          console.log('[ERROR] Withdraw Account Balance failed')
+          reject(error)
+        } else {
+          const tx = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.withdrawBalance,
+            name: `Withdraw Account Balance`,
+          }
+          resolve(new Transaction(tx))
+        }
+      })
+    })
   }
 
   /**
@@ -374,7 +392,32 @@ export class ContractModel {
         }
       })
     })
+  }
 
+  getOwnedCanvasCount (userAddress = '') {
+    return new Promise((resolve, reject) => {
+      this.Contract.balanceOf(userAddress, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(parseInt(result, 10))
+        }
+      })
+    })
+  }
+
+  getAccountBalance (userAddress = '') {
+    return new Promise((resolve, reject) => {
+      this.Contract.getPendingWithdrawal(userAddress, DEFAULT_CONFIG, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(parseInt(result, 10))
+        }
+      })
+    })
   }
 
   /**

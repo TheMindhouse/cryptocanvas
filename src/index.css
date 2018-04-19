@@ -26,3 +26,14 @@ body {
 .emoji-rocket::after {
     content: "\01F680";
 }
+
+/*Ant overrides */
+.ant-modal,
+.ant-alert {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.ant-modal .ant-modal-title,
+.ant-confirm-body .ant-confirm-title {
+    font-weight: bold;
+}

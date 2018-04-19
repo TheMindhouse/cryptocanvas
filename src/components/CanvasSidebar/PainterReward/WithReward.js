@@ -4,9 +4,10 @@ import { Button, Modal } from 'antd'
 const WithReward = (props) => {
   const confirm = () => {
     Modal.confirm({
-      title: 'Confirm Reward Withdraw',
-      content: <span>Do you want to withdraw <b>{props.rewardInEth} ETH</b> reward to address <b>{props.userAddress}</b>?</span>,
-      okText: 'Withdraw',
+      title: 'Add Reward to Account Balance?',
+      content: <span>Your reward for painting, <b>{props.rewardInEth} ETH</b>, will be added to your
+        Account Balance. You can withdraw your Balance on My Account page.</span>,
+      okText: 'Continue',
       okType: 'primary',
       width: 500,
       onOk: props.onWithdraw,
@@ -28,9 +29,9 @@ const WithReward = (props) => {
         type="primary"
         size="default"
         onClick={confirm}
-        title={props.isWithdrawn ? 'You have already withdrawn your reward.' : ''}
+        title={props.isWithdrawn ? 'You have already added the reward to your Account Balance.' : ''}
         disabled={props.isWithdrawn}>
-        Withdraw
+        Add to my Account Balance
       </Button>
     </div>
   )

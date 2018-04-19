@@ -20,7 +20,8 @@ export const TRANSACTION_TYPE = {
   offerForSaleToAddress: 'offerForSaleToAddress',
   cancelSellOffer: 'cancelSellOffer',
   acceptSellOffer: 'acceptSellOffer',
-  withdrawReward: 'withdrawReward',
+  addRewardToBalance: 'addRewardToBalance',
+  withdrawBalance: 'withdrawBalance',
 }
 
 export class Transaction {
