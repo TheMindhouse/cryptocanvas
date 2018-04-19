@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal } from 'antd'
-import TransactionsList from '../Account/TransactionsList'
+import TransactionsList from '../AccountWidget/TransactionsList'
 
 class TransactionsModal extends React.PureComponent {
   render() {
