@@ -12,13 +12,13 @@ const About = () => (
           their authors, <b>is stored forever on the blockchain.</b></h2>
       </div>
     </div>
-    <Row className="container About">
-      <Col span={16} offset={8}>
-        <h2 style={{ marginBottom: 50 }}>
-          <a href="#"><Icon type="book" /> Read the Whitepaper</a>
-        </h2>
-      </Col>
-    </Row>
+    {/*<Row className="container About">*/}
+      {/*<Col span={16} offset={8}>*/}
+        {/*<h2 style={{ marginBottom: 50 }}>*/}
+          {/*<a href="#"><Icon type="book" /> Read the Whitepaper</a>*/}
+        {/*</h2>*/}
+      {/*</Col>*/}
+    {/*</Row>*/}
     <Row className="container About">
       <Col span={8}>
         <Anchor style={{ paddingTop: 20 }}>
