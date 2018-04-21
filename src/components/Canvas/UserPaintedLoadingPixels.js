@@ -33,6 +33,7 @@ class UserPaintedLoadingPixels extends React.PureComponent<Props> {
           <LoadingPixel
             pixelIndex={tx.pixelIndex}
             pixelSize={this.props.pixelSize}
+            colorId={tx.colorId}
             key={i}
           />
         )}
