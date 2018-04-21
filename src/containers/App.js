@@ -14,6 +14,15 @@ import { Web3Provider } from '../stores/Web3Provider'
 import TransactionsProvider from '../stores/TransactionsProvider'
 import { Account } from './Account'
 import ErrorPage404 from './ErrorPage404'
+import ReactGA from 'react-ga'
+
+ReactGA.initialize('UA-117937544-1')
+
+const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+  return null;
+};
 
 class App extends React.Component {
   render () {
@@ -25,6 +34,7 @@ class App extends React.Component {
               <Header />
               <AccountStatus />
 
+              <Route path="/" component={logPageView} />
               <Switch>
                 <Route exact path='/' component={Homepage} />
                 <Route path='/trade' component={Marketplace} />

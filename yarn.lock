@@ -6275,6 +6275,13 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
+react-ga@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.5.0.tgz#fbba2b33d41ce727f7d4cf383d54dbbfbf96c507"
+  optionalDependencies:
+    prop-types "^15.6.0"
+    react "^15.6.2 || ^16.0"
+
 react-konva@^1.6.6:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/react-konva/-/react-konva-1.7.1.tgz#5acbb721148a4628ccea83d984ecfe864a251461"
@@ -6387,6 +6394,15 @@ react-slick@~0.22.3:
     enquire.js "^2.1.6"
     json2mq "^0.2.0"
     resize-observer-polyfill "^1.5.0"
+
+"react@^15.6.2 || ^16.0":
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 react@^16.3.0:
   version "16.3.1"
