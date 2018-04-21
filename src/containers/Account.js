@@ -32,7 +32,10 @@ class Account extends React.PureComponent<Props> {
 
         <Row className="container">
 
-          <Alert type="success" message="This is your account" showIcon />
+          {
+            urlAccountAddress === this.props.account &&
+            <Alert type="success" message="This is your account" showIcon />
+          }
 
           <br />
 
