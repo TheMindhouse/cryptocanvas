@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import { cutAddress } from '../../helpers/strings'
 import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
 import { Badge, Table } from 'antd'
 import './styles/TransactionsList.css'
@@ -32,6 +31,8 @@ const columns = [
     title: 'Timestamp',
     dataIndex: 'timestamp',
     key: 'timestamp',
+    defaultSortOrder: 'descend',
+    sorter: (a: Transaction, b: Transaction) => a.timestamp - b.timestamp,
     render: (date: Date) => date.toISOString(),
   },
   {
