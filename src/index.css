@@ -27,9 +27,27 @@ body {
     content: "\01F680";
 }
 
+.color-inherit {
+    color: inherit !important;
+}
+
+.hover-underline:hover {
+    text-decoration: underline !important;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.font-monospace {
+    font-family: monospace;
+}
+
 /*Ant overrides */
 .ant-modal,
-.ant-alert {
+.ant-alert,
+.ant-table-body,
+.ant-badge-status {
     font-family: 'Montserrat', sans-serif;
 }
 

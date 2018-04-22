@@ -25,7 +25,7 @@ export const TRANSACTION_TYPE = {
 }
 
 export class Transaction {
-  constructor ({ hash, type, name, status }) {
+  constructor ({ hash, type, name, status, timestamp }) {
     if (TRANSACTION_TYPE[type] === 'undefined') {
       throw new Error('Incorrect transaction type')
     }
@@ -34,5 +34,6 @@ export class Transaction {
     this.status = status || TRANSACTION_STATUS.pending
     this.type = TRANSACTION_TYPE[type]
     this.name = name
+    this.timestamp = new Date(timestamp)
   }
 }

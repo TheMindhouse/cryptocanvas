@@ -1,0 +1,16 @@
+.TransactionsList__Badge .ant-badge-status-text {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.TransactionsList__Badge--pending .ant-badge-status-text {
+    color: #1890ff;
+}
+
+.TransactionsList__Badge--completed .ant-badge-status-text {
+    color: #52c41a;
+}
+
+.TransactionsList__Badge--failed .ant-badge-status-text {
+    color: #f5222d;
+}

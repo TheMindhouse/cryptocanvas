@@ -1,5 +1,6 @@
 import React from 'react'
 import getComponentDisplayName from '../helpers/getComponentDisplayName'
+import type { WithModal } from '../types/WithModal'
 
 const withModal = (WrappedComponent) => {
   class withModal extends React.Component {
@@ -16,7 +17,7 @@ const withModal = (WrappedComponent) => {
         ...passThroughProps
       } = this.props
 
-      const modal = {
+      const modal: WithModal = {
         show: this.show,
         close: this.close,
         isVisible: this.state.isVisible,

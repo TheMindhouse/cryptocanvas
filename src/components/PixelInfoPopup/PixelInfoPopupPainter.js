@@ -53,9 +53,11 @@ class PixelInfoPopupPainter extends React.PureComponent<Props, State> {
     }
     return (
       <div>
-        <Link to={this.getAccountUrl()}>
-          <h3>{cutAddress(this.state.authorAddress)}</h3>
-        </Link>
+        <h3>
+          <Link to={this.getAccountUrl()} className="hover-underline color-inherit">
+            {cutAddress(this.state.authorAddress)}
+          </Link>
+        </h3>
         {
           this.state.authorAddress === this.props.account &&
           <Alert message="It's your pixel! 🚀" type="success" />

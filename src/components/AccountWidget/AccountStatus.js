@@ -55,20 +55,17 @@ class AccountStatus extends React.PureComponent {
           this.props.account &&
           <div>
             <StatusConnected account={this.props.account} />
-            {
-              this.props.txStore.transactions.length > 0 &&
-              <div>
-                <TransactionsModal
-                  modal={this.props.modal}
-                  transactions={this.props.txStore.transactions}
-                  onClear={this.onClearTransactions}
-                />
-                <TransactionsSummary
-                  transactions={this.props.txStore.transactions}
-                  onShowAll={this.props.modal.show}
-                />
-              </div>
-            }
+            <div>
+              <TransactionsModal
+                modal={this.props.modal}
+                transactions={this.props.txStore.transactions}
+                onClear={this.onClearTransactions}
+              />
+              <TransactionsSummary
+                transactions={this.props.txStore.transactions}
+                onShowAll={this.props.modal.show}
+              />
+            </div>
           </div>
         }
 

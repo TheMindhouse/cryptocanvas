@@ -39,6 +39,7 @@ export class ContractModel {
             canvasId: canvasId,
             colorId: colorId,
             pixelIndex: pixelIndex,
+            timestamp: new Date(),
           }
           resolve(new TransactionWithPixel(tx))
         }
@@ -57,7 +58,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.makeBid,
-            name: `Bid on Canvas #${canvasId}`
+            name: `Bid on Canvas #${canvasId}`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -76,7 +78,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.createCanvas,
-            name: 'Create Canvas'
+            name: 'Create Canvas',
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -95,7 +98,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.buyOffer,
-            name: `Buy Offer on Canvas #${canvasId}`
+            name: `Buy Offer on Canvas #${canvasId}`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -114,7 +118,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.cancelBuyOffer,
-            name: `Cancel Offer on Canvas #${canvasId}`
+            name: `Cancel Offer on Canvas #${canvasId}`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -134,7 +139,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.acceptBuyOffer,
-            name: `Accept Buy Offer on Canvas #${canvasId}`
+            name: `Accept Buy Offer on Canvas #${canvasId}`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -153,7 +159,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.offerForSale,
-            name: `Offer Canvas #${canvasId} for sale`
+            name: `Offer Canvas #${canvasId} for sale`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -172,7 +179,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.offerForSaleToAddress,
-            name: `Offer Canvas #${canvasId} for sale to address ${receiverAddress}`
+            name: `Offer Canvas #${canvasId} for sale to address ${receiverAddress}`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -191,7 +199,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.cancelSellOffer,
-            name: `Cancel Sell Offer for Canvas #${canvasId}`
+            name: `Cancel Sell Offer for Canvas #${canvasId}`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -210,7 +219,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.acceptSellOffer,
-            name: `Buy Canvas #${canvasId}`
+            name: `Buy Canvas #${canvasId}`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -229,7 +239,8 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.addRewardToBalance,
-            name: `Add Reward for Canvas #${canvasId} to Account Balance`
+            name: `Add Reward for Canvas #${canvasId} to Account Balance`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }
@@ -249,6 +260,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.withdrawBalance,
             name: `Withdraw Account Balance`,
+            timestamp: new Date(),
           }
           resolve(new Transaction(tx))
         }

@@ -4,6 +4,11 @@ import { Badge, Tooltip } from 'antd'
 import './styles/TransactionsSummary.css'
 
 const TransactionsSummary = ({ transactions, onShowAll }) => {
+  if (!transactions.length) {
+    return (
+      <small>No transaction history</small>
+    )
+  }
   const txArray = transactions.reduce((acc, tx) => {
     switch (tx.status) {
       case TRANSACTION_STATUS.pending:
