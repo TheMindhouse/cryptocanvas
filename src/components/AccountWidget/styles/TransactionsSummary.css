@@ -10,10 +10,6 @@
     background: #fafafa;
 }
 
-.TransactionsSummary__Badge {
-    cursor: default;
-}
-
 .TransactionsSummary__Badge .ant-badge-status-text {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;

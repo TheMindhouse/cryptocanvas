@@ -24,7 +24,7 @@ const TransactionsSummary = ({ transactions, onShowAll }) => {
   }, [ 0, 0, 0 ])
 
   return (
-    <div className="TransactionsSummary">
+    <a onClick={onShowAll} className="TransactionsSummary">
       <Tooltip title="Pending transactions">
         <div className="TransactionsSummary__Badge">
           <Badge status="processing" text={txArray[ 0 ]} />
@@ -40,8 +40,8 @@ const TransactionsSummary = ({ transactions, onShowAll }) => {
           <Badge status="error" text={txArray[ 2 ]} />
         </div>
       </Tooltip>
-      <a onClick={onShowAll}>Show All</a>
-    </div>
+      <span>Show All</span>
+    </a>
   )
 }
 

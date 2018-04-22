@@ -1,0 +1,7 @@
+.TransactionsModal .ant-modal-body {
+    padding: 0;
+}
+
+.TransactionsModal .ant-pagination {
+    margin-right: 16px;
+}
