@@ -8,6 +8,7 @@ import { KonvaStage } from './KonvaStage'
 import type { PixelIndex } from '../../types/PixelIndex'
 import type { MouseCoords } from '../../types/MouseCoords'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
+import { Slider } from 'antd'
 
 type Props = {
   canvasId: number,
@@ -22,6 +23,9 @@ type State = {
   pixelPopup: ?PixelIndex,
   pixelHovered: ?PixelIndex,
   mousePosition: ?MouseCoords,
+  scale: number,
+  posX: number,
+  posY: number,
 }
 
 class CanvasStage extends React.Component<Props, State> {
@@ -29,6 +33,9 @@ class CanvasStage extends React.Component<Props, State> {
     pixelPopup: null,
     pixelHovered: null,
     mousePosition: null,
+    scale: 1,
+    posX: 0,
+    posY: 0,
   }
 
   onMouseLeave = () => this.setState({ pixelHovered: null, mousePosition: null })
@@ -59,6 +66,53 @@ class CanvasStage extends React.Component<Props, State> {
     }
   }
 
+  onMouseWheel = (event: any) => {
+    event.preventDefault()
+    const MAX_SCALE = 10
+    const zoomIntensity = 0.1
+    // const event.
+    const direction = event.deltaY > 0 ? -1 : 1
+    const zoom = Math.exp(direction * zoomIntensity)
+    const newScale = parseFloat(Number(this.state.scale * zoom).toFixed(1))
+
+    if (newScale < 1 || newScale > MAX_SCALE) {
+      return
+    }
+
+    const mouseX = event.nativeEvent.layerX
+    const mouseY = event.nativeEvent.layerY
+
+    const containerWidth = event.currentTarget.offsetWidth
+    const containerHeight = event.currentTarget.offsetHeight
+
+    const posX = this.state.posX - (mouseX / newScale) + (mouseX / this.state.scale)
+    const posY = this.state.posY - (mouseY / newScale) + (mouseY / this.state.scale)
+
+    // console.log('mouseX, mouseY: ', mouseX, mouseY, posX, posY)
+    // console.log('mouseX / this.state.scale * zoom', mouseX / this.state.scale * zoom)
+    // console.log('mouseX / this.state.scale', mouseX / this.state.scale)
+
+    const maxPosX = containerWidth - (containerWidth / newScale)
+    const maxPosY = containerHeight - (containerHeight / newScale)
+
+    const finalPosX = posX < 0
+      ? 0
+      : posX > maxPosX
+        ? maxPosX
+        : posX
+
+    const finalPosY = posY < 0
+      ? 0
+      : posY > maxPosY
+        ? maxPosY
+        : posY
+
+    console.log(newScale)
+
+    // this.setState({ scale: finalScale, posX: finalPosX, posY: finalPosY })
+    this.setState({ scale: newScale, posX: finalPosX, posY: finalPosY })
+  }
+
   /**
    *
    * @param x - X coordinate of mouse cursor
@@ -66,8 +120,8 @@ class CanvasStage extends React.Component<Props, State> {
    * @return {{x: number, y: number}} - index coordinates of pixel
    */
   getPixelIndexByMouseCoordinates = ({ x, y }: MouseCoords): PixelIndex => {
-    const indexX: number = Math.floor(x / this.props.pixelSize)
-    const indexY: number = Math.floor(y / this.props.pixelSize)
+    const indexX: number = Math.floor((x + this.state.posX) / (this.props.pixelSize * this.state.scale))
+    const indexY: number = Math.floor((y + this.state.posY) / (this.props.pixelSize * this.state.scale))
     const id: number = indexX + indexY * this.getGridColumns()
     return ({
       id,
@@ -83,53 +137,72 @@ class CanvasStage extends React.Component<Props, State> {
     const canvasSize = gridColumns * this.props.pixelSize
 
     return (
-      <div className="CanvasStage" onMouseLeave={this.onMouseLeave}>
-        {
-          this.state.pixelPopup &&
-          <PixelInfoPopup
-            pixelPopup={this.state.pixelPopup}
-            colorId={this.props.pixels[ this.state.pixelPopup.id ]}
-            pixelSize={this.props.pixelSize}
-            canvasId={this.props.canvasId}
-            onCopyColor={this.props.changeActiveColor}
-            onClose={this.closePixelPopup}
-          />
-        }
+      <div>
+        <Slider value={this.state.scale} min={1} max={5} step={0.1}
+                onChange={(scale) => this.setState({ scale })} />
+        <Slider value={this.state.posX} min={0} max={500} step={1}
+                onChange={(posX) => this.setState({ posX })} />
+        <Slider value={this.state.posY} min={0} max={500} step={1}
+                onChange={(posY) => this.setState({ posY })} />
 
-        {
-          this.state.pixelHovered &&
-          <PixelHoverHighlight
-            pixelHovered={this.state.pixelHovered}
-            pixelSize={this.props.pixelSize}
-            showDetailsIcon={!this.props.activeColorId}
-          />
-        }
+        <div className="CanvasStage" onWheel={this.onMouseWheel} onMouseLeave={this.onMouseLeave}>
+          <div>
+            {
+              this.state.pixelPopup &&
+              <PixelInfoPopup
+                pixelPopup={this.state.pixelPopup}
+                colorId={this.props.pixels[ this.state.pixelPopup.id ]}
+                pixelSize={this.props.pixelSize}
+                canvasId={this.props.canvasId}
+                onCopyColor={this.props.changeActiveColor}
+                onClose={this.closePixelPopup}
+              />
+            }
 
-        <UserPaintedLoadingPixels
-          pixelSize={this.props.pixelSize}
-          canvasId={this.props.canvasId}
-        />
+            <div style={{ overflow: 'hidden' }}>
+              <div style={{
+                transform: `scale(${this.state.scale}, ${this.state.scale}) translate(${-this.state.posX}px, ${-this.state.posY}px)`,
+                transformOrigin: `0 0`,
+                imageRendering: 'pixelated'
+              }}>
+                {
+                  this.state.pixelHovered &&
+                  <PixelHoverHighlight
+                    pixelHovered={this.state.pixelHovered}
+                    pixelSize={this.props.pixelSize}
+                    showDetailsIcon={!this.props.activeColorId}
+                  />
+                }
 
-        {
-          this.state.mousePosition &&
-          this.props.activeColorId > 0 &&
-          <PixelHoverColorPopup
-            mousePosition={this.state.mousePosition}
-            colorId={this.props.activeColorId}
-            pixelSize={this.props.pixelSize}
-          />
-        }
+                <UserPaintedLoadingPixels
+                  pixelSize={this.props.pixelSize}
+                  canvasId={this.props.canvasId}
+                />
 
-        <div
-          onMouseMove={this.onPixelHover}
-          onClick={this.onPixelClick}
-        >
-          <KonvaStage
-            canvasSize={canvasSize}
-            pixels={this.props.pixels}
-            gridColumns={gridColumns}
-            pixelSize={this.props.pixelSize}
-          />
+                {
+                  this.state.mousePosition &&
+                  this.props.activeColorId > 0 &&
+                  <PixelHoverColorPopup
+                    mousePosition={this.state.mousePosition}
+                    colorId={this.props.activeColorId}
+                    pixelSize={this.props.pixelSize}
+                  />
+                }
+
+                <div
+                  onMouseMove={this.onPixelHover}
+                  onClick={this.onPixelClick}
+                >
+                  <KonvaStage
+                    canvasSize={canvasSize}
+                    pixels={this.props.pixels}
+                    gridColumns={gridColumns}
+                    pixelSize={this.props.pixelSize}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
