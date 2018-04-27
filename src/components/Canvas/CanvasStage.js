@@ -29,7 +29,7 @@ type State = {
 }
 
 const MAX_SCALE = 5
-const ZOOM_INTENSITY = 0.1
+const ZOOM_INTENSITY = 0.05
 
 class CanvasStage extends React.Component<Props, State> {
   state = {
