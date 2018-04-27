@@ -154,7 +154,7 @@ export class ContractModel {
 
   offerForSale (canvasId, price) {
     return new Promise((resolve, reject) => {
-      this.Contract.offerCanvasForSale(canvasId, price, CONFIG_GAS_50K, (error, txHash) => {
+      this.Contract.offerCanvasForSale(canvasId, price, CONFIG_GAS_100K, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Offer for sale failed')
