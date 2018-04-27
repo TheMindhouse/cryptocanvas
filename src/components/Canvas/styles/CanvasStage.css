@@ -3,3 +3,12 @@
     position: relative;
     cursor: pointer;
 }
+
+.CanvasStage__CameraWrapper {
+    overflow: hidden;
+}
+
+.CanvasStage__Camera {
+    transform-origin: 0 0;
+    image-rendering: pixelated;
+}

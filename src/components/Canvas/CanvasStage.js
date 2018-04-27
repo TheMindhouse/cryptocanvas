@@ -8,7 +8,6 @@ import { KonvaStage } from './KonvaStage'
 import type { PixelIndex } from '../../types/PixelIndex'
 import type { MouseCoords } from '../../types/MouseCoords'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
-import { Slider } from 'antd'
 
 type Props = {
   canvasId: number,
@@ -88,10 +87,6 @@ class CanvasStage extends React.Component<Props, State> {
     const posX = this.state.posX - (mouseX / newScale) + (mouseX / this.state.scale)
     const posY = this.state.posY - (mouseY / newScale) + (mouseY / this.state.scale)
 
-    // console.log('mouseX, mouseY: ', mouseX, mouseY, posX, posY)
-    // console.log('mouseX / this.state.scale * zoom', mouseX / this.state.scale * zoom)
-    // console.log('mouseX / this.state.scale', mouseX / this.state.scale)
-
     const maxPosX = containerWidth - (containerWidth / newScale)
     const maxPosY = containerHeight - (containerHeight / newScale)
 
@@ -107,9 +102,6 @@ class CanvasStage extends React.Component<Props, State> {
         ? maxPosY
         : posY
 
-    console.log(newScale)
-
-    // this.setState({ scale: finalScale, posX: finalPosX, posY: finalPosY })
     this.setState({ scale: newScale, posX: finalPosX, posY: finalPosY })
   }
 
@@ -138,13 +130,6 @@ class CanvasStage extends React.Component<Props, State> {
 
     return (
       <div>
-        <Slider value={this.state.scale} min={1} max={5} step={0.1}
-                onChange={(scale) => this.setState({ scale })} />
-        <Slider value={this.state.posX} min={0} max={500} step={1}
-                onChange={(posX) => this.setState({ posX })} />
-        <Slider value={this.state.posY} min={0} max={500} step={1}
-                onChange={(posY) => this.setState({ posY })} />
-
         <div className="CanvasStage" onWheel={this.onMouseWheel} onMouseLeave={this.onMouseLeave}>
           <div>
             {
@@ -161,12 +146,9 @@ class CanvasStage extends React.Component<Props, State> {
               />
             }
 
-            <div style={{ overflow: 'hidden' }}>
-              <div style={{
-                transform: `scale(${this.state.scale}, ${this.state.scale}) translate(${-this.state.posX}px, ${-this.state.posY}px)`,
-                transformOrigin: `0 0`,
-                imageRendering: 'pixelated'
-              }}>
+            <div className="CanvasStage__CameraWrapper">
+              <div className="CanvasStage__Camera"
+                   style={{ transform: `scale(${this.state.scale}, ${this.state.scale}) translate(${-this.state.posX}px, ${-this.state.posY}px)` }}>
                 {
                   this.state.pixelHovered &&
                   <PixelHoverHighlight
