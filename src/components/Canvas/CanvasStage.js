@@ -28,6 +28,9 @@ type State = {
   posY: number,
 }
 
+const MAX_SCALE = 5
+const ZOOM_INTENSITY = 0.1
+
 class CanvasStage extends React.Component<Props, State> {
   state = {
     pixelPopup: null,
@@ -68,11 +71,8 @@ class CanvasStage extends React.Component<Props, State> {
 
   onMouseWheel = (event: any) => {
     event.preventDefault()
-    const MAX_SCALE = 10
-    const zoomIntensity = 0.1
-    // const event.
     const direction = event.deltaY > 0 ? -1 : 1
-    const zoom = Math.exp(direction * zoomIntensity)
+    const zoom = Math.exp(direction * ZOOM_INTENSITY)
     const newScale = parseFloat(Number(this.state.scale * zoom).toFixed(1))
 
     if (newScale < 1 || newScale > MAX_SCALE) {
@@ -120,8 +120,8 @@ class CanvasStage extends React.Component<Props, State> {
    * @return {{x: number, y: number}} - index coordinates of pixel
    */
   getPixelIndexByMouseCoordinates = ({ x, y }: MouseCoords): PixelIndex => {
-    const indexX: number = Math.floor((x + this.state.posX) / (this.props.pixelSize * this.state.scale))
-    const indexY: number = Math.floor((y + this.state.posY) / (this.props.pixelSize * this.state.scale))
+    const indexX: number = Math.floor((x + (this.state.posX * this.state.scale)) / (this.props.pixelSize * this.state.scale))
+    const indexY: number = Math.floor((y + (this.state.posY * this.state.scale)) / (this.props.pixelSize * this.state.scale))
     const id: number = indexX + indexY * this.getGridColumns()
     return ({
       id,
