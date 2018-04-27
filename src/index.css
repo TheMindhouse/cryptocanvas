@@ -52,6 +52,7 @@ body {
 }
 
 .ant-modal .ant-modal-title,
-.ant-confirm-body .ant-confirm-title {
+.ant-confirm-body .ant-confirm-title,
+.ant-notification-notice-message {
     font-weight: bold;
 }

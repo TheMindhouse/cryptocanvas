@@ -3,6 +3,7 @@ import { LocalStorageManager } from '../localStorage'
 import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../models/Transaction'
 import withWeb3 from '../hoc/withWeb3'
 import { notification } from 'antd'
+import { EtherscanLink } from '../components/Small/EtherscanLink'
 
 export const TransactionsContext = React.createContext()
 
@@ -58,17 +59,15 @@ class TransactionsProvider extends React.Component {
   }
 
   showNotification = (tx: Transaction) => {
+    const notificationConfig = {
+      description: <p>{tx.name} (<EtherscanLink hash={tx.hash} />)</p>,
+      duration: 5,
+    }
     switch (tx.status) {
       case TRANSACTION_STATUS.completed:
-        return notification.success({
-          message: 'Transaction completed',
-          description: tx.name,
-        })
+        return notification.success({...notificationConfig, message: 'Transaction completed'})
       case TRANSACTION_STATUS.failed:
-        return notification.error({
-          message: 'Transaction failed',
-          description: tx.name,
-        })
+        return notification.success({...notificationConfig, message: 'Transaction failed'})
     }
   }
 
