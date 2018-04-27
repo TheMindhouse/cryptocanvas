@@ -8,14 +8,17 @@ type Props = {
   mousePosition: MouseCoords,
   pixelSize: number,
   colorId: number,
+  scale: number,
+  offsetX: number,
+  offsetY: number,
 }
 
 class PixelHoverColorPopup extends React.PureComponent<Props> {
   static defaultProps = {}
 
   render() {
-    const x = this.props.mousePosition.x - this.props.pixelSize / 2
-    const y = this.props.mousePosition.y - this.props.pixelSize / 2
+    const x = (this.props.mousePosition.x / this.props.scale) - this.props.pixelSize / 2 + this.props.offsetX
+    const y = (this.props.mousePosition.y / this.props.scale) - this.props.pixelSize / 2 + this.props.offsetY
     return (
       <div className="PixelHoverColorPopup" style={{
         transform: `translate(${x}px, ${y}px`,

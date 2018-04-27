@@ -186,6 +186,9 @@ class CanvasStage extends React.Component<Props, State> {
                   this.props.activeColorId > 0 &&
                   <PixelHoverColorPopup
                     mousePosition={this.state.mousePosition}
+                    offsetX={this.state.posX}
+                    offsetY={this.state.posY}
+                    scale={this.state.scale}
                     colorId={this.props.activeColorId}
                     pixelSize={this.props.pixelSize}
                   />
