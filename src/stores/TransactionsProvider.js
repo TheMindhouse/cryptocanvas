@@ -1,7 +1,8 @@
 import React from 'react'
 import { LocalStorageManager } from '../localStorage'
-import { TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../models/Transaction'
+import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../models/Transaction'
 import withWeb3 from '../hoc/withWeb3'
+import { notification } from 'antd'
 
 export const TransactionsContext = React.createContext()
 
@@ -42,7 +43,10 @@ class TransactionsProvider extends React.Component {
         this.props.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
           if (!error && result) {
             const status = TRANSACTION_RECEIPT_STATUS[ Number(result.status) ]
-            LocalStorageManager.transactions.updateTransactions({ ...tx, status })
+            const newTx = { ...tx, status }
+            LocalStorageManager.transactions.updateTransactions(newTx)
+
+            this.showNotification(newTx)
           }
         })
       })
@@ -51,6 +55,21 @@ class TransactionsProvider extends React.Component {
   onClearTransactions = () => {
     this.setState({ transactions: [] })
     LocalStorageManager.transactions.clearTransactions()
+  }
+
+  showNotification = (tx: Transaction) => {
+    switch (tx.status) {
+      case TRANSACTION_STATUS.completed:
+        return notification.success({
+          message: 'Transaction completed',
+          description: tx.name,
+        })
+      case TRANSACTION_STATUS.failed:
+        return notification.error({
+          message: 'Transaction failed',
+          description: tx.name,
+        })
+    }
   }
 
   render () {
