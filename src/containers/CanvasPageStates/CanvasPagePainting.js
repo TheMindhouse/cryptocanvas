@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Modal } from 'antd'
+import { Row, Modal, message } from 'antd'
 
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
@@ -80,12 +80,7 @@ class CanvasPagePainting extends React.Component {
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, pixelIndex, colorId })
           .then((tx) => {
             LocalStorageManager.transactions.updateTransactions(tx)
-            // this.updatePixel({ index, color })
-            Modal.success({
-              title: 'Paint Pixel Transaction sent',
-              content: 'Feel free to paint more! If the pixels you painted remain the same until the canvas is completed, ' +
-              'you will be rewarded approximate amount of money from the initial bid.',
-            })
+            message.success('Paint Pixel Transaction sent');
           })
           .catch((error) => {
             Modal.error({
