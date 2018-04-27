@@ -151,8 +151,10 @@ class CanvasStage extends React.Component<Props, State> {
               this.state.pixelPopup &&
               <PixelInfoPopup
                 pixelPopup={this.state.pixelPopup}
+                offsetX={this.state.posX * this.state.scale}
+                offsetY={this.state.posY * this.state.scale}
                 colorId={this.props.pixels[ this.state.pixelPopup.id ]}
-                pixelSize={this.props.pixelSize}
+                pixelSize={this.props.pixelSize * this.state.scale}
                 canvasId={this.props.canvasId}
                 onCopyColor={this.props.changeActiveColor}
                 onClose={this.closePixelPopup}

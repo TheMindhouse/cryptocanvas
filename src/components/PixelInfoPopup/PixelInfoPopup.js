@@ -8,6 +8,8 @@ import { ClickableColorPreview } from '../ColorPreview/ClickableColorPreview'
 
 type Props = {
   pixelPopup: PixelIndex,
+  offsetX: number,
+  offsetY: number,
   colorId: number,
   canvasId: number,
   pixelSize: number,
@@ -27,28 +29,38 @@ class PixelInfoPopup extends React.PureComponent<Props> {
   }
 
   render () {
-    if (!this.props.pixelPopup) {
+    const {
+      pixelPopup,
+      pixelSize,
+      offsetX,
+      offsetY,
+      onClose,
+      colorId,
+      canvasId,
+    } = this.props
+
+    if (!pixelPopup) {
       return null
     }
 
-    const left = (this.props.pixelPopup.x * this.props.pixelSize) - (POPUP_WIDTH / 2) + (this.props.pixelSize / 2)
-    const top = (this.props.pixelPopup.y * this.props.pixelSize)
+    const left = (pixelPopup.x * pixelSize) - (POPUP_WIDTH / 2) + (pixelSize / 2) - offsetX
+    const top = (pixelPopup.y * pixelSize) - offsetY
 
     return (
       <div className="PixelInfoPopup" style={{ left, top }}>
         <Card className="PixelInfoPopup__card"
-              title={'Pixel #' + this.props.pixelPopup.id}
-              extra={<a onClick={this.props.onClose}><Icon type="close" style={{ fontSize: 16, color: '#222' }} /></a>}
+              title={'Pixel #' + pixelPopup.id}
+              extra={<a onClick={onClose}><Icon type="close" style={{ fontSize: 16, color: '#222' }} /></a>}
               style={{ width: POPUP_WIDTH }}>
           <ClickableColorPreview
-            colorId={this.props.colorId}
+            colorId={colorId}
             onClick={this.onCopyColor}
           />
           <br />
           <h4>Painter:</h4>
           {
-            this.props.colorId > 0
-            ? <PixelInfoPopupPainter pixelId={this.props.pixelPopup.id} canvasId={this.props.canvasId}/>
+            colorId > 0
+            ? <PixelInfoPopupPainter pixelId={pixelPopup.id} canvasId={canvasId}/>
             : <span>No painter yet, be the first!</span>
           }
         </Card>
