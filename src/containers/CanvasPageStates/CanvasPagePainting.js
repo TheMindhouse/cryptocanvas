@@ -134,7 +134,7 @@ class CanvasPagePainting extends React.Component {
 
   render () {
     return (
-      <Row className="CanvasPage" type="flex" justify="space-around" align="top">
+      <Row className="CanvasPage" type="flex" justify="space-between" align="top">
 
         {this.state.isLoading && <CanvasStagePlaceholder />}
 

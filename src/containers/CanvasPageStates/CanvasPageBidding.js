@@ -56,7 +56,7 @@ class CanvasPageBidding extends Component {
   render () {
     return (
       <div>
-        <Row className="CanvasPage" type="flex" justify="space-around" align="top">
+        <Row className="CanvasPage" type="flex" justify="space-between" align="top">
 
           {this.state.isLoading && <p>Canvas loading...</p>}
 

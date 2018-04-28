@@ -5,7 +5,7 @@ import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlacehold
 
 const CanvasPageLoading = (props) => {
   return (
-    <Row className="CanvasPage" type="flex" justify="space-around" align="top">
+    <Row className="CanvasPage" type="flex" justify="space-between" align="top">
       <CanvasStagePlaceholder />
       <CanvasSidebarLoading canvasId={props.canvasId} />
     </Row>

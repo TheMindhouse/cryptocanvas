@@ -1,8 +1,12 @@
 import React from 'react'
+import { Row, Spin } from 'antd'
 
 const CanvasStagePlaceholder = () => {
   return (
-    <div className="CanvasStage" style={{ background: '#ddd', width: '640px', height: '640px' }} />
+    <Row type="flex" align="middle" justify="center" className="CanvasStage"
+         style={{ background: '#ddd', width: '640px', height: '640px' }} >
+      <Spin size="large" />
+    </Row>
   )
 }
 
