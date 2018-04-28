@@ -6,6 +6,7 @@ import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
 import HighestBidWatcher from '../../hoc/renderProps/HighestBidWatcher'
 import { LocalStorageManager } from '../../localStorage'
+import { TransactionsHistory } from '../../components/CanvasHistory/TransactionsHistory'
 
 class CanvasPageBidding extends Component {
   constructor (props) {
@@ -54,22 +55,27 @@ class CanvasPageBidding extends Component {
 
   render () {
     return (
-      <Row className="CanvasPage" type="flex" justify="space-around" align="top">
+      <div>
+        <Row className="CanvasPage" type="flex" justify="space-around" align="top">
 
-        {this.state.isLoading && <p>Canvas loading...</p>}
+          {this.state.isLoading && <p>Canvas loading...</p>}
 
-        <CanvasStage
-          canvasId={this.props.canvasId}
-          pixelSize={this.props.pixelSize}
-          pixels={this.state.pixels}
-        />
+          <CanvasStage
+            canvasId={this.props.canvasId}
+            pixelSize={this.props.pixelSize}
+            pixels={this.state.pixels}
+          />
 
-        <HighestBidWatcher
-          canvasId={this.props.canvasId}
-          onBiddingFinished={this.props.onBiddingFinished}
-          render={(state) => <CanvasSidebarBidding {...state} canvasId={this.props.canvasId} /> }
-        />
-      </Row>
+          <HighestBidWatcher
+            canvasId={this.props.canvasId}
+            onBiddingFinished={this.props.onBiddingFinished}
+            render={(state) => <CanvasSidebarBidding {...state} canvasId={this.props.canvasId} />}
+          />
+        </Row>
+        <Row className="container">
+          <TransactionsHistory/>
+        </Row>
+      </div>
     )
   }
 }

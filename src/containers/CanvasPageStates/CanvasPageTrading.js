@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Row } from 'antd'
+import { Col, Row } from 'antd'
 import withWeb3 from '../../hoc/withWeb3'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTrading'
 import { LocalStorageManager } from '../../localStorage'
+import { TransactionsHistory } from '../../components/CanvasHistory/TransactionsHistory'
 
 class CanvasPageTrading extends Component {
   state = {
@@ -48,25 +49,30 @@ class CanvasPageTrading extends Component {
 
   render () {
     return (
-      <Row className="CanvasPage" type="flex" justify="space-around" align="top">
+      <div>
+        <Row className="CanvasPage" type="flex" justify="space-around" align="top">
 
-        {this.state.isLoading && <p>Canvas loading...</p>}
+          {this.state.isLoading && <p>Canvas loading...</p>}
 
-        <CanvasStage
-          canvasId={this.props.canvasId}
-          pixelSize={this.props.pixelSize}
-          pixels={this.state.pixels}
-        />
+          <CanvasStage
+            canvasId={this.props.canvasId}
+            pixelSize={this.props.pixelSize}
+            pixels={this.state.pixels}
+          />
 
-        <div>
           <CanvasSidebarTrading
             canvasId={this.props.canvasId}
             canvasOwner={this.props.canvasOwner}
             isUserCanvasOwner={this.props.account === this.props.canvasOwner}
             onCanvasSold={this.props.onCanvasSold}
           />
-        </div>
-      </Row>
+        </Row>
+        <Row className="container">
+          <Col span={20} offset={2}>
+            <TransactionsHistory canvasId={this.props.canvasId} />
+          </Col>
+        </Row>
+      </div>
     )
   }
 }
