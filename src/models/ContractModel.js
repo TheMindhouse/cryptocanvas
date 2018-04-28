@@ -15,9 +15,9 @@ const DEFAULT_CONFIG = {
   gasPrice: GAS_PRICE
 }
 
-const CONFIG_GAS_50K = { ... DEFAULT_CONFIG, gas: 50000 }
-const CONFIG_GAS_100K = { ... DEFAULT_CONFIG, gas: 100000 }
-const CONFIG_GAS_150K = { ... DEFAULT_CONFIG, gas: 150000 }
+const CONFIG_GAS_50K = { ...DEFAULT_CONFIG, gas: 150000 }
+const CONFIG_GAS_100K = { ...DEFAULT_CONFIG, gas: 150000 }
+const CONFIG_GAS_150K = { ...DEFAULT_CONFIG, gas: 150000 }
 
 export class ContractModel {
   constructor (Contract) {
@@ -277,7 +277,7 @@ export class ContractModel {
    */
 
   getCanvasIdsByState (canvasState) {
-    const state = Object.entries(BLOCKCHAIN_CANVAS_STATES).findIndex(state => state[1] === canvasState)
+    const state = Object.entries(BLOCKCHAIN_CANVAS_STATES).findIndex(state => state[ 1 ] === canvasState)
     if (state < 0) {
       return Promise.reject('Incorrect state')
     }

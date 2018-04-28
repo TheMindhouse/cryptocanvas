@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, message } from 'antd'
+import { Row } from 'antd'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBidding'
 import withEvents from '../../hoc/withEvents'

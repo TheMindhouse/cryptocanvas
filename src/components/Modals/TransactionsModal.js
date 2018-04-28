@@ -23,7 +23,7 @@ class TransactionsModal extends React.PureComponent<Props> {
         className="TransactionsModal"
         footer={[
           <Button type="danger" onClick={this.props.onClear} key="0">Clear All</Button>,
-          <Button key="submit" type="primary" onClick={this.props.modal.close} key="1">Close Modal</Button>,
+          <Button type="primary" onClick={this.props.modal.close} key="1">Close Modal</Button>,
         ]}
       >
         <TransactionsList transactions={this.props.transactions}/>

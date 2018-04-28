@@ -3,7 +3,6 @@ import * as React from 'react'
 import { Modal } from 'antd'
 import { URLHelper } from '../../helpers/URLhelper'
 import { Link } from 'react-router-dom'
-import { HashLink } from 'react-router-hash-link'
 
 type Props = {}
 

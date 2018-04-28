@@ -64,10 +64,11 @@ class TransactionsProvider extends React.Component {
       duration: 5,
     }
     switch (tx.status) {
-      case TRANSACTION_STATUS.completed:
-        return notification.success({...notificationConfig, message: 'Transaction completed'})
       case TRANSACTION_STATUS.failed:
         return notification.success({...notificationConfig, message: 'Transaction failed'})
+      case TRANSACTION_STATUS.completed:
+      default:
+        return notification.success({...notificationConfig, message: 'Transaction completed'})
     }
   }
 

@@ -74,10 +74,6 @@ const updateCanvasCache = ({ canvasId, pixelsMap, withExpirationDate = true }: {
 const getExpirationDate = () => {
   return moment(new Date()).add(EXPIRATION_TIME_MS, 'ms').toDate()
 }
-/**
- * Check if given date is not older than specified time
- */
-const isExpired = (expirationDate: Date): boolean => new Date(expirationDate) < new Date()
 
 export const canvasPixels = {
   getCanvasCache,

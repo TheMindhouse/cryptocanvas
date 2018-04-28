@@ -1,6 +1,6 @@
 export class PainterReward {
   constructor (props) {
-    this._paintedPixels = parseInt(props[0])
+    this._paintedPixels = parseInt(props[0], 10)
     this._rewardValue = parseFloat(props[1])
     this._isWithdrawn = props[2]
   }

@@ -5,6 +5,10 @@ import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
 import { ContractModel } from '../../models/ContractModel'
 
+type State = {
+  highestBid?: Bid
+}
+
 type Props = {
   onBiddingFinished: (number) => void,
   canvasId: number,
@@ -15,10 +19,6 @@ type Props = {
   Contract: ContractModel,
   eventsSupported: boolean,
   getBlockNumber: () => Promise<number>,
-}
-
-type State = {
-  highestBid?: Bid
 }
 
 class HighestBidWatcher extends React.Component<Props, State> {
