@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Modal } from 'antd'
+import { Divider, message } from 'antd'
 import CurrentOwner from './CurrentOwner'
 import MarketStatus from './MarketStatus'
 import withWeb3 from '../../hoc/withWeb3'
@@ -75,11 +75,7 @@ class CanvasSidebarTrading extends React.PureComponent {
     this.props.Contract.offerForSale(this.props.canvasId, offerInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Offer for Sale Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
-
+        message.success('Offer Canvas for Sale Transaction sent')
       })
   }
 
@@ -89,11 +85,7 @@ class CanvasSidebarTrading extends React.PureComponent {
     this.props.Contract.offerForSaleToAddress(this.props.canvasId, offerInWei, receiverAddress)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Offer for Sale to Address Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
-
+        message.success('Offer Canvas for Sale to Address Transaction sent')
       })
   }
 
@@ -101,11 +93,7 @@ class CanvasSidebarTrading extends React.PureComponent {
     this.props.Contract.cancelSellOffer(this.props.canvasId)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Remove Sell Offer Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
-
+        message.success('Cancel Sell Offer Transaction sent')
       })
   }
 
@@ -115,10 +103,7 @@ class CanvasSidebarTrading extends React.PureComponent {
     this.props.Contract.makeBuyOffer(this.props.canvasId, offerInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Buy Offer Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
+        message.success('Make Buy Offer Transaction sent')
 
       })
   }
@@ -127,11 +112,7 @@ class CanvasSidebarTrading extends React.PureComponent {
     this.props.Contract.cancelBuyOffer(this.props.canvasId)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Cancel Buy Offer Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
-
+        message.success('Cancel Buy Offer Transaction sent')
       })
   }
 
@@ -141,11 +122,7 @@ class CanvasSidebarTrading extends React.PureComponent {
     this.props.Contract.acceptBuyOffer(this.props.canvasId, priceInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Accept Buy Offer Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
-
+        message.success('Sell Canvas Transaction sent')
       })
   }
 
@@ -154,11 +131,7 @@ class CanvasSidebarTrading extends React.PureComponent {
     this.props.Contract.acceptSellOffer(this.props.canvasId, priceInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Buy Canvas Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
-
+        message.success('Buy Canvas Transaction sent')
       })
   }
 

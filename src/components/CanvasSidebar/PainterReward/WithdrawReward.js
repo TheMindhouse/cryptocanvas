@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import withWeb3 from '../../../hoc/withWeb3'
-import { Modal } from 'antd'
+import { message } from 'antd'
 import WithReward from './WithReward'
 import WithoutReward from './WithoutReward'
 import { LocalStorageManager } from '../../../localStorage/index'
@@ -51,10 +51,7 @@ class WithdrawReward extends React.Component<Props, State> {
     this.props.Contract.addRewardToAccountBalance(this.props.canvasId)
       .then(tx => {
         LocalStorageManager.transactions.updateTransactions(tx)
-        Modal.success({
-          title: 'Add Reward to Account Balance Transaction sent',
-          content: 'You should be able to withdraw the reward from your Account Balance after a few minutes, when the blockchain updates.',
-        })
+        message.success('Add Reward to Account Balance Transaction sent')
       })
   }
 

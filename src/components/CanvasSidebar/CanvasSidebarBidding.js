@@ -4,7 +4,7 @@ import { Divider } from 'antd'
 import HighestBid from './HighestBid'
 import SubmitBid from './SubmitBid'
 import BiddingTimeLeft from './BiddingTimeLeft'
-import { Modal } from 'antd/lib/index'
+import { message } from 'antd/lib/index'
 import withWeb3 from '../../hoc/withWeb3'
 import { Bid } from '../../models/Bid'
 import { ContractModel } from '../../models/ContractModel'
@@ -27,10 +27,7 @@ const CanvasSidebarBidding = (props: Props) => {
     props.Contract.makeBid({ canvasId: props.canvasId, bidAmountInWei })
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
-        Modal.success({
-          title: 'Make a Bid Transaction sent',
-          content: 'It will be visible for others in a few minutes, after the blockchain updates.',
-        })
+        message.success('Make a Bid Transaction sent')
       })
   }
   

@@ -2,7 +2,7 @@
 import * as React from 'react'
 import withWeb3 from '../../hoc/withWeb3'
 import { ContractModel } from '../../models/ContractModel'
-import { Button, Spin, Modal } from 'antd'
+import { Button, Spin, Modal, message } from 'antd'
 import { LocalStorageManager } from '../../localStorage'
 
 type Props = {
@@ -47,10 +47,7 @@ class AccountBalance extends React.PureComponent<Props, State> {
     this.props.Contract.withdrawBalance()
       .then((tx) => {
         LocalStorageManager.transactions.updateTransactions(tx)
-        Modal.success({
-          title: 'Withdraw Account Balance Transaction sent',
-          content: 'It will be visible on your wallet after a few minutes, when the blockchain updates.',
-        })
+        message.success('Withdraw Account Balance Transaction sent')
       })
   }
 

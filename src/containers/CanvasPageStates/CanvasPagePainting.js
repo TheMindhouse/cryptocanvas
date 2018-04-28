@@ -80,7 +80,7 @@ class CanvasPagePainting extends React.Component {
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, pixelIndex, colorId })
           .then((tx) => {
             LocalStorageManager.transactions.updateTransactions(tx)
-            message.success('Paint Pixel Transaction sent');
+            message.success('Paint Pixel Transaction sent')
           })
           .catch((error) => {
             Modal.error({

@@ -8,6 +8,7 @@ import { CanvasHistoryTx } from '../../models/CanvasHistoryTx'
 import { TransactionsHistoryList } from './TransactionsHistoryList'
 import { isAddressNull } from '../../helpers/strings'
 import { Link } from 'react-router-dom'
+import { URLHelper } from '../../helpers/URLhelper'
 
 type TransactionsHistoryProps = {
   canvasId: number,
@@ -188,7 +189,7 @@ class TransactionsHistory extends React.PureComponent<TransactionsHistoryProps, 
         {
           this.props.eventsSupported
             ? <TransactionsHistoryList transactions={this.state.transactionsHistory} />
-            : <p>Transaction History available only with MetaMask installed. See <Link to="/help">Installing MetaMask</Link></p>
+            : <p>Transaction History available only with MetaMask installed. See <Link to={URLHelper.help.installingMetamask}>Installing MetaMask</Link></p>
         }
 
       </div>
