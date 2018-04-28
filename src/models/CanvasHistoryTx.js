@@ -5,6 +5,8 @@ type Props = {
   toAddress?: string,
   value: number,
   txHash: string,
+  blockNumber: number,
+  logIndex: number,
 }
 
 export class CanvasHistoryTx {
@@ -13,6 +15,8 @@ export class CanvasHistoryTx {
   _toAddress: ?string
   _value: number
   _txHash: string
+  _blockNumber: number
+  _logIndex: number
 
   constructor (props: Props) {
     this._name = props.name
@@ -20,6 +24,8 @@ export class CanvasHistoryTx {
     this._toAddress = props.toAddress
     this._value = props.value
     this._txHash = props.txHash
+    this._blockNumber = props.blockNumber
+    this._logIndex = props.logIndex
   }
 
   get name (): string {
@@ -40,5 +46,13 @@ export class CanvasHistoryTx {
 
   get txHash (): string {
     return this._txHash
+  }
+
+  get blockNumber (): number {
+    return this._blockNumber
+  }
+
+  get logIndex (): number {
+    return this._logIndex
   }
 }

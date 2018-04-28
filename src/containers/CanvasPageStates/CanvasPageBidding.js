@@ -73,7 +73,7 @@ class CanvasPageBidding extends Component {
           />
         </Row>
         <Row className="container">
-          <TransactionsHistory/>
+          <TransactionsHistory canvasId={this.props.canvasId}/>
         </Row>
       </div>
     )
