@@ -1,10 +1,12 @@
 // @flow
 import React from 'react'
-import { Popover, Row, Tooltip } from 'antd'
+import { Popover, Row } from 'antd'
 
 import './styles/Header.css'
 import { Link, NavLink } from 'react-router-dom'
 import withWeb3 from '../../hoc/withWeb3'
+import { URLHelper } from '../../helpers/URLhelper'
+import { HashLink } from 'react-router-hash-link'
 
 type Props = {
   // from withWeb3
@@ -56,7 +58,8 @@ const Header = (props: Props) => {
           !props.account &&
           <li>
               <Popover
-                content={<span>Log into MetaMask to manage your account. See <Link to="/help#installing-metamask">Installing MetaMask</Link></span>}
+                content={<span>Log into MetaMask to manage your account.
+                  See <HashLink to={URLHelper.help.installingMetamask}>Installing MetaMask</HashLink></span>}
                 title=""
                 placement="bottom"
                 trigger="hover"

@@ -1,6 +1,8 @@
 import React from 'react'
-import { Anchor, Col, Icon, Row } from 'antd'
+import { Anchor, Col, Row } from 'antd'
 import './styles/About.css'
+import { URLHelper } from '../helpers/URLhelper'
+import { HashLink } from 'react-router-hash-link'
 
 const About = () => (
   <div>
@@ -135,11 +137,15 @@ const About = () => (
         <ul>
           <li>a desktop version of Chrome or Firefox</li>
 
-          <li>MetaMask - a browser extension allowing you to interact with the blockchain, see <strong>Installing
-            MetaMask</strong></li>
+          <li>
+            MetaMask - a browser extension allowing you to interact with the blockchain,
+            see <HashLink to={URLHelper.help.installingMetamask}>Installing MetaMask</HashLink>
+          </li>
 
-          <li>Ether - a digital cryptocurrency powering transactions like painting or trading, see <strong>Getting
-            Ether</strong></li>
+          <li>
+            Ether - a digital cryptocurrency powering transactions like painting or trading,
+            see <HashLink to={URLHelper.help.gettingEther}>Getting Ether</HashLink>
+          </li>
         </ul>
 
         <h2 id="how-much-does-it-cost"><b>How much does it cost?</b></h2>
