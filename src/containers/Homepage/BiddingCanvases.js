@@ -8,6 +8,7 @@ class BiddingCanvases extends React.PureComponent {
   render () {
     const { onBiddingFinished } = this.props
     return (
+      <div className="overflow-hidden">
         <Row gutter={100} type="flex">
           {this.props.canvasIds.map((canvasId, index) =>
             <Col span={6} key={index}>
@@ -17,12 +18,13 @@ class BiddingCanvases extends React.PureComponent {
                   <HighestBidWatcher
                     canvasId={canvasId}
                     onBiddingFinished={onBiddingFinished}
-                    render={(state) => <BiddingCanvasExtras {...state} /> } />
+                    render={(state) => <BiddingCanvasExtras {...state} />} />
                 }
               />
             </Col>
           )}
-      </Row>
+        </Row>
+      </div>
     )
   }
 }

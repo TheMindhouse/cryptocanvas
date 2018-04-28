@@ -5,13 +5,15 @@ import CanvasPreview from '../../components/Homepage/CanvasPreview'
 class FinishedCanvases extends React.PureComponent {
   render () {
     return (
-      <Row gutter={100} type="flex">
-        {this.props.canvasIds.map((canvasId, index) =>
-          <Col span={6} key={index}>
-            <CanvasPreview canvasId={canvasId} />
-          </Col>
-        )}
-      </Row>
+      <div className="overflow-hidden">
+        <Row gutter={100} type="flex">
+          {this.props.canvasIds.map((canvasId, index) =>
+            <Col span={6} key={index}>
+              <CanvasPreview canvasId={canvasId} />
+            </Col>
+          )}
+        </Row>
+      </div>
     )
   }
 }
