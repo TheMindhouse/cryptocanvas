@@ -9,6 +9,7 @@ import { TransactionsHistoryList } from './TransactionsHistoryList'
 import { isAddressNull } from '../../helpers/strings'
 import { Link } from 'react-router-dom'
 import { URLHelper } from '../../helpers/URLhelper'
+import { Spin } from 'antd'
 
 type TransactionsHistoryProps = {
   canvasId: number,
@@ -19,14 +20,14 @@ type TransactionsHistoryProps = {
 }
 
 type TransactionsHistoryState = {
-  transactionsHistory: Array<CanvasHistoryTx>,
+  transactionsHistory: ?Array<CanvasHistoryTx>,
 }
 
 class TransactionsHistory extends React.PureComponent<TransactionsHistoryProps, TransactionsHistoryState> {
   static defaultProps = {}
 
   state = {
-    transactionsHistory: [],
+    transactionsHistory: null,
   }
 
   eventArgs = [ { canvasId: this.props.canvasId }, { fromBlock: CONFIG.startBlock, toBlock: 'latest' } ]
@@ -187,9 +188,18 @@ class TransactionsHistory extends React.PureComponent<TransactionsHistoryProps, 
       <div>
         <h2><b>Canvas Transaction History</b></h2>
         {
-          this.props.eventsSupported
-            ? <TransactionsHistoryList transactions={this.state.transactionsHistory} />
-            : <p>Transaction History available only with MetaMask installed. See <Link to={URLHelper.help.installingMetamask}>Installing MetaMask</Link></p>
+          !this.props.eventsSupported &&
+          <p>
+            Transaction History available only with MetaMask installed.
+            See <Link to={URLHelper.help.installingMetamask}>Installing MetaMask</Link>
+          </p>
+        }
+        {
+          this.props.eventsSupported && (
+            this.state.transactionsHistory
+              ? <TransactionsHistoryList transactions={this.state.transactionsHistory} />
+              : <Spin style={{ display: 'block' }} />
+          )
         }
 
       </div>
