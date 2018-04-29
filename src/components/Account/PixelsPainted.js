@@ -88,8 +88,12 @@ class PixelsPainted extends React.Component<Props, State> {
         <br />
         {
           paintedCanvasIds.map(canvasId =>
-            <p key={canvasId}><Link to={URLHelper.canvas(canvasId)}>Canvas
-              #{canvasId}</Link> - <b>{pixelsGroupedByCanvasId[ canvasId ].length} pixels</b></p>)
+            <p key={canvasId}>
+              <Link to={URLHelper.canvas(canvasId)}>
+                Canvas #{canvasId}
+              </Link> - <b>{pixelsGroupedByCanvasId[ canvasId ].length} pixels</b>
+            </p>
+          )
         }
       </div>
     )

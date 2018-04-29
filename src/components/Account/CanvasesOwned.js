@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react'
 import { ContractModel } from '../../models/ContractModel'
-import { PixelPainted } from '../../models/PixelPainted'
 import withWeb3 from '../../hoc/withWeb3'
-import { CONFIG } from '../../config'
 import { CANVAS_STATES } from '../../models/CanvasState'
 import { CanvasInfo } from '../../models/CanvasInfo'
 import { Col, Row } from 'antd'
@@ -15,7 +13,6 @@ type Props = {
   accountAddress: string,
   // from withWeb3
   Contract: ContractModel,
-  eventsSupported: boolean,
   account: string,
 }
 
