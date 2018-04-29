@@ -44,7 +44,7 @@ class AccountBalance extends React.PureComponent<Props, State> {
 
   confirm = () => {
     Modal.confirm({
-      title: 'Withdraw your Account Balance?',
+      title: 'Withdraw Account Balance?',
       content: 'It will be visible in your wallet after a few minutes, when the blockchain updates.',
       okText: 'Withdraw',
       okType: 'primary',

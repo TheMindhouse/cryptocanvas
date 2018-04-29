@@ -60,7 +60,6 @@ class PixelsPainted extends React.Component<Props, State> {
           this.setState({ paintedPixels, isLoading: false })
         }
       })
-
   }
 
   render () {

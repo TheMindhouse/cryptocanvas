@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin, Modal } from 'antd'
+import { Spin, message } from 'antd'
 
 import './styles/CreateCanvas.css'
 import withWeb3 from '../../hoc/withWeb3'
@@ -15,10 +15,7 @@ class CreateCanvas extends React.PureComponent {
     this.props.Contract.createCanvas()
       .then((tx) => {
         LocalStorageManager.transactions.updateTransactions(tx)
-        Modal.success({
-          title: 'Create Canvas Transaction successfully sent',
-          content: 'You need to wait a few minutes before it\'s updated in the blockchain',
-        })
+        message.success('Create Canvas Transaction sent')
         this.setState({ loading: false })
       })
       .catch(() => {
