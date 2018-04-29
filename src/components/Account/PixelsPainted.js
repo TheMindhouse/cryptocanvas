@@ -38,6 +38,14 @@ class PixelsPainted extends React.Component<Props, State> {
     }
   }
 
+  componentDidUpdate (prevProps: Props) {
+    if (prevProps.accountAddress !== this.props.accountAddress) {
+      if (this.props.eventsSupported) {
+        this.setState({ isLoading: true }, this.getPaintedPixels)
+      }
+    }
+  }
+
   getPaintedPixels = () => {
     if (!this.props.accountAddress) {
       return
@@ -56,13 +64,13 @@ class PixelsPainted extends React.Component<Props, State> {
   }
 
   render () {
-    if (this.state.isLoading) {
-      return <Spin />
+    if (!this.props.eventsSupported) {
+      return <p>Stats available only with MetaMask. See <HashLink to={URLHelper.help.installingMetamask}>Installing
+        MetaMask</HashLink></p>
     }
 
-    if (!this.props.eventsSupported) {
-      return <p>Statistics available with MetaMask only. See <HashLink to={URLHelper.help.installingMetamask}>Installing
-        MetaMask</HashLink></p>
+    if (this.state.isLoading) {
+      return <Spin />
     }
 
     const pixelsGroupedByCanvasId = groupBy(this.state.paintedPixels, pixel => pixel.canvasId)

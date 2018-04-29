@@ -28,6 +28,16 @@ class AccountBalance extends React.PureComponent<Props, State> {
   }
 
   componentDidMount () {
+    this.getBalance()
+  }
+
+  componentDidUpdate (prevProps: Props) {
+    if (prevProps.accountAddress !== this.props.accountAddress) {
+      this.setState({ isLoading: true }, this.getBalance)
+    }
+  }
+
+  getBalance = () => {
     this.props.Contract.getAccountBalance(this.props.accountAddress)
       .then(balance => this.setState({ balance, isLoading: false }))
   }
@@ -35,7 +45,7 @@ class AccountBalance extends React.PureComponent<Props, State> {
   confirm = () => {
     Modal.confirm({
       title: 'Withdraw your Account Balance?',
-      content: 'It will be visible on your wallet after a few minutes, when the blockchain updates.',
+      content: 'It will be visible in your wallet after a few minutes, when the blockchain updates.',
       okText: 'Withdraw',
       okType: 'primary',
       width: 500,
@@ -51,14 +61,14 @@ class AccountBalance extends React.PureComponent<Props, State> {
       })
   }
 
-  render() {
+  render () {
     if (this.state.isLoading) {
       return <Spin />
     }
 
     return (
       <div>
-      <h1>{this.props.web3.fromWei(this.state.balance)} ETH</h1>
+        <h1>{this.props.web3.fromWei(this.state.balance)} ETH</h1>
         {
           this.props.accountAddress === this.props.account &&
           <Button
