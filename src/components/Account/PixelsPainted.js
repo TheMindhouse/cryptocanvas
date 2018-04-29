@@ -4,6 +4,11 @@ import withWeb3 from '../../hoc/withWeb3'
 import { ContractModel } from '../../models/ContractModel'
 import { PixelPainted } from '../../models/PixelPainted'
 import { Spin } from 'antd'
+import { CONFIG } from '../../config'
+import { URLHelper } from '../../helpers/URLhelper'
+import { HashLink } from 'react-router-hash-link'
+import { groupBy } from '../../helpers/utils'
+import { Link } from 'react-router-dom'
 
 type Props = {
   // NOT user address, but from the page params!
@@ -11,6 +16,7 @@ type Props = {
   // from withWeb3
   Contract: ContractModel,
   eventsSupported: boolean,
+  account: string,
 }
 
 type State = {
@@ -36,7 +42,10 @@ class PixelsPainted extends React.Component<Props, State> {
     if (!this.props.accountAddress) {
       return
     }
-    this.props.Contract.PixelPaintedEvent({ painter: this.props.accountAddress }, { fromBlock: 169, toBlock: 'latest' })
+    this.props.Contract.PixelPaintedEvent({ painter: this.props.accountAddress }, {
+      fromBlock: CONFIG.startBlock,
+      toBlock: 'latest'
+    })
       .get((error, result) => {
         if (!error && result) {
           const paintedPixels = result.map(resultEvent => new PixelPainted(resultEvent.args))
@@ -52,11 +61,30 @@ class PixelsPainted extends React.Component<Props, State> {
     }
 
     if (!this.props.eventsSupported) {
-      return <p>Not available. Please log into MetaMask</p>
+      return <p>Statistics available with MetaMask only. See <HashLink to={URLHelper.help.installingMetamask}>Installing
+        MetaMask</HashLink></p>
     }
 
+    const pixelsGroupedByCanvasId = groupBy(this.state.paintedPixels, pixel => pixel.canvasId)
+    const paintedCanvasIds = Object.keys(pixelsGroupedByCanvasId)
+
     return (
-      <h4>User with this address has painted <b>{this.state.paintedPixels.length}</b> pixels.</h4>
+      <div>
+        <h3>
+          {
+            this.props.accountAddress === this.props.account
+              ? 'You have painted '
+              : 'User with this address has painted '
+          }
+          <b>{this.state.paintedPixels.length}</b> pixels on <b>{paintedCanvasIds.length}</b> canvases.
+        </h3>
+        <br />
+        {
+          paintedCanvasIds.map(canvasId =>
+            <p key={canvasId}><Link to={URLHelper.canvas(canvasId)}>Canvas
+              #{canvasId}</Link> - <b>{pixelsGroupedByCanvasId[ canvasId ].length} pixels</b></p>)
+        }
+      </div>
     )
   }
 }
