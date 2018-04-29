@@ -5,6 +5,7 @@ import withWeb3 from '../hoc/withWeb3'
 import PixelsPainted from '../components/Account/PixelsPainted'
 import AccountBalance from '../components/Account/AccountBalance'
 import { AccountBalanceHeader } from '../components/Account/AccountBalanceHeader'
+import CanvasesOwned from '../components/Account/CanvasesOwned'
 
 type Props = {
   match: {
@@ -41,6 +42,11 @@ class Account extends React.PureComponent<Props> {
 
           <AccountBalanceHeader />
           <AccountBalance accountAddress={urlAccountAddress}/>
+
+          <br /><br />
+
+          <h2><b>Canvases Owned</b></h2>
+          <CanvasesOwned accountAddress={urlAccountAddress}/>
 
           <br /><br />
 
