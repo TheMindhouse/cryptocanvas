@@ -38,18 +38,12 @@ class Web3Provider extends React.Component {
       ? console.log('Events supported')
       : console.log('Events not supported')
 
-    const account = metamaskAvailable ? window.web3.eth.accounts[ 0 ] : undefined
-
-    // Set default account
-    window.web3.eth.defaultAccount = account
-
     const ContractInstance = window.web3.eth.contract(ABI)
     const Contract = new ContractModel(ContractInstance.at(CONTRACT_ADDRESS))
 
     window.Contract = Contract
 
     this.state = {
-      account,
       web3: window.web3,
       Contract,
       getBlockNumber: this.getBlockNumber,
@@ -59,9 +53,21 @@ class Web3Provider extends React.Component {
   }
 
   componentDidMount () {
-    this.checkAccountInterval = setInterval(() => {
-      this.checkAccount()
-    }, CHECK_ACCOUNT_DELAY)
+    this.checkAccount()
+      .then(account => {
+        this.setState({ account }, () => {
+          // Set default account
+          window.web3.eth.defaultAccount = account
+          this.checkAccountInterval = setInterval(() => {
+            this.checkAccount().then(newAccount => {
+              if (newAccount !== this.state.account) {
+                window.location.reload()
+              }
+            })
+          }, CHECK_ACCOUNT_DELAY)
+        })
+      })
+      .catch(() => this.setState({ account: undefined }))
   }
 
   componentWillUnmount () {
@@ -69,10 +75,15 @@ class Web3Provider extends React.Component {
   }
 
   checkAccount = () => {
-    const account = window.web3.eth.accounts[ 0 ]
-    if (account !== this.state.account) {
-      this.setState({ account })
-    }
+    return new Promise((resolve, reject) => {
+      window.web3.eth.getAccounts((error, accounts) => {
+        if (accounts && accounts[ 0 ]) {
+          resolve(accounts[ 0 ])
+        } else {
+          reject(error)
+        }
+      })
+    })
   }
 
   getBlockNumber = () => {
