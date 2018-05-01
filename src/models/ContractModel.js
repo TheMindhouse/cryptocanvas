@@ -454,8 +454,9 @@ export class ContractModel {
   }
 
   getAccountBalance (userAddress = '') {
+    // Different gas limit is a solution to Metamask caching results...
     return new Promise((resolve, reject) => {
-      this.Contract.getPendingWithdrawal(userAddress, this.config, (error, result) => {
+      this.Contract.getPendingWithdrawal(userAddress, {...this.config, gas: Math.floor(Math.random() * (GAS_LIMIT + 100)) + GAS_LIMIT  }, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
