@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import withTransactions from '../../hoc/withTransactions'
-import { Button, Modal, Spin } from 'antd'
+import { Alert, Button, Modal, Spin } from 'antd'
 import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
 import { WithdrawBalanceTransaction } from '../../models/transactions/WithdrawBalanceTransaction'
 import { EtherscanLink } from '../Small/EtherscanLink'
@@ -11,7 +11,7 @@ type Props = {
   onWithdraw: () => void,
   account: string,
   txStore: {
-    transactions: Array<Transaction|WithdrawBalanceTransaction>
+    transactions: Array<Transaction | WithdrawBalanceTransaction>
   },
 }
 
@@ -30,18 +30,20 @@ class AccountBalanceWithdraw extends React.PureComponent<Props> {
   }
 
   getPendingTransactions = () => {
-    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction|WithdrawBalanceTransaction) =>
+    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction | WithdrawBalanceTransaction) =>
       tx.status === TRANSACTION_STATUS.pending &&
       tx instanceof WithdrawBalanceTransaction &&
       tx.address === this.props.account
     )
     return pendingTx.map((tx: WithdrawBalanceTransaction) => (
-      <div><Spin size="small"/> Withdraw Balance transaction pending (<EtherscanLink hash={tx.hash}/>)</div>
+      <div key={tx.hash} style={{ marginTop: 10 }}>
+        <Alert message={<small>Withdraw Balance transaction pending (<EtherscanLink hash={tx.hash} />)</small>}
+               type="info" showIcon iconType="loading" style={{ display: 'inline-block' }} />
+      </div>
     ))
   }
 
-
-  render() {
+  render () {
     const pendingTransactions = this.getPendingTransactions()
     return (
       <div>

@@ -33,6 +33,12 @@ class WithdrawReward extends React.Component<Props, State> {
       .then(() => this.getRewardInfo())
   }
 
+  componentDidUpdate (prevProps: Props) {
+    if (prevProps.account !== this.props.account) {
+      this.getRewardInfo()
+    }
+  }
+
   getLastBid = () => {
     return this.props.Contract.getLastBid(this.props.canvasId)
       .then((lastBid: Bid) => this.setState({ lastBid }))
@@ -77,6 +83,7 @@ class WithdrawReward extends React.Component<Props, State> {
               isWithdrawn={isWithdrawn}
               userAddress={this.props.account}
               onWithdraw={this.onWithdraw}
+              canvasId={this.props.canvasId}
             />
             : <WithoutReward />
         }

@@ -7,6 +7,7 @@ import { CanvasBuyOffer } from './CanvasBuyOffer'
 import { PainterReward } from './PainterReward'
 import { BLOCKCHAIN_CANVAS_STATES, CanvasState } from './CanvasState'
 import { WithdrawBalanceTransaction } from './transactions/WithdrawBalanceTransaction'
+import { AddRewardToBalanceTransaction } from './transactions/AddRewardToBalanceTransaction'
 
 const GAS_LIMIT = 150000
 const GAS_PRICE = 2000000000
@@ -243,13 +244,14 @@ export class ContractModel {
           console.log('[ERROR] Add Reward to Account Balance failed')
           reject(error)
         } else {
-          const tx = {
+          const tx: AddRewardToBalanceTransaction = {
             hash: txHash,
             type: TRANSACTION_TYPE.addRewardToBalance,
             name: `Add Reward for Canvas #${canvasId} to Account Balance`,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new AddRewardToBalanceTransaction(tx))
         }
       })
     })
