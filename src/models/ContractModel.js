@@ -6,6 +6,7 @@ import { CanvasSellOffer } from './CanvasSellOffer'
 import { CanvasBuyOffer } from './CanvasBuyOffer'
 import { PainterReward } from './PainterReward'
 import { BLOCKCHAIN_CANVAS_STATES, CanvasState } from './CanvasState'
+import { WithdrawBalanceTransaction } from './transactions/WithdrawBalanceTransaction'
 
 const GAS_LIMIT = 3000000
 const GAS_PRICE = 2000000000
@@ -252,7 +253,7 @@ export class ContractModel {
     })
   }
 
-  withdrawBalance () {
+  withdrawBalance ({ address, amount }) {
     return new Promise((resolve, reject) => {
       this.Contract.withdraw({ ...CONFIG_GAS_50K }, (error, txHash) => {
         if (error) {
@@ -260,13 +261,15 @@ export class ContractModel {
           console.log('[ERROR] Withdraw Account Balance failed')
           reject(error)
         } else {
-          const tx = {
+          const tx: WithdrawBalanceTransaction = {
             hash: txHash,
             type: TRANSACTION_TYPE.withdrawBalance,
             name: `Withdraw Account Balance`,
             timestamp: new Date(),
+            address,
+            amount,
           }
-          resolve(new Transaction(tx))
+          resolve(new WithdrawBalanceTransaction(tx))
         }
       })
     })

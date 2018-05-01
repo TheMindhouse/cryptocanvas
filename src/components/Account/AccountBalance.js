@@ -2,8 +2,9 @@
 import * as React from 'react'
 import withWeb3 from '../../hoc/withWeb3'
 import { ContractModel } from '../../models/ContractModel'
-import { Button, Spin, Modal, message } from 'antd'
+import { message, Spin } from 'antd'
 import { LocalStorageManager } from '../../localStorage'
+import { AccountBalanceWithdraw } from './AccountBalanceWithdraw'
 
 type Props = {
   // NOT user address, but from the page params!
@@ -42,19 +43,8 @@ class AccountBalance extends React.PureComponent<Props, State> {
       .then(balance => this.setState({ balance, isLoading: false }))
   }
 
-  confirm = () => {
-    Modal.confirm({
-      title: 'Withdraw Account Balance?',
-      content: 'It will be visible in your wallet after a few minutes, when the blockchain updates.',
-      okText: 'Withdraw',
-      okType: 'primary',
-      width: 500,
-      onOk: this.onWithdraw,
-    })
-  }
-
   onWithdraw = () => {
-    this.props.Contract.withdrawBalance()
+    this.props.Contract.withdrawBalance({ address: this.props.account, amount: this.state.balance })
       .then((tx) => {
         LocalStorageManager.transactions.updateTransactions(tx)
         message.success('Withdraw Account Balance Transaction sent')
@@ -71,13 +61,7 @@ class AccountBalance extends React.PureComponent<Props, State> {
         <h1>{this.props.web3.fromWei(this.state.balance)} ETH</h1>
         {
           this.props.accountAddress === this.props.account &&
-          <Button
-            type="primary"
-            size="default"
-            onClick={this.confirm}
-            disabled={!this.state.balance}>
-            Withdraw
-          </Button>
+          <AccountBalanceWithdraw onWithdraw={this.onWithdraw} balance={this.state.balance} account={this.props.account}/>
         }
       </div>
     )
