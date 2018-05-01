@@ -4,6 +4,7 @@ import { CanvasHistoryTx } from '../../models/CanvasHistoryTx'
 import { Table } from 'antd'
 import { EtherscanLink } from '../Small/EtherscanLink'
 import { AccountAddressLink } from '../Small/AccountAddressLink'
+import { TransactionsHistory } from './TransactionsHistory'
 
 type Props = {
   transactions: Array<CanvasHistoryTx>
@@ -47,7 +48,8 @@ class TransactionsHistoryList extends React.PureComponent<Props> {
 
   render () {
     return (
-      <Table dataSource={this.props.transactions} columns={columns} size="small" />
+      <Table dataSource={this.props.transactions} columns={columns} size="small"
+             rowKey={(tx: CanvasHistoryTx) => tx.txHash}/>
     )
   }
 }
