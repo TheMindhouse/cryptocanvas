@@ -44,7 +44,7 @@ class AccountBalance extends React.PureComponent<Props, State> {
   }
 
   onWithdraw = () => {
-    this.props.Contract.withdrawBalance({ address: this.props.account, amount: this.state.balance })
+    this.props.Contract.withdrawBalance()
       .then((tx) => {
         LocalStorageManager.transactions.updateTransactions(tx)
         message.success('Withdraw Account Balance Transaction sent')
