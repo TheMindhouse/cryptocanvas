@@ -11,11 +11,11 @@ import withTransactions from '../../hoc/withTransactions'
 import { Link } from 'react-router-dom'
 
 const StatusMetaMaskNotAvailable = () => (
-  <p>
+  <span>
     To participate in drawing and trading<br />
     CryptoCanvas on this site, download<br />
     the <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> Chrome plugin.
-  </p>
+  </span>
 )
 
 const StatusDisconnected = () =>

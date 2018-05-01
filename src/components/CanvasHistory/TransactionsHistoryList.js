@@ -4,7 +4,6 @@ import { CanvasHistoryTx } from '../../models/CanvasHistoryTx'
 import { Table } from 'antd'
 import { EtherscanLink } from '../Small/EtherscanLink'
 import { AccountAddressLink } from '../Small/AccountAddressLink'
-import { TransactionsHistory } from './TransactionsHistory'
 
 type Props = {
   transactions: Array<CanvasHistoryTx>

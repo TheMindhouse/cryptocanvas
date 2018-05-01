@@ -4,7 +4,6 @@ import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
 import { Badge, Table } from 'antd'
 import './styles/TransactionsList.css'
 import { EtherscanLink } from '../Small/EtherscanLink'
-import { CanvasHistoryTx } from '../../models/CanvasHistoryTx'
 
 const columns = [
   {
