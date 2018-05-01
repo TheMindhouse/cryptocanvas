@@ -8,17 +8,13 @@ import { PainterReward } from './PainterReward'
 import { BLOCKCHAIN_CANVAS_STATES, CanvasState } from './CanvasState'
 import { WithdrawBalanceTransaction } from './transactions/WithdrawBalanceTransaction'
 
-const GAS_LIMIT = 3000000
+const GAS_LIMIT = 150000
 const GAS_PRICE = 2000000000
 
 const DEFAULT_CONFIG = {
   gas: GAS_LIMIT,
   gasPrice: GAS_PRICE
 }
-
-const CONFIG_GAS_50K = { ...DEFAULT_CONFIG, gas: 150000 }
-const CONFIG_GAS_100K = { ...DEFAULT_CONFIG, gas: 150000 }
-const CONFIG_GAS_150K = { ...DEFAULT_CONFIG, gas: 150000 }
 
 export class ContractModel {
   constructor (Contract) {
@@ -31,7 +27,7 @@ export class ContractModel {
 
   setPixel ({ canvasId, pixelIndex, colorId }) {
     return new Promise((resolve, reject) => {
-      this.Contract.setPixel(canvasId, pixelIndex.id, colorId, CONFIG_GAS_100K, (error, txHash) => {
+      this.Contract.setPixel(canvasId, pixelIndex.id, colorId, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Set pixel failed')
@@ -54,7 +50,7 @@ export class ContractModel {
 
   makeBid ({ canvasId, bidAmountInWei }) {
     return new Promise((resolve, reject) => {
-      this.Contract.makeBid(canvasId, { ...CONFIG_GAS_150K, value: bidAmountInWei }, (error, txHash) => {
+      this.Contract.makeBid(canvasId, { ...DEFAULT_CONFIG, value: bidAmountInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Make bid failed')
@@ -74,7 +70,7 @@ export class ContractModel {
 
   createCanvas () {
     return new Promise((resolve, reject) => {
-      this.Contract.createCanvas({}, CONFIG_GAS_100K, (error, txHash) => {
+      this.Contract.createCanvas({}, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Create canvas failed')
@@ -94,7 +90,7 @@ export class ContractModel {
 
   makeBuyOffer (canvasId, valueInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.makeBuyOffer(canvasId, { ...CONFIG_GAS_100K, value: valueInWei }, (error, txHash) => {
+      this.Contract.makeBuyOffer(canvasId, { ...DEFAULT_CONFIG, value: valueInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Make buy offer failed')
@@ -114,7 +110,7 @@ export class ContractModel {
 
   cancelBuyOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.cancelBuyOffer(canvasId, CONFIG_GAS_50K, (error, txHash) => {
+      this.Contract.cancelBuyOffer(canvasId, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Cancel buy offer failed')
@@ -135,7 +131,7 @@ export class ContractModel {
 
   acceptBuyOffer (canvasId, priceInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.acceptBuyOffer(canvasId, priceInWei, CONFIG_GAS_100K, (error, txHash) => {
+      this.Contract.acceptBuyOffer(canvasId, priceInWei, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Accept buy offer failed')
@@ -155,7 +151,7 @@ export class ContractModel {
 
   offerForSale (canvasId, price) {
     return new Promise((resolve, reject) => {
-      this.Contract.offerCanvasForSale(canvasId, price, CONFIG_GAS_100K, (error, txHash) => {
+      this.Contract.offerCanvasForSale(canvasId, price, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Offer for sale failed')
@@ -175,7 +171,7 @@ export class ContractModel {
 
   offerForSaleToAddress (canvasId, price, receiverAddress) {
     return new Promise((resolve, reject) => {
-      this.Contract.offerCanvasForSaleToAddress(canvasId, price, receiverAddress, CONFIG_GAS_100K, (error, txHash) => {
+      this.Contract.offerCanvasForSaleToAddress(canvasId, price, receiverAddress, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Offer for sale to address failed')
@@ -195,7 +191,7 @@ export class ContractModel {
 
   cancelSellOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.cancelSellOffer(canvasId, CONFIG_GAS_50K, (error, txHash) => {
+      this.Contract.cancelSellOffer(canvasId, DEFAULT_CONFIG, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Cancel sell offer failed')
@@ -215,7 +211,7 @@ export class ContractModel {
 
   acceptSellOffer (canvasId, priceInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.acceptSellOffer(canvasId, { ...CONFIG_GAS_100K, value: priceInWei }, (error, txHash) => {
+      this.Contract.acceptSellOffer(canvasId, { ...DEFAULT_CONFIG, value: priceInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Buy Canvas failed')
@@ -235,7 +231,7 @@ export class ContractModel {
 
   addRewardToAccountBalance (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.addRewardToPendingWithdrawals(canvasId, { ...CONFIG_GAS_100K }, (error, txHash) => {
+      this.Contract.addRewardToPendingWithdrawals(canvasId, { ...DEFAULT_CONFIG }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Add Reward to Account Balance failed')
@@ -255,7 +251,7 @@ export class ContractModel {
 
   withdrawBalance ({ address, amount }) {
     return new Promise((resolve, reject) => {
-      this.Contract.withdraw({ ...CONFIG_GAS_50K }, (error, txHash) => {
+      this.Contract.withdraw({ ...DEFAULT_CONFIG }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Withdraw Account Balance failed')
