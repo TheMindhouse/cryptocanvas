@@ -1,6 +1,7 @@
 .CanvasPreview {
     width: 100%;
     margin-bottom: 60px;
+    text-align: left;
 }
 
 .CanvasPreview__info {

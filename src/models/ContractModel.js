@@ -7,6 +7,7 @@ import { CanvasBuyOffer } from './CanvasBuyOffer'
 import { PainterReward } from './PainterReward'
 import { BLOCKCHAIN_CANVAS_STATES, CanvasState } from './CanvasState'
 import { TransactionWithCanvasId } from './transactions/TransactionWithCanvasId'
+import { cutAddress } from '../helpers/strings'
 
 const GAS_LIMIT = 150000
 const GAS_PRICE = 2000000000
@@ -197,7 +198,7 @@ export class ContractModel {
           const tx = {
             hash: txHash,
             type: TRANSACTION_TYPE.offerForSaleToAddress,
-            name: `Offer Canvas #${canvasId} for sale to address ${receiverAddress}`,
+            name: `Offer Canvas #${canvasId} for sale to address ${cutAddress(receiverAddress)}...`,
             account: this.account,
             timestamp: new Date(),
           }
