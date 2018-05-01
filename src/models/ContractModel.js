@@ -74,8 +74,9 @@ export class ContractModel {
             name: `Bid on Canvas #${canvasId}`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
@@ -116,8 +117,9 @@ export class ContractModel {
             name: `Buy Offer on Canvas #${canvasId}`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
@@ -137,8 +139,9 @@ export class ContractModel {
             name: `Cancel Offer on Canvas #${canvasId}`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
@@ -159,8 +162,9 @@ export class ContractModel {
             name: `Accept Buy Offer on Canvas #${canvasId}`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
@@ -180,8 +184,9 @@ export class ContractModel {
             name: `Offer Canvas #${canvasId} for sale`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
@@ -201,8 +206,9 @@ export class ContractModel {
             name: `Offer Canvas #${canvasId} for sale to address ${cutAddress(receiverAddress)}...`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
@@ -222,8 +228,9 @@ export class ContractModel {
             name: `Cancel Sell Offer for Canvas #${canvasId}`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
@@ -243,8 +250,9 @@ export class ContractModel {
             name: `Buy Canvas #${canvasId}`,
             account: this.account,
             timestamp: new Date(),
+            canvasId,
           }
-          resolve(new Transaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
