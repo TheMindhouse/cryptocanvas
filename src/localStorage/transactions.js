@@ -11,10 +11,11 @@ const getTransactions = () => {
       switch (tx.type) {
         case TRANSACTION_TYPE.setPixel:
           return new TransactionWithPixel(tx)
-        case TRANSACTION_TYPE.addRewardToBalance:
-          return new TransactionWithCanvasId(tx)
-        default:
+        case TRANSACTION_TYPE.createCanvas:
+        case TRANSACTION_TYPE.withdrawBalance:
           return new Transaction(tx)
+        default:
+          return new TransactionWithCanvasId(tx)
       }
     })
   }

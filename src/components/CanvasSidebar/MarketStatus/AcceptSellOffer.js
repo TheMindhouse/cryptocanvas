@@ -1,5 +1,7 @@
 import React from 'react'
 import { Button, Modal } from 'antd'
+import { TRANSACTION_TYPE } from '../../../models/Transaction'
+import { PendingTransactionInfo } from '../../Small/PendingTransactionInfo'
 
 const AcceptSellOffer = (props) => {
   const confirmAcceptSellOffer = () => {
@@ -18,6 +20,7 @@ const AcceptSellOffer = (props) => {
           <Button type="primary" size="default" onClick={confirmAcceptSellOffer}>
             Buy this Canvas for {props.price} ETH
           </Button>
+          <PendingTransactionInfo type={TRANSACTION_TYPE.acceptSellOffer} canvasId={props.canvasId}/>
           <br /><br />
         </div>
       : null

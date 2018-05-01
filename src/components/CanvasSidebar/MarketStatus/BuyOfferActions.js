@@ -2,8 +2,15 @@ import React from 'react'
 import MakeBuyOffer from './MakeBuyOffer'
 import CancelBuyOffer from './CancelBuyOffer'
 import { Alert, Row } from 'antd'
+import { PendingTransactionInfo } from '../../Small/PendingTransactionInfo'
+import { TRANSACTION_TYPE } from '../../../models/Transaction'
 
 const BuyOfferActions = (props) => {
+  const transactionTypes = [
+    TRANSACTION_TYPE.buyOffer,
+    TRANSACTION_TYPE.cancelBuyOffer,
+  ]
+
   return (
     <div>
       {
@@ -27,6 +34,7 @@ const BuyOfferActions = (props) => {
         <MakeBuyOffer submitOffer={props.submitBuyOffer} />
       }
 
+      <PendingTransactionInfo type={transactionTypes} canvasId={props.canvasId}/>
     </div>
   )
 }

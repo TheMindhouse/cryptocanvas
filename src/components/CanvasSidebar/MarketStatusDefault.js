@@ -27,6 +27,7 @@ const MarketStatusDefault = (props) => {
           isUserOfferReceiver={props.currentSellOffer.onlySellTo === props.userAddress}
           price={props.web3.fromWei(props.currentSellOffer.price)}
           acceptSellOffer={props.acceptSellOffer}
+          canvasId={props.canvasId}
         />
       }
 
@@ -45,6 +46,7 @@ const MarketStatusDefault = (props) => {
           isUsersOffer={props.currentBuyOffer.buyer === props.userAddress}
           submitBuyOffer={props.submitBuyOffer}
           cancelBuyOffer={props.cancelBuyOffer}
+          canvasId={props.canvasId}
         />
       }
 

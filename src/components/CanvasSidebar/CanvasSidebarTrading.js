@@ -152,6 +152,7 @@ class CanvasSidebarTrading extends React.PureComponent {
 
         <MarketStatus
           userAddress={this.props.account}
+          canvasId={this.props.canvasId}
           isUserCanvasOwner={this.props.account === this.props.canvasOwner}
           currentBuyOffer={this.state.currentBuyOffer}
           currentSellOffer={this.state.currentSellOffer}
