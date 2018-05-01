@@ -6,8 +6,7 @@ import { CanvasSellOffer } from './CanvasSellOffer'
 import { CanvasBuyOffer } from './CanvasBuyOffer'
 import { PainterReward } from './PainterReward'
 import { BLOCKCHAIN_CANVAS_STATES, CanvasState } from './CanvasState'
-import { WithdrawBalanceTransaction } from './transactions/WithdrawBalanceTransaction'
-import { AddRewardToBalanceTransaction } from './transactions/AddRewardToBalanceTransaction'
+import { TransactionWithCanvasId } from './transactions/TransactionWithCanvasId'
 
 const GAS_LIMIT = 150000
 const GAS_PRICE = 2000000000
@@ -16,7 +15,7 @@ export class ContractModel {
   constructor (Contract, account) {
     this._Contract = Contract
     this._account = account
-    this.config = {
+    this._config = {
       gas: GAS_LIMIT,
       gasPrice: GAS_PRICE,
       from: account,
@@ -30,6 +29,10 @@ export class ContractModel {
 
   get account () {
     return this._account
+  }
+
+  get config () {
+    return this._config
   }
 
   setPixel ({ canvasId, pixelIndex, colorId }) {
@@ -47,6 +50,7 @@ export class ContractModel {
             canvasId: canvasId,
             colorId: colorId,
             pixelIndex: pixelIndex,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new TransactionWithPixel(tx))
@@ -67,6 +71,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.makeBid,
             name: `Bid on Canvas #${canvasId}`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -87,6 +92,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.createCanvas,
             name: 'Create Canvas',
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -107,6 +113,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.buyOffer,
             name: `Buy Offer on Canvas #${canvasId}`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -127,6 +134,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.cancelBuyOffer,
             name: `Cancel Offer on Canvas #${canvasId}`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -148,6 +156,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.acceptBuyOffer,
             name: `Accept Buy Offer on Canvas #${canvasId}`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -168,6 +177,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.offerForSale,
             name: `Offer Canvas #${canvasId} for sale`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -188,6 +198,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.offerForSaleToAddress,
             name: `Offer Canvas #${canvasId} for sale to address ${receiverAddress}`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -208,6 +219,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.cancelSellOffer,
             name: `Cancel Sell Offer for Canvas #${canvasId}`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -228,6 +240,7 @@ export class ContractModel {
             hash: txHash,
             type: TRANSACTION_TYPE.acceptSellOffer,
             name: `Buy Canvas #${canvasId}`,
+            account: this.account,
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
@@ -244,20 +257,21 @@ export class ContractModel {
           console.log('[ERROR] Add Reward to Account Balance failed')
           reject(error)
         } else {
-          const tx: AddRewardToBalanceTransaction = {
+          const tx: TransactionWithCanvasId = {
             hash: txHash,
             type: TRANSACTION_TYPE.addRewardToBalance,
             name: `Add Reward for Canvas #${canvasId} to Account Balance`,
+            account: this.account,
             timestamp: new Date(),
             canvasId,
           }
-          resolve(new AddRewardToBalanceTransaction(tx))
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })
   }
 
-  withdrawBalance ({ address, amount }) {
+  withdrawBalance () {
     return new Promise((resolve, reject) => {
       this.Contract.withdraw({ ...this.config }, (error, txHash) => {
         if (error) {
@@ -265,15 +279,14 @@ export class ContractModel {
           console.log('[ERROR] Withdraw Account Balance failed')
           reject(error)
         } else {
-          const tx: WithdrawBalanceTransaction = {
+          const tx: Transaction = {
             hash: txHash,
             type: TRANSACTION_TYPE.withdrawBalance,
             name: `Withdraw Account Balance`,
+            account: this.account,
             timestamp: new Date(),
-            address,
-            amount,
           }
-          resolve(new WithdrawBalanceTransaction(tx))
+          resolve(new Transaction(tx))
         }
       })
     })

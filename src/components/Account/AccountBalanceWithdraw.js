@@ -2,8 +2,7 @@
 import * as React from 'react'
 import withTransactions from '../../hoc/withTransactions'
 import { Alert, Button, Modal, Spin } from 'antd'
-import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
-import { WithdrawBalanceTransaction } from '../../models/transactions/WithdrawBalanceTransaction'
+import { Transaction, TRANSACTION_STATUS, TRANSACTION_TYPE } from '../../models/Transaction'
 import { EtherscanLink } from '../Small/EtherscanLink'
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
   onWithdraw: () => void,
   account: string,
   txStore: {
-    transactions: Array<Transaction | WithdrawBalanceTransaction>
+    transactions: Array<Transaction>
   },
 }
 
@@ -30,12 +29,12 @@ class AccountBalanceWithdraw extends React.PureComponent<Props> {
   }
 
   getPendingTransactions = () => {
-    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction | WithdrawBalanceTransaction) =>
+    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction) =>
       tx.status === TRANSACTION_STATUS.pending &&
-      tx instanceof WithdrawBalanceTransaction &&
-      tx.address === this.props.account
+      tx.type === TRANSACTION_TYPE.withdrawBalance &&
+      tx.account === this.props.account
     )
-    return pendingTx.map((tx: WithdrawBalanceTransaction) => (
+    return pendingTx.map((tx: Transaction) => (
       <div key={tx.hash} style={{ marginTop: 10 }}>
         <Alert message={<small>Withdraw Balance transaction pending (<EtherscanLink hash={tx.hash} />)</small>}
                type="info" showIcon iconType="loading" style={{ display: 'inline-block' }} />

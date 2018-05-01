@@ -81,7 +81,7 @@ class WithdrawReward extends React.Component<Props, State> {
               paintedPixels={paintedPixels}
               rewardInEth={this.props.web3.fromWei(rewardValue)}
               isWithdrawn={isWithdrawn}
-              userAddress={this.props.account}
+              account={this.props.account}
               onWithdraw={this.onWithdraw}
               canvasId={this.props.canvasId}
             />

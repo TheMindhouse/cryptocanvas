@@ -6,7 +6,7 @@ type Props = {
   canvasId: number,
 }
 
-export class AddRewardToBalanceTransaction extends Transaction {
+export class TransactionWithCanvasId extends Transaction {
   constructor (props: Props) {
     super(props)
     this.canvasId = props.canvasId

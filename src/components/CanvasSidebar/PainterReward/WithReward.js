@@ -2,9 +2,9 @@
 import React from 'react'
 import { Alert, Button, Modal, Spin } from 'antd'
 import withTransactions from '../../../hoc/withTransactions'
-import { Transaction, TRANSACTION_STATUS } from '../../../models/Transaction'
+import { Transaction, TRANSACTION_STATUS, TRANSACTION_TYPE } from '../../../models/Transaction'
 import { EtherscanLink } from '../../Small/EtherscanLink'
-import { AddRewardToBalanceTransaction } from '../../../models/transactions/AddRewardToBalanceTransaction'
+import { TransactionWithCanvasId } from '../../../models/transactions/TransactionWithCanvasId'
 
 type Props = {
   rewardInEth: number,
@@ -33,12 +33,13 @@ class WithReward extends React.PureComponent<Props> {
   }
 
   getPendingTransactions = () => {
-    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction | AddRewardToBalanceTransaction) =>
+    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction | TransactionWithCanvasId) =>
       tx.status === TRANSACTION_STATUS.pending &&
-      tx instanceof AddRewardToBalanceTransaction &&
+      tx.type === TRANSACTION_TYPE.addRewardToBalance &&
+      tx.account === this.props.account &&
       tx.canvasId === this.props.canvasId
     )
-    return pendingTx.map((tx: AddRewardToBalanceTransaction) => (
+    return pendingTx.map((tx: TransactionWithCanvasId) => (
       <div key={tx.hash} style={{ marginTop: 10 }}>
         <Alert message={<small>Add Reward To Balance transaction pending (<EtherscanLink hash={tx.hash} />)</small>}
                type="info" showIcon iconType="loading"/>
