@@ -64,12 +64,21 @@ class PixelsPainted extends React.Component<Props, State> {
 
   render () {
     if (!this.props.eventsSupported) {
-      return <p>Stats available only with MetaMask. See <HashLink to={URLHelper.help.installingMetamask}>Installing
-        MetaMask</HashLink></p>
+      return (
+        <div>
+          <h2><b>Pixels Painted</b></h2>
+          <p>Stats available only with <HashLink to={URLHelper.help.installingMetamask}>MetaMask</HashLink> installed.</p>
+        </div>
+      )
     }
 
     if (this.state.isLoading) {
-      return <Spin />
+      return (
+        <div>
+          <h2><b>Pixels Painted</b></h2>
+          <Spin />
+        </div>
+      )
     }
 
     const pixelsGroupedByCanvasId = groupBy(this.state.paintedPixels, pixel => pixel.canvasId)
@@ -77,15 +86,7 @@ class PixelsPainted extends React.Component<Props, State> {
 
     return (
       <div>
-        <h3>
-          {
-            this.props.accountAddress === this.props.account
-              ? 'You have painted '
-              : 'User with this address has painted '
-          }
-          <b>{this.state.paintedPixels.length}</b> pixels on <b>{paintedCanvasIds.length}</b> canvases.
-        </h3>
-        <br />
+        <h2><b>{this.state.paintedPixels.length} Pixels Painted on {paintedCanvasIds.length} {paintedCanvasIds.length !== 1 ? 'canvases' : 'canvas' }</b></h2>
         {
           paintedCanvasIds.map(canvasId =>
             <p key={canvasId}>

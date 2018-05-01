@@ -46,17 +46,14 @@ class Account extends React.PureComponent<Props> {
 
           <br /><br />
 
-          <h2><b>Canvases Owned</b></h2>
           <CanvasesOwned accountAddress={urlAccountAddress}/>
 
-          <br /><br />
+          <br />
 
-          <h2><b>Current Highest Bids</b></h2>
           <HighestBids accountAddress={urlAccountAddress}/>
 
-          <br /><br />
+          <br />
 
-          <h2><b>Pixels Painted</b></h2>
           <PixelsPainted accountAddress={urlAccountAddress}/>
 
           <br /><br />

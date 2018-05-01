@@ -57,27 +57,27 @@ class CanvasesOwned extends React.PureComponent<Props, State> {
 
   render () {
     if (this.state.isLoading) {
-      return <Spin />
+      return (
+        <div>
+          <h2><b>Canvases Owned</b></h2>
+          <Spin />
+        </div>
+      )
     }
 
     return (
       <div>
-        <h3>
-          {
-            this.props.accountAddress === this.props.account
-              ? 'You are the owner of '
-              : 'User with this address is the owner of '
-          }
-          <b>{this.state.ownedCanvasesIds.length}</b> {this.state.ownedCanvasesIds.length !== 1 ? 'canvases' : 'canvas'}.
-        </h3>
-        <br />
-        <Row gutter={100} type="flex" style={{ marginBottom: -60 }}>
-          {this.state.ownedCanvasesIds.map((canvasId, index) =>
-            <Col span={6} key={index}>
-              <CanvasPreview canvasId={canvasId} />
-            </Col>
-          )}
-        </Row>
+        <h2><b>{this.state.ownedCanvasesIds.length} Canvases Owned</b></h2>
+        {
+          this.state.ownedCanvasesIds.length > 0 &&
+          <Row gutter={100} type="flex" style={{ marginTop: 20, marginBottom: -60 }}>
+            {this.state.ownedCanvasesIds.map((canvasId, index) =>
+              <Col span={6} key={index}>
+                <CanvasPreview canvasId={canvasId} />
+              </Col>
+            )}
+          </Row>
+        }
       </div>
     )
   }
