@@ -7,7 +7,7 @@ import { EtherscanLink } from '../components/Small/EtherscanLink'
 
 export const TransactionsContext = React.createContext()
 
-const CHECK_TX_DELAY = 2000
+const CHECK_TX_DELAY = 3000
 
 class TransactionsProvider extends React.Component {
   constructor (props) {
@@ -40,6 +40,8 @@ class TransactionsProvider extends React.Component {
     LocalStorageManager.transactions.getTransactions()
       .filter(tx => tx.status === TRANSACTION_STATUS.pending)
       .forEach(tx => {
+        // todo - prevent double notifications when checkTransactions runs
+        // the second time before getTransactionReceipt is received
         console.log(`Checking transaction - ${tx.hash}`)
         this.props.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
           if (!error && result) {
