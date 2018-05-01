@@ -1,10 +1,9 @@
 // @flow
 import React from 'react'
-import { Alert, Button, Modal, Spin } from 'antd'
+import { Alert, Button, Modal } from 'antd'
 import withTransactions from '../../../hoc/withTransactions'
-import { Transaction, TRANSACTION_STATUS, TRANSACTION_TYPE } from '../../../models/Transaction'
-import { EtherscanLink } from '../../Small/EtherscanLink'
-import { TransactionWithCanvasId } from '../../../models/transactions/TransactionWithCanvasId'
+import { Transaction, TRANSACTION_TYPE } from '../../../models/Transaction'
+import { PendingTransactionInfo } from '../../Small/PendingTransactionInfo'
 
 type Props = {
   rewardInEth: number,
@@ -32,23 +31,7 @@ class WithReward extends React.PureComponent<Props> {
     })
   }
 
-  getPendingTransactions = () => {
-    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction | TransactionWithCanvasId) =>
-      tx.status === TRANSACTION_STATUS.pending &&
-      tx.type === TRANSACTION_TYPE.addRewardToBalance &&
-      tx.account === this.props.account &&
-      tx.canvasId === this.props.canvasId
-    )
-    return pendingTx.map((tx: TransactionWithCanvasId) => (
-      <div key={tx.hash} style={{ marginTop: 10 }}>
-        <Alert message={<small>Add Reward To Balance transaction pending (<EtherscanLink hash={tx.hash} />)</small>}
-               type="info" showIcon iconType="loading"/>
-      </div>
-    ))
-  }
-
   render () {
-    const pendingTransactions = this.getPendingTransactions()
     return (
       <div>
         <p>
@@ -73,10 +56,7 @@ class WithReward extends React.PureComponent<Props> {
             </Button>
         }
 
-        {
-          pendingTransactions.length > 0 &&
-          <div style={{ marginTop: 20 }}>{pendingTransactions}</div>
-        }
+        <PendingTransactionInfo type={TRANSACTION_TYPE.addRewardToBalance} />
 
       </div>
     )

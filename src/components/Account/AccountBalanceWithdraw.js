@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react'
 import withTransactions from '../../hoc/withTransactions'
-import { Alert, Button, Modal, Spin } from 'antd'
-import { Transaction, TRANSACTION_STATUS, TRANSACTION_TYPE } from '../../models/Transaction'
-import { EtherscanLink } from '../Small/EtherscanLink'
+import { Button, Modal } from 'antd'
+import { Transaction, TRANSACTION_TYPE } from '../../models/Transaction'
+import { PendingTransactionInfo } from '../Small/PendingTransactionInfo'
 
 type Props = {
   balance: number,
@@ -28,22 +28,7 @@ class AccountBalanceWithdraw extends React.PureComponent<Props> {
     })
   }
 
-  getPendingTransactions = () => {
-    const pendingTx = this.props.txStore.transactions.filter((tx: Transaction) =>
-      tx.status === TRANSACTION_STATUS.pending &&
-      tx.type === TRANSACTION_TYPE.withdrawBalance &&
-      tx.account === this.props.account
-    )
-    return pendingTx.map((tx: Transaction) => (
-      <div key={tx.hash} style={{ marginTop: 10 }}>
-        <Alert message={<small>Withdraw Balance transaction pending (<EtherscanLink hash={tx.hash} />)</small>}
-               type="info" showIcon iconType="loading" style={{ display: 'inline-block' }} />
-      </div>
-    ))
-  }
-
   render () {
-    const pendingTransactions = this.getPendingTransactions()
     return (
       <div>
         <Button
@@ -53,10 +38,8 @@ class AccountBalanceWithdraw extends React.PureComponent<Props> {
           disabled={!this.props.balance}>
           Withdraw
         </Button>
-        {
-          pendingTransactions.length > 0 &&
-          <div style={{ marginTop: 20 }}>{pendingTransactions}</div>
-        }
+
+        <PendingTransactionInfo type={TRANSACTION_TYPE.withdrawBalance} style={{ display: 'inline-block' }} />
       </div>
     )
   }

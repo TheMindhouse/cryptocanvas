@@ -10,6 +10,7 @@ import withWeb3 from '../../hoc/withWeb3'
 type Props = {
   type: string|Array<string>,
   canvasId?: number,
+  style?: Object,
   // withTransactions
   txStore: {
     transactions: Array<Transaction>
@@ -38,7 +39,7 @@ class PendingTransactionInfo extends React.PureComponent<Props> {
     return pendingTx.map((tx: Transaction) => (
       <div key={tx.hash} style={{ marginTop: 10 }}>
         <Alert message={<small>{tx.name} transaction pending (<EtherscanLink hash={tx.hash} />)</small>}
-               type="info" showIcon iconType="loading" />
+               type="info" showIcon iconType="loading" style={this.props.style}/>
       </div>
     ))
   }
