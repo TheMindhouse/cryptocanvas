@@ -11,23 +11,29 @@ import { WithdrawBalanceTransaction } from './transactions/WithdrawBalanceTransa
 const GAS_LIMIT = 150000
 const GAS_PRICE = 2000000000
 
-const DEFAULT_CONFIG = {
-  gas: GAS_LIMIT,
-  gasPrice: GAS_PRICE
-}
-
 export class ContractModel {
-  constructor (Contract) {
+  constructor (Contract, account) {
     this._Contract = Contract
+    this._account = account
+    this.config = {
+      gas: GAS_LIMIT,
+      gasPrice: GAS_PRICE,
+      from: account,
+    }
+    console.log('New ContractModel with account ', account)
   }
 
   get Contract () {
     return this._Contract
   }
 
+  get account () {
+    return this._account
+  }
+
   setPixel ({ canvasId, pixelIndex, colorId }) {
     return new Promise((resolve, reject) => {
-      this.Contract.setPixel(canvasId, pixelIndex.id, colorId, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.setPixel(canvasId, pixelIndex.id, colorId, this.config, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Set pixel failed')
@@ -50,7 +56,7 @@ export class ContractModel {
 
   makeBid ({ canvasId, bidAmountInWei }) {
     return new Promise((resolve, reject) => {
-      this.Contract.makeBid(canvasId, { ...DEFAULT_CONFIG, value: bidAmountInWei }, (error, txHash) => {
+      this.Contract.makeBid(canvasId, { ...this.config, value: bidAmountInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Make bid failed')
@@ -70,7 +76,7 @@ export class ContractModel {
 
   createCanvas () {
     return new Promise((resolve, reject) => {
-      this.Contract.createCanvas({}, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.createCanvas({}, this.config, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Create canvas failed')
@@ -90,7 +96,7 @@ export class ContractModel {
 
   makeBuyOffer (canvasId, valueInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.makeBuyOffer(canvasId, { ...DEFAULT_CONFIG, value: valueInWei }, (error, txHash) => {
+      this.Contract.makeBuyOffer(canvasId, { ...this.config, value: valueInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Make buy offer failed')
@@ -110,7 +116,7 @@ export class ContractModel {
 
   cancelBuyOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.cancelBuyOffer(canvasId, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.cancelBuyOffer(canvasId, this.config, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Cancel buy offer failed')
@@ -131,7 +137,7 @@ export class ContractModel {
 
   acceptBuyOffer (canvasId, priceInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.acceptBuyOffer(canvasId, priceInWei, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.acceptBuyOffer(canvasId, priceInWei, this.config, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Accept buy offer failed')
@@ -151,7 +157,7 @@ export class ContractModel {
 
   offerForSale (canvasId, price) {
     return new Promise((resolve, reject) => {
-      this.Contract.offerCanvasForSale(canvasId, price, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.offerCanvasForSale(canvasId, price, this.config, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Offer for sale failed')
@@ -171,7 +177,7 @@ export class ContractModel {
 
   offerForSaleToAddress (canvasId, price, receiverAddress) {
     return new Promise((resolve, reject) => {
-      this.Contract.offerCanvasForSaleToAddress(canvasId, price, receiverAddress, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.offerCanvasForSaleToAddress(canvasId, price, receiverAddress, this.config, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Offer for sale to address failed')
@@ -191,7 +197,7 @@ export class ContractModel {
 
   cancelSellOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.cancelSellOffer(canvasId, DEFAULT_CONFIG, (error, txHash) => {
+      this.Contract.cancelSellOffer(canvasId, this.config, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Cancel sell offer failed')
@@ -211,7 +217,7 @@ export class ContractModel {
 
   acceptSellOffer (canvasId, priceInWei) {
     return new Promise((resolve, reject) => {
-      this.Contract.acceptSellOffer(canvasId, { ...DEFAULT_CONFIG, value: priceInWei }, (error, txHash) => {
+      this.Contract.acceptSellOffer(canvasId, { ...this.config, value: priceInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Buy Canvas failed')
@@ -231,7 +237,7 @@ export class ContractModel {
 
   addRewardToAccountBalance (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.addRewardToPendingWithdrawals(canvasId, { ...DEFAULT_CONFIG }, (error, txHash) => {
+      this.Contract.addRewardToPendingWithdrawals(canvasId, { ...this.config }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Add Reward to Account Balance failed')
@@ -251,7 +257,7 @@ export class ContractModel {
 
   withdrawBalance ({ address, amount }) {
     return new Promise((resolve, reject) => {
-      this.Contract.withdraw({ ...DEFAULT_CONFIG }, (error, txHash) => {
+      this.Contract.withdraw({ ...this.config }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Withdraw Account Balance failed')
@@ -281,7 +287,7 @@ export class ContractModel {
       return Promise.reject('Incorrect state')
     }
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasByState(state, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCanvasByState(state, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -294,7 +300,7 @@ export class ContractModel {
 
   getCanvasCount () {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasCount(DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCanvasCount(this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -307,7 +313,7 @@ export class ContractModel {
 
   getLastBid (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getLastBidForCanvas(canvasId, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getLastBidForCanvas(canvasId, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -320,7 +326,7 @@ export class ContractModel {
 
   getCanvas (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasBitmap(canvasId, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCanvasBitmap(canvasId, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -333,7 +339,7 @@ export class ContractModel {
 
   getCanvasInfo (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasInfo(canvasId, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCanvasInfo(canvasId, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -346,7 +352,7 @@ export class ContractModel {
 
   getCanvasState (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasState(canvasId, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCanvasState(canvasId, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -359,7 +365,7 @@ export class ContractModel {
 
   getCurrentBuyOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCurrentBuyOffer(canvasId, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCurrentBuyOffer(canvasId, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -372,7 +378,7 @@ export class ContractModel {
 
   getCurrentSellOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCurrentSellOffer(canvasId, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getCurrentSellOffer(canvasId, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -385,7 +391,7 @@ export class ContractModel {
 
   getRewardInfo (canvasId, userAddress = '') {
     return new Promise((resolve, reject) => {
-      this.Contract.calculateReward(canvasId, userAddress, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.calculateReward(canvasId, userAddress, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -398,7 +404,7 @@ export class ContractModel {
 
   getPixelAuthor (canvasId, pixelIndex) {
     return new Promise((resolve, reject) => {
-      this.Contract.getPixelAuthor(canvasId, pixelIndex, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getPixelAuthor(canvasId, pixelIndex, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -411,7 +417,7 @@ export class ContractModel {
 
   getOwnedCanvasCount (userAddress = '') {
     return new Promise((resolve, reject) => {
-      this.Contract.balanceOf(userAddress, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.balanceOf(userAddress, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -424,7 +430,7 @@ export class ContractModel {
 
   getAccountBalance (userAddress = '') {
     return new Promise((resolve, reject) => {
-      this.Contract.getPendingWithdrawal(userAddress, DEFAULT_CONFIG, (error, result) => {
+      this.Contract.getPendingWithdrawal(userAddress, this.config, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)

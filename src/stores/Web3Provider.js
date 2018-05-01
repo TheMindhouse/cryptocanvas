@@ -16,7 +16,7 @@ class Web3Provider extends React.Component {
   constructor (props) {
     super(props)
 
-    console.log('Setting up Web3 Provider');
+    console.log('Setting up Web3 Provider')
 
     let eventsSupported = false
     let metamaskAvailable = false
@@ -38,8 +38,8 @@ class Web3Provider extends React.Component {
       ? console.log('Events supported')
       : console.log('Events not supported')
 
-    const ContractInstance = window.web3.eth.contract(ABI)
-    const Contract = new ContractModel(ContractInstance.at(CONTRACT_ADDRESS))
+    this.ContractInstance = window.web3.eth.contract(ABI)
+    const Contract = new ContractModel(this.ContractInstance.at(CONTRACT_ADDRESS))
 
     window.Contract = Contract
 
@@ -54,20 +54,9 @@ class Web3Provider extends React.Component {
 
   componentDidMount () {
     this.checkAccount()
-      .then(account => {
-        this.setState({ account }, () => {
-          // Set default account
-          window.web3.eth.defaultAccount = account
-          this.checkAccountInterval = setInterval(() => {
-            this.checkAccount().then(newAccount => {
-              if (newAccount !== this.state.account) {
-                window.location.reload()
-              }
-            })
-          }, CHECK_ACCOUNT_DELAY)
-        })
-      })
-      .catch(() => this.setState({ account: undefined }))
+    this.checkAccountInterval = setInterval(() => {
+      this.checkAccount()
+    }, CHECK_ACCOUNT_DELAY)
   }
 
   componentWillUnmount () {
@@ -75,14 +64,12 @@ class Web3Provider extends React.Component {
   }
 
   checkAccount = () => {
-    return new Promise((resolve, reject) => {
-      window.web3.eth.getAccounts((error, accounts) => {
-        if (accounts && accounts[ 0 ]) {
-          resolve(accounts[ 0 ])
-        } else {
-          reject(error)
-        }
-      })
+    window.web3.eth.getAccounts((error, accounts = []) => {
+      const account = accounts[0]
+      if (account !== this.state.account) {
+        const Contract = new ContractModel(this.ContractInstance.at(CONTRACT_ADDRESS), account)
+        this.setState({ account, Contract })
+      }
     })
   }
 
