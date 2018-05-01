@@ -837,8 +837,13 @@
         "type": "uint256"
       },
       {
-        "indexed": false,
-        "name": "toAddress",
+        "indexed": true,
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "to",
         "type": "address"
       }
     ],
@@ -852,9 +857,24 @@
         "indexed": true,
         "name": "canvasId",
         "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "name": "minPrice",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "to",
+        "type": "address"
       }
     ],
-    "name": "CanvasNoLongerForSale",
+    "name": "SellOfferCancelled",
     "type": "event"
   },
   {

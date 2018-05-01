@@ -485,7 +485,7 @@ export class ContractModel {
   }
 
   SellOfferCancelledEvent (...args) {
-    return this.Contract.CanvasNoLongerForSale(...args)
+    return this.Contract.SellOfferCancelled(...args)
   }
 
   CanvasSoldEvent (...args) {
