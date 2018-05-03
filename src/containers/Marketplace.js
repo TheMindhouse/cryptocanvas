@@ -48,7 +48,7 @@ class Marketplace extends Component {
 
         <Row className="container text-center">
           <h1><b>Initial Bidding</b></h1>
-          <h3>Waiting for you to make a bid, which will be distributed across all of the painters</h3>
+          <h3>Waiting for the first owner, whose winning bid will be distributed across all the painters</h3>
           <br /><br />
           {!this.state.biddingCanvasIds && <Spin />}
           {
