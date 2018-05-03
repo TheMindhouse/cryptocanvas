@@ -72,7 +72,7 @@ class CanvasesOwned extends React.PureComponent<Props, State> {
           this.state.ownedCanvasesIds.length > 0 &&
           <Row gutter={100} type="flex" style={{ marginTop: 20, marginBottom: -60 }}>
             {this.state.ownedCanvasesIds.map((canvasId, index) =>
-              <Col span={6} key={index}>
+              <Col xs={24} sm={12} md={6} key={index}>
                 <CanvasPreview canvasId={canvasId} />
               </Col>
             )}
