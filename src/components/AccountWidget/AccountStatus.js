@@ -28,7 +28,7 @@ const StatusDisconnected = () =>
 
 const StatusConnected = ({ account }) =>
   <div>
-    <span className="AccountStatus__info">Account & Transactions</span><br />
+    <span className="AccountStatus__info">My Transactions History</span><br />
     <span className="AccountStatus__address"><Link to={`/account/${account}`}>{cutAddress(account)}</Link></span>
   </div>
 
