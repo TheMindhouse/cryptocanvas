@@ -436,6 +436,25 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_owner",
+        "type": "address"
+      }
+    ],
+    "name": "getCanvasByOwner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -1009,6 +1028,11 @@
         "indexed": false,
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "reason",
+        "type": "string"
       }
     ],
     "name": "CommissionAddedToWithdrawals",
