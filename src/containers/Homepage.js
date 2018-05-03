@@ -5,6 +5,7 @@ import withWeb3 from '../hoc/withWeb3'
 import ActiveCanvases from './Homepage/ActiveCanvases'
 import { CANVAS_STATES } from '../models/CanvasState'
 import { Link } from 'react-router-dom'
+import Marketplace from './Marketplace'
 
 class Homepage extends Component {
   state = {
@@ -57,19 +58,23 @@ class Homepage extends Component {
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="container">
             <h2>
-              <b>CryptoCanvas</b> is a limited set of collectible 64x64 pixel artworks <b>living on the Ethereum blockchain</b>.
-              Each canvas is created by you, the CryptoCanvas community, thus it has multiple authors, who create a
-              unique piece of art by collaborating together.
+              <blockquote>
+                There is an empty CryptoCanvas.<br />
+                You may place a tile upon it and it will be stored on the blockchain.<br />
+                Individually you can create something. <br />
+                Together you can create something more.
+              </blockquote>
+              <small>- <i>Someone in some Place on the Internet</i></small>
             </h2>
           </Row>
         </div>
-        <Row className="container" style={{ textAlign: 'center' }}>
+        <Row className="container" style={{ textAlign: 'center', marginBottom: 100 }}>
           <h1><b>Canvases Available for Painting</b></h1>
-          <h3>They are still not finished, so you can jump in and paint some pixels!</h3>
-          <h5>or read <Link to="/about">How it works</Link></h5>
+          <h3>You can jump in and paint some pixels (or read <Link to="/about">How it works</Link>)</h3>
           <br /><br />
           <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
         </Row>
+        <Marketplace />
       </div>
     )
   }

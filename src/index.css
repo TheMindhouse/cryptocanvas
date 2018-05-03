@@ -48,6 +48,17 @@ body {
     overflow: hidden;
 }
 
+blockquote::before {
+    display: block;
+    content: '“';
+    font-size: 100px;
+    position: absolute;
+    top: -70px;
+    color: #fff;
+    left: 0;
+    font-family: 'Times New Roman', Georgia, serif;
+}
+
 /*Ant overrides */
 .ant-modal,
 .ant-alert,

@@ -48,7 +48,7 @@ class Marketplace extends Component {
 
         <Row className="container" style={{ textAlign: 'center' }}>
           <h1><b>Initial Bidding</b></h1>
-          <h3>Waiting for you to make a bid, which will be distributed across all of the painters.</h3>
+          <h3>Waiting for you to make a bid, which will be distributed across all of the painters</h3>
           <br /><br />
           {!this.state.biddingCanvasIds && <Spin />}
           {
@@ -65,7 +65,7 @@ class Marketplace extends Component {
 
         <Row className="container" style={{ textAlign: 'center' }}>
           <h1><b>Finished Canvas Gallery</b></h1>
-          <h3>You can admire them and you can buy them.</h3>
+          <h3>You can admire them and you can buy them</h3>
           <br /><br />
           {!this.state.completedCanvasIds && <Spin />}
           {

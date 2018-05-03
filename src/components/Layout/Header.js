@@ -25,16 +25,16 @@ const Header = (props: Props) => {
           <NavLink to="/" exact
                    className="Header__menu-link"
                    activeClassName="Header__menu-link--active">
-            Paint
+            Canvas Gallery
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/trade"
-                   className="Header__menu-link"
-                   activeClassName="Header__menu-link--active">
-            Marketplace
-          </NavLink>
-        </li>
+        {/*<li>*/}
+          {/*<NavLink to="/trade"*/}
+                   {/*className="Header__menu-link"*/}
+                   {/*activeClassName="Header__menu-link--active">*/}
+            {/*Marketplace*/}
+          {/*</NavLink>*/}
+        {/*</li>*/}
         <li>
           <NavLink to="/about"
                    className="Header__menu-link"
