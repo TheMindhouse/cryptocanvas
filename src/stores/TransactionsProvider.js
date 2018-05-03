@@ -4,10 +4,9 @@ import { Transaction, TRANSACTION_RECEIPT_STATUS, TRANSACTION_STATUS } from '../
 import withWeb3 from '../hoc/withWeb3'
 import { notification } from 'antd'
 import { EtherscanLink } from '../components/Small/EtherscanLink'
+import { CONFIG } from '../config'
 
 export const TransactionsContext = React.createContext()
-
-const CHECK_TX_DELAY = 3000
 
 class TransactionsProvider extends React.Component {
   constructor (props) {
@@ -22,7 +21,7 @@ class TransactionsProvider extends React.Component {
     this.checkTransactionsInterval = setInterval(() => {
       this.checkTransactions()
       this.updateTransactions()
-    }, CHECK_TX_DELAY)
+    }, CONFIG.CHECK_TX_DELAY)
   }
 
   componentWillUnmount () {
@@ -67,7 +66,7 @@ class TransactionsProvider extends React.Component {
     }
     switch (tx.status) {
       case TRANSACTION_STATUS.failed:
-        return notification.success({...notificationConfig, message: 'Transaction failed'})
+        return notification.error({...notificationConfig, duration: 0, message: 'Transaction failed'})
       case TRANSACTION_STATUS.completed:
       default:
         return notification.success({...notificationConfig, message: 'Transaction completed'})

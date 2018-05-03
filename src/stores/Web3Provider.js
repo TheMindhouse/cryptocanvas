@@ -1,14 +1,9 @@
 import React from 'react'
 import { ContractModel } from '../models/ContractModel'
 import ABI from '../helpers/ABI.json'
+import { CONFIG } from '../config'
 
 const Web3Context = React.createContext()
-
-// const CONTRACT_ADDRESS = '0x4d5cafaa44847c01fe22bbc0cf9771b64782fa29'
-const CONTRACT_ADDRESS = '0x5e68426C7bBCEe3F590B95Dd52066AA2efF6165B' // Rinkeby testnet
-// const WEB3_HTTP_PROVIDER = 'http://localhost:8545'
-const WEB3_HTTP_PROVIDER = 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm'
-const CHECK_ACCOUNT_DELAY = 2000
 
 const Web3 = window.Web3
 
@@ -27,7 +22,7 @@ class Web3Provider extends React.Component {
       metamaskAvailable = true
     } else {
       console.log('Metamask not found - using Infura!')
-      window.web3 = new Web3(new Web3.providers.HttpProvider(WEB3_HTTP_PROVIDER))
+      window.web3 = new Web3(new Web3.providers.HttpProvider(CONFIG.WEB3_HTTP_PROVIDER))
 
       // todo - temporary for dev purposes
       // metamaskAvailable = true
@@ -39,7 +34,7 @@ class Web3Provider extends React.Component {
       : console.log('Events not supported')
 
     this.ContractInstance = window.web3.eth.contract(ABI)
-    const Contract = new ContractModel(this.ContractInstance.at(CONTRACT_ADDRESS))
+    const Contract = new ContractModel(this.ContractInstance.at(CONFIG.CONTRACT_ADDRESS))
 
     window.Contract = Contract
 
@@ -56,7 +51,7 @@ class Web3Provider extends React.Component {
     this.checkAccount()
     this.checkAccountInterval = setInterval(() => {
       this.checkAccount()
-    }, CHECK_ACCOUNT_DELAY)
+    }, CONFIG.CHECK_ACCOUNT_DELAY)
   }
 
   componentWillUnmount () {
@@ -67,7 +62,7 @@ class Web3Provider extends React.Component {
     window.web3.eth.getAccounts((error, accounts = []) => {
       const account = accounts[0]
       if (account !== this.state.account) {
-        const Contract = new ContractModel(this.ContractInstance.at(CONTRACT_ADDRESS), account)
+        const Contract = new ContractModel(this.ContractInstance.at(CONFIG.CONTRACT_ADDRESS), account)
         this.setState({ account, Contract })
       }
     })

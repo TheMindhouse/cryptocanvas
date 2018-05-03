@@ -4,9 +4,10 @@ import PixelsMap from '../Canvas/PixelsMap'
 
 import canvasBg from '../../assets/images/bg.png'
 import './styles/CanvasPreviewImage.css'
+import { CONFIG } from '../../config'
 
 class CanvasPreviewImage extends React.PureComponent {
-  pixelSize = 2
+  pixelSize = CONFIG.pixelSize.preview
 
   render () {
     const gridColumns = Math.sqrt(this.props.pixels.length)

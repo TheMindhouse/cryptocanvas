@@ -8,9 +8,10 @@ import CanvasPageBidding from './CanvasPageStates/CanvasPageBidding'
 import CanvasPageTrading from './CanvasPageStates/CanvasPageTrading'
 import CanvasPageLoading from './CanvasPageStates/CanvasPageLoading'
 import { CANVAS_STATES } from '../models/CanvasState'
+import { CONFIG } from '../config'
 
 class CanvasPage extends React.Component {
-  pixelSize = 10
+  pixelSize = CONFIG.pixelSize.canvas
 
   constructor (props) {
     super(props)
