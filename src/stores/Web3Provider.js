@@ -4,10 +4,10 @@ import ABI from '../helpers/ABI.json'
 
 const Web3Context = React.createContext()
 
-// const CONTRACT_ADDRESS = '0x2ee58b1ef60566cd2c8270a6af236753bc2c8128'
-const CONTRACT_ADDRESS = '0xaf9700ea86214bc54046fec9e2e3d1cd710f4982' // Ropsten
+// const CONTRACT_ADDRESS = '0x4d5cafaa44847c01fe22bbc0cf9771b64782fa29'
+const CONTRACT_ADDRESS = '0x5e68426C7bBCEe3F590B95Dd52066AA2efF6165B' // Rinkeby testnet
 // const WEB3_HTTP_PROVIDER = 'http://localhost:8545'
-const WEB3_HTTP_PROVIDER = 'https://ropsten.infura.io/ML50g9METlqvSTgwiJTm'
+const WEB3_HTTP_PROVIDER = 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm'
 const CHECK_ACCOUNT_DELAY = 2000
 
 const Web3 = window.Web3

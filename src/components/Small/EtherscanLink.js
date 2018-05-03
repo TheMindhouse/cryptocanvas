@@ -11,7 +11,7 @@ class EtherscanLink extends React.PureComponent<Props> {
   render() {
     const { hash } = this.props
     return (
-      <a href={`https://ropsten.etherscan.io/tx/${hash}`} target="_blank"
+      <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank"
          className="font-monospace text-nowrap"
          rel="noopener noreferrer">{hash.substr(0, 8)}</a>
     )
