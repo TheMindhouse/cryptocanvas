@@ -453,6 +453,19 @@ export class ContractModel {
     })
   }
 
+  getPaintedPixelsCountByAddress (userAddress = '', canvasId) {
+    return new Promise((resolve, reject) => {
+      this.Contract.getPaintedPixelsCountByAddress(userAddress, canvasId, this.config, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(parseInt(result, 10))
+        }
+      })
+    })
+  }
+
   getAccountBalance (userAddress = '') {
     // Different gas limit is a solution to Metamask caching results...
     return new Promise((resolve, reject) => {

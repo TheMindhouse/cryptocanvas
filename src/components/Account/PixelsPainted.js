@@ -2,13 +2,15 @@
 import * as React from 'react'
 import withWeb3 from '../../hoc/withWeb3'
 import { ContractModel } from '../../models/ContractModel'
-import { PixelPainted } from '../../models/PixelPainted'
 import { Spin } from 'antd'
-import { CONFIG } from '../../config'
 import { URLHelper } from '../../helpers/URLhelper'
 import { HashLink } from 'react-router-hash-link'
-import { groupBy } from '../../helpers/utils'
 import { Link } from 'react-router-dom'
+
+type PaintedPixelsOnCanvas = {
+  canvasId: number,
+  count: number,
+}
 
 type Props = {
   // NOT user address, but from the page params!
@@ -20,7 +22,7 @@ type Props = {
 }
 
 type State = {
-  paintedPixels: Array<PixelPainted>,
+  paintedPixels: Array<PaintedPixelsOnCanvas>,
   isLoading: boolean,
 }
 
@@ -50,15 +52,17 @@ class PixelsPainted extends React.Component<Props, State> {
     if (!this.props.accountAddress) {
       return
     }
-    this.props.Contract.PixelPaintedEvent({ painter: this.props.accountAddress }, {
-      fromBlock: CONFIG.startBlock,
-      toBlock: 'latest'
-    })
-      .get((error, result) => {
-        if (!error && result) {
-          const paintedPixels = result.map(resultEvent => new PixelPainted(resultEvent.args))
+
+    this.props.Contract.getCanvasCount()
+      .then((canvasCount) => {
+        const canvasIds = Array.from(new Array(canvasCount), (val, index) => index)
+        const pPixelsCount = canvasIds.map(canvasId => this.props.Contract.getPaintedPixelsCountByAddress(this.props.accountAddress, canvasId))
+        Promise.all(pPixelsCount).then((allPixelsCount: Array<number>) => {
+          const paintedPixels = allPixelsCount
+            .map((count: number, canvasId: number): PaintedPixelsOnCanvas => ({ canvasId, count }))
+            .filter(pixelsCount => pixelsCount.count)
           this.setState({ paintedPixels, isLoading: false })
-        }
+        })
       })
   }
 
@@ -67,7 +71,8 @@ class PixelsPainted extends React.Component<Props, State> {
       return (
         <div>
           <h2><b>Pixels Painted</b></h2>
-          <p>Stats available only with <HashLink to={URLHelper.help.installingMetamask}>MetaMask</HashLink> installed.</p>
+          <p>Stats available only with <HashLink to={URLHelper.help.installingMetamask}>MetaMask</HashLink> installed.
+          </p>
         </div>
       )
     }
@@ -81,18 +86,20 @@ class PixelsPainted extends React.Component<Props, State> {
       )
     }
 
-    const pixelsGroupedByCanvasId = groupBy(this.state.paintedPixels, pixel => pixel.canvasId)
-    const paintedCanvasIds = Object.keys(pixelsGroupedByCanvasId)
+    const paintedPixelsCount = this.state.paintedPixels.reduce((prevValue: number, paintedPixel: PaintedPixelsOnCanvas): number => {
+      return prevValue + paintedPixel.count
+    }, 0)
 
     return (
       <div>
-        <h2><b>{this.state.paintedPixels.length} Pixels Painted on {paintedCanvasIds.length} {paintedCanvasIds.length !== 1 ? 'canvases' : 'canvas' }</b></h2>
+        <h2><b>{paintedPixelsCount} Pixels Painted
+          on {this.state.paintedPixels.length} {this.state.paintedPixels.length !== 1 ? 'Canvases' : 'Canvas'}</b></h2>
         {
-          paintedCanvasIds.map(canvasId =>
-            <p key={canvasId}>
-              <Link to={URLHelper.canvas(canvasId)}>
-                Canvas #{canvasId}
-              </Link> - <b>{pixelsGroupedByCanvasId[ canvasId ].length} pixels</b>
+          this.state.paintedPixels.map((paintedPixels: PaintedPixelsOnCanvas) =>
+            <p key={paintedPixels.canvasId}>
+              <Link to={URLHelper.canvas(paintedPixels.canvasId)}>
+                Canvas #{paintedPixels.canvasId}
+              </Link> - <b>{paintedPixels.count} pixels</b>
             </p>
           )
         }
