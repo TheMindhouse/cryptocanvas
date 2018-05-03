@@ -23,6 +23,7 @@ type State = {
   pixelHovered: ?PixelIndex,
   mousePosition: ?MouseCoords,
   scale: number,
+  pixelSize: number,
   posX: number,
   posY: number,
 }
@@ -36,8 +37,23 @@ class CanvasStage extends React.Component<Props, State> {
     pixelHovered: null,
     mousePosition: null,
     scale: 1,
+    pixelSize: this.props.pixelSize,
     posX: 0,
     posY: 0,
+  }
+
+  componentDidMount () {
+    window.addEventListener('resize', this.onWindowResize)
+  }
+
+  componentDidUpdate (prevProps: Props) {
+    if (prevProps.pixels.length !== this.props.pixels.length) {
+      this.onWindowResize()
+    }
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.onWindowResize)
   }
 
   onMouseLeave = () => this.setState({ pixelHovered: null, mousePosition: null })
@@ -112,8 +128,8 @@ class CanvasStage extends React.Component<Props, State> {
    * @return {{x: number, y: number}} - index coordinates of pixel
    */
   getPixelIndexByMouseCoordinates = ({ x, y }: MouseCoords): PixelIndex => {
-    const indexX: number = Math.floor((x + (this.state.posX * this.state.scale)) / (this.props.pixelSize * this.state.scale))
-    const indexY: number = Math.floor((y + (this.state.posY * this.state.scale)) / (this.props.pixelSize * this.state.scale))
+    const indexX: number = Math.floor((x + (this.state.posX * this.state.scale)) / (this.state.pixelSize * this.state.scale))
+    const indexY: number = Math.floor((y + (this.state.posY * this.state.scale)) / (this.state.pixelSize * this.state.scale))
     const id: number = indexX + indexY * this.getGridColumns()
     return ({
       id,
@@ -124,9 +140,19 @@ class CanvasStage extends React.Component<Props, State> {
 
   getGridColumns = () => Math.sqrt(this.props.pixels.length)
 
+  getCanvasSize = () => this.getGridColumns() * this.state.pixelSize
+
+  onWindowResize = () => {
+    const canvasActualWidth = window.innerWidth - 40
+    const canvasFullWidth = this.getGridColumns() * this.props.pixelSize
+    const pixelScaleFactor = canvasActualWidth < canvasFullWidth ? canvasActualWidth / canvasFullWidth : 1
+    const pixelSize = Math.floor(pixelScaleFactor * this.props.pixelSize)
+    this.setState({ pixelSize, scale: 1 })
+  }
+
   render () {
     const gridColumns = this.getGridColumns()
-    const canvasSize = gridColumns * this.props.pixelSize
+    const canvasSize = this.getCanvasSize()
 
     return (
       <div>
@@ -139,7 +165,7 @@ class CanvasStage extends React.Component<Props, State> {
                 offsetX={this.state.posX * this.state.scale}
                 offsetY={this.state.posY * this.state.scale}
                 colorId={this.props.pixels[ this.state.pixelPopup.id ]}
-                pixelSize={this.props.pixelSize * this.state.scale}
+                pixelSize={this.state.pixelSize * this.state.scale}
                 canvasId={this.props.canvasId}
                 onCopyColor={this.props.changeActiveColor}
                 onClose={this.closePixelPopup}
@@ -153,13 +179,13 @@ class CanvasStage extends React.Component<Props, State> {
                   this.state.pixelHovered &&
                   <PixelHoverHighlight
                     pixelHovered={this.state.pixelHovered}
-                    pixelSize={this.props.pixelSize}
+                    pixelSize={this.state.pixelSize}
                     showDetailsIcon={!this.props.activeColorId}
                   />
                 }
 
                 <UserPaintedLoadingPixels
-                  pixelSize={this.props.pixelSize}
+                  pixelSize={this.state.pixelSize}
                   canvasId={this.props.canvasId}
                 />
 
@@ -172,7 +198,7 @@ class CanvasStage extends React.Component<Props, State> {
                     offsetY={this.state.posY}
                     scale={this.state.scale}
                     colorId={this.props.activeColorId}
-                    pixelSize={this.props.pixelSize}
+                    pixelSize={this.state.pixelSize}
                   />
                 }
 
@@ -184,7 +210,7 @@ class CanvasStage extends React.Component<Props, State> {
                     canvasSize={canvasSize}
                     pixels={this.props.pixels}
                     gridColumns={gridColumns}
-                    pixelSize={this.props.pixelSize}
+                    pixelSize={this.state.pixelSize}
                   />
                 </div>
               </div>

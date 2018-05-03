@@ -10,6 +10,7 @@ export const CONFIG = {
   startBlock: 228,
   pixelSize: {
     preview: 20,
-    canvas: 40,
-  }
+    canvas: 220,
+  },
+  gridColumns: 3,
 }

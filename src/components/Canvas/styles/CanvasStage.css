@@ -4,6 +4,10 @@
     cursor: pointer;
 }
 
+.CanvasStage--Placeholder {
+    background: #ddd;
+}
+
 .CanvasStage__CameraWrapper {
     overflow: hidden;
 }
