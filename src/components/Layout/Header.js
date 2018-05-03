@@ -25,7 +25,7 @@ const Header = (props: Props) => {
           <NavLink to="/" exact
                    className="Header__menu-link"
                    activeClassName="Header__menu-link--active">
-            Canvas Gallery
+            <span className="hidden-mobile">Canvas</span> Gallery
           </NavLink>
         </li>
         {/*<li>*/}
@@ -49,7 +49,7 @@ const Header = (props: Props) => {
             <NavLink to={`/account/${props.account}`}
                      className="Header__menu-link"
                      activeClassName="Header__menu-link--active">
-              My Account
+              <span className="hidden-mobile">My</span> Account
             </NavLink>
           </li>
         }
@@ -65,7 +65,7 @@ const Header = (props: Props) => {
                 trigger="hover"
               >
                 <span className="Header__menu-link  Header__menu-link--disabled">
-                  My Account
+                  <span className="hidden-mobile">My</span> Account
                 </span>
               </Popover>
           </li>

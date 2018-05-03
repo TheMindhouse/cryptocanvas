@@ -22,8 +22,8 @@ const About = () => (
       {/*</Col>*/}
     {/*</Row>*/}
     <Row className="container About">
-      <Col span={8}>
-        <Anchor style={{ paddingTop: 20 }}>
+      <Col xs={24} sm={24} md={8} className="About__nav">
+        <Anchor>
           <Anchor.Link href="#introduction" title="Introduction" />
           <Anchor.Link href="#what-is-cryptocanvas" title="What is CryptoCanvas?" />
           <Anchor.Link href="#how-does-it-work" title="How does it work?">
@@ -38,7 +38,7 @@ const About = () => (
           <Anchor.Link href="#is-the-number-of-canvases-limited" title="Is the number of canvases limited?" />
         </Anchor>
       </Col>
-      <Col span={16}>
+      <Col xs={24} sm={24} md={16}>
         <h2 id="introduction"><b>Introduction</b></h2>
 
         <p>An inspiration for creating CryptoCanvas came from the combination of two ideas. First, we got really excited

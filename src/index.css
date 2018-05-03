@@ -40,6 +40,10 @@ body {
     white-space: nowrap;
 }
 
+.text-wrap {
+    word-wrap: break-word;
+}
+
 .font-monospace {
     font-family: monospace;
 }
@@ -76,4 +80,12 @@ blockquote::before {
 .ant-table-thead > tr > th,
 .ant-table-tbody > tr > td {
     word-break: normal !important;
+}
+
+/* Responsive classes */
+
+@media all and (max-width: 640px) {
+    .hidden-mobile {
+        display: none !important;
+    }
 }

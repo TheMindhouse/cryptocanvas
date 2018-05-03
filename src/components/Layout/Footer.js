@@ -14,13 +14,13 @@ class Footer extends React.PureComponent<Props> {
     return (
       <Row className="container Footer">
         <Divider />
-        <Col span={8} style={{ textAlign: 'left' }}>
+        <Col xs={24} sm={24} md={8}>
           <nav className="Footer__nav">
             <Link to={URLHelper.about}>About</Link>
             <Link to={URLHelper.help.page}>Help</Link>
           </nav>
         </Col>
-        <Col span={8} style={{ textAlign: 'center' }}>
+        <Col xs={24} sm={24} md={8} style={{ textAlign: 'center' }}>
           Made with &hearts; by The Mindhouse
         </Col>
       </Row>

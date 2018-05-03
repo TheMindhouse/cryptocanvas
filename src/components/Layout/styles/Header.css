@@ -1,6 +1,6 @@
 .Header {
     max-width: 1100px;
-    padding: 50px 20px;
+    padding: 40px 20px 50px;
     margin: 0 auto;
 }
 
@@ -20,6 +20,8 @@
 
 .Header__menu {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .Header__menu li {
@@ -46,4 +48,39 @@
 .Header__menu-link--disabled {
     color: #999;
     cursor: default;
+}
+
+@media all and (max-width: 1100px) {
+    .Header__menu {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .Header {
+        padding: 15px 20px 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .Header__title > * {
+        font-size: 30px;
+        margin: 0;
+    }
+
+    .Header__subtitle {
+        font-size: 15px;
+    }
+
+    .Header__menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .Header__menu li {
+        padding: 0 15px;
+    }
 }

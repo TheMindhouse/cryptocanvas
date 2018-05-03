@@ -28,7 +28,7 @@ class Account extends React.PureComponent<Props> {
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="container">
             <h1><b>Account Details</b></h1>
-            <h2>{urlAccountAddress}</h2>
+            <h2 className="text-wrap">{urlAccountAddress}</h2>
           </Row>
         </div>
 
