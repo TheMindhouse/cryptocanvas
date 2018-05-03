@@ -33,7 +33,7 @@ class App extends React.Component {
         <TransactionsProvider>
           <Router>
             <div>
-              <div style={{ minHeight: 'calc(100vh - 150px)' }}>
+              <div className="AppContent">
                 <Header />
                 <AccountStatus />
 

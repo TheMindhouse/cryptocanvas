@@ -7,3 +7,7 @@
 .CanvasPreview__info {
     margin-top: 15px;
 }
+
+.CanvasPreview__info a {
+    color: inherit;
+}

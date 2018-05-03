@@ -46,7 +46,7 @@ class Marketplace extends Component {
           </Row>
         </div>
 
-        <Row className="container" style={{ textAlign: 'center' }}>
+        <Row className="container text-center">
           <h1><b>Initial Bidding</b></h1>
           <h3>Waiting for you to make a bid, which will be distributed across all of the painters</h3>
           <br /><br />
@@ -63,7 +63,7 @@ class Marketplace extends Component {
           }
         </Row>
 
-        <Row className="container" style={{ textAlign: 'center' }}>
+        <Row className="container text-center">
           <h1><b>Finished Canvas Gallery</b></h1>
           <h3>You can admire them and you can buy them</h3>
           <br /><br />

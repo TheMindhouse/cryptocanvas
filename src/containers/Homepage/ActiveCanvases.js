@@ -12,18 +12,30 @@ class ActiveCanvases extends React.PureComponent {
     return (
       <div>
         <Row gutter={100} type="flex">
-          {this.props.activeCanvasIds.map((canvasId, index) =>
-            <Col span={6} key={index}>
-              <CanvasPreview canvasId={canvasId} showPercentCompleted={true} />
+          {
+            !this.props.activeCanvasIds.length &&
+            <Col span={24}>
+              <p className="NoCanvasInfo">No active canvases, but you can create a new one</p>
             </Col>
-          )}
-          {this.props.activeCanvasIds.length < MAX_ACTIVE_CANVASES &&
-          <Col span={6}>
-            <CreateCanvas />
-          </Col>
+          }
+
+          {
+            this.props.activeCanvasIds.map((canvasId, index) =>
+              <Col xs={24} sm={12} md={6} key={index}>
+                <CanvasPreview canvasId={canvasId} showPercentCompleted={true} />
+              </Col>
+            )
+          }
+
+          {
+            this.props.activeCanvasIds.length < MAX_ACTIVE_CANVASES &&
+            <Col xs={24} sm={12} md={6}>
+              <CreateCanvas />
+            </Col>
           }
         </Row>
-        <PendingTransactionInfo type={TRANSACTION_TYPE.createCanvas} style={{ display: 'inline-block' }}/>
+
+        <PendingTransactionInfo type={TRANSACTION_TYPE.createCanvas} style={{ display: 'inline-block' }} />
       </div>
     )
   }

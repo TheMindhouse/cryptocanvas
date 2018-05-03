@@ -11,7 +11,7 @@ class BiddingCanvases extends React.PureComponent {
       <div className="overflow-hidden">
         <Row gutter={100} type="flex">
           {this.props.canvasIds.map((canvasId, index) =>
-            <Col span={6} key={index}>
+            <Col xs={24} sm={12} md={6} key={index}>
               <CanvasPreview
                 canvasId={canvasId}
                 extraRender={() =>

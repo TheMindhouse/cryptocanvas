@@ -62,7 +62,7 @@ class CanvasPreview extends React.Component {
           {!this.state.isLoading && <CanvasPreviewImage pixels={this.state.pixels} />}
         </Link>
         <Row gutter={20} type="flex" justify="space-between" className="CanvasPreview__info">
-          <h3>Canvas #{this.props.canvasId}</h3>
+          <h3><Link to={URLHelper.canvas(this.props.canvasId)}>Canvas #{this.props.canvasId}</Link></h3>
           {
             this.props.showPercentCompleted && this.state.pixels.length > 0 &&
             <h3>{getPercentOfPixelsCompleted(this.state.pixels)}%</h3>
