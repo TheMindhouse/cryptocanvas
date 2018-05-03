@@ -67,7 +67,7 @@ class CanvasesOwned extends React.PureComponent<Props, State> {
 
     return (
       <div>
-        <h2><b>{this.state.ownedCanvasesIds.length} Canvases Owned</b></h2>
+        <h2><b>{this.state.ownedCanvasesIds.length} {this.state.ownedCanvasesIds.length !== 1 ? 'Canvases' : 'Canvas'} Owned</b></h2>
         {
           this.state.ownedCanvasesIds.length > 0 &&
           <Row gutter={100} type="flex" style={{ marginTop: 20, marginBottom: -60 }}>
