@@ -54,7 +54,9 @@ const CanvasSidebarBidding = (props: Props) => {
           <div>
             <SubmitBid
               submitBid={submitBid}
-              highestBidAmount={highestBidAmount} />
+              highestBidAmount={highestBidAmount}
+              canvasId={props.canvasId}
+            />
             <Divider />
           </div>
       }

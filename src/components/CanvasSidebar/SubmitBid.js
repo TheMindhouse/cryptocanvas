@@ -1,5 +1,7 @@
 import React from 'react'
 import { Input, Button } from 'antd'
+import { PendingTransactionInfo } from '../Small/PendingTransactionInfo'
+import { TRANSACTION_TYPE } from '../../models/Transaction'
 
 class SubmitBid extends React.PureComponent {
   constructor (props) {
@@ -42,6 +44,8 @@ class SubmitBid extends React.PureComponent {
         (${this.getAmountInUSD()})
         <p>{this.state.error}</p>
         <Button type="primary" onClick={this.onSubmitBid}>Submit Bid</Button>
+
+        <PendingTransactionInfo type={TRANSACTION_TYPE.makeBid} canvasId={this.props.canvasId}/>
       </div>
     )
   }
