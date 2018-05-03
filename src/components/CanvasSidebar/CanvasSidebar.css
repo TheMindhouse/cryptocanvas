@@ -13,3 +13,10 @@
     font-weight: 400;
     color: #777;
 }
+
+@media all and (max-width: 1100px) {
+    .CanvasSidebar {
+        width: 100%;
+        margin-top: 30px;
+    }
+}

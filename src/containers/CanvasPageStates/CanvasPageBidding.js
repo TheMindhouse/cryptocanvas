@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row } from 'antd'
+import { Col, Row } from 'antd'
 import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarBidding from '../../components/CanvasSidebar/CanvasSidebarBidding'
 import withEvents from '../../hoc/withEvents'
@@ -73,7 +73,9 @@ class CanvasPageBidding extends Component {
           />
         </Row>
         <Row className="container">
-          <TransactionsHistory canvasId={this.props.canvasId}/>
+          <Col xs={{ span: 24, offset: 0 }} sm={{ span: 24, offset: 0 }} md={{ span: 20, offset: 2 }}>
+            <TransactionsHistory canvasId={this.props.canvasId} />
+          </Col>
         </Row>
       </div>
     )

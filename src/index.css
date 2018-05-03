@@ -94,7 +94,7 @@ blockquote::before {
 
 /* Responsive classes */
 
-@media all and (max-width: 640px) {
+@media all and (max-width: 768px) {
     .hidden-mobile {
         display: none !important;
     }
