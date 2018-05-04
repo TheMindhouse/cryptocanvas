@@ -13,7 +13,7 @@ export const CONFIG = {
   MINIMUM_BID: 0.08,
   startBlock: 228,
   pixelSize: {
-    preview: 20,
+    preview: 64,
     canvas: 220,
   },
   gridColumns: 3,
