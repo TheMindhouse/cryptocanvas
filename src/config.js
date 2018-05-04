@@ -7,6 +7,8 @@ export const CONFIG = {
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms
   CHECK_ACCOUNT_DELAY: 2000,
+  // How long a canvas is stored in the cache, in ms
+  CANVAS_CACHE_TIME: 15 * 60 * 1000,  // 15 minutes
   startBlock: 228,
   pixelSize: {
     preview: 20,

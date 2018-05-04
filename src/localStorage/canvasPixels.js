@@ -1,9 +1,9 @@
 // @flow
 import { CanvasPixelsCache } from '../models/CanvasPixelsCache'
 import moment from 'moment'
+import { CONFIG } from '../config'
 
 const STORAGE_KEY = 'CANVAS_CACHE'
-const EXPIRATION_TIME_MS = 1 * 60 * 1000 // Default expiration time is 15 minutes
 
 const getSavedCanvases = () => {
   const canvases = window.localStorage.getItem(STORAGE_KEY) || '[]'
@@ -72,7 +72,7 @@ const updateCanvasCache = ({ canvasId, pixelsMap, withExpirationDate = true }: {
 }
 
 const getExpirationDate = () => {
-  return moment(new Date()).add(EXPIRATION_TIME_MS, 'ms').toDate()
+  return moment(new Date()).add(CONFIG.CANVAS_CACHE_TIME, 'ms').toDate()
 }
 
 export const canvasPixels = {
