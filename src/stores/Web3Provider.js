@@ -36,8 +36,6 @@ class Web3Provider extends React.Component {
     this.ContractInstance = window.web3.eth.contract(ABI)
     const Contract = new ContractModel(this.ContractInstance.at(CONFIG.CONTRACT_ADDRESS))
 
-    window.Contract = Contract
-
     this.state = {
       web3: window.web3,
       Contract,

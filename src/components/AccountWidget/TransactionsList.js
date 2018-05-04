@@ -5,7 +5,6 @@ import { Badge, Table } from 'antd'
 import './styles/TransactionsList.css'
 import { EtherscanLink } from '../Small/EtherscanLink'
 import Moment from 'react-moment'
-import { AccountAddressLink } from '../Small/AccountAddressLink'
 
 const columns = [
   {
