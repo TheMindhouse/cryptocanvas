@@ -54,6 +54,11 @@ body {
     text-align: center;
 }
 
+.text-error {
+    color: red;
+    font-size: 0.9em;
+}
+
 .font-monospace {
     font-family: monospace;
 }

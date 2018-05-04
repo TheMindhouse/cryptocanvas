@@ -9,6 +9,8 @@ export const CONFIG = {
   CHECK_ACCOUNT_DELAY: 2000,
   // How long a canvas is stored in the cache, in ms
   CANVAS_CACHE_TIME: 15 * 60 * 1000,  // 15 minutes
+  // Minimum bid in Initial Bidding
+  MINIMUM_BID: 0.08,
   startBlock: 228,
   pixelSize: {
     preview: 20,
