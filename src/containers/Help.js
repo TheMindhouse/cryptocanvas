@@ -3,6 +3,7 @@ import * as React from 'react'
 import { Anchor, Col, Row } from 'antd'
 import { URLHelper } from '../helpers/URLhelper'
 import { Link } from 'react-router-dom'
+import { YoutubePlayer } from '../components/Small/YoutubePlayer'
 
 type Props = {}
 
@@ -31,14 +32,45 @@ class Help extends React.PureComponent<Props> {
           </Col>
           <Col span={16}>
             <h2 id="installing-metamask"><b>Installing MetaMask</b></h2>
-            <p>To do</p>
+            <p>
+              To use CryptoCanvas, you will need to install MetaMask, a browser extension, which connects your browser
+              to the Ethereum network. You will also need to put some Ether in it to play with the canvases.
+            </p>
+            <p>
+              <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">
+                <b>Download MetaMask on the Official MetaMask Website.</b>
+              </a>
+            </p>
+            <p>
+              Note: A digital wallet like MetaMask acts like a bank account&mdash;treat it with respect and make sure
+              you don’t forget your password or the seed words.
+            </p>
+            <YoutubePlayer videoId="6Gf_kRE4MJU" />
+            <br />
+
             <h2 id="getting-ether"><b>Getting Ether</b></h2>
-            <p>To do</p>
+            <p>Ether cryptocurrency (ETH) fuels all the operations performed on the Ethereum network. To paint, make
+              bids and trade the canvases you will need a small amount of Ether to send transactions to the network. The
+              cost of sending a transaction should not exceed a couple of cents.</p>
+            <p>
+              <b>For U.S. citizens only:</b><br />
+              You can buy Ether directly in MetaMask. Just press the “Buy” button under your account address.
+            </p>
+            <p>
+              <b>For everyone else:</b><br />
+              You will need to purchase ETH from an exchange, and then transfer the ETH from your exchange wallet to
+              your MetaMask wallet. Unfortunately, you cannot interact with CryptoCanvas with only an exchange account.
+            </p>
+            <p>
+              You cannot use traditional currencies like USD or EUR to play with CryptoCanvas — it needs to be converted
+              into ETH first.
+            </p>
           </Col>
         </Row>
-      </div>
-    )
-  }
-}
+        <
+        /div>
+        )
+        }
+        }
 
-export { Help }
+        export {Help}
