@@ -28,6 +28,7 @@ class Help extends React.PureComponent<Props> {
             <Anchor style={{ paddingTop: 20 }}>
               <Anchor.Link href="#installing-metamask" title="Installing MetaMask" />
               <Anchor.Link href="#getting-ether" title="Getting Ether" />
+              <Anchor.Link href="#sending-eth-to-metamask" title="Sending ETH to MetaMask" />
             </Anchor>
           </Col>
           <Col span={16}>
@@ -58,19 +59,38 @@ class Help extends React.PureComponent<Props> {
             </p>
             <p>
               <b>For everyone else:</b><br />
-              You will need to purchase ETH from an exchange, and then transfer the ETH from your exchange wallet to
+              You will need to purchase ETH from <a href="https://blockgeeks.com/guides/best-cryptocurrency-exchanges"
+                                                    target="_blank" rel="noopener noreferrer">an exchange</a>,
+              and then transfer the ETH from your exchange wallet to
               your MetaMask wallet. Unfortunately, you cannot interact with CryptoCanvas with only an exchange account.
             </p>
             <p>
               You cannot use traditional currencies like USD or EUR to play with CryptoCanvas — it needs to be converted
               into ETH first.
             </p>
+
+            <h2 id="sending-eth-to-metamask"><b>Sending ETH to MetaMask</b></h2>
+            <p>
+              <b>For U.S. citizens only:</b><br />
+              You can buy ETH directly from the MetaMask using the Coinbase widget and it will appear in your MetaMask
+              wallet. It’s a very simple and quick method to get started.
+            </p>
+            <p>
+              <b>For everyone else:</b><br />
+              You need to buy ETH from an exchange using normal fiat currency, such as USD or EUR, and then transfer it
+              to your MetaMask wallet.<br />
+              Once you’ve bought Ether on an exchange, copy your MetaMask address by clicking on the three large dots
+              next to your account in the MetaMask widget, and then select “Copy Address to clipboard”. Go to your
+              exchange, select your ETH wallet and find a “send” button. Paste the MetaMask address in the box and enter
+              the amount to transfer. Make sure the address you pasted is the correct address from MetaMask! After
+              making the transfer, Ether should show up on your MetaMask wallet and you’re good to paint your first
+              canvas!
+            </p>
           </Col>
         </Row>
-        <
-        /div>
-        )
-        }
-        }
+      </div>
+    )
+  }
+}
 
-        export {Help}
+export { Help }
