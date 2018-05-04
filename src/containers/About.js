@@ -11,7 +11,7 @@ const About = () => (
         <h2>
           <b>TL;DR</b><br />
           CryptoCanvas is a collectible set of community created artworks living on the Ethereum blockchain.
-          Users paint canvas pixel by pixel and when it's finished, they put their artwork up for auction.<br />
+          Users paint canvas pixel by pixel and when it's finished, their artwork is put up for auction.<br />
           <b>All the information</b>&mdash;about colors and authors of the pixels, and owners of the
           finished artworks&mdash;is stored <b>forever on the blockchain.</b>
         </h2>
@@ -35,6 +35,7 @@ const About = () => (
             <Anchor.Link href="#trading" title="III. Trading" />
           </Anchor.Link>
           <Anchor.Link href="#withdrawing-rewards-and-profits" title="Withdrawing Rewards and Profits" />
+          <Anchor.Link href="#how-do-you-calculate-rewards" title="How do you calculate Rewards for painting?" />
           <Anchor.Link href="#how-can-i-participate" title="How can I participate?" />
           <Anchor.Link href="#how-much-does-it-cost" title="How much does it cost?" />
           <Anchor.Link href="#what-is-stored-on-the-blockchain" title="What is stored on the blockchain?" />
@@ -59,7 +60,8 @@ const About = () => (
           They rely on the functionality of the creators' servers because only some of the data, the ID or DNA numbers,
           is stored on the blockchain. In these projects, the data stored on the blockchain must be interpreted by the
           creators' servers. CryptoCanvas has no such limitations. All the information about the CryptoCanvas artwork is
-          stored on the blockchain&mdash;that means every single pixel of the canvas and every transaction ever made. Such
+          stored on the blockchain&mdash;that means every single pixel of the canvas and every transaction ever made.
+          Such
           information is open and available to be interpreted by anyone, which means CryptoCanvas is a fully
           decentralized app, completely independent of our servers.
         </p>
@@ -89,7 +91,7 @@ const About = () => (
 
         <h3 id="initial-bidding"><b>II. Initial Bidding</b></h3>
         <p>After all the pixels have their colors selected, the painting phase is finished and the canvas enters the
-          Initial Bidding mode.</p>
+          Initial Bidding mode. <b>From that point, the canvas cannot be edited anymore.</b></p>
 
         <p>In the real world, when an artist finishes an artwork, she offers it for sale. CryptoCanvas has the same
           principle - the only difference is that it has many authors instead of one.</p>
@@ -119,7 +121,7 @@ const About = () => (
 
         <h2 id="withdrawing-rewards-and-profits"><b>Withdrawing Rewards and Profits</b></h2>
 
-        <p>Because of the Ethereum platform limitations, rewards for painting and profits from trading are not
+        <p>Because of the Ethereum platform security guidelines, rewards for painting and profits from trading are not
           transferred to your wallet automatically. Instead, they are added to your Account Balance on the CryptoCanvas
           Ethereum Contract. The Contract is publicly available and is completely independent of the CryptoCanvas.art
           website, so you don't need to worry about your funds. They will be stored in the Contract forever waiting for
@@ -134,6 +136,14 @@ const About = () => (
           Account Balance" button. This operation will check how many pixels of the final canvas were painted by you,
           calculate your reward based on the canvas price from the Initial Bidding and add it to your Balance. From
           there you will be able to withdraw it as described before.</p>
+
+        <h2 id="how-do-you-calculate-rewards"><b>How do you calculate Rewards for painting?</b></h2>
+        <p>The reward is evenly distributed across all the painters from the winning bid in the Initial Bidding phase,
+          based on how many final pixels of the canvas they have painted.</p>
+        <p><i>Example:<br />
+          The canvas was sold during Initial Bidding for 1 ETH. Minus our 3.9% commission, there is a total of 0.961 ETH
+          to distribute. If you painted 256 pixels&mdash;that is 6.25% of all the pixels of the canvas&mdash;you would be rewarded
+          6.25% of the 0.961 ETH, which is 0,0600625 ETH.</i></p>
 
         <h2 id="how-can-i-participate"><b>How can I participate?</b></h2>
 
@@ -159,7 +169,7 @@ const About = () => (
           only thing you need to cover is a transaction fee required by the Ethereum network which should not exceed a
           couple of cents.</p>
 
-        <p>We take a small commision of <b>3.9%</b> from the final highest bid after Initial Bidding is finished and
+        <p>We take a small commission of <b>3.9%</b> from the final highest bid after Initial Bidding is finished and
           from each successful trading transaction (accepted Buy or Sell offer) in the "Marketplace".</p>
 
         <h2 id="what-is-stored-on-the-blockchain"><b>What is stored on the blockchain?</b></h2>
@@ -171,7 +181,7 @@ const About = () => (
         </p>
 
         <h2 id="is-the-number-of-canvases-limited"><b>Is the number of canvases limited?</b></h2>
-        <p>Yes, the total number of canvases is limited to 1000. However, maximum 10 canvases can be active at the same
+        <p>Yes, the total number of canvases is limited to 1000. However, maximum 12 canvases can be active at the same
           time.</p>
       </Col>
     </Row>
