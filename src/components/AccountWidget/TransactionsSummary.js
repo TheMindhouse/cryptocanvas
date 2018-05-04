@@ -6,7 +6,7 @@ import './styles/TransactionsSummary.css'
 const TransactionsSummary = ({ transactions, onShowAll }) => {
   if (!transactions.length) {
     return (
-      <small>No transaction history</small>
+      <small>No transactions</small>
     )
   }
   const txArray = transactions.reduce((acc, tx) => {
