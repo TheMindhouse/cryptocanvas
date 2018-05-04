@@ -24,14 +24,14 @@ class Help extends React.PureComponent<Props> {
           </div>
         </div>
         <Row className="container About">
-          <Col span={8}>
+          <Col xs={24} sm={24} md={8} className="About__nav">
             <Anchor style={{ paddingTop: 20 }}>
               <Anchor.Link href="#installing-metamask" title="Installing MetaMask" />
               <Anchor.Link href="#getting-ether" title="Getting Ether" />
               <Anchor.Link href="#sending-eth-to-metamask" title="Sending ETH to MetaMask" />
             </Anchor>
           </Col>
-          <Col span={16}>
+          <Col xs={24} sm={24} md={16}>
             <h2 id="installing-metamask"><b>Installing MetaMask</b></h2>
             <p>
               To use CryptoCanvas, you will need to install MetaMask, a browser extension, which connects your browser
