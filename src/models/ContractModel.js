@@ -364,7 +364,10 @@ export class ContractModel {
   getCanvasInfo (canvasId) {
     return new Promise((resolve, reject) => {
       // Different gas limit is a solution to Metamask caching results...
-      this.Contract.getCanvasInfo(canvasId, {...this.config, gas: Math.floor(Math.random() * (GAS_LIMIT + 100)) + GAS_LIMIT  }, (error, result) => {
+      this.Contract.getCanvasInfo(canvasId, {
+        ...this.config,
+        gas: Math.floor(Math.random() * (GAS_LIMIT + 100)) + GAS_LIMIT
+      }, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -469,7 +472,10 @@ export class ContractModel {
   getAccountBalance (userAddress = '') {
     // Different gas limit is a solution to Metamask caching results...
     return new Promise((resolve, reject) => {
-      this.Contract.getPendingWithdrawal(userAddress, {...this.config, gas: Math.floor(Math.random() * (GAS_LIMIT + 100)) + GAS_LIMIT  }, (error, result) => {
+      this.Contract.getPendingWithdrawal(userAddress, {
+        ...this.config,
+        gas: Math.floor(Math.random() * (GAS_LIMIT + 100)) + GAS_LIMIT
+      }, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
