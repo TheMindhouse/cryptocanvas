@@ -350,7 +350,7 @@ export class ContractModel {
 
   getCanvas (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasBitmap(canvasId, this.config, (error, result) => {
+      this.Contract.getCanvasBitmap(canvasId, { ...this.config, gas: 3000000 }, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
