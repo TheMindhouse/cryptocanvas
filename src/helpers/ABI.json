@@ -932,7 +932,7 @@
         "type": "uint32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "buyer",
         "type": "address"
       },
@@ -954,7 +954,7 @@
         "type": "uint32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "buyer",
         "type": "address"
       },
