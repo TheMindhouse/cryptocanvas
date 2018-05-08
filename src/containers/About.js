@@ -40,6 +40,7 @@ const About = () => (
           <Anchor.Link href="#how-much-does-it-cost" title="How much does it cost?" />
           <Anchor.Link href="#what-is-stored-on-the-blockchain" title="What is stored on the blockchain?" />
           <Anchor.Link href="#is-the-number-of-canvases-limited" title="Is the number of canvases limited?" />
+          <Anchor.Link href="#who-holds-copyright-to-the-canvases" title="Who holds copyright to the Canvases?" />
         </Anchor>
       </Col>
       <Col xs={24} sm={24} md={16}>
@@ -142,7 +143,8 @@ const About = () => (
           based on how many final pixels of the canvas they have painted.</p>
         <p><i>Example:<br />
           The canvas was sold during Initial Bidding for 1 ETH. Minus our 3.9% commission, there is a total of 0.961 ETH
-          to distribute. If you painted 256 pixels&mdash;that is 6.25% of all the pixels of the canvas&mdash;you would be rewarded
+          to distribute. If you painted 256 pixels&mdash;that is 6.25% of all the pixels of the canvas&mdash;you would
+          be rewarded
           6.25% of the 0.961 ETH, which is 0,0600625 ETH.</i></p>
 
         <h2 id="how-can-i-participate"><b>How can I participate?</b></h2>
@@ -183,6 +185,14 @@ const About = () => (
         <h2 id="is-the-number-of-canvases-limited"><b>Is the number of canvases limited?</b></h2>
         <p>Yes, the total number of canvases is limited to 1000. However, maximum 12 canvases can be active at the same
           time.</p>
+
+        <h2 id="who-holds-copyright-to-the-canvases"><b>Who holds copyright to a canvas?</b></h2>
+        <p>
+          Each finished canvas has its owner, determined during the Initial Bidding phase. The current owner holds all
+          copyright to the canvas. Once the owner transfers the ownership of the canvas to another user, the copyright
+          is passed to the new owner along with the canvas.
+        </p>
+        <p>CryptoCanvas fans are able to use images of the canvases in non-commercial purposes.</p>
       </Col>
     </Row>
   </div>
