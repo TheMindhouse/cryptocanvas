@@ -29,7 +29,7 @@ class PaintingHelp extends React.PureComponent<Props> {
             </li>
           </ul>
           <p>
-            You can find more information about how CryptoCanvas works at the <a href={URLHelper.about}>About page</a>.
+            <b>You can find more information about how CryptoCanvas works at the <a href={URLHelper.about}>About page</a>.</b>
           </p>
         </div>
       ),

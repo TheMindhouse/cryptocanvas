@@ -70,7 +70,7 @@ class Homepage extends Component {
         </div>
         <Row className="container" style={{ textAlign: 'center', marginBottom: 100 }}>
           <h1><b>Canvases Available for Painting</b></h1>
-          <h3>Paint some pixels and be a part of history (or read <Link to="/about">how it works</Link>)</h3>
+          <h3>Paint some pixels and become the Blockchain Picasso (or read <Link to="/about">how it works</Link>)</h3>
           <br /><br />
           <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
         </Row>
