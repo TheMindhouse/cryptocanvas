@@ -6,6 +6,7 @@
 
 .Footer a {
     color: #999;
+    white-space: nowrap;
 }
 
 .Footer a:hover {

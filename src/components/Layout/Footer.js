@@ -18,6 +18,7 @@ class Footer extends React.PureComponent<Props> {
           <nav className="Footer__nav">
             <Link to={URLHelper.about}>About</Link>
             <Link to={URLHelper.help.page}>Help</Link>
+            <Link to={URLHelper.terms}>Terms of Use</Link>
             <Link to={URLHelper.contact}>Contact</Link>
           </nav>
         </Col>
