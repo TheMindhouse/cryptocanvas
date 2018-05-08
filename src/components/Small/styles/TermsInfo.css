@@ -1,0 +1,14 @@
+.TermsInfo {
+    color: #999;
+    font-size: 0.8em;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.TermsInfo a {
+    color: #000;
+}
+
+.TermsInfo a:hover {
+    text-decoration: underline;
+}

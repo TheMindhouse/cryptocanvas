@@ -1,5 +1,6 @@
 import React from 'react'
 import { Input, Modal } from 'antd'
+import { TermsInfo } from '../Small/TermsInfo'
 
 class OfferForSaleModal extends React.PureComponent {
   state = {
@@ -47,6 +48,7 @@ class OfferForSaleModal extends React.PureComponent {
         <Input type="text"
                placeholder="(optional) Receiver's address"
                onChange={this.setReceiver} />
+        <TermsInfo />
       </Modal>
     )
   }

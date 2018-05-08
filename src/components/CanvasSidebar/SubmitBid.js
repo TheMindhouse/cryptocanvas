@@ -1,8 +1,9 @@
 import React from 'react'
-import { Input, Button, Icon } from 'antd'
+import { Input, Button, Icon, Modal } from 'antd'
 import { PendingTransactionInfo } from '../Small/PendingTransactionInfo'
 import { TRANSACTION_TYPE } from '../../models/Transaction'
 import { CONFIG } from '../../config'
+import { TermsInfo } from '../Small/TermsInfo'
 
 class SubmitBid extends React.PureComponent {
   constructor (props) {
@@ -31,7 +32,21 @@ class SubmitBid extends React.PureComponent {
       const error = 'Your bid must be higher than the current highest bid'
       return this.setState({ error })
     }
-    this.props.submitBid(this.state.bid)
+
+    Modal.confirm({
+      title: 'Confirm Make a Bid',
+      content: (
+        <div>
+          <p>
+            Do you want to submit <b className="text-nowrap">{this.state.bid} ETH</b> bid for <b className="text-nowrap">Canvas #{this.props.canvasId}</b>?
+          </p>
+          <TermsInfo />
+        </div>
+      ),
+      okText: 'Submit Bid',
+      okType: 'primary',
+      onOk: () => this.props.submitBid(this.state.bid),
+    })
   }
 
   getAmountInUSD = () => {
@@ -54,9 +69,9 @@ class SubmitBid extends React.PureComponent {
           this.state.error &&
           <p className="text-error"><Icon type="exclamation-circle" /> {this.state.error}</p>
         }
-        <Button type="primary" onClick={this.onSubmitBid}>Submit Bid</Button>
+        <Button type="primary" onClick={this.onSubmitBid}>Make a Bid</Button>
 
-        <PendingTransactionInfo type={TRANSACTION_TYPE.makeBid} canvasId={this.props.canvasId}/>
+        <PendingTransactionInfo type={TRANSACTION_TYPE.makeBid} canvasId={this.props.canvasId} />
       </div>
     )
   }

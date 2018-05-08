@@ -1,5 +1,6 @@
 import React from 'react'
 import { Input, Modal } from 'antd'
+import { TermsInfo } from '../Small/TermsInfo'
 
 class MakeBuyOfferModal extends React.PureComponent {
   state = {
@@ -28,6 +29,7 @@ class MakeBuyOfferModal extends React.PureComponent {
                onChange={this.update}
                onPressEnter={this.onSubmitOffer} />
         <p />
+        <TermsInfo />
       </Modal>
     )
   }

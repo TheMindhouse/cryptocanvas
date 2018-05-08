@@ -2,13 +2,19 @@ import React from 'react'
 import { Button, Modal } from 'antd'
 import { PendingTransactionInfo } from '../../Small/PendingTransactionInfo'
 import { TRANSACTION_TYPE } from '../../../models/Transaction'
+import { TermsInfo } from '../../Small/TermsInfo'
 
 const AcceptBuyOffer = (props) => {
   const confirmAcceptBuyOffer = () => {
     Modal.confirm({
       title: 'Confirm Canvas Sale',
-      content: <span>Do you want to sell this Canvas for <b>{props.price} ETH?</b></span>,
-      okText: 'Yes, sell this Canvas',
+      content: (
+        <div>
+          <p>Do you want to sell <b className="text-nowrap">Canvas #{props.canvasId}</b> for <b className="text-nowrap">{props.price} ETH?</b></p>
+          <TermsInfo />
+        </div>
+      ),
+      okText: 'Sell Canvas',
       okType: 'primary',
       onOk: () => props.acceptBuyOffer(props.price),
     })
