@@ -7,9 +7,10 @@ const Contact = () => {
     <div>
       <div className="containerWrapper" style={{ marginBottom: 50 }}>
         <div className="container">
+          <h2><b>Contact</b></h2>
           <h2>
-            If you have any questions or suggestions,<br />
-            you can contact us at <b><Obfuscate email='team@mindhouse.io' /></b>
+            If you have any thoughts, questions or suggestions,<br />
+            you are welcome to contact us at <b><Obfuscate email='team@mindhouse.io' /></b>
           </h2>
         </div>
       </div>
