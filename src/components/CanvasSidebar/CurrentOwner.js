@@ -8,7 +8,7 @@ const CurrentOwner = (props) => {
   return (
     <div>
       <h2><b>Current Owner</b></h2>
-      <Link to={URLHelper.account(props.canvasOwner)}><h3>{cutAddress(props.canvasOwner)}</h3></Link>
+      <h3><Link to={URLHelper.account(props.canvasOwner)}>{cutAddress(props.canvasOwner)}</Link></h3>
       {
         props.isUserCanvasOwner &&
         <Alert
