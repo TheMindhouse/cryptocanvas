@@ -6310,6 +6310,10 @@ react-moment@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.7.0.tgz#9ccb5c87be683d08c253b48469167443f09c3d89"
 
+react-obfuscate@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/react-obfuscate/-/react-obfuscate-1.3.3.tgz#2b800c89466f2829f5e96137240228a1afa8f49c"
+
 react-player@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/react-player/-/react-player-1.5.0.tgz#c7f0b864d8a154797a8f39b0768d16f5a7c22199"

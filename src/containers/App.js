@@ -17,6 +17,8 @@ import ErrorPage404 from './ErrorPage404'
 import ReactGA from 'react-ga'
 import { Help } from './Help'
 import { Footer } from '../components/Layout/Footer'
+import Contact from './Contact'
+import TermsOfUse from './TermsOfUse'
 
 ReactGA.initialize('UA-117937544-1')
 
@@ -45,6 +47,8 @@ class App extends React.Component {
                   <Route path='/canvas/:id' component={CanvasPage} />
                   <Route path='/account/:address' component={Account} />
                   <Route path='/help' component={Help} />
+                  <Route path='/terms-of-use' component={TermsOfUse} />
+                  <Route path='/contact' component={Contact} />
                   <Route component={ErrorPage404} />
                 </Switch>
               </div>
