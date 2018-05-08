@@ -350,7 +350,7 @@ export class ContractModel {
 
   getCanvas (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasBitmap(canvasId, { ...this.config, gas: 3000000 }, (error, result) => {
+      this.Contract.getCanvasBitmap(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -364,10 +364,7 @@ export class ContractModel {
   getCanvasInfo (canvasId) {
     return new Promise((resolve, reject) => {
       // Different gas limit is a solution to Metamask caching results...
-      this.Contract.getCanvasInfo(canvasId, {
-        ...this.config,
-        gas: Math.floor(Math.random() * (GAS_LIMIT + 100)) + GAS_LIMIT
-      }, (error, result) => {
+      this.Contract.getCanvasInfo(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -395,7 +392,7 @@ export class ContractModel {
 
   getCanvasState (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasState(canvasId, this.config, (error, result) => {
+      this.Contract.getCanvasState(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -408,7 +405,7 @@ export class ContractModel {
 
   getCurrentBuyOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCurrentBuyOffer(canvasId, this.config, (error, result) => {
+      this.Contract.getCurrentBuyOffer(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -421,7 +418,7 @@ export class ContractModel {
 
   getCurrentSellOffer (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getCurrentSellOffer(canvasId, this.config, (error, result) => {
+      this.Contract.getCurrentSellOffer(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -434,7 +431,7 @@ export class ContractModel {
 
   getRewardInfo (canvasId, userAddress = '') {
     return new Promise((resolve, reject) => {
-      this.Contract.calculateReward(canvasId, userAddress, this.config, (error, result) => {
+      this.Contract.calculateReward(canvasId, userAddress, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -447,7 +444,7 @@ export class ContractModel {
 
   getPixelAuthor (canvasId, pixelIndex) {
     return new Promise((resolve, reject) => {
-      this.Contract.getPixelAuthor(canvasId, pixelIndex, this.config, (error, result) => {
+      this.Contract.getPixelAuthor(canvasId, pixelIndex, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -460,7 +457,7 @@ export class ContractModel {
 
   getOwnedCanvasCount (userAddress = '') {
     return new Promise((resolve, reject) => {
-      this.Contract.balanceOf(userAddress, this.config, (error, result) => {
+      this.Contract.balanceOf(userAddress, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -473,7 +470,7 @@ export class ContractModel {
 
   getPaintedPixelsCountByAddress (userAddress = '', canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getPaintedPixelsCountByAddress(userAddress, canvasId, this.config, (error, result) => {
+      this.Contract.getPaintedPixelsCountByAddress(userAddress, canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -487,10 +484,7 @@ export class ContractModel {
   getAccountBalance (userAddress = '') {
     // Different gas limit is a solution to Metamask caching results...
     return new Promise((resolve, reject) => {
-      this.Contract.getPendingWithdrawal(userAddress, {
-        ...this.config,
-        gas: Math.floor(Math.random() * (GAS_LIMIT + 100)) + GAS_LIMIT
-      }, (error, result) => {
+      this.Contract.getPendingWithdrawal(userAddress, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
