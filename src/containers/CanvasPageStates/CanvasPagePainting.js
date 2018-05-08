@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Modal, message } from 'antd'
+import { message, Modal, Row } from 'antd'
 
 import withEvents from '../../hoc/withEvents'
 import withWeb3 from '../../hoc/withWeb3'
@@ -157,6 +157,7 @@ class CanvasPagePainting extends React.Component {
           changeActiveColor={this.changeActiveColor}
           activeColorId={this.props.account ? this.state.activeColorId : undefined}
           isPickerDisabled={!this.props.account}
+          isCanvasLoading={this.state.isLoading}
         />
       </Row>
     )

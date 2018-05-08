@@ -6,6 +6,7 @@ import withWeb3 from '../../hoc/withWeb3'
 import withEvents from '../../hoc/withEvents'
 import WithdrawReward from './PainterReward/WithdrawReward'
 import { LocalStorageManager } from '../../localStorage'
+import { CanvasPainters } from './CanvasPainters'
 
 class CanvasSidebarTrading extends React.PureComponent {
   constructor () {
@@ -140,6 +141,12 @@ class CanvasSidebarTrading extends React.PureComponent {
       <div className="CanvasSidebar">
         <h2 className="CanvasSidebar__title">Canvas #{this.props.canvasId}</h2>
         <h3 className="CanvasSidebar__status">Completed</h3>
+
+        <CanvasPainters
+          canvasId={this.props.canvasId}
+          isCanvasLoading={this.props.isCanvasLoading}
+          isCanvasFinished={true}
+        />
 
         <Divider />
 

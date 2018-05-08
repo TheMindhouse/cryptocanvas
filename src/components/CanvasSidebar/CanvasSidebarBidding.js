@@ -9,10 +9,12 @@ import withWeb3 from '../../hoc/withWeb3'
 import { Bid } from '../../models/Bid'
 import { ContractModel } from '../../models/ContractModel'
 import { LocalStorageManager } from '../../localStorage'
+import { CanvasPainters } from './CanvasPainters'
 
 type Props = {
   canvasId: number,
   highestBid?: Bid,
+  isCanvasLoading: boolean,
   //  withWeb3
   web3: Object,
   account: string,
@@ -39,6 +41,12 @@ const CanvasSidebarBidding = (props: Props) => {
     <div className="CanvasSidebar">
       <h2 className="CanvasSidebar__title">Canvas #{props.canvasId}</h2>
       <h3 className="CanvasSidebar__status">Initial Bidding</h3>
+
+      <CanvasPainters
+        canvasId={props.canvasId}
+        isCanvasLoading={props.isCanvasLoading}
+        isCanvasFinished={true}
+      />
 
       <Divider />
 

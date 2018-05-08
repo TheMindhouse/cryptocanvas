@@ -23,7 +23,8 @@ class CanvasPageBidding extends Component {
   }
 
   getCanvas = () => {
-    // Get cached canvas pixels from Local Storage
+    // Get cached canvas pixels from Local Storage, but only when cache doesn't have expiration date,
+    // which means it was cached when already finished (with all pixels)
     const canvasCache = LocalStorageManager.canvasPixels.getCanvasCache(this.props.canvasId)
     if (canvasCache && !canvasCache.expirationDate) {
       return this.setState({
@@ -69,7 +70,12 @@ class CanvasPageBidding extends Component {
           <HighestBidWatcher
             canvasId={this.props.canvasId}
             onBiddingFinished={this.props.onBiddingFinished}
-            render={(state) => <CanvasSidebarBidding {...state} canvasId={this.props.canvasId} />}
+            render={(state) =>
+              <CanvasSidebarBidding {...state}
+                                    canvasId={this.props.canvasId}
+                                    isCanvasLoading={this.state.isLoading}
+              />
+            }
           />
         </Row>
         <Row className="container">

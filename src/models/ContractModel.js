@@ -378,6 +378,21 @@ export class ContractModel {
     })
   }
 
+  getCanvasPainters (canvasId) {
+    return new Promise((resolve, reject) => {
+      // Different gas limit is a solution to Metamask caching results...
+      this.Contract.getCanvasPainters(canvasId, {}, (error, result) => {
+        if (error) {
+          console.log(error)
+          reject(error)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+
+  }
+
   getCanvasState (canvasId) {
     return new Promise((resolve, reject) => {
       this.Contract.getCanvasState(canvasId, this.config, (error, result) => {
