@@ -28,3 +28,9 @@
 .AccountStatus__address a:hover {
     text-decoration: underline;
 }
+
+.AccountStatus__InstallMetaMaskInfo {
+    width: 300px;
+    max-width: 100%;
+    display: block;
+}

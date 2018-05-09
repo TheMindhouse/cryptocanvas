@@ -9,12 +9,12 @@ import TransactionsModal from '../Modals/TransactionsModal'
 import { TransactionsSummary } from './TransactionsSummary'
 import withTransactions from '../../hoc/withTransactions'
 import { Link } from 'react-router-dom'
+import { URLHelper } from '../../helpers/URLhelper'
 
 const StatusMetaMaskNotAvailable = () => (
-  <span>
-    To participate in drawing and trading<br />
-    CryptoCanvas on this site, download<br />
-    the <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> Chrome plugin.
+  <span className="AccountStatus__InstallMetaMaskInfo">
+    To participate in painting and trading
+    CryptoCanvas on this site, <Link to={URLHelper.help.page}>install the MetaMask Chrome plugin</Link>.
   </span>
 )
 
