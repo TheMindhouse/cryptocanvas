@@ -14,7 +14,7 @@ type Props = {
   canvasId: number,
   render: (State) => React.Node,
   // withEvents
-  events: Array<any>,
+  addEvents: (Event|Array<Event>) => void,
   //  withWeb3
   Contract: ContractModel,
   eventsSupported: boolean,
@@ -83,7 +83,7 @@ class HighestBidWatcher extends React.Component<Props, State> {
         console.log(result)
     })
 
-    this.props.events.push(bidPostedEvent)
+    this.props.addEvents(bidPostedEvent)
   }
 
   render () {

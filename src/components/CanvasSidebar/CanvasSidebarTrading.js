@@ -61,13 +61,13 @@ class CanvasSidebarTrading extends React.PureComponent {
       this.props.onCanvasSold()
     })
 
-    this.props.events.push(
+    this.props.addEvents([
       buyOfferMadeEvent,
       buyOfferCancelledEvent,
       sellOfferMadeEvent,
       sellOfferCancelledEvent,
-      canvasSoldEvent
-      )
+      canvasSoldEvent,
+      ])
   }
 
   submitSellOffer = (offerInEth) => {

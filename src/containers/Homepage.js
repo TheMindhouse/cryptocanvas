@@ -32,7 +32,7 @@ class Homepage extends Component {
         .then(() => this.getFinishedCanvasIds())
     })
 
-    this.props.events.push(canvasCreatedEvent)
+    this.props.addEvents(canvasCreatedEvent)
   }
 
   getActiveCanvasIds = () => {

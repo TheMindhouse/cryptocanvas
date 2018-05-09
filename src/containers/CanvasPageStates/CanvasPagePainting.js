@@ -129,7 +129,7 @@ class CanvasPagePainting extends React.Component {
       this.updatePixel({ index, color })
     })
 
-    this.props.events.push(pixelPaintedEvent)
+    this.props.addEvents(pixelPaintedEvent)
   }
 
   render () {
