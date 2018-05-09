@@ -17,7 +17,6 @@ type Props = {
   accountAddress: string,
   // from withWeb3
   Contract: ContractModel,
-  eventsSupported: boolean,
   account: string,
 }
 
@@ -31,20 +30,16 @@ class PixelsPainted extends React.Component<Props, State> {
 
   state = {
     paintedPixels: [],
-    isLoading: this.props.eventsSupported,
+    isLoading: true,
   }
 
   componentDidMount () {
-    if (this.props.eventsSupported) {
-      this.getPaintedPixels()
-    }
+    this.getPaintedPixels()
   }
 
   componentDidUpdate (prevProps: Props) {
     if (prevProps.accountAddress !== this.props.accountAddress) {
-      if (this.props.eventsSupported) {
-        this.setState({ isLoading: true }, this.getPaintedPixels)
-      }
+      this.setState({ isLoading: true }, this.getPaintedPixels)
     }
   }
 
@@ -67,16 +62,6 @@ class PixelsPainted extends React.Component<Props, State> {
   }
 
   render () {
-    if (!this.props.eventsSupported) {
-      return (
-        <div>
-          <h2><b>Pixels Painted</b></h2>
-          <p>Stats available only with <HashLink to={URLHelper.help.installingMetamask}>MetaMask</HashLink> installed.
-          </p>
-        </div>
-      )
-    }
-
     if (this.state.isLoading) {
       return (
         <div>
