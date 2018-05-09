@@ -311,7 +311,7 @@ export class ContractModel {
       return Promise.reject('Incorrect state')
     }
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasByState(state, this.config, (error, result) => {
+      this.Contract.getCanvasByState(state, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -324,7 +324,7 @@ export class ContractModel {
 
   getCanvasCount () {
     return new Promise((resolve, reject) => {
-      this.Contract.getCanvasCount(this.config, (error, result) => {
+      this.Contract.getCanvasCount({}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -337,7 +337,7 @@ export class ContractModel {
 
   getLastBid (canvasId) {
     return new Promise((resolve, reject) => {
-      this.Contract.getLastBidForCanvas(canvasId, this.config, (error, result) => {
+      this.Contract.getLastBidForCanvas(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
@@ -363,7 +363,6 @@ export class ContractModel {
 
   getCanvasInfo (canvasId) {
     return new Promise((resolve, reject) => {
-      // Different gas limit is a solution to Metamask caching results...
       this.Contract.getCanvasInfo(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
@@ -377,7 +376,6 @@ export class ContractModel {
 
   getCanvasPainters (canvasId) {
     return new Promise((resolve, reject) => {
-      // Different gas limit is a solution to Metamask caching results...
       this.Contract.getCanvasPainters(canvasId, {}, (error, result) => {
         if (error) {
           console.log(error)
@@ -482,7 +480,6 @@ export class ContractModel {
   }
 
   getAccountBalance (userAddress = '') {
-    // Different gas limit is a solution to Metamask caching results...
     return new Promise((resolve, reject) => {
       this.Contract.getPendingWithdrawal(userAddress, {}, (error, result) => {
         if (error) {
