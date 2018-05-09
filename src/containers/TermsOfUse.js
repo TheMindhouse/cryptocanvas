@@ -8,7 +8,7 @@ const TermsOfUse = () => {
       <div className="containerWrapper" style={{ marginBottom: 50 }}>
         <div className="container">
           <h2><b>CryptoCanvas Terms of Use</b></h2>
-          <h3>Last Updated: May 8, 2018</h3>
+          <h3>Last Updated: May 9, 2018</h3>
         </div>
       </div>
       <Row className="container About">
@@ -44,10 +44,12 @@ const TermsOfUse = () => {
 
           <h2><b>2. Definitions</b></h2>
 
-          {/*<p>*/}
-          {/*<b>“Smart Contract”</b> means the smart contract on the Ethereum blockchain at address CONTRACT_ADDRESS. Smart*/}
-          {/*Contract information can be accessed here: ETHERSCAN_URL*/}
-          {/*</p>*/}
+          <p>
+            <b>“Smart Contract”</b> means the smart contract on the Ethereum blockchain at address
+            0x0c9b5c62e7ddeba23164fefa0ff10676e3b52629. Smart Contract information can be
+            accessed <a href="https://etherscan.io/address/0x0c9b5c62e7ddeba23164fefa0ff10676e3b52629"
+                        target="_blank" rel="noopener noreferrer">here</a>.
+          </p>
 
           <p>
             <b>“Canvas”</b> means a collectible artwork created by the CryptoCanvas community with information about the
