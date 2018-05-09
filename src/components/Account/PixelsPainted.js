@@ -92,8 +92,8 @@ class PixelsPainted extends React.Component<Props, State> {
 
     return (
       <div>
-        <h2><b>{paintedPixelsCount} Pixels Painted
-          on {this.state.paintedPixels.length} {this.state.paintedPixels.length !== 1 ? 'Canvases' : 'Canvas'}</b></h2>
+        <h2><b>{paintedPixelsCount} {paintedPixelsCount === 1 ? 'Pixel' : 'Pixels'} Painted
+          on {this.state.paintedPixels.length} {this.state.paintedPixels.length === 1 ? 'Canvas' : 'Canvases'}</b></h2>
         {
           this.state.paintedPixels.map((paintedPixels: PaintedPixelsOnCanvas) =>
             <p key={paintedPixels.canvasId}>
