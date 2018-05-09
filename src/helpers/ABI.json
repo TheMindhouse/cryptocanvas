@@ -649,6 +649,20 @@
   },
   {
     "constant": true,
+    "inputs": [],
+    "name": "ACTION_INITIAL_BIDDING",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [
       {
         "name": "includePrivateOffers",
@@ -705,6 +719,20 @@
   {
     "constant": true,
     "inputs": [],
+    "name": "ACTION_BUY_OFFER_ACCEPTED",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "WIDTH",
     "outputs": [
       {
@@ -720,6 +748,20 @@
     "constant": true,
     "inputs": [],
     "name": "STATE_INITIAL_BIDDING",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "ACTION_SELL_OFFER_ACCEPTED",
     "outputs": [
       {
         "name": "",
@@ -1069,8 +1111,8 @@
       },
       {
         "indexed": true,
-        "name": "reason",
-        "type": "string"
+        "name": "action",
+        "type": "uint8"
       }
     ],
     "name": "CommissionAddedToWithdrawals",
