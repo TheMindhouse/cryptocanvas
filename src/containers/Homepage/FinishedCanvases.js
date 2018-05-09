@@ -6,8 +6,8 @@ class FinishedCanvases extends React.PureComponent {
   render () {
     return (
       <Row gutter={100} type="flex">
-        {this.props.canvasIds.map((canvasId, index) =>
-          <Col xs={24} sm={12} md={6} key={index}>
+        {this.props.canvasIds.map((canvasId) =>
+          <Col xs={24} sm={12} md={6} key={canvasId}>
             <CanvasPreview canvasId={canvasId} />
           </Col>
         )}
