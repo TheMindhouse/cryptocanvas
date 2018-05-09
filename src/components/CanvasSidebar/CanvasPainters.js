@@ -59,7 +59,9 @@ class CanvasPainters extends React.PureComponent<Props, State> {
       .then((paintersByPixel: Array<string>) => {
         const canvasPainters = this.groupPixelsByAddress(paintersByPixel)
         this.setState({ canvasPainters })
-        this.updateLocalStorageCache(paintersByPixel)
+        if (this.props.isCanvasFinished) {
+          this.updateLocalStorageCache(paintersByPixel)
+        }
       })
       .catch((error) => {
         console.error(error)
