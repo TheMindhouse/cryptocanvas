@@ -9,7 +9,8 @@ export const CONFIG = {
   CANVAS_CACHE_TIME: 15 * 60 * 1000,  // 15 minutes
   // Minimum bid in Initial Bidding
   MINIMUM_BID: 0.08,
-  startBlock: 228,
+  // Canvas Creation block
+  startBlock: 5584261,
   pixelSize: {
     preview: 3,
     canvas: 10,
