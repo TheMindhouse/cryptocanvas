@@ -7,6 +7,7 @@ import withWeb3 from '../../hoc/withWeb3'
 import HighestBidWatcher from '../../hoc/renderProps/HighestBidWatcher'
 import { LocalStorageManager } from '../../localStorage'
 import { TransactionsHistory } from '../../components/CanvasHistory/TransactionsHistory'
+import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 
 class CanvasPageBidding extends Component {
   constructor (props) {
@@ -59,7 +60,7 @@ class CanvasPageBidding extends Component {
       <div>
         <Row className="CanvasPage" type="flex" justify="space-between" align="top">
 
-          {this.state.isLoading && <p>Canvas loading...</p>}
+          {this.state.isLoading && <CanvasStagePlaceholder />}
 
           <CanvasStage
             canvasId={this.props.canvasId}

@@ -5,6 +5,7 @@ import CanvasStage from '../../components/Canvas/CanvasStage'
 import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTrading'
 import { LocalStorageManager } from '../../localStorage'
 import { TransactionsHistory } from '../../components/CanvasHistory/TransactionsHistory'
+import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 
 class CanvasPageTrading extends Component {
   state = {
@@ -52,7 +53,7 @@ class CanvasPageTrading extends Component {
       <div>
         <Row className="CanvasPage" type="flex" justify="space-between" align="top">
 
-          {this.state.isLoading && <p>Canvas loading...</p>}
+          {this.state.isLoading && <CanvasStagePlaceholder />}
 
           <CanvasStage
             canvasId={this.props.canvasId}
