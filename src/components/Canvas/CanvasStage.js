@@ -42,6 +42,8 @@ class CanvasStage extends React.Component<Props, State> {
     posY: 0,
   }
 
+  canvasRef = React.createRef()
+
   componentDidMount () {
     window.addEventListener('resize', this.onWindowResize)
   }
@@ -64,8 +66,11 @@ class CanvasStage extends React.Component<Props, State> {
 
   onPixelHover = (event: any): void => {
     const containerWidth: number = event.currentTarget.offsetWidth
-    const x: number = (event.nativeEvent.layerX === containerWidth) ? containerWidth - 1 : event.nativeEvent.layerX
-    const y: number = event.nativeEvent.layerY
+    const canvasEl = this.canvasRef.current || {}
+    const layerX = event.pageX - canvasEl.offsetLeft
+    const layerY = event.pageY - canvasEl.offsetTop
+    const x: number = (layerX === containerWidth) ? containerWidth - 1 : layerX
+    const y: number = layerY
     const mousePosition: MouseCoords = { x, y }
     const pixelHovered: PixelIndex = this.getPixelIndexByMouseCoordinates({ x, y })
     this.setState({ pixelHovered, mousePosition })
@@ -156,7 +161,8 @@ class CanvasStage extends React.Component<Props, State> {
 
     return (
       <div>
-        <div className="CanvasStage" onWheel={this.onMouseWheel} onMouseLeave={this.onMouseLeave}>
+        <div className="CanvasStage" ref={this.canvasRef}
+             onWheel={this.onMouseWheel} onMouseLeave={this.onMouseLeave}>
           <div>
             {
               this.state.pixelPopup &&
