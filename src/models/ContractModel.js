@@ -18,7 +18,7 @@ export class ContractModel {
     this._account = account
     this._config = {
       gas: GAS_LIMIT,
-      gasPrice: GAS_PRICE,
+      // gasPrice: GAS_PRICE,
       from: account,
     }
     console.log('New ContractModel with account ', account)
