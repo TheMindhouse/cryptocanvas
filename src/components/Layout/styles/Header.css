@@ -9,13 +9,16 @@
 }
 
 .Header__title > * {
-    font-size: 40px;
+    font-size: 44px;
     font-weight: bold;
+    margin: 0;
 }
 
 .Header__subtitle {
-    font-size: 20px;
+    color: #999;
+    font-size: 19px;
     font-weight: 400;
+    margin: 0;
 }
 
 .Header__menu {
