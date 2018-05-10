@@ -78,8 +78,11 @@ class CanvasStage extends React.Component<Props, State> {
 
   onPixelClick = (event: any): void => {
     const containerWidth: number = event.target.offsetWidth
-    const x: number = (event.nativeEvent.layerX === containerWidth) ? containerWidth - 1 : event.nativeEvent.layerX
-    const y: number = event.nativeEvent.layerY
+    const canvasEl = this.canvasRef.current || {}
+    const layerX = event.pageX - canvasEl.offsetLeft
+    const layerY = event.pageY - canvasEl.offsetTop
+    const x: number = (layerX === containerWidth) ? containerWidth - 1 : layerX
+    const y: number = layerY
     const indexObj: PixelIndex = this.getPixelIndexByMouseCoordinates({ x, y })
 
     if (this.props.activeColorId) {
@@ -99,14 +102,15 @@ class CanvasStage extends React.Component<Props, State> {
       return
     }
 
-    const mouseX = event.nativeEvent.layerX
-    const mouseY = event.nativeEvent.layerY
+    const canvasEl = this.canvasRef.current || {}
+    const layerX = event.pageX - canvasEl.offsetLeft
+    const layerY = event.pageY - canvasEl.offsetTop
 
     const containerWidth = event.currentTarget.offsetWidth
     const containerHeight = event.currentTarget.offsetHeight
 
-    const posX = this.state.posX - (mouseX / newScale) + (mouseX / this.state.scale)
-    const posY = this.state.posY - (mouseY / newScale) + (mouseY / this.state.scale)
+    const posX = this.state.posX - (layerX / newScale) + (layerX / this.state.scale)
+    const posY = this.state.posY - (layerY / newScale) + (layerY / this.state.scale)
 
     const maxPosX = containerWidth - (containerWidth / newScale)
     const maxPosY = containerHeight - (containerHeight / newScale)
