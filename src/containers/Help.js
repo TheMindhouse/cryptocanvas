@@ -56,8 +56,7 @@ class Help extends React.PureComponent<Props> {
 
             <h2 id="getting-ether"><b>Getting Ether</b></h2>
             <p>Ether cryptocurrency (ETH) fuels all the operations performed on the Ethereum network. To paint, make
-              bids and trade the canvases you will need a small amount of Ether to send transactions to the network. The
-              cost of sending a transaction should not exceed a couple of cents.</p>
+              bids and trade the canvases you will need a small amount of Ether to send transactions to the network.</p>
             <p>
               <b>For U.S. citizens only:</b><br />
               You can buy Ether directly in MetaMask. Just press the “Buy” button under your account address.

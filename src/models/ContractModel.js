@@ -38,7 +38,7 @@ export class ContractModel {
 
   setPixel ({ canvasId, pixelIndex, colorId }) {
     return new Promise((resolve, reject) => {
-      this.Contract.setPixel(canvasId, pixelIndex.id, colorId, this.config, (error, txHash) => {
+      this.Contract.setPixel(canvasId, pixelIndex.id, colorId, { ...this.config, gas: 100000 }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Set pixel failed')

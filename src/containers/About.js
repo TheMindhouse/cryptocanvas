@@ -199,10 +199,7 @@ class About extends React.PureComponent {
             <h2 id="how-much-does-it-cost"><b>How much does it cost?</b></h2>
 
             <p>Essentially, it's free. We don't charge any fees for creating canvases, placing pixels or making bids.
-              The
-              only thing you need to cover is a transaction fee required by the Ethereum network which should not exceed
-              a
-              couple of cents.</p>
+              The only thing you need to cover is a transaction fee required by the Ethereum network.</p>
 
             <p>We take a small commission of <b>3.9%</b> from the final highest bid after Initial Bidding is finished
               and
