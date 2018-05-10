@@ -4,11 +4,16 @@ import { Anchor, Col, Row } from 'antd'
 import { URLHelper } from '../helpers/URLhelper'
 import { Link } from 'react-router-dom'
 import { YoutubePlayer } from '../components/Small/YoutubePlayer'
+import { setDocumentTitle } from '../helpers/utils'
 
 type Props = {}
 
 class Help extends React.PureComponent<Props> {
   static defaultProps = {}
+
+  componentDidMount () {
+    setDocumentTitle('Help')
+  }
 
   render () {
     return (

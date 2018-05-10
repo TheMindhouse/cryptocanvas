@@ -7,6 +7,7 @@ import AccountBalance from '../components/Account/AccountBalance'
 import { AccountBalanceHeader } from '../components/Account/AccountBalanceHeader'
 import CanvasesOwned from '../components/Account/CanvasesOwned'
 import HighestBids from '../components/Account/HighestBids'
+import { setDocumentTitle } from '../helpers/utils'
 
 type Props = {
   match: {
@@ -20,6 +21,10 @@ type Props = {
 
 class Account extends React.PureComponent<Props> {
   static defaultProps = {}
+
+  componentDidMount () {
+    setDocumentTitle('Account Details')
+  }
 
   render () {
     const urlAccountAddress = this.props.match.params.address

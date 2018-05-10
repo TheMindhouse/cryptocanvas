@@ -9,6 +9,7 @@ import CanvasPageTrading from './CanvasPageStates/CanvasPageTrading'
 import CanvasPageLoading from './CanvasPageStates/CanvasPageLoading'
 import { CANVAS_STATES } from '../models/CanvasState'
 import { CONFIG } from '../config'
+import { setDocumentTitle } from '../helpers/utils'
 
 class CanvasPage extends React.Component {
   pixelSize = CONFIG.pixelSize.canvas
@@ -25,6 +26,7 @@ class CanvasPage extends React.Component {
 
   componentDidMount () {
     this.getCanvasInfo()
+    setDocumentTitle(`Canvas #${this.canvasId}`)
   }
 
   getCanvasInfo = () => {

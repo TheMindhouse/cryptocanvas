@@ -6,6 +6,7 @@ import FinishedCanvases from './Homepage/FinishedCanvases'
 import { CANVAS_STATES } from '../models/CanvasState'
 import BiddingCanvases from './Homepage/BiddingCanvases'
 import './styles/Marketplace.css'
+import { setDocumentTitle } from '../helpers/utils'
 
 class Marketplace extends Component {
   state = {
@@ -14,6 +15,7 @@ class Marketplace extends Component {
   }
 
   componentDidMount () {
+    setDocumentTitle('Marketplace')
     this.getBiddingCanvasIds()
     this.getCompletedCanvasIds()
   }

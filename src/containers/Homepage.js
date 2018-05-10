@@ -6,6 +6,7 @@ import ActiveCanvases from './Homepage/ActiveCanvases'
 import { CANVAS_STATES } from '../models/CanvasState'
 import { Link } from 'react-router-dom'
 import Marketplace from './Marketplace'
+import { setDocumentTitle } from '../helpers/utils'
 
 class Homepage extends Component {
   state = {
@@ -14,6 +15,8 @@ class Homepage extends Component {
   }
 
   componentDidMount () {
+    setDocumentTitle(null)
+
     this.getActiveCanvasIds()
       .then(() => this.getFinishedCanvasIds())
 
