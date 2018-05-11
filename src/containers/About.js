@@ -41,10 +41,10 @@ class About extends React.PureComponent {
                 <Anchor.Link href="#initial-bidding" title="II. Initial Bidding" />
                 <Anchor.Link href="#trading" title="III. Trading" />
               </Anchor.Link>
-              <Anchor.Link href="#withdrawing-rewards-and-profits" title="Withdrawing Rewards and Profits" />
-              <Anchor.Link href="#how-do-you-calculate-rewards" title="How do you calculate Rewards for painting?" />
               <Anchor.Link href="#how-can-i-participate" title="How can I participate?" />
               <Anchor.Link href="#how-much-does-it-cost" title="How much does it cost?" />
+              <Anchor.Link href="#withdrawing-rewards-and-profits" title="Withdrawing Rewards and Profits" />
+              <Anchor.Link href="#how-do-you-calculate-rewards" title="How do you calculate Rewards for painting?" />
               <Anchor.Link href="#what-is-stored-on-the-blockchain" title="What is stored on the blockchain?" />
               <Anchor.Link href="#is-the-number-of-canvases-limited" title="Is the number of canvases limited?" />
               <Anchor.Link href="#who-holds-copyright-to-the-canvases" title="Who holds copyright to the Canvases?" />
@@ -141,6 +141,33 @@ class About extends React.PureComponent {
             <p>In both cases, after accepting Buy Offer by the owner or Sell Offer by a user, the ownership will be
               transferred to the buyer automatically.</p>
 
+            <h2 id="how-can-i-participate"><b>How can I participate?</b></h2>
+
+            <p>CryptoCanvas is based on the Ethereum blockchain technology. To get started you need:</p>
+
+            <ul>
+              <li>a desktop version of Chrome or Firefox</li>
+
+              <li>
+                MetaMask - a browser extension allowing you to interact with the blockchain,
+                see <HashLink to={URLHelper.help.installingMetamask}>Installing MetaMask</HashLink>
+              </li>
+
+              <li>
+                Ether - a digital cryptocurrency powering transactions like painting or trading,
+                see <HashLink to={URLHelper.help.gettingEther}>Getting Ether</HashLink>
+              </li>
+            </ul>
+
+            <h2 id="how-much-does-it-cost"><b>How much does it cost?</b></h2>
+
+            <p>Essentially, it's free. We don't charge any fees for creating canvases, placing pixels or making bids.
+              The only thing you need to cover is a transaction fee required by the Ethereum network.</p>
+
+            <p>We take a small commission of <b>3.9%</b> from the final highest bid after Initial Bidding is finished
+              and
+              from each successful trading transaction (accepted Buy or Sell offer) in the "Marketplace".</p>
+
             <h2 id="withdrawing-rewards-and-profits"><b>Withdrawing Rewards and Profits</b></h2>
 
             <p>Because of the Ethereum platform security guidelines, rewards for painting and profits from trading are
@@ -177,33 +204,6 @@ class About extends React.PureComponent {
               would
               be rewarded
               6.25% of the 0.961 ETH, which is 0,0600625 ETH.</i></p>
-
-            <h2 id="how-can-i-participate"><b>How can I participate?</b></h2>
-
-            <p>CryptoCanvas is based on the Ethereum blockchain technology. To get started you need:</p>
-
-            <ul>
-              <li>a desktop version of Chrome or Firefox</li>
-
-              <li>
-                MetaMask - a browser extension allowing you to interact with the blockchain,
-                see <HashLink to={URLHelper.help.installingMetamask}>Installing MetaMask</HashLink>
-              </li>
-
-              <li>
-                Ether - a digital cryptocurrency powering transactions like painting or trading,
-                see <HashLink to={URLHelper.help.gettingEther}>Getting Ether</HashLink>
-              </li>
-            </ul>
-
-            <h2 id="how-much-does-it-cost"><b>How much does it cost?</b></h2>
-
-            <p>Essentially, it's free. We don't charge any fees for creating canvases, placing pixels or making bids.
-              The only thing you need to cover is a transaction fee required by the Ethereum network.</p>
-
-            <p>We take a small commission of <b>3.9%</b> from the final highest bid after Initial Bidding is finished
-              and
-              from each successful trading transaction (accepted Buy or Sell offer) in the "Marketplace".</p>
 
             <h2 id="what-is-stored-on-the-blockchain"><b>What is stored on the blockchain?</b></h2>
             <p>

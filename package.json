@@ -18,6 +18,7 @@
     "react-player": "^1.5.0",
     "react-router-dom": "^4.2.2",
     "react-router-hash-link": "^1.2.0",
+    "react-router-scroll-top": "^0.1.1",
     "react-scripts": "1.1.1",
     "web3": "github:ethereum/web3.js"
   },
