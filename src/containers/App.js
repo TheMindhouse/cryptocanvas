@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route, Switch,
 } from 'react-router-dom'
+import ScrollToTop from 'react-router-scroll-top'
 
 import Homepage from './Homepage'
 import Marketplace from './Marketplace'
@@ -34,26 +35,28 @@ class App extends React.Component {
       <Web3Provider>
         <TransactionsProvider>
           <Router>
-            <div>
-              <div className="AppContent">
-                <Header />
-                <AccountStatus />
+            <ScrollToTop>
+              <div>
+                <div className="AppContent">
+                  <Header />
+                  <AccountStatus />
 
-                <Route path="/" component={logPageView} />
-                <Switch>
-                  <Route exact path='/' component={Homepage} />
-                  <Route path='/trade' component={Marketplace} />
-                  <Route path='/about' component={About} />
-                  <Route path='/canvas/:id' component={CanvasPage} />
-                  <Route path='/account/:address' component={Account} />
-                  <Route path='/help' component={Help} />
-                  <Route path='/terms-of-use' component={TermsOfUse} />
-                  <Route path='/contact' component={Contact} />
-                  <Route component={ErrorPage404} />
-                </Switch>
+                  <Route path="/" component={logPageView} />
+                  <Switch>
+                    <Route exact path='/' component={Homepage} />
+                    <Route path='/trade' component={Marketplace} />
+                    <Route path='/about' component={About} />
+                    <Route path='/canvas/:id' component={CanvasPage} />
+                    <Route path='/account/:address' component={Account} />
+                    <Route path='/help' component={Help} />
+                    <Route path='/terms-of-use' component={TermsOfUse} />
+                    <Route path='/contact' component={Contact} />
+                    <Route component={ErrorPage404} />
+                  </Switch>
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
+            </ScrollToTop>
           </Router>
         </TransactionsProvider>
       </Web3Provider>
