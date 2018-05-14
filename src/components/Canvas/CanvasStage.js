@@ -46,6 +46,7 @@ class CanvasStage extends React.Component<Props, State> {
 
   componentDidMount () {
     window.addEventListener('resize', this.onWindowResize)
+    this.onWindowResize()
   }
 
   componentDidUpdate (prevProps: Props) {

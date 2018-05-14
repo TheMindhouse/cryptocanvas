@@ -57,10 +57,8 @@ class CanvasPreview extends React.Component {
   render () {
     return (
       <div className="CanvasPreview">
-        <Link to={URLHelper.canvas(this.props.canvasId)}>
-          {this.state.isLoading && <CanvasPreviewPlaceholder />}
-          {!this.state.isLoading && <CanvasPreviewImage pixels={this.state.pixels} />}
-        </Link>
+        {this.state.isLoading && <CanvasPreviewPlaceholder />}
+        {!this.state.isLoading && <CanvasPreviewImage pixels={this.state.pixels} canvasId={this.props.canvasId} />}
         <Row gutter={20} type="flex" justify="space-between" className="CanvasPreview__info">
           <h3><Link to={URLHelper.canvas(this.props.canvasId)}>Canvas #{this.props.canvasId}</Link></h3>
           {

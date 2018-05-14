@@ -26,8 +26,8 @@ class CanvasStagePlaceholder extends React.PureComponent {
   render () {
     return (
       <Row type="flex" align="middle" justify="center" className="CanvasStage CanvasStage--Placeholder"
-        style={{ width: this.state.canvasSize, height: this.state.canvasSize }}>
-          <Spin size="large" />
+           style={{ width: this.state.canvasSize, height: this.state.canvasSize }}>
+        {!this.props.hideSpinner && <Spin size="large" />}
       </Row>
     )
   }

@@ -6,6 +6,7 @@
 
 .CanvasStage--Placeholder {
     background: #ddd;
+    cursor: default;
 }
 
 .CanvasStage__CameraWrapper {
