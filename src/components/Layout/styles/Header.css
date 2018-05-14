@@ -74,6 +74,7 @@
 
     .Header__subtitle {
         font-size: 15px;
+        margin-bottom: 15px;
     }
 
     .Header__menu {
