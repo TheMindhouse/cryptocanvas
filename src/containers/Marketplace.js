@@ -52,7 +52,7 @@ class Marketplace extends Component {
           <h1><b>Initial Bidding</b></h1>
           <h3>Waiting for the first owner, whose winning bid will be distributed across all the painters</h3>
           <br /><br />
-          {!this.state.biddingCanvasIds && <Spin />}
+          {!this.state.biddingCanvasIds && <div style={{ marginBottom: 50 }}><Spin /></div>}
           {
             this.state.biddingCanvasIds && (
               this.state.biddingCanvasIds.length > 0

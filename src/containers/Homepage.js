@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row } from 'antd'
+import { Row, Spin } from 'antd'
 import withEvents from '../hoc/withEvents'
 import withWeb3 from '../hoc/withWeb3'
 import ActiveCanvases from './Homepage/ActiveCanvases'
@@ -10,15 +10,13 @@ import { setDocumentTitle } from '../helpers/utils'
 
 class Homepage extends Component {
   state = {
-    activeCanvasIds: [],
-    finishedCanvasIds: [],
+    activeCanvasIds: null,
   }
 
   componentDidMount () {
     setDocumentTitle(null)
 
     this.getActiveCanvasIds()
-      .then(() => this.getFinishedCanvasIds())
 
     if (this.props.eventsSupported) {
       this.props.getBlockNumber().then(this.watchForChanges)
@@ -32,7 +30,6 @@ class Homepage extends Component {
     canvasCreatedEvent.watch(() => {
       console.log('[EVENT] New canvas created')
       this.getActiveCanvasIds()
-        .then(() => this.getFinishedCanvasIds())
     })
 
     this.props.addEvents(canvasCreatedEvent)
@@ -41,18 +38,6 @@ class Homepage extends Component {
   getActiveCanvasIds = () => {
     return this.props.Contract.getCanvasIdsByState(CANVAS_STATES.active)
       .then(activeCanvasIds => this.setState({ activeCanvasIds }))
-  }
-
-  getFinishedCanvasIds = () => {
-    this.props.Contract.getCanvasCount()
-      .then((canvasCount) => {
-        console.log('Total canvases: ' + canvasCount)
-        console.log('Active canvases: ' + this.state.activeCanvasIds)
-        const finishedCanvasIds = Array.from(new Array(canvasCount), (val, index) => index)
-          .filter(id => !this.state.activeCanvasIds.includes(id))
-        console.log('Finished canvases: ' + finishedCanvasIds)
-        this.setState({ finishedCanvasIds })
-      })
   }
 
   render () {
@@ -75,7 +60,8 @@ class Homepage extends Component {
           <h1><b>Canvases Available for Painting</b></h1>
           <h3>Paint some pixels and become the Blockchain Picasso (or read <Link to="/about">how it works</Link>)</h3>
           <br /><br />
-          <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />
+          {!this.state.activeCanvasIds && <Spin />}
+          {this.state.activeCanvasIds && <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} /> }
         </Row>
         <Marketplace />
       </div>
