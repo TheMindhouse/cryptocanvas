@@ -23,7 +23,7 @@ class Footer extends React.PureComponent<Props> {
           </nav>
         </Col>
         <Col xs={24} sm={24} md={8} style={{ textAlign: 'center' }}>
-          Made with &hearts; by The Mindhouse
+          Made with &hearts; by <a href="https://mindhouse.io" target="_blank" rel="noopener noreferrer">The Mindhouse</a>
         </Col>
       </Row>
     )
