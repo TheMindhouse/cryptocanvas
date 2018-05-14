@@ -10,6 +10,9 @@ import CanvasPageLoading from './CanvasPageStates/CanvasPageLoading'
 import { CANVAS_STATES } from '../models/CanvasState'
 import { CONFIG } from '../config'
 import { setDocumentTitle } from '../helpers/utils'
+import { URLHelper } from '../helpers/URLhelper'
+import { Redirect } from 'react-router-dom'
+import { CanvasNotCreatedYet } from './CanvasPageStates/CanvasNotCreatedYet'
 
 class CanvasPage extends React.Component {
   pixelSize = CONFIG.pixelSize.canvas
@@ -19,8 +22,13 @@ class CanvasPage extends React.Component {
 
     this.canvasId = parseInt(props.match.params.id, 10)
 
+    const isInvalidId = isNaN(props.match.params.id) ||
+      this.canvasId < 0 ||
+      this.canvasId > CONFIG.MAX_TOTAL_CANVASES
+
     this.state = {
       isLoading: true,
+      isInvalidId: isInvalidId
     }
   }
 
@@ -30,9 +38,12 @@ class CanvasPage extends React.Component {
   }
 
   getCanvasInfo = () => {
-    console.log(`Getting info for Canvas #${this.canvasId}`);
+    console.log(`Getting info for Canvas #${this.canvasId}`)
     this.props.Contract.getCanvasInfo(this.canvasId)
       .then((canvasInfo) => {
+        if (canvasInfo.id !== this.canvasId) {
+          return this.setState({ canvasNotCreatedYet: true })
+        }
         this.setState({
           canvasState: canvasInfo.canvasState,
           paintedPixels: canvasInfo.paintedPixels,
@@ -49,12 +60,12 @@ class CanvasPage extends React.Component {
   }
 
   onPaintingFinished = () => {
-    console.log('[EVENT] PAINTING FINISHED!');
+    console.log('[EVENT] PAINTING FINISHED!')
     this.setState({ isLoading: true }, this.getCanvasInfo)
   }
 
   onBiddingFinished = () => {
-    console.log('[EVENT] BIDDING FINISHED!');
+    console.log('[EVENT] BIDDING FINISHED!')
     this.setState({ isLoading: true }, this.getCanvasInfo)
   }
 
@@ -63,6 +74,14 @@ class CanvasPage extends React.Component {
       isLoading,
       canvasState = {},
     } = this.state
+
+    if (this.state.isInvalidId) {
+      return <Redirect to={URLHelper.pageNotFound} />
+    }
+
+    if (this.state.canvasNotCreatedYet) {
+      return <CanvasNotCreatedYet canvasId={this.canvasId} />
+    }
 
     return (
       <div>

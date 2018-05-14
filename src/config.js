@@ -10,6 +10,10 @@ export const CONFIG = {
   CANVAS_CACHE_TIME: 15 * 60 * 1000,  // 15 minutes
   // Minimum bid in Initial Bidding
   MINIMUM_BID: 0.08,
+  // Maximum number of canvases painted at the same time
+  MAX_ACTIVE_CANVASES: 12,
+  // Maximum number of canvases in total
+  MAX_TOTAL_CANVASES: 1000,
   // Canvas Creation block
   startBlock: 5584261,
   pixelSize: {

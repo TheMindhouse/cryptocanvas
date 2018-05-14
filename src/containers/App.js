@@ -51,6 +51,7 @@ class App extends React.Component {
                     <Route path='/help' component={Help} />
                     <Route path='/terms-of-use' component={TermsOfUse} />
                     <Route path='/contact' component={Contact} />
+                    <Route path='/404' component={ErrorPage404} />
                     <Route component={ErrorPage404} />
                   </Switch>
                 </div>
