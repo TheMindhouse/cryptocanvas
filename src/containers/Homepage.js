@@ -7,6 +7,8 @@ import { CANVAS_STATES } from '../models/CanvasState'
 import { Link } from 'react-router-dom'
 import Marketplace from './Marketplace'
 import { setDocumentTitle } from '../helpers/utils'
+import Mona from '../assets/images/mona.png'
+import './styles/Homepage.css'
 
 class Homepage extends Component {
   state = {
@@ -44,8 +46,9 @@ class Homepage extends Component {
     return (
       <div>
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
-          <Row className="container">
-            <h2>
+          <Row className="Homepage__header container" type="flex" align="middle">
+            <img src={Mona} className="Homepage__Mona" />
+            <h2 className="Homepage__quote">
               <blockquote>
                 There is an empty CryptoCanvas.<br />
                 You may place a tile upon it and it will be stored on the blockchain.<br />
