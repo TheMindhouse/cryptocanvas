@@ -73,8 +73,8 @@ blockquote::before {
     font-size: 100px;
     position: absolute;
     top: -70px;
+    left: -20px;
     color: #fff;
-    left: 0;
     font-family: 'Times New Roman', Georgia, serif;
 }
 

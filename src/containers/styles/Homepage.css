@@ -1,0 +1,27 @@
+.Homepage__header {
+    flex-wrap: nowrap;
+}
+
+.Homepage__Mona {
+    width: 220px;
+    height: 220px;
+    margin-right: 30px;
+}
+
+.Homepage__quote {
+    margin-bottom: 0;
+    position: relative;
+}
+
+
+@media all and (max-width: 768px) {
+    .Homepage__header {
+        flex-wrap: wrap;
+    }
+
+    .Homepage__Mona {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 30px;
+    }
+}
