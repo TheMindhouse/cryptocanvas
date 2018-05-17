@@ -21,7 +21,10 @@ import { Footer } from '../components/Layout/Footer'
 import Contact from './Contact'
 import TermsOfUse from './TermsOfUse'
 
-ReactGA.initialize('UA-117937544-1')
+const hostname = window && window.location && window.location.hostname
+if (hostname === 'cryptocanvas.art') {
+  ReactGA.initialize('UA-117937544-1')
+}
 
 const logPageView = () => {
   ReactGA.set({ page: window.location.pathname })

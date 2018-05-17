@@ -2,6 +2,8 @@ import React from 'react'
 import { ContractModel } from '../models/ContractModel'
 import ABI from '../helpers/ABI.json'
 import { CONFIG } from '../config'
+import { withAnalytics } from '../hoc/withAnalytics'
+import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../constants/analytics'
 
 const Web3Context = React.createContext()
 
@@ -62,6 +64,16 @@ class Web3Provider extends React.Component {
       if (account !== this.state.account) {
         const Contract = new ContractModel(this.ContractInstance.at(CONFIG.CONTRACT_ADDRESS), account)
         this.setState({ account, Contract })
+
+        // Notify analytics that user has activated Metamask
+        // Event sent only once
+        if (!this.accountEventSent) {
+          this.props.analyticsAPI.event({
+            category: ANALYTICS_EVENTS.metamask,
+            action: ANALYTICS_ACTIONS.metamask.accountActive,
+          })
+          this.accountEventSent = true
+        }
       }
     })
   }
@@ -87,6 +99,8 @@ class Web3Provider extends React.Component {
     )
   }
 }
+
+Web3Provider = withAnalytics(Web3Provider)
 
 export {
   Web3Context,
