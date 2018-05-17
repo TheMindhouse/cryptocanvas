@@ -21,7 +21,7 @@ export class ContractModel {
       // gasPrice: GAS_PRICE,
       from: account,
     }
-    console.log('New ContractModel with account ', account)
+    // console.log('New ContractModel with account ', account)
   }
 
   get Contract () {

@@ -13,7 +13,7 @@ class Web3Provider extends React.Component {
   constructor (props) {
     super(props)
 
-    console.log('Setting up Web3 Provider')
+    // console.log('Setting up Web3 Provider')
 
     let eventsSupported = false
     let metamaskAvailable = false

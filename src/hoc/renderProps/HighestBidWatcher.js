@@ -39,9 +39,9 @@ class HighestBidWatcher extends React.Component<Props, State> {
   getHighestBid = () => {
     this.props.Contract.getLastBid(this.props.canvasId)
       .then((bid) => {
-        console.log(bid)
+        // console.log(bid)
         if (bid.amount) {
-          console.log('New highest bid: ', bid)
+          // console.log('New highest bid: ', bid)
           this.updateHighestBid(bid)
         }
       })
@@ -54,7 +54,7 @@ class HighestBidWatcher extends React.Component<Props, State> {
         this.setBiddingTimer()
       }
     } else {
-      console.log('Empty bid, skipping!')
+      // console.log('Empty bid, skipping!')
     }
   }
 

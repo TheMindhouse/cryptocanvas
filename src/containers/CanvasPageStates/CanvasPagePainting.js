@@ -63,7 +63,7 @@ class CanvasPagePainting extends React.Component {
 
   changeActiveColor = (colorId) => {
     if (!this.props.account) { return }
-    console.log(`Change current color to #${colorId}`)
+    // console.log(`Change current color to #${colorId}`)
     this.setState({
       activeColorId: colorId,
     })
@@ -89,7 +89,7 @@ class CanvasPagePainting extends React.Component {
           action: ANALYTICS_ACTIONS.painting.paintPixelSubmit,
           label: `Canvas #${this.props.canvasId}, pixel (${pixelIndex.x}, ${pixelIndex.y})`,
         })
-        console.log(`User set pixel color at (${pixelIndex.x}, ${pixelIndex.y}) to ${colorId}`)
+        // console.log(`User set pixel color at (${pixelIndex.x}, ${pixelIndex.y}) to ${colorId}`)
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, pixelIndex, colorId })
           .then((tx) => {
             LocalStorageManager.transactions.updateTransactions(tx)
@@ -108,7 +108,7 @@ class CanvasPagePainting extends React.Component {
           })
       },
       onCancel: () => {
-        console.log('Pixel update cancelled')
+        // console.log('Pixel update cancelled')
       },
     })
   }
@@ -126,7 +126,7 @@ class CanvasPagePainting extends React.Component {
 
   checkIfFinishedPainting = () => {
     const hasFinished = getNumberOfPaintedPixels(this.state.pixels) === this.state.pixels.length
-    console.log('--> Checking if painting has finished: ' + hasFinished)
+    // console.log('--> Checking if painting has finished: ' + hasFinished)
     if (hasFinished) {
       console.log('[EVENT] - All the pixels have been painted!')
       this.props.onPaintingFinished()

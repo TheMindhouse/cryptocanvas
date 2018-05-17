@@ -41,7 +41,7 @@ const updatePaintersCache = ({ canvasId, canvasPainters }: {
       canvasToSave
     ]
 
-  console.log(`STORAGE: Adding Painters of Canvas #${canvasToSave.canvasId} to the storage.`)
+  // console.log(`STORAGE: Adding Painters of Canvas #${canvasToSave.canvasId} to the storage.`)
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedCanvases))
 }
 
