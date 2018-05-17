@@ -47,13 +47,13 @@ class CanvasPainters extends React.PureComponent<Props, State> {
     if (this.props.isCanvasFinished) {
       const paintersCache: ?CanvasPaintersCache = LocalStorageManager.canvasPainters.getPaintersCache(this.props.canvasId)
       if (paintersCache) {
-        console.log('Painters Cache found')
+        // console.log('Painters Cache found')
         const canvasPainters = this.groupPixelsByAddress(paintersCache.canvasPainters)
         return this.setState({ canvasPainters })
       }
     }
 
-    console.log('Downloading Painters from the Blockchain...')
+    // console.log('Downloading Painters from the Blockchain...')
 
     this.props.Contract.getCanvasPainters(this.props.canvasId)
       .then((paintersByPixel: Array<string>) => {

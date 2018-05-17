@@ -12,15 +12,12 @@ const withEvents = (WrappedComponent) => {
     componentWillUnmount () {
       this.events.forEach(event => {
         if (typeof event.stopWatching === 'function') {
-          console.log('Stopping watching event')
           event.stopWatching()
         }
       })
-      console.log('Stopped watching for events');
     }
 
     addEvents = (newEvents) => {
-      console.log('Adding new events', newEvents)
       if (Array.isArray(newEvents)) {
         this.events = [...this.events, ...newEvents]
       } else {

@@ -18,12 +18,12 @@ const getCanvasCache = (canvasId: number): ?CanvasPixelsCache => {
   }
 
   if (savedCanvas.isExpired()) {
-    console.log(`STORAGE: Canvas #${savedCanvas.canvasId} is expired, removing...`)
+    // console.log(`STORAGE: Canvas #${savedCanvas.canvasId} is expired, removing...`)
     removeFromSavedCanvases(savedCanvas)
     return null
   }
 
-  console.log(`STORAGE: Returning data for Canvas #${savedCanvas.canvasId}. Expires on ${moment(savedCanvas.expirationDate).calendar()}`)
+  // console.log(`STORAGE: Returning data for Canvas #${savedCanvas.canvasId}. Expires on ${moment(savedCanvas.expirationDate).calendar()}`)
   return savedCanvas
 }
 
@@ -67,7 +67,7 @@ const updateCanvasCache = ({ canvasId, pixelsMap, withExpirationDate = true }: {
         canvasToSave
       ]
 
-  console.log(`STORAGE: Adding new Canvas #${canvasToSave.canvasId} to the storage.`, newSavedCanvases)
+  // console.log(`STORAGE: Adding new Canvas #${canvasToSave.canvasId} to the storage.`, newSavedCanvases)
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedCanvases))
 }
 

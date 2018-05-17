@@ -41,7 +41,7 @@ class TransactionsProvider extends React.Component {
       .forEach(tx => {
         // todo - prevent double notifications when checkTransactions runs
         // the second time before getTransactionReceipt is received
-        console.log(`Checking transaction - ${tx.hash}`)
+        // console.log(`Checking transaction - ${tx.hash}`)
         this.props.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
           if (!error && result) {
             const status = TRANSACTION_RECEIPT_STATUS[ Number(result.status) ]

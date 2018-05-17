@@ -11,6 +11,8 @@ import ConfirmPixelModal from '../../components/Modals/ConfirmPixelModal'
 import { getNumberOfPaintedPixels } from '../../helpers/colors'
 import { LocalStorageManager } from '../../localStorage'
 import type { PixelIndex } from '../../types/PixelIndex'
+import { withAnalytics } from '../../hoc/withAnalytics'
+import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../../constants/analytics'
 
 class CanvasPagePainting extends React.Component {
   constructor (props) {
@@ -61,7 +63,7 @@ class CanvasPagePainting extends React.Component {
 
   changeActiveColor = (colorId) => {
     if (!this.props.account) { return }
-    console.log(`Change current color to #${colorId}`)
+    // console.log(`Change current color to #${colorId}`)
     this.setState({
       activeColorId: colorId,
     })
@@ -70,13 +72,24 @@ class CanvasPagePainting extends React.Component {
   changePixelColor = (pixelIndex: PixelIndex) => {
     const colorId = this.state.activeColorId
 
+    this.props.analyticsAPI.event({
+      category: ANALYTICS_EVENTS.painting,
+      action: ANALYTICS_ACTIONS.painting.paintPixelConfirm,
+      label: `Canvas #${this.props.canvasId}, pixel (${pixelIndex.x}, ${pixelIndex.y})`,
+    })
+
     Modal.confirm({
       title: 'Do you want to paint this pixel?',
       content: <ConfirmPixelModal x={pixelIndex.x} y={pixelIndex.y} color={colorId} />,
       okText: 'Paint Pixel',
       okType: 'primary',
       onOk: () => {
-        console.log(`User set pixel color at (${pixelIndex.x}, ${pixelIndex.y}) to ${colorId}`)
+        this.props.analyticsAPI.event({
+          category: ANALYTICS_EVENTS.painting,
+          action: ANALYTICS_ACTIONS.painting.paintPixelSubmit,
+          label: `Canvas #${this.props.canvasId}, pixel (${pixelIndex.x}, ${pixelIndex.y})`,
+        })
+        // console.log(`User set pixel color at (${pixelIndex.x}, ${pixelIndex.y}) to ${colorId}`)
         this.props.Contract.setPixel({ canvasId: this.props.canvasId, pixelIndex, colorId })
           .then((tx) => {
             LocalStorageManager.transactions.updateTransactions(tx)
@@ -87,10 +100,15 @@ class CanvasPagePainting extends React.Component {
               title: 'Could not update pixel',
               content: 'Make sure your address is able to paint the pixel again',
             })
+            this.props.analyticsAPI.event({
+              category: ANALYTICS_EVENTS.painting,
+              action: ANALYTICS_ACTIONS.painting.paintPixelFailed,
+              label: `Canvas #${this.props.canvasId}, pixel (${pixelIndex.x}, ${pixelIndex.y})`,
+            })
           })
       },
       onCancel: () => {
-        console.log('Pixel update cancelled')
+        // console.log('Pixel update cancelled')
       },
     })
   }
@@ -108,7 +126,7 @@ class CanvasPagePainting extends React.Component {
 
   checkIfFinishedPainting = () => {
     const hasFinished = getNumberOfPaintedPixels(this.state.pixels) === this.state.pixels.length
-    console.log('--> Checking if painting has finished: ' + hasFinished)
+    // console.log('--> Checking if painting has finished: ' + hasFinished)
     if (hasFinished) {
       console.log('[EVENT] - All the pixels have been painted!')
       this.props.onPaintingFinished()
@@ -164,4 +182,4 @@ class CanvasPagePainting extends React.Component {
   }
 }
 
-export default withEvents(withWeb3(CanvasPagePainting))
+export default withAnalytics(withEvents(withWeb3(CanvasPagePainting)))

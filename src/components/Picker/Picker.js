@@ -1,6 +1,6 @@
 import React from 'react'
 import { hexPalette } from '../../helpers/colors'
-import { PickerColor } from './PickerColor'
+import PickerColor from './PickerColor'
 import './Picker.css'
 import { ColorPreview } from '../ColorPreview/ColorPreview'
 import { Button } from 'antd'

@@ -38,7 +38,7 @@ class CanvasPage extends React.Component {
   }
 
   getCanvasInfo = () => {
-    console.log(`Getting info for Canvas #${this.canvasId}`)
+    // console.log(`Getting info for Canvas #${this.canvasId}`)
     this.props.Contract.getCanvasInfo(this.canvasId)
       .then((canvasInfo) => {
         if (canvasInfo.id !== this.canvasId) {
