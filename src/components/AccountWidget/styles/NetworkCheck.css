@@ -1,0 +1,16 @@
+.NetworkCheck {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    font-weight: 400;
+    color: #fafafa;
+    background: #e74c3c;
+    font-size: 14px;
+    padding: 10px 30px;
+}
+
+.NetworkCheck__Icon {
+    margin-right: 10px;
+}

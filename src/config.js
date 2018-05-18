@@ -1,7 +1,10 @@
+import { METAMASK_NETWORKS } from './constants/metamask'
+
 export const CONFIG = {
   CONTRACT_ADDRESS: '0x0c9b5c62e7ddeba23164fefa0ff10676e3b52629', // Main net
   WEB3_HTTP_PROVIDER: 'https://mainnet.infura.io/ML50g9METlqvSTgwiJTm',
   PAGE_TITLE: 'CryptoCanvas - Distributed art on the blockchain',
+  ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
   // Delay to check transactions in ms
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms

@@ -10,6 +10,7 @@ import { TransactionsSummary } from './TransactionsSummary'
 import withTransactions from '../../hoc/withTransactions'
 import { Link } from 'react-router-dom'
 import { URLHelper } from '../../helpers/URLhelper'
+import { NetworkCheck } from './NetworkCheck'
 
 const StatusMetaMaskNotAvailable = () => (
   <span className="AccountStatus__InstallMetaMaskInfo">
@@ -41,6 +42,8 @@ class AccountStatus extends React.PureComponent {
   render () {
     return (
       <div className="AccountStatus">
+        <NetworkCheck />
+
         {
           !this.props.account && this.props.metamaskAvailable &&
           <StatusDisconnected />
