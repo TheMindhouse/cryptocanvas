@@ -1,6 +1,6 @@
 {
   "name": "crypto-canvas",
-  "version": "1.02",
+  "version": "1.02.0",
   "private": true,
   "dependencies": {
     "antd": "^3.2.3",
