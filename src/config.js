@@ -1,10 +1,10 @@
 import { METAMASK_NETWORKS } from './constants/metamask'
 
 export const CONFIG = {
-  CONTRACT_ADDRESS: '0x0c9b5c62e7ddeba23164fefa0ff10676e3b52629', // Main net
-  WEB3_HTTP_PROVIDER: 'https://mainnet.infura.io/ML50g9METlqvSTgwiJTm',
   PAGE_TITLE: 'CryptoCanvas - Distributed art on the blockchain',
-  ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
+  CONTRACT_ADDRESS: '0x5e68426C7bBCEe3F590B95Dd52066AA2efF6165B', // Rinkeby testnet
+  WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm',
+  ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Delay to check transactions in ms
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms
@@ -23,5 +23,5 @@ export const CONFIG = {
     preview: 3,
     canvas: 10,
   },
-  gridColumns: 64
+  gridColumns: 3
 }
