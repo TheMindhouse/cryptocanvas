@@ -2,7 +2,7 @@ import { METAMASK_NETWORKS } from './constants/metamask'
 
 export const CONFIG = {
   PAGE_TITLE: 'CryptoCanvas - Distributed art on the blockchain',
-  CONTRACT_ADDRESS: '0x5e68426C7bBCEe3F590B95Dd52066AA2efF6165B', // Rinkeby testnet
+  CONTRACT_ADDRESS: '0xF309eFC1003CC83D00a95fBAba5b1b2Dc7A6732b', // Rinkeby testnet
   WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Delay to check transactions in ms
@@ -22,8 +22,8 @@ export const CONFIG = {
   pixelSize: {
     // preview: 3,
     // canvas: 10,
-    preview: 60,
-    canvas: 220,
+    preview: 48,
+    canvas: 128,
   },
-  gridColumns: 3
+  gridColumns: 5
 }
