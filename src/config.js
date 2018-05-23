@@ -20,8 +20,10 @@ export const CONFIG = {
   // Canvas Creation block
   startBlock: 5584261,
   pixelSize: {
-    preview: 3,
-    canvas: 10,
+    // preview: 3,
+    // canvas: 10,
+    preview: 60,
+    canvas: 220,
   },
   gridColumns: 3
 }
