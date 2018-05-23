@@ -53,6 +53,27 @@
     cursor: default;
 }
 
+.HeaderTestnet__Info {
+    background: orange;
+    padding: 3px 5px;
+    color: #fff;
+    margin-top: 10px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    cursor: default;
+}
+
+.HeaderTestnet__Popup {
+    font-weight: bold;
+}
+
+.HeaderTestnet__WarningIcon {
+    font-size: 30px;
+    color: red;
+    margin-right: 10px;
+}
+
 @media all and (max-width: 1100px) {
     .Header__menu {
         display: flex;
