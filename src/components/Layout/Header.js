@@ -43,7 +43,7 @@ const Header = (props: Props) => {
       <Row justify="space-between" type="flex" align="middle">
         <img src={Mona} className="Header__Mona" />
         <div>
-          <Link to="/" className="Header__title"><h1>CryptoCanvas</h1></Link>
+          <Link to={URLHelper.home} className="Header__title"><h1>CryptoCanvas</h1></Link>
           <h2 className="Header__subtitle">Distributed art on the blockchain</h2>
           {CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main && <HeaderTestNet />}
         </div>
