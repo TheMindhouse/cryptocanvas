@@ -17,8 +17,7 @@ type Props = {
   onClose: () => void,
 }
 
-const POPUP_WIDTH = 210
-
+const POPUP_WIDTH = 240
 
 class PixelInfoPopup extends React.PureComponent<Props> {
   static defaultProps = {}
@@ -52,16 +51,26 @@ class PixelInfoPopup extends React.PureComponent<Props> {
               title={'Pixel #' + pixelPopup.id}
               extra={<a onClick={onClose}><Icon type="close" style={{ fontSize: 16, color: '#222' }} /></a>}
               style={{ width: POPUP_WIDTH }}>
-          <ClickableColorPreview
-            colorId={colorId}
-            onClick={this.onCopyColor}
-          />
-          <br />
-          <h4>Painter:</h4>
           {
-            colorId > 0
-            ? <PixelInfoPopupPainter pixelId={pixelPopup.id} canvasId={canvasId}/>
-            : <span>No painter yet, be the first!</span>
+            colorId > 0 &&
+            <div>
+              <ClickableColorPreview
+                colorId={colorId}
+                onClick={this.onCopyColor}
+              />
+              <br />
+              <h4>Painter:</h4>
+              <PixelInfoPopupPainter pixelId={pixelPopup.id} canvasId={canvasId} />
+            </div>
+          }
+          {
+            colorId === 0 &&
+            <div>
+              <p>This pixel is not yet painted. Be the first!</p>
+              <p><b>How to paint:</b></p>
+              <span>1. Pick a color on the right</span><br />
+              <span>2. Click a pixel to paint it</span>
+            </div>
           }
         </Card>
       </div>
