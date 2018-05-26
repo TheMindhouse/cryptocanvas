@@ -9,6 +9,7 @@ import { URLHelper } from '../../helpers/URLhelper'
 import { HashLink } from 'react-router-hash-link'
 import { CONFIG } from '../../config'
 import { METAMASK_NETWORK_NAMES, METAMASK_NETWORKS } from '../../constants/metamask'
+import Mona from '../../assets/images/mona.png'
 
 type Props = {
   // from withWeb3
@@ -39,26 +40,22 @@ const HeaderTestNet = () => (
 const Header = (props: Props) => {
   return (
     <Row className="Header" justify="space-between" type="flex" align="middle">
-      <div>
-        <Link to="/" className="Header__title"><h1>CryptoCanvas</h1></Link>
-        <h2 className="Header__subtitle">Distributed art on the blockchain</h2>
-        {CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main && <HeaderTestNet />}
-      </div>
+      <Row justify="space-between" type="flex" align="middle">
+        <img src={Mona} className="Header__Mona" />
+        <div>
+          <Link to="/" className="Header__title"><h1>CryptoCanvas</h1></Link>
+          <h2 className="Header__subtitle">Distributed art on the blockchain</h2>
+          {CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main && <HeaderTestNet />}
+        </div>
+      </Row>
       <ul className="Header__menu">
         <li>
-          <NavLink to="/" exact
+          <NavLink to={URLHelper.home} exact
                    className="Header__menu-link"
                    activeClassName="Header__menu-link--active">
             <span className="hidden-mobile">Canvas</span> Gallery
           </NavLink>
         </li>
-        {/*<li>*/}
-        {/*<NavLink to="/trade"*/}
-        {/*className="Header__menu-link"*/}
-        {/*activeClassName="Header__menu-link--active">*/}
-        {/*Marketplace*/}
-        {/*</NavLink>*/}
-        {/*</li>*/}
         <li>
           <NavLink to="/about"
                    className="Header__menu-link"

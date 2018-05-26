@@ -20,6 +20,7 @@ import { Help } from './Help'
 import { Footer } from '../components/Layout/Footer'
 import Contact from './Contact'
 import TermsOfUse from './TermsOfUse'
+import Intro from './Intro'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
@@ -48,7 +49,8 @@ class App extends React.Component {
 
                   <Route path="/" component={logPageView} />
                   <Switch>
-                    <Route exact path='/' component={Homepage} />
+                    <Route exact path='/' component={Intro} />
+                    <Route path='/gallery' component={Homepage} />
                     <Route path='/trade' component={Marketplace} />
                     <Route path='/about' component={About} />
                     <Route path='/canvas/:id' component={CanvasPage} />

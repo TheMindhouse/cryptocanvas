@@ -5,10 +5,13 @@ import './styles/YoutubePlayer.css'
 
 type Props = {
   videoId: string,
+  playing?: boolean,
 }
 
 class YoutubePlayer extends React.PureComponent<Props> {
-  static defaultProps = {}
+  static defaultProps = {
+    playing: false,
+  }
   
   render() {
     return (
@@ -19,6 +22,9 @@ class YoutubePlayer extends React.PureComponent<Props> {
           width='100%'
           height='100%'
           controls
+          playing={this.props.playing}
+          volume={100}
+          muted={this.props.playing}
         />
       </div>
     )

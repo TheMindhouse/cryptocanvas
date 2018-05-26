@@ -4,6 +4,14 @@
     margin: 0 auto;
 }
 
+.Header__Mona {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    position: relative;
+    top: 5px;
+}
+
 .Header__title {
     text-decoration: none !important;
 }
@@ -86,6 +94,14 @@
         padding: 15px 20px 20px;
         flex-direction: column;
         text-align: center;
+    }
+
+    .Header__Mona {
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        position: relative;
+        top: -4px;
     }
 
     .Header__title > * {
