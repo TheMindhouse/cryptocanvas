@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Spin } from 'antd'
+import { Row, Spin, Tooltip } from 'antd'
 import withEvents from '../hoc/withEvents'
 import withWeb3 from '../hoc/withWeb3'
 import ActiveCanvases from './Homepage/ActiveCanvases'
@@ -47,7 +47,10 @@ class Homepage extends Component {
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="Homepage__header container">
             <h1><b>Canvases Available for Painting</b></h1>
-            <h3>Paint some pixels and become the Blockchain Picasso (or read <Link to="/about">how it works</Link>)</h3>
+            <h3>
+              <b>Paint a portion of a canvas for <Tooltip placement="top" title="You only need to cover a transaction fee required by the
+              Ethereum Network">FREE*</Tooltip></b> and get a share of its price after it's sold on an auction.<br/>
+              You can also read more <Link to="/about">how it works</Link>.</h3>
           </Row>
         </div>
         <Row className="container text-center">
