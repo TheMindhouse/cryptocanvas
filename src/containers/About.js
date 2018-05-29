@@ -48,6 +48,7 @@ class About extends React.PureComponent {
               <Anchor.Link href="#what-is-stored-on-the-blockchain" title="What is stored on the blockchain?" />
               <Anchor.Link href="#is-the-number-of-canvases-limited" title="Is the number of canvases limited?" />
               <Anchor.Link href="#who-holds-copyright-to-the-canvases" title="Who holds copyright to the Canvases?" />
+              <Anchor.Link href="#is-the-code-open-source" title="Is the code open-source?" />
             </Anchor>
           </Col>
           <Col xs={24} sm={24} md={16}>
@@ -227,6 +228,25 @@ class About extends React.PureComponent {
               is passed to the new owner along with the canvas.
             </p>
             <p>CryptoCanvas fans are able to use images of the canvases in non-commercial purposes.</p>
+
+            <h2 id="is-the-code-open-source"><b>Is the code open-source?</b></h2>
+            <p>
+              Yes! All of the CryptoCanvas code is available for everyone at
+              our <a href="https://github.com/TheMindhouse/cryptocanvas-solidity" target="_blank" rel="noopener noreferrer">
+              GitHub page</a>.
+            </p>
+            <p>Smart Contract is also verified and available
+              at <a href="https://etherscan.io/address/0x0c9b5c62e7ddeba23164fefa0ff10676e3b52629#code" target="_blank"
+                    rel="noopener noreferrer">Etherscan</a>.
+            </p>
+            <p>
+              Because CryptoCanvas is open-source and all the data is stored on the
+              blockchain, <b>the canvases will never disappear and everyone will be able to interact
+              with them forever</b>!
+              Even if our servers were down, the canvases would always be there, on the blockchain,
+              available to be read by anyone. You are free to create your own website to interact with
+              the CryptoCanvas Smart Contract.
+            </p>
           </Col>
         </Row>
       </div>

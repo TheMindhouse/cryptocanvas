@@ -41,17 +41,14 @@ class Marketplace extends Component {
       <div>
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="container">
-            <h2>
-              Buy and Sell finished artworks<br />
-              with <b>proof of ownership</b> stored forever <b>on the Ethereum blockchain</b>.
-            </h2>
+            <h1><b>Canvas Auctions</b></h1>
+            <h3>
+              A canvas is put up for auction when all its pixels are set.<br />
+              An auction determines the first owner, whose winning bid is distributed across all painters.</h3>
           </Row>
         </div>
 
         <Row className="container text-center">
-          <h1><b>Initial Bidding</b></h1>
-          <h3>Waiting for the first owner, whose winning bid will be distributed across all the painters</h3>
-          <br /><br />
           {!this.state.biddingCanvasIds && <div style={{ marginBottom: 50 }}><Spin /></div>}
           {
             this.state.biddingCanvasIds && (
@@ -65,10 +62,17 @@ class Marketplace extends Component {
           }
         </Row>
 
+        <div className="containerWrapper" style={{ marginBottom: 50 }}>
+          <Row className="container">
+            <h1><b>Canvas Marketplace</b></h1>
+            <h3>
+              These paintings were sold on an auction and already have an owner.<br/>
+              You can make an offer to buy one or accept an offer from its owner.
+            </h3>
+          </Row>
+        </div>
+
         <Row className="container text-center">
-          <h1><b>Finished Canvas Gallery</b></h1>
-          <h3>You can admire them and you can buy them</h3>
-          <br /><br />
           {!this.state.completedCanvasIds && <Spin />}
           {
             this.state.completedCanvasIds && (

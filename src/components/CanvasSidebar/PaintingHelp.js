@@ -39,7 +39,7 @@ class PaintingHelp extends React.PureComponent<Props> {
 
   render () {
     return (
-      <Link to="#" onClick={this.showModal}>How can I place a pixel?</Link>
+      <Link to="#" onClick={this.showModal}>Help: How can I place a pixel?</Link>
     )
   }
 }

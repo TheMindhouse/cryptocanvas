@@ -17,14 +17,14 @@ class ClickableColorPreview extends React.PureComponent<Props> {
   render () {
     if (!this.props.account) {
       return (
-        <ColorPreview colorId={this.props.colorId} />
+        <ColorPreview colorId={this.props.colorId} style={{ width: '100%' }} />
       )
     }
 
     return (
       <Tooltip title="Click to copy" onClick={this.props.onClick}>
         <div>
-          <ColorPreview colorId={this.props.colorId} style={{ cursor: 'pointer' }} />
+          <ColorPreview colorId={this.props.colorId} style={{ cursor: 'pointer', width: '100%' }} />
         </div>
       </Tooltip>
     )

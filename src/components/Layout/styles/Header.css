@@ -4,6 +4,14 @@
     margin: 0 auto;
 }
 
+.Header__Mona {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    position: relative;
+    top: 5px;
+}
+
 .Header__title {
     text-decoration: none !important;
 }
@@ -53,6 +61,27 @@
     cursor: default;
 }
 
+.HeaderTestnet__Info {
+    background: orange;
+    padding: 3px 5px;
+    color: #fff;
+    margin-top: 10px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    cursor: default;
+}
+
+.HeaderTestnet__Popup {
+    font-weight: bold;
+}
+
+.HeaderTestnet__WarningIcon {
+    font-size: 30px;
+    color: red;
+    margin-right: 10px;
+}
+
 @media all and (max-width: 1100px) {
     .Header__menu {
         display: flex;
@@ -65,6 +94,14 @@
         padding: 15px 20px 20px;
         flex-direction: column;
         text-align: center;
+    }
+
+    .Header__Mona {
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        position: relative;
+        top: -4px;
     }
 
     .Header__title > * {
@@ -86,5 +123,9 @@
 
     .Header__menu li {
         padding: 0 15px;
+    }
+
+    .HeaderTestnet__Info {
+        margin-bottom:  15px;
     }
 }

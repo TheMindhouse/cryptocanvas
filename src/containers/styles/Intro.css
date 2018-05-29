@@ -1,0 +1,10 @@
+.Intro__video {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.Intro__button {
+    font-size: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}

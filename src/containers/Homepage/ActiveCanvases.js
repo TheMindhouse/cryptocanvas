@@ -1,10 +1,12 @@
 import React from 'react'
-import { Col, Row } from 'antd'
+import { Button, Col, Row } from 'antd'
 import CanvasPreview from '../../components/Homepage/CanvasPreview'
 import CreateCanvas from '../../components/Homepage/CreateCanvas'
 import { PendingTransactionInfo } from '../../components/Small/PendingTransactionInfo'
 import { TRANSACTION_TYPE } from '../../models/Transaction'
 import { CONFIG } from '../../config'
+import { URLHelper } from '../../helpers/URLhelper'
+import { Link } from 'react-router-dom'
 
 class ActiveCanvases extends React.PureComponent {
   render () {
@@ -21,7 +23,15 @@ class ActiveCanvases extends React.PureComponent {
           {
             this.props.activeCanvasIds.map((canvasId, index) =>
               <Col xs={24} sm={12} md={6} key={index}>
-                <CanvasPreview canvasId={canvasId} showPercentCompleted={true} />
+                <CanvasPreview canvasId={canvasId} showPercentCompleted={true}
+                               extraRender={() =>
+                                 <div className="text-center">
+                                   <Link to={URLHelper.canvas(canvasId)}>
+                                     <Button type="primary" size="large">Paint this Canvas</Button>
+                                   </Link>
+                                 </div>
+                               }
+                />
               </Col>
             )
           }

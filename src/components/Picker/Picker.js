@@ -13,8 +13,8 @@ const PICKER_SIZE = COLOR_WIDTH * Math.sqrt(hexPalette.length)
 export class Picker extends React.Component {
   render () {
     return (
-      <div>
-        <ColorPreview colorId={this.props.activeColorId} style={{ width: PICKER_SIZE, margin: '30px 0'}}/>
+      <div style={{ marginTop: 20 }}>
+        <h2><b>1. Choose a color</b></h2>
         <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
           {
             this.props.isDisabled &&
@@ -34,6 +34,11 @@ export class Picker extends React.Component {
               changeActiveColor={this.props.changeActiveColor}
             />)}
         </div>
+        <ColorPreview
+          colorId={this.props.activeColorId}
+          style={{ width: PICKER_SIZE, margin: '30px 0'}}
+        />
+        <h2><b>2. Click a pixel to paint</b></h2>
       </div>
     )
   }
