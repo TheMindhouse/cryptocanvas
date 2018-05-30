@@ -19,6 +19,8 @@ const CONFIG_MAIN = {
   MAX_ACTIVE_CANVASES: 12,
   // Maximum number of canvases in total
   MAX_TOTAL_CANVASES: 1000,
+  // Maximum number of selected pixels on a single canvas
+  MAX_SELECTED_PIXELS: 100,
   // Canvas Creation block
   startBlock: 5584261,
   pixelSize: {
@@ -47,6 +49,8 @@ const CONFIG_RINKEBY = {
   MAX_ACTIVE_CANVASES: 12,
   // Maximum number of canvases in total
   MAX_TOTAL_CANVASES: 1000,
+  // Maximum number of selected pixels on a single canvas
+  MAX_SELECTED_PIXELS: 5,
   // Canvas Creation block
   startBlock: 5584261,
   pixelSize: {

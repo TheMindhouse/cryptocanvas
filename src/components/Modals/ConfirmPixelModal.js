@@ -1,10 +1,16 @@
+// @flow
 import React from 'react'
 import { ColorPreview } from '../ColorPreview/ColorPreview'
 import { Row } from 'antd'
 import './styles/ConfirmPixel.css'
-import { TermsInfo } from '../Small/TermsInfo'
 
-const ConfirmPixelModal = ({ x, y, color }) => {
+type Props = {
+  x: number,
+  y: number,
+  colorId: number,
+}
+
+const ConfirmPixelModal = ({ x, y, colorId }: Props) => {
   return (
     <div>
       <Row type="flex" justify="center" align="center" className="ConfirmPixel" gutter={30}>
@@ -16,15 +22,11 @@ const ConfirmPixelModal = ({ x, y, color }) => {
           <span className="ConfirmPixel_Coords">{y}</span>
         </div>
         <div>
-          <ColorPreview colorId={color} />
+          <ColorPreview colorId={colorId} />
         </div>
       </Row>
-      <TermsInfo />
     </div>
   )
 }
 
-ConfirmPixelModal.propTypes = {}
-ConfirmPixelModal.defaultProps = {}
-
-export default ConfirmPixelModal
+export { ConfirmPixelModal }

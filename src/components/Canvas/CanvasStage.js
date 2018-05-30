@@ -11,6 +11,8 @@ import UserSelectedPixels from './UserSelectedPixels'
 import { withSelectedPixels } from '../../hoc/withSelectedPixels'
 import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsProvider'
 import { SelectedPixel } from '../../models/SelectedPixel'
+import { CONFIG } from '../../config'
+import { Modal } from 'antd/lib/index'
 
 type Props = {
   canvasId: number,
@@ -91,9 +93,14 @@ class CanvasStage extends React.Component<Props, State> {
     const y: number = layerY
     const indexObj: PixelIndex = this.getPixelIndexByMouseCoordinates({ x, y })
 
+    const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     const selectedPixel = new SelectedPixel({ canvasId: this.props.canvasId, pixelIndex: indexObj, colorId: this.props.activeColorId })
 
     if (this.props.activeColorId) {
+      if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
+        this.showCannotSelectPixelModal()
+        return
+      }
       this.props.selectedPixelsStore.selectPixel(selectedPixel)
       // this.props.changePixelColor(indexObj)
     } else {
@@ -103,6 +110,13 @@ class CanvasStage extends React.Component<Props, State> {
       }
       this.showPixelPopup(indexObj)
     }
+  }
+
+  showCannotSelectPixelModal = () => {
+    Modal.error({
+      title: 'Cannot Select Pixel',
+      content: `Maximum ${CONFIG.MAX_SELECTED_PIXELS} pixels can be submitted at once.`,
+    })
   }
 
   onMouseWheel = (event: any) => {
