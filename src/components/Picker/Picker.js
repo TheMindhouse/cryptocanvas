@@ -14,7 +14,7 @@ export class Picker extends React.Component {
   render () {
     return (
       <div>
-        <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
+        <div className="Picker" style={{ width: PICKER_SIZE }}>
           {
             this.props.isDisabled &&
             <div className="Picker__DisabledOverlay">
@@ -32,11 +32,11 @@ export class Picker extends React.Component {
               isSelected={colorId === this.props.activeColorId}
               changeActiveColor={this.props.changeActiveColor}
             />)}
+          <ColorPreview
+            colorId={this.props.activeColorId}
+            style={{ width: PICKER_SIZE, margin: '3px 0 15px'}}
+          />
         </div>
-        <ColorPreview
-          colorId={this.props.activeColorId}
-          style={{ width: PICKER_SIZE, margin: '10px 0 15px'}}
-        />
       </div>
     )
   }
