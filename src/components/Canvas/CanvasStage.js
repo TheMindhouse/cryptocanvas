@@ -8,6 +8,7 @@ import { KonvaStage } from './KonvaStage'
 import type { PixelIndex } from '../../types/PixelIndex'
 import type { MouseCoords } from '../../types/MouseCoords'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
+import UserSelectedPixels from './UserSelectedPixels'
 
 type Props = {
   canvasId: number,
@@ -167,7 +168,8 @@ class CanvasStage extends React.Component<Props, State> {
     return (
       <div>
         <div className="CanvasStage" ref={this.canvasRef}
-             onWheel={this.onMouseWheel} onMouseLeave={this.onMouseLeave}>
+             // onWheel={this.onMouseWheel}
+             onMouseLeave={this.onMouseLeave}>
           <div>
             {
               this.state.pixelPopup &&
@@ -195,7 +197,11 @@ class CanvasStage extends React.Component<Props, State> {
                   />
                 }
 
-                <UserPaintedLoadingPixels
+                {/*<UserPaintedLoadingPixels*/}
+                  {/*pixelSize={this.state.pixelSize}*/}
+                  {/*canvasId={this.props.canvasId}*/}
+                {/*/>*/}
+                <UserSelectedPixels
                   pixelSize={this.state.pixelSize}
                   canvasId={this.props.canvasId}
                 />

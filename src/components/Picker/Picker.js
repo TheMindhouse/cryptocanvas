@@ -7,14 +7,13 @@ import { Button } from 'antd'
 import { URLHelper } from '../../helpers/URLhelper'
 import { HashLink } from 'react-router-hash-link'
 
-const COLOR_WIDTH = 16
+const COLOR_WIDTH = 14
 const PICKER_SIZE = COLOR_WIDTH * Math.sqrt(hexPalette.length)
 
 export class Picker extends React.Component {
   render () {
     return (
-      <div style={{ marginTop: 20 }}>
-        <h2><b>1. Choose a color</b></h2>
+      <div>
         <div className="Picker" style={{ width: PICKER_SIZE, height: PICKER_SIZE }}>
           {
             this.props.isDisabled &&
@@ -36,9 +35,8 @@ export class Picker extends React.Component {
         </div>
         <ColorPreview
           colorId={this.props.activeColorId}
-          style={{ width: PICKER_SIZE, margin: '30px 0'}}
+          style={{ width: PICKER_SIZE, margin: '10px 0 15px'}}
         />
-        <h2><b>2. Click a pixel to paint</b></h2>
       </div>
     )
   }
