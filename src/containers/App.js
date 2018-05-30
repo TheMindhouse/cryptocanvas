@@ -21,6 +21,7 @@ import { Footer } from '../components/Layout/Footer'
 import Contact from './Contact'
 import TermsOfUse from './TermsOfUse'
 import Intro from './Intro'
+import { SelectedPixelsProvider } from '../stores/SelectedPixelsProvider'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
@@ -53,7 +54,9 @@ class App extends React.Component {
                     <Route path='/gallery' component={Homepage} />
                     <Route path='/trade' component={Marketplace} />
                     <Route path='/about' component={About} />
-                    <Route path='/canvas/:id' component={CanvasPage} />
+                    <SelectedPixelsProvider>
+                      <Route path='/canvas/:id' component={CanvasPage} />
+                    </SelectedPixelsProvider>
                     <Route path='/account/:address' component={Account} />
                     <Route path='/help' component={Help} />
                     <Route path='/terms-of-use' component={TermsOfUse} />

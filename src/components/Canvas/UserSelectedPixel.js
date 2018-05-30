@@ -11,7 +11,7 @@ type Props = {
   colorId: number,
 }
 
-class SelectedPixel extends React.PureComponent<Props> {
+class UserSelectedPixel extends React.PureComponent<Props> {
   static defaultProps = {}
 
   render () {
@@ -28,11 +28,11 @@ class SelectedPixel extends React.PureComponent<Props> {
         <div className="SelectedPixel__color" style={{
           backgroundColor: hexPalette[ this.props.colorId ]
         }}>
-          <Icon type="loading" />
+          <Icon type="plus" style={{ fontSize: `calc(${pixelSize}px / 2)`}}/>
         </div>
       </div>
     )
   }
 }
 
-export { SelectedPixel }
+export { UserSelectedPixel }

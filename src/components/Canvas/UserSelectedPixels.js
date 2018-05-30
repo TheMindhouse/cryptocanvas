@@ -1,14 +1,12 @@
 // @flow
 import * as React from 'react'
-import withTransactions from '../../hoc/withTransactions'
-import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
-import { TransactionWithPixel } from '../../models/TransactionWithPixel'
-import { SelectedPixel } from './SelectedPixel'
+import { UserSelectedPixel } from './UserSelectedPixel'
+import { withSelectedPixels } from '../../hoc/withSelectedPixels'
+import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsProvider'
+import { SelectedPixel } from '../../models/SelectedPixel'
 
 type Props = {
-  txStore: {
-    transactions: Array<Transaction|TransactionWithPixel>
-  },
+  selectedPixelsStore: SelectedPixelsProviderState,
   pixelSize: number,
   canvasId: number,
 }
@@ -16,30 +14,21 @@ type Props = {
 class UserSelectedPixels extends React.PureComponent<Props> {
   static defaultProps = {}
 
-  getCanvasPendingTransactions = () => {
-      const y = this.props.txStore.transactions.filter((tx: Transaction|TransactionWithPixel) =>
-        tx.status === TRANSACTION_STATUS.pending &&
-        tx instanceof TransactionWithPixel &&
-        tx.canvasId === this.props.canvasId
-      )
-    return y
-  }
-
-
-  render() {
+  render () {
     return (
       <div>
-        {this.getCanvasPendingTransactions().map((tx: TransactionWithPixel, i: number) =>
-          <SelectedPixel
-            pixelIndex={tx.pixelIndex}
-            pixelSize={this.props.pixelSize}
-            colorId={tx.colorId}
-            key={i}
-          />
-        )}
+        {this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
+          .map((selectedPixel: SelectedPixel, i: number) =>
+            <UserSelectedPixel
+              pixelIndex={selectedPixel.pixelIndex}
+              pixelSize={this.props.pixelSize}
+              colorId={selectedPixel.colorId}
+              key={i}
+            />
+          )}
       </div>
     )
   }
 }
 
-export default withTransactions(UserSelectedPixels)
+export default withSelectedPixels(UserSelectedPixels)

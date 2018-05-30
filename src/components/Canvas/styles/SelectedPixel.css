@@ -19,7 +19,7 @@
 
 @keyframes crescendo {
     0% {
-        transform: scale(.5);
+        transform: scale(.8);
     }
     100% {
         transform: scale(1);
