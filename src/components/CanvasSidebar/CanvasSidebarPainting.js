@@ -39,7 +39,7 @@ const CanvasSidebarPainting = (props) => {
       <SelectedPixelsInfo canvasId={props.canvasId} />
 
       <Button type="primary" size="large">Submit to the blockchain</Button>
-      <TermsInfo style={{ marginTop: 0 }}/>
+      <TermsInfo style={{ marginTop: 10 }}/>
 
       <br />
       <PaintingHelp />
