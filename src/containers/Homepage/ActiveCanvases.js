@@ -44,7 +44,7 @@ class ActiveCanvases extends React.PureComponent {
           }
         </Row>
 
-        <PendingTransactionInfo type={TRANSACTION_TYPE.createCanvas} style={{ display: 'inline-block' }} />
+        <PendingTransactionInfo type={TRANSACTION_TYPE.createCanvas} style={{ display: 'inline-block', marginBottom: 50 }} />
       </div>
     )
   }
