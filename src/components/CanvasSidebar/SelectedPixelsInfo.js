@@ -36,7 +36,6 @@ class SelectedPixelsInfo extends React.PureComponent<Props> {
           modal={this.props.modal}
           selectedPixels={selectedPixels}
           removeSelectedPixel={this.props.selectedPixelsStore.removeSelectedPixel}
-          onClear={() => {}}
         />
         <Row type="flex" align="middle" className="SelectedPixelsPreview">
           {selectedPixels.slice(0, COLOR_PREVIEW_LIMIT).map((pixel: SelectedPixel, i: number) =>

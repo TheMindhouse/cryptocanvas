@@ -13,7 +13,6 @@ import { ColorPreview } from '../ColorPreview/ColorPreview'
 type Props = {
   selectedPixels: Array<SelectedPixel>,
   removeSelectedPixel: (SelectedPixel) => boolean,
-  onClear: () => void,
   modal: WithModal,
 }
 
@@ -60,6 +59,12 @@ class SelectedPixelsModal extends React.PureComponent<Props> {
     return false
   }
 
+  deselectAll = () => {
+    this.props.selectedPixels.forEach((pixel: SelectedPixel) => this.props.removeSelectedPixel(pixel))
+    message.success(`All pixels deselected`)
+    this.props.modal.close()
+  }
+  
   render () {
     const canvasSize = CONFIG.pixelSize.canvas * CONFIG.gridColumns
 
@@ -70,7 +75,7 @@ class SelectedPixelsModal extends React.PureComponent<Props> {
         onCancel={this.props.modal.close}
         width={canvasSize + 50}
         footer={[
-          <Button type="danger" onClick={this.props.onClear} key="0">Deselect All</Button>,
+          <Button type="danger" onClick={this.deselectAll} key="0">Deselect All</Button>,
           <Button type="primary" onClick={this.props.modal.close} key="1">Close Modal</Button>,
         ]}
       >
