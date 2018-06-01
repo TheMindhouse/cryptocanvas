@@ -13,6 +13,7 @@ import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsPro
 import { SelectedPixel } from '../../models/SelectedPixel'
 import { CONFIG } from '../../config'
 import { Modal } from 'antd/lib/index'
+import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
 
 type Props = {
   canvasId: number,
@@ -222,10 +223,11 @@ class CanvasStage extends React.Component<Props, State> {
                   />
                 }
 
-                {/*<UserPaintedLoadingPixels*/}
-                  {/*pixelSize={this.state.pixelSize}*/}
-                  {/*canvasId={this.props.canvasId}*/}
-                {/*/>*/}
+                <UserPaintedLoadingPixels
+                  pixelSize={this.state.pixelSize}
+                  canvasId={this.props.canvasId}
+                />
+
                 <UserSelectedPixels
                   pixelSize={this.state.pixelSize}
                   canvasId={this.props.canvasId}
