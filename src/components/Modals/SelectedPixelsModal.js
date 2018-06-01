@@ -64,7 +64,7 @@ class SelectedPixelsModal extends React.PureComponent<Props> {
     message.success(`All pixels deselected`)
     this.props.modal.close()
   }
-  
+
   render () {
     const canvasSize = CONFIG.pixelSize.canvas * CONFIG.gridColumns
 

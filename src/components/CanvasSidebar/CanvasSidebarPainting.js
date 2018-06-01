@@ -7,6 +7,7 @@ import { CanvasPainters } from './CanvasPainters'
 import { Button } from 'antd'
 import { TermsInfo } from '../Small/TermsInfo'
 import { SelectedPixelsInfo } from './SelectedPixelsInfo'
+import { SubmitSelectedPixels } from './SubmitSelectedPixels'
 
 const CanvasSidebarPainting = (props) => {
   const percentCompleted = parseInt((props.paintedPixels / props.totalPixels) * 100, 10)
@@ -38,8 +39,7 @@ const CanvasSidebarPainting = (props) => {
       <h3><b>2. Select pixels to paint</b></h3>
       <SelectedPixelsInfo canvasId={props.canvasId} />
 
-      <Button type="primary" size="large">Submit to the blockchain</Button>
-      <TermsInfo style={{ marginTop: 10 }}/>
+      <SubmitSelectedPixels canvasId={props.canvasId} paintedPixels={props.paintedPixels} />
 
       <br />
       <PaintingHelp />
