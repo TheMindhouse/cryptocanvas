@@ -441,6 +441,28 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_indexes",
+        "type": "uint32[]"
+      },
+      {
+        "name": "_colors",
+        "type": "uint8[]"
+      }
+    ],
+    "name": "setPixels",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "owner",

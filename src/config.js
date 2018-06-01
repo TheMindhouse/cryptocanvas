@@ -32,7 +32,7 @@ const CONFIG_MAIN = {
 
 const CONFIG_RINKEBY = {
   // Contract settings
-  CONTRACT_ADDRESS: '0xF309eFC1003CC83D00a95fBAba5b1b2Dc7A6732b', // Rinkeby testnet
+  CONTRACT_ADDRESS: '0x13bfa7d3b3e905ee5c611fa1097b03bf8f5d634a', // Rinkeby testnet
   WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Browser page title
@@ -50,7 +50,7 @@ const CONFIG_RINKEBY = {
   // Maximum number of canvases in total
   MAX_TOTAL_CANVASES: 1000,
   // Maximum number of selected pixels on a single canvas
-  MAX_SELECTED_PIXELS: 5,
+  MAX_SELECTED_PIXELS: 100,
   // Canvas Creation block
   startBlock: 5584261,
   pixelSize: {
