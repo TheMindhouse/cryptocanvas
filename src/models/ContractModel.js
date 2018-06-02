@@ -8,6 +8,9 @@ import { PainterReward } from './PainterReward'
 import { BLOCKCHAIN_CANVAS_STATES, CanvasState } from './CanvasState'
 import { TransactionWithCanvasId } from './transactions/TransactionWithCanvasId'
 import { cutAddress } from '../helpers/strings'
+import * as pluralize from 'pluralize'
+import type { PixelIndex } from '../types/PixelIndex'
+import { TransactionWithPixels } from './TransactionWithPixels'
 
 const GAS_LIMIT = 150000
 const GAS_PRICE = 2000000000
@@ -36,6 +39,14 @@ export class ContractModel {
     return this._config
   }
 
+  calculateSetPixelGas (pixelsCount: number, hasFirstPixel: boolean): number {
+    const FIRST_PIXEL = 55000
+    const REGULAR_PIXEL = 45000
+    let totalGas = pixelsCount * REGULAR_PIXEL
+    if (hasFirstPixel) totalGas += FIRST_PIXEL
+    return totalGas
+  }
+
   setPixel ({ canvasId, pixelIndex, colorId }) {
     return new Promise((resolve, reject) => {
       this.Contract.setPixel(canvasId, pixelIndex.id, colorId, { ...this.config, gas: 100000 }, (error, txHash) => {
@@ -55,6 +66,36 @@ export class ContractModel {
             timestamp: new Date(),
           }
           resolve(new TransactionWithPixel(tx))
+        }
+      })
+    })
+  }
+
+  setPixels ({ canvasId, pixelIndexes, colorIds, gasLimit }:
+               {
+                 canvasId: number,
+                 pixelIndexes: Array<PixelIndex>,
+                 colorIds: Array<number>,
+               }) {
+    return new Promise((resolve, reject) => {
+      const pixelIds = pixelIndexes.map((pixelIndex: PixelIndex) => pixelIndex.id)
+      this.Contract.setPixels(canvasId, pixelIds, colorIds, { ...this.config, gas: gasLimit }, (error, txHash) => {
+        if (error) {
+          console.log(error)
+          console.log('[ERROR] Set pixels failed')
+          reject(error)
+        } else {
+          const tx: TransactionWithPixels = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.setPixels,
+            name: `Set ${pixelIds.length} ${pluralize('pixel', pixelIds.length)} on Canvas #${canvasId}`,
+            canvasId: canvasId,
+            colorIds: colorIds,
+            pixelIndexes: pixelIndexes,
+            account: this.account,
+            timestamp: new Date(),
+          }
+          resolve(new TransactionWithPixels(tx))
         }
       })
     })

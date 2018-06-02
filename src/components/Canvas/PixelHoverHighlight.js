@@ -28,7 +28,7 @@ class PixelHoverHighlight extends React.Component<Props> {
         width: pixelSize,
         height: pixelSize,
       }}>
-        { this.props.showDetailsIcon && <Icon type="search" /> }
+        { this.props.showDetailsIcon && <Icon type="search" style={{ fontSize: `calc(${pixelSize}px / 2)`}} /> }
 
       </div>
     )

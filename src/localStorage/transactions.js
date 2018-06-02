@@ -1,6 +1,7 @@
 import { Transaction, TRANSACTION_TYPE } from '../models/Transaction'
 import { TransactionWithPixel } from '../models/TransactionWithPixel'
 import { TransactionWithCanvasId } from '../models/transactions/TransactionWithCanvasId'
+import { TransactionWithPixels } from '../models/TransactionWithPixels'
 
 const STORAGE_KEY = 'USER_TX'
 
@@ -11,6 +12,8 @@ const getTransactions = () => {
       switch (tx.type) {
         case TRANSACTION_TYPE.setPixel:
           return new TransactionWithPixel(tx)
+        case TRANSACTION_TYPE.setPixels:
+          return new TransactionWithPixels(tx)
         case TRANSACTION_TYPE.createCanvas:
         case TRANSACTION_TYPE.withdrawBalance:
           return new Transaction(tx)

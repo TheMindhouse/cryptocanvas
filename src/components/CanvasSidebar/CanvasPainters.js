@@ -110,9 +110,9 @@ class CanvasPainters extends React.PureComponent<Props, State> {
       <div>
         {
           this.state.canvasPainters
-            ? <Link to="#" onClick={this.showModal}>
+            ? <p><Link to="#" onClick={this.showModal}>
               {paintersCount} Canvas {paintersCount === 1 ? 'Painter' : 'Painters'}
-            </Link>
+            </Link></p>
             : <p>&nbsp;</p>
         }
       </div>

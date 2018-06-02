@@ -7,6 +7,12 @@ import { PixelHoverColorPopup } from './PixelHoverColorPopup'
 import { KonvaStage } from './KonvaStage'
 import type { PixelIndex } from '../../types/PixelIndex'
 import type { MouseCoords } from '../../types/MouseCoords'
+import UserSelectedPixels from './UserSelectedPixels'
+import { withSelectedPixels } from '../../hoc/withSelectedPixels'
+import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsProvider'
+import { SelectedPixel } from '../../models/SelectedPixel'
+import { CONFIG } from '../../config'
+import { Modal } from 'antd/lib/index'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
 
 type Props = {
@@ -16,6 +22,8 @@ type Props = {
   activeColorId: number,
   changePixelColor: (PixelIndex) => void,
   changeActiveColor: (number) => void,
+  // withSelectedPixels
+  selectedPixelsStore: SelectedPixelsProviderState,
 }
 
 type State = {
@@ -86,11 +94,30 @@ class CanvasStage extends React.Component<Props, State> {
     const y: number = layerY
     const indexObj: PixelIndex = this.getPixelIndexByMouseCoordinates({ x, y })
 
+    const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
+    const selectedPixel = new SelectedPixel({ canvasId: this.props.canvasId, pixelIndex: indexObj, colorId: this.props.activeColorId })
+
     if (this.props.activeColorId) {
-      this.props.changePixelColor(indexObj)
+      if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
+        this.showCannotSelectPixelModal()
+        return
+      }
+      this.props.selectedPixelsStore.selectPixel(selectedPixel)
+      // this.props.changePixelColor(indexObj)
     } else {
+      // If the click was to deselect a pixel, do not show info popup
+      if (this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)) {
+        return
+      }
       this.showPixelPopup(indexObj)
     }
+  }
+
+  showCannotSelectPixelModal = () => {
+    Modal.error({
+      title: 'Cannot Select Pixel',
+      content: `Maximum ${CONFIG.MAX_SELECTED_PIXELS} pixels can be submitted at once.`,
+    })
   }
 
   onMouseWheel = (event: any) => {
@@ -167,7 +194,8 @@ class CanvasStage extends React.Component<Props, State> {
     return (
       <div>
         <div className="CanvasStage" ref={this.canvasRef}
-             onWheel={this.onMouseWheel} onMouseLeave={this.onMouseLeave}>
+             onWheel={this.onMouseWheel}
+             onMouseLeave={this.onMouseLeave}>
           <div>
             {
               this.state.pixelPopup &&
@@ -196,6 +224,11 @@ class CanvasStage extends React.Component<Props, State> {
                 }
 
                 <UserPaintedLoadingPixels
+                  pixelSize={this.state.pixelSize}
+                  canvasId={this.props.canvasId}
+                />
+
+                <UserSelectedPixels
                   pixelSize={this.state.pixelSize}
                   canvasId={this.props.canvasId}
                 />
@@ -233,4 +266,4 @@ class CanvasStage extends React.Component<Props, State> {
   }
 }
 
-export default CanvasStage
+export default withSelectedPixels(CanvasStage)

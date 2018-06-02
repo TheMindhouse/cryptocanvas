@@ -67,6 +67,10 @@ body {
     overflow: hidden;
 }
 
+.margin-bottom-none {
+    margin-bottom: 0;
+}
+
 blockquote::before {
     display: block;
     content: '“';
