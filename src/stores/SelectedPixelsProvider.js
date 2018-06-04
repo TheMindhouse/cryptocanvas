@@ -15,6 +15,7 @@ export type SelectedPixelsProviderState = {
   getSelectedPixels: (canvasId?: number) => Array<SelectedPixel>,
   selectPixel: (SelectedPixel) => void,
   removeSelectedPixel: ({ canvasId: number, pixelIndex: PixelIndex }) => boolean,
+  removeSelectedPixels: ({ canvasId: number, pixelIndexes: Array<PixelIndex> }) => number,
   pixelExists: (SelectedPixel) => boolean,
 }
 
@@ -26,6 +27,7 @@ export class SelectedPixelsProvider extends React.Component<Props, SelectedPixel
       getSelectedPixels: this.getSelectedPixels,
       selectPixel: this.selectPixel,
       removeSelectedPixel: this.removeSelectedPixel,
+      removeSelectedPixels: this.removeSelectedPixels,
       pixelExists: this.pixelExists,
     }
   }
@@ -50,6 +52,18 @@ export class SelectedPixelsProvider extends React.Component<Props, SelectedPixel
 
     // Return true if the pixel was saved before and has now been deleted
     return oldSelectedPixels.length > newSelectedPixels.length
+  }
+
+  removeSelectedPixels = ({ canvasId, pixelIndexes }: { canvasId: number, pixelIndexes: Array<PixelIndex> }) => {
+    const oldSelectedPixels = this.state.selectedPixels
+    const newSelectedPixels = pixelIndexes.reduce((newPixels: Array<SelectedPixel>, pixelIndex: PixelIndex): Array<SelectedPixel> => {
+      return LocalStorageManager.selectedPixels.removeSelectedPixel({ canvasId, pixelIndex })
+    }, oldSelectedPixels)
+    console.log(`Removed selected pixel. New selected pixels: `, newSelectedPixels)
+    this.setState({ selectedPixels: newSelectedPixels })
+
+    // Return number of pixels deselected
+    return oldSelectedPixels.length - newSelectedPixels.length
   }
 
   pixelExists = (selectedPixel: SelectedPixel) =>

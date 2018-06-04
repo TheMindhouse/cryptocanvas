@@ -55,11 +55,17 @@ class CanvasStage extends React.Component<Props, State> {
   componentDidMount () {
     window.addEventListener('resize', this.onWindowResize)
     this.onWindowResize()
+    this.deselectPaintedPixels()
   }
 
   componentDidUpdate (prevProps: Props) {
     if (prevProps.pixels.length !== this.props.pixels.length) {
       this.onWindowResize()
+    }
+
+    // Some pixels have been painted (colors changed)
+    if (prevProps.pixels.filter(val => val).length !== this.props.pixels.filter(val => val).length) {
+      this.deselectPaintedPixels()
     }
   }
 
@@ -208,6 +214,18 @@ class CanvasStage extends React.Component<Props, State> {
     !!this.state.pixelHovered &&
     this.props.pixels[this.state.pixelHovered.id] === 0
 
+
+  deselectPaintedPixels = () => {
+    const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
+    // Indexes of already painted pixels
+    const pixelIndexes = selectedPixels.reduce((acc: Array<PixelIndex>, pixel: SelectedPixel): Array<PixelIndex> => {
+      if (this.props.pixels[pixel.pixelIndex.id] > 0) {
+        acc.push(pixel.pixelIndex)
+      }
+      return acc
+    }, [])
+    this.props.selectedPixelsStore.removeSelectedPixels({ canvasId: this.props.canvasId, pixelIndexes})
+  }
 
   render () {
     const gridColumns = this.getGridColumns()
