@@ -98,12 +98,20 @@ class CanvasStage extends React.Component<Props, State> {
     const selectedPixel = new SelectedPixel({ canvasId: this.props.canvasId, pixelIndex: indexObj, colorId: this.props.activeColorId })
 
     if (this.props.activeColorId) {
+      // Check if number of selected pixels is not already maximum
       if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
         this.showCannotSelectPixelModal()
         return
       }
+
+      // Deselect, if the same pixel is clicked again with the same color
+      if(this.props.selectedPixelsStore.pixelExists(selectedPixel)) {
+        this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)
+        return
+      }
+
+      // Select pixel
       this.props.selectedPixelsStore.selectPixel(selectedPixel)
-      // this.props.changePixelColor(indexObj)
     } else {
       // If the click was to deselect a pixel, do not show info popup
       if (this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)) {
