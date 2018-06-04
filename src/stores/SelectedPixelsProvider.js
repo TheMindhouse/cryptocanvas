@@ -15,6 +15,7 @@ export type SelectedPixelsProviderState = {
   getSelectedPixels: (canvasId?: number) => Array<SelectedPixel>,
   selectPixel: (SelectedPixel) => void,
   removeSelectedPixel: ({ canvasId: number, pixelIndex: PixelIndex }) => boolean,
+  pixelExists: (SelectedPixel) => boolean,
 }
 
 export class SelectedPixelsProvider extends React.Component<Props, SelectedPixelsProviderState> {
@@ -25,13 +26,14 @@ export class SelectedPixelsProvider extends React.Component<Props, SelectedPixel
       getSelectedPixels: this.getSelectedPixels,
       selectPixel: this.selectPixel,
       removeSelectedPixel: this.removeSelectedPixel,
+      pixelExists: this.pixelExists,
     }
   }
 
   getSelectedPixels = (canvasId?: number = -1) => {
     return canvasId >= 0
-      ?  this.state.selectedPixels.filter((selectedPixel: SelectedPixel) => selectedPixel.canvasId === canvasId)
-      :  this.state.selectedPixels
+      ? this.state.selectedPixels.filter((selectedPixel: SelectedPixel) => selectedPixel.canvasId === canvasId)
+      : this.state.selectedPixels
   }
 
   selectPixel = (selectedPixel: SelectedPixel) => {
@@ -49,6 +51,13 @@ export class SelectedPixelsProvider extends React.Component<Props, SelectedPixel
     // Return true if the pixel was saved before and has now been deleted
     return oldSelectedPixels.length > newSelectedPixels.length
   }
+
+  pixelExists = (selectedPixel: SelectedPixel) =>
+    this.getSelectedPixels(selectedPixel.canvasId)
+      .findIndex((savedPixel: SelectedPixel) =>
+        savedPixel.pixelIndex.id === selectedPixel.pixelIndex.id &&
+        savedPixel.colorId === selectedPixel.colorId
+      ) > -1
 
   render () {
     return (

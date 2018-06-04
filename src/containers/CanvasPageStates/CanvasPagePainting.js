@@ -62,10 +62,14 @@ class CanvasPagePainting extends React.Component {
   }
 
   changeActiveColor = (colorId) => {
-    if (!this.props.account) { return }
     // console.log(`Change current color to #${colorId}`)
     this.setState({
       activeColorId: colorId,
+    })
+    this.props.analyticsAPI.event({
+      category: ANALYTICS_EVENTS.painting,
+      action: ANALYTICS_ACTIONS.painting.colorSelected,
+      value: colorId,
     })
   }
 
@@ -173,8 +177,8 @@ class CanvasPagePainting extends React.Component {
           paintedPixels={getNumberOfPaintedPixels(this.state.pixels)}
           totalPixels={this.state.pixels.length}
           changeActiveColor={this.changeActiveColor}
-          activeColorId={this.props.account ? this.state.activeColorId : undefined}
-          isPickerDisabled={!this.props.account}
+          activeColorId={this.state.activeColorId}
+          isEthereumActive={this.props.account}
           isCanvasLoading={this.state.isLoading}
         />
       </Row>

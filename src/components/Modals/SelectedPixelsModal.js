@@ -1,14 +1,12 @@
 // @flow
 import React from 'react'
-import { Button, Modal, Popover, Row, message } from 'antd'
+import { Button, message, Modal, Row, Tooltip } from 'antd'
 import type { WithModal } from '../../types/WithModal'
 import { SelectedPixel } from '../../models/SelectedPixel'
 import * as pluralize from 'pluralize'
 import { CONFIG } from '../../config'
 import { hexPalette } from '../../helpers/colors'
 import './styles/SelectedPixelsModal.css'
-import { PixelCoords } from '../Small/PixelCoords'
-import { ColorPreview } from '../ColorPreview/ColorPreview'
 
 type Props = {
   selectedPixels: Array<SelectedPixel>,
@@ -16,23 +14,11 @@ type Props = {
   modal: WithModal,
 }
 
-const SelectedPixelHover = ({ pixel }: { pixel: SelectedPixel }) => (
-  <div>
-    <Row type="flex" justify="space-between" align="center">
-      <PixelCoords pixelIndex={pixel.pixelIndex} style={{ marginRight: 20 }} />
-      <ColorPreview colorId={pixel.colorId} />
-    </Row>
-    <br />
-    <p className="text-center"><b>Click on a pixel to deselect</b></p>
-  </div>
-)
-
 const SingleSelectedPixel = ({ pixel, deselectPixel }:
                              { pixel: SelectedPixel,
                                deselectPixel: (SelectedPixel) => boolean,
                              }) => (
-  <Popover content={<SelectedPixelHover pixel={pixel} />}
-           title={`Pixel #${pixel.pixelIndex.id}`} trigger="hover" key={pixel.pixelIndex.id}>
+  <Tooltip placement="top" title="Click to deselect" key={pixel.pixelIndex.id}>
     <div className="SelectedPixelsModal__Pixel"
          style={{
            width: CONFIG.pixelSize.canvas,
@@ -43,7 +29,7 @@ const SingleSelectedPixel = ({ pixel, deselectPixel }:
          }}
          onClick={() => deselectPixel(pixel)}
     />
-  </Popover>
+  </Tooltip>
 )
 
 class SelectedPixelsModal extends React.PureComponent<Props> {
