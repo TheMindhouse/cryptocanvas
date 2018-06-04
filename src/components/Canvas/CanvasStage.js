@@ -194,7 +194,7 @@ class CanvasStage extends React.Component<Props, State> {
     return (
       <div>
         <div className="CanvasStage" ref={this.canvasRef}
-             onWheel={this.onMouseWheel}
+             // onWheel={this.onMouseWheel}
              onMouseLeave={this.onMouseLeave}>
           <div>
             {

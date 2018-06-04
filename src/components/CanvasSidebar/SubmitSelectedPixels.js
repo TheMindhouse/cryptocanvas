@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import { withSelectedPixels } from '../../hoc/withSelectedPixels'
-import { Button } from 'antd'
+import { Alert, Button } from 'antd'
 import { TermsInfo } from '../Small/TermsInfo'
 import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsProvider'
 import withWeb3 from '../../hoc/withWeb3'
@@ -11,11 +11,14 @@ import { LocalStorageManager } from '../../localStorage'
 import { message, Modal } from 'antd/lib/index'
 import { withAnalytics } from '../../hoc/withAnalytics'
 import { WithAnalytics } from '../../types/WithAnalytics'
+import { HashLink } from 'react-router-hash-link'
+import { URLHelper } from '../../helpers/URLhelper'
 
 type Props = {
   canvasId: number,
   paintedPixels: number,
   totalPixels: number,
+  isSubmitAllowed: boolean,
   // withSelectedPixels
   selectedPixelsStore: SelectedPixelsProviderState,
   // withWeb3
@@ -59,6 +62,26 @@ class SubmitSelectedPixels extends React.PureComponent<Props> {
   }
 
   render () {
+    if (!this.props.isSubmitAllowed) {
+      return (
+        <div>
+          <Alert type="error" showIcon
+                 message={(
+                   <span>
+                     <b>Enable MetaMask to submit pixels.</b><br/>
+                      <HashLink to={URLHelper.help.installingMetamask}>
+                        Help: How to enable MetaMask
+                      </HashLink>
+                   </span>
+                 )} />
+          <br />
+          <Button type="primary" size="large" disabled>
+            Submit to the blockchain
+          </Button>
+        </div>
+      )
+    }
+
     const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     return (
       <div>

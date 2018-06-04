@@ -4,8 +4,6 @@ import './CanvasSidebar.css'
 import { Picker } from '../Picker/Picker'
 import { PaintingHelp } from './PaintingHelp'
 import { CanvasPainters } from './CanvasPainters'
-import { Button } from 'antd'
-import { TermsInfo } from '../Small/TermsInfo'
 import { SelectedPixelsInfo } from './SelectedPixelsInfo'
 import { SubmitSelectedPixels } from './SubmitSelectedPixels'
 
@@ -33,13 +31,13 @@ const CanvasSidebarPainting = (props) => {
       <Picker
         changeActiveColor={props.changeActiveColor}
         activeColorId={props.activeColorId}
-        isDisabled={props.isPickerDisabled}
       />
 
       <h3><b>2. Select pixels to paint</b></h3>
       <SelectedPixelsInfo canvasId={props.canvasId} />
 
-      <SubmitSelectedPixels canvasId={props.canvasId} paintedPixels={props.paintedPixels} />
+      <SubmitSelectedPixels canvasId={props.canvasId} paintedPixels={props.paintedPixels}
+                            isSubmitAllowed={props.isEthereumActive}/>
 
       <br />
       <PaintingHelp />

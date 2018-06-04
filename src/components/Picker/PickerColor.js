@@ -3,31 +3,16 @@ import React from 'react'
 
 import './PickerColor.css'
 import { hexPalette } from '../../helpers/colors'
-import { withAnalytics } from '../../hoc/withAnalytics'
-import type { AnalyticsEvent } from '../../types/AnalyticsEvent'
-import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../../constants/analytics'
 
 type Props = {
   colorId: number,
   size: number,
   changeActiveColor: (number) => void,
   isSelected: boolean,
-  // withAnalytics
-  analyticsAPI: {
-    event: AnalyticsEvent,
-  },
 }
 
 const PickerColor = (props: Props) => {
-  const changeActiveColor = () => {
-    props.changeActiveColor(props.colorId)
-
-    props.analyticsAPI.event({
-      category: ANALYTICS_EVENTS.painting,
-      action: ANALYTICS_ACTIONS.painting.colorSelected,
-      value: props.colorId,
-    })
-  }
+  const changeActiveColor = () => props.changeActiveColor(props.colorId)
 
   return (
     <div className={'PickerColor ' + (props.isSelected ? 'PickerColor--selected' : '')}
@@ -39,4 +24,4 @@ const PickerColor = (props: Props) => {
   )
 }
 
-export default withAnalytics(PickerColor)
+export default PickerColor
