@@ -12,7 +12,7 @@ import { withSelectedPixels } from '../../hoc/withSelectedPixels'
 import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsProvider'
 import { SelectedPixel } from '../../models/SelectedPixel'
 import { CONFIG } from '../../config'
-import { Modal } from 'antd/lib/index'
+import { Modal, message } from 'antd'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
 
 type Props = {
@@ -96,6 +96,11 @@ class CanvasStage extends React.Component<Props, State> {
 
     const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     const selectedPixel = new SelectedPixel({ canvasId: this.props.canvasId, pixelIndex: indexObj, colorId: this.props.activeColorId })
+
+    if (!this.canPaintHoveredPixel()) {
+      message.warning('You can\'t paint over an already painted pixel');
+      return
+    }
 
     if (this.props.activeColorId) {
       // Check if number of selected pixels is not already maximum
@@ -195,6 +200,12 @@ class CanvasStage extends React.Component<Props, State> {
     this.setState({ pixelSize, scale: 1 })
   }
 
+  // Returns true, if the currently hovered pixel has not yet been painted (color equals 0)
+  canPaintHoveredPixel = (): boolean =>
+    !!this.state.pixelHovered &&
+    this.props.pixels[this.state.pixelHovered.id] === 0
+
+
   render () {
     const gridColumns = this.getGridColumns()
     const canvasSize = this.getCanvasSize()
@@ -243,6 +254,7 @@ class CanvasStage extends React.Component<Props, State> {
 
                 {
                   this.state.mousePosition &&
+                  this.state.pixelHovered &&
                   this.props.activeColorId > 0 &&
                   <PixelHoverColorPopup
                     mousePosition={this.state.mousePosition}
@@ -251,6 +263,7 @@ class CanvasStage extends React.Component<Props, State> {
                     scale={this.state.scale}
                     colorId={this.props.activeColorId}
                     pixelSize={this.state.pixelSize}
+                    canPaintHoveredPixel={this.canPaintHoveredPixel()}
                   />
                 }
 
