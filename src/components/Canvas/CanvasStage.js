@@ -97,33 +97,36 @@ class CanvasStage extends React.Component<Props, State> {
     const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     const selectedPixel = new SelectedPixel({ canvasId: this.props.canvasId, pixelIndex: indexObj, colorId: this.props.activeColorId })
 
-    if (!this.canPaintHoveredPixel()) {
-      message.warning('You can\'t paint over an already painted pixel');
-      return
-    }
-
-    if (this.props.activeColorId) {
-      // Check if number of selected pixels is not already maximum
-      if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
-        this.showCannotSelectPixelModal()
-        return
-      }
-
-      // Deselect, if the same pixel is clicked again with the same color
-      if(this.props.selectedPixelsStore.pixelExists(selectedPixel)) {
-        this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)
-        return
-      }
-
-      // Select pixel
-      this.props.selectedPixelsStore.selectPixel(selectedPixel)
-    } else {
+    // Click on a pixel without selected color
+    if (!this.props.activeColorId) {
       // If the click was to deselect a pixel, do not show info popup
       if (this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)) {
         return
       }
       this.showPixelPopup(indexObj)
+      return
     }
+
+    // Prevent painting over already existing pixels
+    if (!this.canPaintHoveredPixel()) {
+      message.warning('You can\'t paint over an already painted pixel');
+      return
+    }
+
+    // Check if number of selected pixels is not already maximum
+    if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
+      this.showCannotSelectPixelModal()
+      return
+    }
+
+    // Deselect, if the same pixel is clicked again with the same color
+    if(this.props.selectedPixelsStore.pixelExists(selectedPixel)) {
+      this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)
+      return
+    }
+
+    // Select pixel
+    this.props.selectedPixelsStore.selectPixel(selectedPixel)
   }
 
   showCannotSelectPixelModal = () => {
