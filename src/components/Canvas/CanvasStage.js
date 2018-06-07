@@ -12,7 +12,7 @@ import { withSelectedPixels } from '../../hoc/withSelectedPixels'
 import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsProvider'
 import { SelectedPixel } from '../../models/SelectedPixel'
 import { CONFIG } from '../../config'
-import { Modal } from 'antd/lib/index'
+import { Modal, message } from 'antd'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
 
 type Props = {
@@ -55,11 +55,17 @@ class CanvasStage extends React.Component<Props, State> {
   componentDidMount () {
     window.addEventListener('resize', this.onWindowResize)
     this.onWindowResize()
+    this.deselectPaintedPixels()
   }
 
   componentDidUpdate (prevProps: Props) {
     if (prevProps.pixels.length !== this.props.pixels.length) {
       this.onWindowResize()
+    }
+
+    // Some pixels have been painted (colors changed)
+    if (prevProps.pixels.filter(val => val).length !== this.props.pixels.filter(val => val).length) {
+      this.deselectPaintedPixels()
     }
   }
 
@@ -97,28 +103,36 @@ class CanvasStage extends React.Component<Props, State> {
     const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     const selectedPixel = new SelectedPixel({ canvasId: this.props.canvasId, pixelIndex: indexObj, colorId: this.props.activeColorId })
 
-    if (this.props.activeColorId) {
-      // Check if number of selected pixels is not already maximum
-      if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
-        this.showCannotSelectPixelModal()
-        return
-      }
-
-      // Deselect, if the same pixel is clicked again with the same color
-      if(this.props.selectedPixelsStore.pixelExists(selectedPixel)) {
-        this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)
-        return
-      }
-
-      // Select pixel
-      this.props.selectedPixelsStore.selectPixel(selectedPixel)
-    } else {
+    // Click on a pixel without selected color
+    if (!this.props.activeColorId) {
       // If the click was to deselect a pixel, do not show info popup
       if (this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)) {
         return
       }
       this.showPixelPopup(indexObj)
+      return
     }
+
+    // Prevent painting over already existing pixels
+    if (!this.canPaintHoveredPixel()) {
+      message.warning('You can\'t paint over an already painted pixel');
+      return
+    }
+
+    // Check if number of selected pixels is not already maximum
+    if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
+      this.showCannotSelectPixelModal()
+      return
+    }
+
+    // Deselect, if the same pixel is clicked again with the same color
+    if(this.props.selectedPixelsStore.pixelExists(selectedPixel)) {
+      this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)
+      return
+    }
+
+    // Select pixel
+    this.props.selectedPixelsStore.selectPixel(selectedPixel)
   }
 
   showCannotSelectPixelModal = () => {
@@ -195,6 +209,24 @@ class CanvasStage extends React.Component<Props, State> {
     this.setState({ pixelSize, scale: 1 })
   }
 
+  // Returns true, if the currently hovered pixel has not yet been painted (color equals 0)
+  canPaintHoveredPixel = (): boolean =>
+    !!this.state.pixelHovered &&
+    this.props.pixels[this.state.pixelHovered.id] === 0
+
+
+  deselectPaintedPixels = () => {
+    const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
+    // Indexes of already painted pixels
+    const pixelIndexes = selectedPixels.reduce((acc: Array<PixelIndex>, pixel: SelectedPixel): Array<PixelIndex> => {
+      if (this.props.pixels[pixel.pixelIndex.id] > 0) {
+        acc.push(pixel.pixelIndex)
+      }
+      return acc
+    }, [])
+    this.props.selectedPixelsStore.removeSelectedPixels({ canvasId: this.props.canvasId, pixelIndexes})
+  }
+
   render () {
     const gridColumns = this.getGridColumns()
     const canvasSize = this.getCanvasSize()
@@ -243,6 +275,7 @@ class CanvasStage extends React.Component<Props, State> {
 
                 {
                   this.state.mousePosition &&
+                  this.state.pixelHovered &&
                   this.props.activeColorId > 0 &&
                   <PixelHoverColorPopup
                     mousePosition={this.state.mousePosition}
@@ -251,6 +284,7 @@ class CanvasStage extends React.Component<Props, State> {
                     scale={this.state.scale}
                     colorId={this.props.activeColorId}
                     pixelSize={this.state.pixelSize}
+                    canPaintHoveredPixel={this.canPaintHoveredPixel()}
                   />
                 }
 

@@ -3,5 +3,24 @@
     z-index: 11;
     box-shadow: 0 2px 8px 1px rgba(0,0,0,0.4);
     pointer-events: none;
-    border-radius: 3px;
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f00;
+    overflow: hidden;
+}
+
+.PixelHoverColorPopup__Icon {
+    z-index: 2;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.PixelHoverColorPopup__Background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
