@@ -38,15 +38,7 @@ export class ContractModel {
   get config () {
     return this._config
   }
-
-  calculateSetPixelGas (pixelsCount: number, hasFirstPixel: boolean): number {
-    const FIRST_PIXEL = 55000
-    const REGULAR_PIXEL = 45000
-    let totalGas = pixelsCount * REGULAR_PIXEL
-    if (hasFirstPixel) totalGas += FIRST_PIXEL
-    return totalGas
-  }
-
+  
   setPixel ({ canvasId, pixelIndex, colorId }) {
     return new Promise((resolve, reject) => {
       this.Contract.setPixel(canvasId, pixelIndex.id, colorId, { ...this.config, gas: 100000 }, (error, txHash) => {

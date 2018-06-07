@@ -13,12 +13,13 @@ import { withAnalytics } from '../../hoc/withAnalytics'
 import { WithAnalytics } from '../../types/WithAnalytics'
 import { HashLink } from 'react-router-hash-link'
 import { URLHelper } from '../../helpers/URLhelper'
+import { gasCalculator } from '../../helpers/gasCalculator'
 
 type Props = {
   canvasId: number,
-  paintedPixels: number,
   totalPixels: number,
   isSubmitAllowed: boolean,
+  isCanvasEmpty: boolean,
   // withSelectedPixels
   selectedPixelsStore: SelectedPixelsProviderState,
   // withWeb3
@@ -35,7 +36,7 @@ class SubmitSelectedPixels extends React.PureComponent<Props> {
     const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     const pixelIndexes = selectedPixels.map((pixel: SelectedPixel) => pixel.pixelIndex)
     const colorIds = selectedPixels.map((pixel: SelectedPixel) => pixel.colorId)
-    const gasLimit = this.calculateGasPrice(selectedPixels.length)
+    const gasLimit = gasCalculator.setPixels(selectedPixels.length, this.props.isCanvasEmpty)
     this.props.Contract.setPixels({ canvasId, pixelIndexes, colorIds, gasLimit })
       .then((tx) => {
         selectedPixels.forEach((pixel: SelectedPixel) => this.props.selectedPixelsStore.removeSelectedPixel(pixel))
@@ -54,11 +55,6 @@ class SubmitSelectedPixels extends React.PureComponent<Props> {
         //   label: `Canvas #${this.props.canvasId}, pixel (${pixelIndex.x}, ${pixelIndex.y})`,
         // })
       })
-  }
-
-  calculateGasPrice = (pixelsCount) => {
-    const hasFirstPixel = !this.props.paintedPixels
-    return this.props.Contract.calculateSetPixelGas(pixelsCount, hasFirstPixel)
   }
 
   render () {
