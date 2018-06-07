@@ -5,7 +5,7 @@ import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsPro
 import { SelectedPixel } from '../../models/SelectedPixel'
 import { hexPalette } from '../../helpers/colors'
 import './styles/SelectedPixelsInfo.css'
-import { Row } from 'antd'
+import { Row, Popover, Icon } from 'antd'
 import * as pluralize from 'pluralize'
 import withModal from '../../hoc/withModal'
 import SelectedPixelsModal from '../Modals/SelectedPixelsModal'
@@ -69,7 +69,19 @@ class SelectedPixelsInfo extends React.PureComponent<Props> {
           <a href="#" onClick={this.props.modal.show}>
             {selectedPixels.length} {pluralize('pixel', selectedPixels.length)} selected
           </a>
-          { this.props.gasPrice && <span>&nbsp;(max. <EthToUsd eth={estimatedGasPriceInEth} />)</span> }
+          {
+            this.props.gasPrice &&
+            <Popover title="Who am I paying for painting?" width={100} content={
+              <p style={{ maxWidth: 230 }}>
+                <b>This is NOT a fee for us.</b> We don't charge anything for painting.<br /><br />
+                This is a fee for miners - computers processing your operation in the Ethereum Network.&nbsp;
+                <a href="https://blog.softwaremill.com/ethereum-everything-you-want-to-know-about-the-gas-b7c8f5c17e7c"
+                   target="_blank" rel="noopener noreferrer">Read more</a>
+              </p>
+            }>
+              <span>&nbsp;(max. <EthToUsd eth={estimatedGasPriceInEth} /> <Icon type="question-circle" />)</span>
+            </Popover>
+          }
         </p>
       </div>
     )
