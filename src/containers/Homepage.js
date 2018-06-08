@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import Marketplace from './Marketplace'
 import { setDocumentTitle } from '../helpers/utils'
 import './styles/Homepage.css'
+import BetaInfo from './Homepage/BetaInfo'
 
 class Homepage extends Component {
   state = {
@@ -44,6 +45,7 @@ class Homepage extends Component {
   render () {
     return (
       <div>
+        <BetaInfo />
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="Homepage__header container">
             <h1><b>Canvases Available for Painting</b></h1>
