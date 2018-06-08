@@ -32,7 +32,7 @@ const selectPixel = ({ canvasId, pixelIndex, colorId }: SelectedPixel = {}): Arr
       selectedPixelToSave,
     ]
   // Save to local storage
-  console.log(`STORAGE: Adding Pixel #${selectedPixelToSave.pixelIndex.id} of Canvas #${selectedPixelToSave.canvasId} to the storage.`)
+  // console.log(`STORAGE: Adding Pixel #${selectedPixelToSave.pixelIndex.id} of Canvas #${selectedPixelToSave.canvasId} to the storage.`)
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newSelectedPixels))
 
   return newSelectedPixels
@@ -53,7 +53,7 @@ const removeSelectedPixel = ({ canvasId, pixelIndex }: SelectedPixel = {}): Arra
         ...selectedPixels.slice(index + 1, selectedPixels.length)
       ]
     // Save to local storage
-    console.log(`STORAGE: Removed Pixel #${pixelIndex.id} of Canvas #${canvasId} from the storage.`)
+    // console.log(`STORAGE: Removed Pixel #${pixelIndex.id} of Canvas #${canvasId} from the storage.`)
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newSelectedPixels))
     return newSelectedPixels
   }
