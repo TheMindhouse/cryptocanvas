@@ -8,6 +8,7 @@ import { ContractModel } from '../../models/ContractModel'
 import { CanvasPaintersModal } from '../Modals/CanvasPaintersModal'
 import { LocalStorageManager } from '../../localStorage'
 import { CanvasPaintersCache } from '../../models/CanvasPaintersCache'
+import * as pluralize from 'pluralize'
 
 type Props = {
   canvasId: number,
@@ -16,6 +17,7 @@ type Props = {
   isCanvasFinished: boolean,
   // withWeb3
   Contract: ContractModel,
+  account: string,
 }
 
 type State = {
@@ -95,8 +97,14 @@ class CanvasPainters extends React.PureComponent<Props, State> {
       maskClosable: true,
       content: (
         <div>
-          <br />
-          {this.state.canvasPainters && <CanvasPaintersModal canvasPainters={this.state.canvasPainters} />}
+          {
+            this.state.canvasPainters &&
+            <CanvasPaintersModal
+              canvasPainters={this.state.canvasPainters}
+              userAccount={this.props.account}
+              isCanvasFinished={this.props.isCanvasFinished}
+            />
+          }
         </div>
       ),
       onOk () {},
@@ -111,7 +119,7 @@ class CanvasPainters extends React.PureComponent<Props, State> {
         {
           this.state.canvasPainters
             ? <p><Link to="#" onClick={this.showModal}>
-              {paintersCount} Canvas {paintersCount === 1 ? 'Painter' : 'Painters'}
+              {paintersCount} Canvas {pluralize('Painter', paintersCount)}
             </Link></p>
             : <p>&nbsp;</p>
         }
