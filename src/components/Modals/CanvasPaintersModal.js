@@ -30,11 +30,17 @@ const CanvasPaintersModal = (props: Props) => {
     userAccount,
     isCanvasFinished,
   } = props
+
+  const pixelsOwned = canvasPainters[userAccount] ? canvasPainters[userAccount].length : 0
+
   return (
     <div>
-      <PixelsOwnedInfo
-        pixelsOwned={canvasPainters[userAccount].length}
-        isCanvasFinished={isCanvasFinished} />
+      {
+        !!pixelsOwned &&
+        <PixelsOwnedInfo
+          pixelsOwned={pixelsOwned}
+          isCanvasFinished={isCanvasFinished} />
+      }
       <br />
       <PaintersList canvasPainters={canvasPainters} />
     </div>
