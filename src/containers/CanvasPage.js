@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 
 import withWeb3 from '../hoc/withWeb3'
@@ -13,9 +14,25 @@ import { setDocumentTitle } from '../helpers/utils'
 import { URLHelper } from '../helpers/URLhelper'
 import { Redirect } from 'react-router-dom'
 import { CanvasNotCreatedYet } from './CanvasPageStates/CanvasNotCreatedYet'
+import { ContractModel } from '../models/ContractModel'
+import { CanvasInfo } from '../models/CanvasInfo'
 
-class CanvasPage extends React.Component {
-  pixelSize = CONFIG.pixelSize.canvas
+type Props = {
+  // withWeb3
+  Contract: ContractModel,
+}
+
+type State = {
+  isLoading: boolean,
+  isInvalidId: boolean,
+  canvasNotCreatedYet?: boolean,
+  hasError?: boolean,
+  canvasInfo?: CanvasInfo,
+}
+
+class CanvasPage extends React.Component<Props, State> {
+  pixelSize: number = CONFIG.pixelSize.canvas
+  canvasId: number
 
   constructor (props) {
     super(props)
@@ -45,9 +62,7 @@ class CanvasPage extends React.Component {
           return this.setState({ canvasNotCreatedYet: true })
         }
         this.setState({
-          canvasState: canvasInfo.canvasState,
-          paintedPixels: canvasInfo.paintedPixels,
-          canvasOwner: canvasInfo.owner,
+          canvasInfo,
           isLoading: false,
         })
       })
@@ -72,8 +87,9 @@ class CanvasPage extends React.Component {
   render () {
     const {
       isLoading,
-      canvasState = {},
     } = this.state
+
+    const currentCanvasState = this.state.canvasInfo && this.state.canvasInfo.canvasState.state
 
     if (this.state.isInvalidId) {
       return <Redirect to={URLHelper.pageNotFound} />
@@ -88,28 +104,29 @@ class CanvasPage extends React.Component {
 
         {isLoading && <CanvasPageLoading canvasId={this.canvasId} />}
 
-        {!isLoading && canvasState.state === CANVAS_STATES.active &&
+        {!isLoading && currentCanvasState === CANVAS_STATES.active &&
         <CanvasPagePainting
+          canvasInfo={this.state.canvasInfo}
           pixelSize={this.pixelSize}
-          paintedPixels={this.state.paintedPixels}
           canvasId={this.canvasId}
           onPaintingFinished={this.onPaintingFinished}
         />
         }
 
-        {!isLoading && canvasState.state === CANVAS_STATES.bidding &&
+        {!isLoading && currentCanvasState === CANVAS_STATES.bidding &&
         <CanvasPageBidding
+          canvasInfo={this.state.canvasInfo}
           pixelSize={this.pixelSize}
           canvasId={this.canvasId}
           onBiddingFinished={this.onBiddingFinished}
         />
         }
 
-        {!isLoading && canvasState.state === CANVAS_STATES.completed &&
+        {!isLoading && currentCanvasState === CANVAS_STATES.completed &&
         <CanvasPageTrading
-          pixelSize={this.pixelSize}
           canvasId={this.canvasId}
-          canvasOwner={this.state.canvasOwner}
+          canvasInfo={this.state.canvasInfo}
+          pixelSize={this.pixelSize}
           onCanvasSold={this.getCanvasInfo}
         />
         }

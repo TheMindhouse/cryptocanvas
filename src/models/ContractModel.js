@@ -38,7 +38,7 @@ export class ContractModel {
   get config () {
     return this._config
   }
-  
+
   setPixel ({ canvasId, pixelIndex, colorId }) {
     return new Promise((resolve, reject) => {
       this.Contract.setPixel(canvasId, pixelIndex.id, colorId, { ...this.config, gas: 100000 }, (error, txHash) => {
@@ -329,6 +329,28 @@ export class ContractModel {
             timestamp: new Date(),
           }
           resolve(new Transaction(tx))
+        }
+      })
+    })
+  }
+
+  setCanvasName (canvasId, name) {
+    return new Promise((resolve, reject) => {
+      this.Contract.setCanvasName(canvasId, name, { ...this.config, gas: 60000 }, (error, txHash) => {
+        if (error) {
+          console.log(error)
+          console.log(`[ERROR] Change name of Canvas #${canvasId} to ${name} failed`)
+          reject(error)
+        } else {
+          const tx = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.setCanvasName,
+            name: `Change name of Canvas #${canvasId} to ${name}`,
+            account: this.account,
+            timestamp: new Date(),
+            canvasId,
+          }
+          resolve(new TransactionWithCanvasId(tx))
         }
       })
     })

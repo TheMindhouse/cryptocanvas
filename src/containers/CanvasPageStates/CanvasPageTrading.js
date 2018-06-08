@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { Col, Row } from 'antd'
 import withWeb3 from '../../hoc/withWeb3'
@@ -6,8 +7,25 @@ import CanvasSidebarTrading from '../../components/CanvasSidebar/CanvasSidebarTr
 import { LocalStorageManager } from '../../localStorage'
 import { TransactionsHistory } from '../../components/CanvasHistory/TransactionsHistory'
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
+import { ContractModel } from '../../models/ContractModel'
+import { CanvasInfo } from '../../models/CanvasInfo'
 
-class CanvasPageTrading extends Component {
+type Props = {
+  canvasId: number,
+  canvasInfo: CanvasInfo,
+  pixelSize: number,
+  onCanvasSold: () => void,
+  // withWeb3
+  Contract: ContractModel,
+  account: string,
+}
+
+type State = {
+  pixels: Array<number>,
+  isLoading: boolean,
+}
+
+class CanvasPageTrading extends Component<Props, State> {
   state = {
     pixels: [],
     isLoading: true,
@@ -49,6 +67,8 @@ class CanvasPageTrading extends Component {
   }
 
   render () {
+    const isUserCanvasOwner = this.props.account === this.props.canvasInfo.owner
+
     return (
       <div>
         <Row className="CanvasPage" type="flex" justify="space-between" align="top">
@@ -63,8 +83,7 @@ class CanvasPageTrading extends Component {
 
           <CanvasSidebarTrading
             canvasId={this.props.canvasId}
-            canvasOwner={this.props.canvasOwner}
-            isUserCanvasOwner={this.props.account === this.props.canvasOwner}
+            canvasInfo={this.props.canvasInfo}
             onCanvasSold={this.props.onCanvasSold}
             isCanvasLoading={this.state.isLoading}
           />
@@ -78,8 +97,5 @@ class CanvasPageTrading extends Component {
     )
   }
 }
-
-CanvasPageTrading.propTypes = {}
-CanvasPageTrading.defaultProps = {}
 
 export default withWeb3(CanvasPageTrading)

@@ -7,6 +7,7 @@ import withEvents from '../../hoc/withEvents'
 import WithdrawReward from './PainterReward/WithdrawReward'
 import { LocalStorageManager } from '../../localStorage'
 import { CanvasPainters } from './CanvasPainters'
+import { SetCanvasName } from './SetCanvasName'
 
 class CanvasSidebarTrading extends React.PureComponent {
   constructor () {
@@ -43,7 +44,7 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   watchForChanges = (blockNumber) => {
-    const options = [{ _canvasId: this.props.canvasId }, { fromBlock: blockNumber, toBlock: 'latest' }]
+    const options = [ { _canvasId: this.props.canvasId }, { fromBlock: blockNumber, toBlock: 'latest' } ]
 
     const buyOfferMadeEvent = this.props.Contract.BuyOfferMadeEvent(...options)
     const buyOfferCancelledEvent = this.props.Contract.BuyOfferCancelledEvent(...options)
@@ -67,7 +68,7 @@ class CanvasSidebarTrading extends React.PureComponent {
       sellOfferMadeEvent,
       sellOfferCancelledEvent,
       canvasSoldEvent,
-      ])
+    ])
   }
 
   submitSellOffer = (offerInEth) => {
@@ -137,9 +138,13 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   render () {
+    const canvasOwner = this.props.canvasInfo.owner
+    const isUserCanvasOwner = this.props.account === canvasOwner
+    const canvasName = this.props.canvasInfo.name || `Canvas #${this.props.canvasId}`
+
     return (
       <div className="CanvasSidebar">
-        <h2 className="CanvasSidebar__title">Canvas #{this.props.canvasId}</h2>
+        <h2 className="CanvasSidebar__title">{canvasName}</h2>
         <h3 className="CanvasSidebar__status">Completed</h3>
 
         <CanvasPainters
@@ -151,16 +156,24 @@ class CanvasSidebarTrading extends React.PureComponent {
         <Divider />
 
         <CurrentOwner
-          canvasOwner={this.props.canvasOwner}
-          isUserCanvasOwner={this.props.account === this.props.canvasOwner}
+          canvasOwner={canvasOwner}
+          isUserCanvasOwner={isUserCanvasOwner}
         />
+
+        {
+          isUserCanvasOwner &&
+          <div>
+            <br />
+            <SetCanvasName canvasId={this.props.canvasId} />
+          </div>
+        }
 
         <Divider />
 
         <MarketStatus
           userAddress={this.props.account}
           canvasId={this.props.canvasId}
-          isUserCanvasOwner={this.props.account === this.props.canvasOwner}
+          isUserCanvasOwner={isUserCanvasOwner}
           currentBuyOffer={this.state.currentBuyOffer}
           currentSellOffer={this.state.currentSellOffer}
           submitBuyOffer={this.submitBuyOffer}
