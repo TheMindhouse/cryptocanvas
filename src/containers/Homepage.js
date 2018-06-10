@@ -45,7 +45,6 @@ class Homepage extends Component {
   render () {
     return (
       <div>
-        <BetaInfo />
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <Row className="Homepage__header container">
             <h1><b>Canvases Available for Painting</b></h1>

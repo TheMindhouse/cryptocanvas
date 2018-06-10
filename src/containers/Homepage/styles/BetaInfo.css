@@ -1,11 +1,24 @@
 .BetaInfo {
     margin-bottom: 50px;
     padding: 50px 0;
-    background: #e2ecf5;
+    background-repeat: repeat-x;
+    background-size: 2000px 200px;
 }
 
-.BetaInfo__Countdown {
-    font-size: 40px;
-    margin: -15px 0 0;
-    color: #e74c3c;
+.BetaInfo__CountdownDate {
+    font-size: 12px;
+    margin-top: 10px;
+    display: block;
+}
+
+.BetaInfo__Header {
+    font-size: 30px;
+    margin: 0;
+    color: #222;
+}
+
+.BetaInfo__text {
+    font-size: 15px;
+    margin: 1em 0 0;
+    color: #555;
 }

@@ -10,6 +10,8 @@ import { HashLink } from 'react-router-hash-link'
 import { CONFIG } from '../../config'
 import { METAMASK_NETWORK_NAMES, METAMASK_NETWORKS } from '../../constants/metamask'
 import Mona from '../../assets/images/mona.png'
+import { CountdownCounter } from '../../hoc/renderProps/CountdownCounter'
+import { CountdownInline } from '../Small/CountdownInline'
 
 type Props = {
   // from withWeb3
@@ -43,9 +45,19 @@ const Header = (props: Props) => {
       <Row justify="space-between" type="flex" align="middle">
         <img src={Mona} className="Header__Mona" />
         <div>
-          <Link to={URLHelper.home} className="Header__title"><h1>CryptoCanvas</h1></Link>
+          <Link to={URLHelper.intro} className="Header__title">CryptoCanvas</Link>
           <h2 className="Header__subtitle">Distributed art on the blockchain</h2>
-          {CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main && <HeaderTestNet />}
+
+          <div className="Header__LaunchInfo">
+            <span className="Header__Beta">Free Beta</span>
+            Live version starts in&nbsp;
+            <CountdownCounter
+              date={new Date(1530446400000)}
+              render={(state) => <CountdownInline {...state} />}
+            />
+          </div>
+
+          {/*{CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main && <HeaderTestNet />}*/}
         </div>
       </Row>
       <ul className="Header__menu">

@@ -14,12 +14,11 @@
 
 .Header__title {
     text-decoration: none !important;
-}
-
-.Header__title > * {
     font-size: 44px;
+    line-height: 40px;
     font-weight: bold;
     margin: 0;
+    color: #222 !important;
 }
 
 .Header__subtitle {
@@ -27,6 +26,22 @@
     font-size: 19px;
     font-weight: 400;
     margin: 0;
+}
+
+.Header__LaunchInfo {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #444;
+}
+
+.Header__Beta {
+    background: orange;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 3px;
+    margin-right: 10px;
+    font-size: 14px;
 }
 
 .Header__menu {
@@ -104,7 +119,7 @@
         top: -4px;
     }
 
-    .Header__title > * {
+    .Header__title {
         font-size: 30px;
         margin: 0;
     }

@@ -1,0 +1,23 @@
+.Countdown {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.Countdown__Item {
+    display: inline-flex;
+    flex-direction: column;
+    margin: 0 10px;
+}
+
+.Countdown__Item-value {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 35px;
+    color: #e74c3c;
+}
+
+.Countdown__Item-caption {
+    font-weight: bold;
+    color: #555;
+}
