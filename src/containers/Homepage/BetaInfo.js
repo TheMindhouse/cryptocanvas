@@ -6,6 +6,8 @@ import './styles/BetaInfo.css'
 import pixelBg from '../../assets/images/pixels.png'
 import { CountdownCounter } from '../../hoc/renderProps/CountdownCounter'
 import { Countdown } from '../../components/Small/Countdown'
+import { URLHelper } from '../../helpers/URLhelper'
+import { Link } from 'react-router-dom'
 
 const LIVE_START_DATE = 1530446400000
 
@@ -18,9 +20,11 @@ const BetaInfo = () => {
           <p className="BetaInfo__Header"><b>CryptoCanvas BETA</b></p>
           <p className="BetaInfo__text">This is a completely FREE version running on Rinkeby Test Network.</p>
           <p className="BetaInfo__text">
-            <Button type="primary" size="large" className="Intro__button">
-              Get started <Icon type="arrow-right" />
-            </Button>
+            <Link to={URLHelper.getStarted}>
+              <Button type="primary" size="large" className="Intro__button">
+                Get started <Icon type="arrow-right" />
+              </Button>
+            </Link>
           </p>
         </Col>
         <Col xs={{ span: 24 }} md={{ span: 8 }} className="text-center">
