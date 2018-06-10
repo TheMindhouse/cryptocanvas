@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react'
-import type { CountdownCounterState } from '../../hoc/renderProps/CountdownCounter'
 import './styles/Countdown.css'
 import * as pluralize from 'pluralize'
 import { TimeLeft } from '../../types/TimeLeft'
+import { Icon } from 'antd'
 
 type Props = {
   timeLeft: TimeLeft,
@@ -20,7 +20,11 @@ class Countdown extends React.PureComponent<Props> {
     } = this.props
 
     if (isLoading) {
-      return null
+      return (
+        <div className="CountdownLoadingSpinner">
+          <Icon type="loading" />
+        </div>
+      )
     }
 
     return (
