@@ -13,6 +13,10 @@ class BiddingTimeLeft extends React.PureComponent {
     this.startTimer()
   }
 
+  componentWillUnmount () {
+    window.clearInterval(this.timer)
+  }
+
   startTimer = () => {
     this.timer = setInterval(() => {
       const secondsLeft = this.state.secondsLeft - 1
