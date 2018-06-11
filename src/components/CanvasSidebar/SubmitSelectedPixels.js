@@ -14,6 +14,8 @@ import { WithAnalytics } from '../../types/WithAnalytics'
 import { HashLink } from 'react-router-hash-link'
 import { URLHelper } from '../../helpers/URLhelper'
 import { gasCalculator } from '../../helpers/gasCalculator'
+import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../../constants/analytics'
+import * as pluralize from 'pluralize'
 
 type Props = {
   canvasId: number,
@@ -42,6 +44,11 @@ class SubmitSelectedPixels extends React.PureComponent<Props> {
         selectedPixels.forEach((pixel: SelectedPixel) => this.props.selectedPixelsStore.removeSelectedPixel(pixel))
         LocalStorageManager.transactions.updateTransactions(tx)
         message.success('Paint Pixels Transaction sent')
+        this.props.analyticsAPI.event({
+          category: ANALYTICS_EVENTS.painting,
+          action: ANALYTICS_ACTIONS.painting.paintPixelsSubmit,
+          label: `Canvas #${this.props.canvasId}, ${selectedPixels.length} ${pluralize('pixel', selectedPixels.length)}`,
+        })
       })
       .catch((error) => {
         console.error(error)
@@ -49,11 +56,11 @@ class SubmitSelectedPixels extends React.PureComponent<Props> {
           title: 'Could not paint pixels',
           content: 'You either rejected the transaction in MetaMask or another error occurred.',
         })
-        // this.props.analyticsAPI.event({
-        //   category: ANALYTICS_EVENTS.painting,
-        //   action: ANALYTICS_ACTIONS.painting.paintPixelFailed,
-        //   label: `Canvas #${this.props.canvasId}, pixel (${pixelIndex.x}, ${pixelIndex.y})`,
-        // })
+        this.props.analyticsAPI.event({
+          category: ANALYTICS_EVENTS.painting,
+          action: ANALYTICS_ACTIONS.painting.paintPixelsFailed,
+          label: `Canvas #${this.props.canvasId}, ${selectedPixels.length} ${pluralize('pixel', selectedPixels.length)}`,
+        })
       })
   }
 
