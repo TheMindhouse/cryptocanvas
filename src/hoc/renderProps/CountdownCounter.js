@@ -7,7 +7,7 @@ import { TimeLeft } from '../../types/TimeLeft'
 
 type Props = {
   date: Date,
-  render: TimeLeft => any
+  render: CountdownCounterState => any
 }
 
 export type CountdownCounterState = {
