@@ -38,7 +38,7 @@ const CONFIG_MAIN = {
 
 const CONFIG_RINKEBY = {
   // Contract settings
-  CONTRACT_ADDRESS: '0x13bfa7d3b3e905ee5c611fa1097b03bf8f5d634a', // Rinkeby testnet
+  CONTRACT_ADDRESS: '0xc0b060439080142216171290fb8db84b1b707c04', // Rinkeby testnet
   WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Browser page title
@@ -64,10 +64,10 @@ const CONFIG_RINKEBY = {
   // Canvas Creation block
   startBlock: 5584261,
   pixelSize: {
-    preview: 48,
-    canvas: 128,
+    preview: 5,
+    canvas: 13,
   },
-  gridColumns: 5,
+  gridColumns: 48,
   COMMISSION: CONFIG_MAIN.COMMISSION,
   PAINTERS_REWARD: CONFIG_MAIN.PAINTERS_REWARD,
 }
