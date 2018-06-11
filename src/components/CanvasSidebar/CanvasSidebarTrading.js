@@ -4,10 +4,11 @@ import CurrentOwner from './CurrentOwner'
 import MarketStatus from './MarketStatus'
 import withWeb3 from '../../hoc/withWeb3'
 import withEvents from '../../hoc/withEvents'
-import WithdrawReward from './PainterReward/WithdrawReward'
 import { LocalStorageManager } from '../../localStorage'
 import { CanvasPainters } from './CanvasPainters'
 import { SetCanvasName } from './SetCanvasName'
+import PainterRewardCore from '../../hoc/renderProps/PainterRewardCore'
+import SidebarRewardInfo from './PainterReward/SidebarRewardInfo'
 
 class CanvasSidebarTrading extends React.PureComponent {
   constructor () {
@@ -189,7 +190,11 @@ class CanvasSidebarTrading extends React.PureComponent {
 
         {
           this.props.account &&
-          <WithdrawReward canvasId={this.props.canvasId} />
+          <PainterRewardCore
+            canvasId={this.props.canvasId}
+            render={(state) => <SidebarRewardInfo {...state} canvasId={this.props.canvasId}/>
+            }
+          />
         }
 
       </div>

@@ -31,7 +31,9 @@ const CONFIG_MAIN = {
     preview: 3,
     canvas: 10,
   },
-  gridColumns: 64
+  gridColumns: 64,
+  COMMISSION: 0.039,
+  PAINTERS_REWARD: 0.061,
 }
 
 const CONFIG_RINKEBY = {
@@ -65,7 +67,9 @@ const CONFIG_RINKEBY = {
     preview: 48,
     canvas: 128,
   },
-  gridColumns: 5
+  gridColumns: 5,
+  COMMISSION: CONFIG_MAIN.COMMISSION,
+  PAINTERS_REWARD: CONFIG_MAIN.PAINTERS_REWARD,
 }
 
 const getConfig = () => {
