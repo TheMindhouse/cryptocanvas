@@ -1,6 +1,8 @@
 import React from 'react'
-import Countdown from 'react-countdown-now'
 import Moment from 'react-moment'
+import { Countdown } from '../Small/Countdown'
+import { CountdownInline } from '../Small/CountdownInline'
+import { CountdownCounter } from '../../hoc/renderProps/CountdownCounter'
 
 class BiddingTimeLeft extends React.PureComponent {
   timer = null
@@ -32,7 +34,12 @@ class BiddingTimeLeft extends React.PureComponent {
         <h2><b>Bidding Time Left</b></h2>
         {this.props.biddingFinishTime &&
         <div>
-          <h2><Countdown date={this.props.biddingFinishTime * 1000} /></h2>
+          <h3>
+            <CountdownCounter
+              date={this.props.biddingFinishTime * 1000}
+              render={(state) => <CountdownInline {...state} />}
+            />
+          </h3>
           <p><Moment date={new Date(this.props.biddingFinishTime * 1000)} format="dddd, MMMM Do YYYY, h:mm:ss a"/></p>
         </div>
         }

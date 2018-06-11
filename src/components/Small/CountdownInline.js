@@ -26,7 +26,10 @@ class CountdownInline extends React.PureComponent<Props> {
 
     return (
       <strong>
-        {timeLeft.days} {pluralize('Day', timeLeft.days)}&nbsp;
+        {
+          !!timeLeft.days &&
+          <span>{timeLeft.days} {pluralize('Day', timeLeft.days)}&nbsp;</span>
+        }
         {padStart(timeLeft.hours)}:{padStart(timeLeft.min)}:{padStart(timeLeft.sec)}
       </strong>
     )
