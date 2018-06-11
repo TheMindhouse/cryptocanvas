@@ -1,43 +1,21 @@
 // @flow
 import React from 'react'
-import { Icon, Popover, Row } from 'antd'
+import { Popover, Row } from 'antd'
 
 import './styles/Header.css'
 import { Link, NavLink } from 'react-router-dom'
 import withWeb3 from '../../hoc/withWeb3'
 import { URLHelper } from '../../helpers/URLhelper'
 import { HashLink } from 'react-router-hash-link'
-import { CONFIG } from '../../config'
-import { METAMASK_NETWORK_NAMES, METAMASK_NETWORKS } from '../../constants/metamask'
 import Mona from '../../assets/images/mona.png'
-import { CountdownCounter } from '../../hoc/renderProps/CountdownCounter'
-import { CountdownInline } from '../Small/CountdownInline'
+import { CONFIG } from '../../config'
+import { HeaderLaunchInfo } from '../Header/HeaderLaunchInfo'
+import { METAMASK_NETWORKS } from '../../constants/metamask'
 
 type Props = {
   // from withWeb3
   account?: string,
 }
-
-const HeaderTestNet = () => (
-  <Popover
-    content={
-      <Row type="flex" align="middle" className="HeaderTestnet__Popup">
-        <Icon type="exclamation-circle" className="HeaderTestnet__WarningIcon" style={{ fontSize: 30 }}/>
-        <span>
-          This is only a TEST version of CryptoCanvas.<br />
-          Go to <a href="https://cryptocanvas.art">cryptocanvas.art</a> for the real one.
-        </span>
-      </Row>
-    }
-    title=""
-    placement="top"
-    trigger="hover"
-  >
-    <span className="HeaderTestnet__Info">
-      {METAMASK_NETWORK_NAMES[ CONFIG.ETHEREUM_NETWORK ]} <small><Icon type="question-circle-o" /></small>
-    </span>
-  </Popover>
-)
 
 const Header = (props: Props) => {
   return (
@@ -46,17 +24,12 @@ const Header = (props: Props) => {
         <img src={Mona} className="Header__Mona" />
         <div>
           <Link to={URLHelper.intro} className="Header__title">CryptoCanvas</Link>
-          <h2 className="Header__subtitle">Distributed art on the blockchain</h2>
+          <h2 className="Header__subtitle">Create, Trade & Collect Blockchain Artworks</h2>
 
-          <div className="Header__LaunchInfo">
-            <span className="Header__Beta">Free Beta</span>
-            Live version starts in&nbsp;
-            <CountdownCounter
-              date={new Date(1530446400000)}
-              render={(state) => <CountdownInline {...state} />}
-            />
-          </div>
-
+          {
+            CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
+            <HeaderLaunchInfo />
+          }
           {/*{CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main && <HeaderTestNet />}*/}
         </div>
       </Row>

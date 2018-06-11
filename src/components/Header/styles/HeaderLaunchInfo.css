@@ -1,0 +1,15 @@
+.HeaderLaunchInfo {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #444;
+}
+
+.HeaderLaunchInfo__Beta {
+    background: orange;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 3px;
+    margin-right: 10px;
+    font-size: 14px;
+}

@@ -6,7 +6,7 @@ const CONFIG_MAIN = {
   WEB3_HTTP_PROVIDER: 'https://mainnet.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
   // Browser page title
-  PAGE_TITLE: 'CryptoCanvas - Distributed art on the blockchain',
+  PAGE_TITLE: 'CryptoCanvas - Create, Trade & Collect Blockchain Artworks',
   // Delay to check transactions in ms
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms
@@ -40,7 +40,7 @@ const CONFIG_RINKEBY = {
   WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Browser page title
-  PAGE_TITLE: 'CryptoCanvas Rinkeby - Distributed art on the blockchain',
+  PAGE_TITLE: 'CryptoCanvas BETA - Create, Trade & Collect Blockchain Artworks',
   // Delay to check transactions in ms
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms

@@ -15,7 +15,7 @@
 .Header__title {
     text-decoration: none !important;
     font-size: 44px;
-    line-height: 40px;
+    line-height: 1.2em;
     font-weight: bold;
     margin: 0;
     color: #222 !important;
@@ -23,25 +23,9 @@
 
 .Header__subtitle {
     color: #999;
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 400;
     margin: 0;
-}
-
-.Header__LaunchInfo {
-    margin: 5px 0 0;
-    font-size: 12px;
-    color: #444;
-}
-
-.Header__Beta {
-    background: orange;
-    color: #fff;
-    font-weight: bold;
-    padding: 4px;
-    border-radius: 3px;
-    margin-right: 10px;
-    font-size: 14px;
 }
 
 .Header__menu {
