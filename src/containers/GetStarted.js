@@ -13,8 +13,11 @@ const GetStarted = () => {
         <h1><b>Get Started With BETA</b></h1>
 
         <h3 style={{ maxWidth: 700 }}>
-          Even though you can see dollar signs and prices, every operation during Beta is free
-          because it's performed on the Rinkeby Test Network with Test Ether.
+          Beta runs exactly the same code as Live version will.
+        </h3>
+        <h3 style={{ maxWidth: 700 }}>
+          The difference is that <b>every operation during Beta is free</b> because it's performed on the Test Network
+          with Test Ether and the paintings are temporary.
         </h3>
 
         <Row style={{ marginTop: 50 }}>

@@ -18,7 +18,9 @@ const BetaInfo = () => {
         <Col xs={{ span: 24 }} md={{ span: 16 }}>
           <p className="BetaInfo__Header">Welcome to</p>
           <p className="BetaInfo__Header"><b>CryptoCanvas BETA</b></p>
-          <p className="BetaInfo__text">This is a completely FREE version running on Rinkeby Test Network.</p>
+          <p className="BetaInfo__text">
+            Create, trade and collect community generated artworks.
+          </p>
           <p className="BetaInfo__text">
             <Link to={URLHelper.getStarted}>
               <Button type="primary" size="large" className="Intro__button">

@@ -2,15 +2,17 @@
 import * as React from 'react'
 import { YoutubePlayer } from '../components/Small/YoutubePlayer'
 import './styles/Intro.css'
-import { URLHelper } from '../helpers/URLhelper'
-import { Link } from 'react-router-dom'
-import { Button, Icon } from 'antd'
 import BetaInfo from './Homepage/BetaInfo'
+import { CONFIG } from '../config'
+import { METAMASK_NETWORKS } from '../constants/metamask'
 
 const Intro = () => {
   return (
     <div>
-      <BetaInfo />
+      {
+        CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
+        <BetaInfo />
+      }
       <div className="container">
         <div className="Intro__video">
           <YoutubePlayer videoId="qRbZ_wcWzL0" playing />
