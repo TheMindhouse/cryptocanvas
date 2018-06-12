@@ -1,22 +1,16 @@
 // @flow
 import * as React from 'react'
 
-type Props = {}
-
-const FbMessenger = (props: Props) => {
+const FbMessenger = () => {
   return (
-    <div>
-      <div className="fb-customerchat"
-           attribution="setup_tool"
-           page_id="1882641792033739"
-           theme_color="#0084ff"
-           logged_in_greeting="Hi! How can I help you?"
-           logged_out_greeting="Hi! How can I help you?">
-      </div>
+    <div className="fb-customerchat"
+         attribution="setup_tool"
+         page_id="1882641792033739"
+         theme_color="#0084ff"
+         logged_in_greeting="Hi! I'm here if you need any help!"
+         logged_out_greeting="Hi! I'm here if you need any help!">
     </div>
   )
 }
-
-FbMessenger.defaultProps = {}
 
 export default FbMessenger
