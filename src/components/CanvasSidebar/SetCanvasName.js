@@ -24,6 +24,7 @@ class SetCanvasName extends React.PureComponent<Props> {
   onModalSubmit = (name: string) => {
     this.props.Contract.setCanvasName(this.props.canvasId, name)
       .then(transaction => {
+        this.props.modal.close()
         LocalStorageManager.transactions.updateTransactions(transaction)
         message.success('Change Canvas Name transaction sent')
       })

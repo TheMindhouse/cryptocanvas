@@ -24,7 +24,9 @@ class SetCanvasNameModal extends React.PureComponent<Props, State> {
 
   onChange = (event: any) => {
     const name = event.currentTarget.value
-    this.setState({ name })
+    if (name.match(/^[a-z0-9!#\-]*$/i)) {
+      this.setState({ name })
+    }
   }
 
   onSubmit = () => {
@@ -50,6 +52,7 @@ class SetCanvasNameModal extends React.PureComponent<Props, State> {
         </p>
         <Input type="text"
                placeholder="Enter new name"
+               value={this.state.name}
                onChange={this.onChange}
                onPressEnter={this.onSubmit} />
         <p className={`text-smaller ${!this.isValidName() ? 'text-error' : ''}`} style={{ textAlign: 'right' }}>
