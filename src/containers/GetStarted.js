@@ -5,22 +5,11 @@ import { URLHelper } from '../helpers/URLhelper'
 import { HashLink } from 'react-router-hash-link'
 import { Button, Col, Icon, Row } from 'antd'
 import { Link } from 'react-router-dom'
-
-declare var FB: {
-  CustomerChat: {
-    update: Function,
-    showDialog: Function,
-  }
-}
+import { FbMessengerHelper } from '../helpers/FbMessengerHelper'
 
 class GetStarted extends React.PureComponent<{}> {
   componentDidMount () {
-    if (FB && FB.CustomerChat && typeof FB.CustomerChat.showDialog === 'function') {
-      FB.CustomerChat.update({
-        logged_in_greeting: 'Hello There!',
-      });
-      FB.CustomerChat.showDialog()
-    }
+    FbMessengerHelper.showGetStartedDialog()
   }
 
   render () {
