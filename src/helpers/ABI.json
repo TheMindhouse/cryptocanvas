@@ -441,6 +441,28 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_indexes",
+        "type": "uint32[]"
+      },
+      {
+        "name": "_colors",
+        "type": "uint8[]"
+      }
+    ],
+    "name": "setPixels",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "owner",
@@ -832,6 +854,10 @@
         "type": "uint32"
       },
       {
+        "name": "name",
+        "type": "string"
+      },
+      {
         "name": "paintedPixels",
         "type": "uint32"
       },
@@ -894,6 +920,24 @@
       }
     ],
     "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_canvasId",
+        "type": "uint32"
+      },
+      {
+        "name": "_name",
+        "type": "string"
+      }
+    ],
+    "name": "setCanvasName",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1206,6 +1250,23 @@
       }
     ],
     "name": "CanvasCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "canvasId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "string"
+      }
+    ],
+    "name": "CanvasNameSet",
     "type": "event"
   },
   {

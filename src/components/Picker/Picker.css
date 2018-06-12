@@ -18,7 +18,7 @@
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
-    padding: 50px;
+    padding: 50px 20px 100px;
     font-weight: bold;
     color: #000;
     user-select: none;

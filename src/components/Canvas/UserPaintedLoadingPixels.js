@@ -4,37 +4,52 @@ import withTransactions from '../../hoc/withTransactions'
 import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
 import { TransactionWithPixel } from '../../models/TransactionWithPixel'
 import { LoadingPixel } from './LoadingPixel'
+import { TransactionWithPixels } from '../../models/TransactionWithPixels'
+import type { PixelIndex } from '../../types/PixelIndex'
 
 type Props = {
   txStore: {
-    transactions: Array<Transaction|TransactionWithPixel>
+    transactions: Array<Transaction | TransactionWithPixels>
   },
   pixelSize: number,
   canvasId: number,
+}
+
+type PixelIndexWithColor = {
+  pixelIndex: PixelIndex,
+  colorId: number,
 }
 
 class UserPaintedLoadingPixels extends React.PureComponent<Props> {
   static defaultProps = {}
 
   getCanvasPendingTransactions = () => {
-      const y = this.props.txStore.transactions.filter((tx: Transaction|TransactionWithPixel) =>
-        tx.status === TRANSACTION_STATUS.pending &&
-        tx instanceof TransactionWithPixel &&
-        tx.canvasId === this.props.canvasId
-      )
-    return y
+    return this.props.txStore.transactions.filter((tx: Transaction | TransactionWithPixels) =>
+      tx.status === TRANSACTION_STATUS.pending &&
+      tx instanceof TransactionWithPixels &&
+      tx.canvasId === this.props.canvasId
+    )
   }
 
-
-  render() {
+  render () {
+    const pendingPixelsTransactions = this.getCanvasPendingTransactions()
+    const pendingPixelsArrays: Array<Array<PixelIndexWithColor>> = pendingPixelsTransactions.map(
+      (tx: TransactionWithPixels): Array<PixelIndexWithColor> =>
+        tx.pixelIndexes.map((pixelIndex: PixelIndex, i: number): PixelIndexWithColor => ({
+            pixelIndex,
+            colorId: tx.colorIds[ i ],
+          })
+        )
+    )
+    const pendingPixels: Array<PixelIndexWithColor> = [].concat(...pendingPixelsArrays)
     return (
       <div>
-        {this.getCanvasPendingTransactions().map((tx: TransactionWithPixel, i: number) =>
+        {pendingPixels.map((pixel: PixelIndexWithColor) =>
           <LoadingPixel
-            pixelIndex={tx.pixelIndex}
+            pixelIndex={pixel.pixelIndex}
             pixelSize={this.props.pixelSize}
-            colorId={tx.colorId}
-            key={i}
+            colorId={pixel.colorId}
+            key={pixel.pixelIndex.id}
           />
         )}
       </div>

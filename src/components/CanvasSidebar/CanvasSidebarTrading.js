@@ -4,9 +4,11 @@ import CurrentOwner from './CurrentOwner'
 import MarketStatus from './MarketStatus'
 import withWeb3 from '../../hoc/withWeb3'
 import withEvents from '../../hoc/withEvents'
-import WithdrawReward from './PainterReward/WithdrawReward'
 import { LocalStorageManager } from '../../localStorage'
 import { CanvasPainters } from './CanvasPainters'
+import { SetCanvasName } from './SetCanvasName'
+import PainterRewardCore from '../../hoc/renderProps/PainterRewardCore'
+import SidebarRewardInfo from './PainterReward/SidebarRewardInfo'
 
 class CanvasSidebarTrading extends React.PureComponent {
   constructor () {
@@ -43,7 +45,7 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   watchForChanges = (blockNumber) => {
-    const options = [{ _canvasId: this.props.canvasId }, { fromBlock: blockNumber, toBlock: 'latest' }]
+    const options = [ { _canvasId: this.props.canvasId }, { fromBlock: blockNumber, toBlock: 'latest' } ]
 
     const buyOfferMadeEvent = this.props.Contract.BuyOfferMadeEvent(...options)
     const buyOfferCancelledEvent = this.props.Contract.BuyOfferCancelledEvent(...options)
@@ -67,12 +69,12 @@ class CanvasSidebarTrading extends React.PureComponent {
       sellOfferMadeEvent,
       sellOfferCancelledEvent,
       canvasSoldEvent,
-      ])
+    ])
   }
 
   submitSellOffer = (offerInEth) => {
     const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
-    console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    // console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.offerForSale(this.props.canvasId, offerInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
@@ -82,7 +84,7 @@ class CanvasSidebarTrading extends React.PureComponent {
 
   submitSellOfferToAddress = (offerInEth, receiverAddress) => {
     const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
-    console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    // console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.offerForSaleToAddress(this.props.canvasId, offerInWei, receiverAddress)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
@@ -100,7 +102,7 @@ class CanvasSidebarTrading extends React.PureComponent {
 
   submitBuyOffer = (offerInEth) => {
     const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
-    console.log(`[USER] New buy offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    // console.log(`[USER] New buy offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.makeBuyOffer(this.props.canvasId, offerInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
@@ -137,9 +139,17 @@ class CanvasSidebarTrading extends React.PureComponent {
   }
 
   render () {
+    const canvasOwner = this.props.canvasInfo.owner
+    const isUserCanvasOwner = this.props.account === canvasOwner
+    const canvasName = this.props.canvasInfo.name || `Canvas #${this.props.canvasId}`
+
     return (
       <div className="CanvasSidebar">
-        <h2 className="CanvasSidebar__title">Canvas #{this.props.canvasId}</h2>
+        {
+          this.props.canvasInfo.name &&
+          <h3 className="CanvasSidebar__status">Canvas #{this.props.canvasId}</h3>
+        }
+        <h2 className="CanvasSidebar__title">{canvasName}</h2>
         <h3 className="CanvasSidebar__status">Completed</h3>
 
         <CanvasPainters
@@ -151,16 +161,24 @@ class CanvasSidebarTrading extends React.PureComponent {
         <Divider />
 
         <CurrentOwner
-          canvasOwner={this.props.canvasOwner}
-          isUserCanvasOwner={this.props.account === this.props.canvasOwner}
+          canvasOwner={canvasOwner}
+          isUserCanvasOwner={isUserCanvasOwner}
         />
+
+        {
+          isUserCanvasOwner &&
+          <div>
+            <br />
+            <SetCanvasName canvasId={this.props.canvasId} />
+          </div>
+        }
 
         <Divider />
 
         <MarketStatus
           userAddress={this.props.account}
           canvasId={this.props.canvasId}
-          isUserCanvasOwner={this.props.account === this.props.canvasOwner}
+          isUserCanvasOwner={isUserCanvasOwner}
           currentBuyOffer={this.state.currentBuyOffer}
           currentSellOffer={this.state.currentSellOffer}
           submitBuyOffer={this.submitBuyOffer}
@@ -176,7 +194,11 @@ class CanvasSidebarTrading extends React.PureComponent {
 
         {
           this.props.account &&
-          <WithdrawReward canvasId={this.props.canvasId} />
+          <PainterRewardCore
+            canvasId={this.props.canvasId}
+            render={(state) => <SidebarRewardInfo {...state} canvasId={this.props.canvasId}/>
+            }
+          />
         }
 
       </div>

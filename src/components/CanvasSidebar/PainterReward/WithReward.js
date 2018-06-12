@@ -22,8 +22,12 @@ class WithReward extends React.PureComponent<Props> {
   confirm = () => {
     Modal.confirm({
       title: 'Add Reward to Account Balance?',
-      content: <span>Your reward for painting, <b>{this.props.rewardInEth} ETH</b>, will be added to your
-        Account Balance. You can withdraw your Balance on My Account page.</span>,
+      content: (
+        <div>
+          <p>Your reward for painting, <b>{this.props.rewardInEth} ETH</b>, will be added to your Account Balance.</p>
+          <p>You can withdraw your Balance on My Account page.</p>
+        </div>
+      ),
       okText: 'Continue',
       okType: 'primary',
       width: 500,
@@ -35,9 +39,8 @@ class WithReward extends React.PureComponent<Props> {
     return (
       <div>
         <p>
-          You've painted <b>{this.props.paintedPixels}</b> final pixels of this Canvas <span className="emoji-rocket" />
-          <span
-            className="emoji-hands" />
+          You've painted <b>{this.props.paintedPixels}</b> pixels of this Canvas <span className="emoji-rocket" />
+          <span className="emoji-hands" />
         </p>
         <p>
           Your reward for painting is <span title={this.props.rewardInEth + ' ETH'}>

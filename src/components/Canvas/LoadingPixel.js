@@ -26,7 +26,7 @@ class LoadingPixel extends React.PureComponent<Props> {
         height: pixelSize,
         backgroundColor: hexPalette[this.props.colorId]
       }}>
-        <Icon type="loading" />
+        <Icon type="loading" style={{ fontSize: `calc(${pixelSize}px / 2)`}} />
       </div>
     )
   }

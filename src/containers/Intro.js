@@ -2,29 +2,31 @@
 import * as React from 'react'
 import { YoutubePlayer } from '../components/Small/YoutubePlayer'
 import './styles/Intro.css'
-import { URLHelper } from '../helpers/URLhelper'
-import { Link } from 'react-router-dom'
-import { Button, Icon } from 'antd'
+import BetaInfo from './Homepage/BetaInfo'
+import { CONFIG } from '../config'
+import { METAMASK_NETWORKS } from '../constants/metamask'
+import { setDocumentTitle } from '../helpers/utils'
 
-const Intro = () => {
-  return (
-    <div>
-      <div className="container">
-        <div className="Intro__video">
-          <YoutubePlayer videoId="qRbZ_wcWzL0" playing />
-        </div>
-        <div className="text-center">
-          <Link to={URLHelper.home}>
-            <Button type="primary" size="large" className="Intro__button">
-              Get started <Icon type="arrow-right" />
-            </Button>
-          </Link>
+class Intro extends React.PureComponent<{}> {
+  componentDidMount () {
+    setDocumentTitle(null)
+  }
+
+  render () {
+    return (
+      <div>
+        {
+          CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
+          <BetaInfo />
+        }
+        <div className="container">
+          <div className="Intro__video">
+            <YoutubePlayer videoId="qRbZ_wcWzL0" />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
-
-Intro.defaultProps = {}
 
 export default Intro

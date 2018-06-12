@@ -11,7 +11,9 @@ export const TRANSACTION_RECEIPT_STATUS = {
 
 export const TRANSACTION_TYPE = {
   createCanvas: 'createCanvas',
+  setCanvasName: 'setCanvasName',
   setPixel: 'setPixel',
+  setPixels: 'setPixels',
   makeBid: 'makeBid',
   buyOffer: 'buyOffer',
   cancelBuyOffer: 'cancelBuyOffer',

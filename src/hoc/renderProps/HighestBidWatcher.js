@@ -64,7 +64,7 @@ class HighestBidWatcher extends React.Component<Props, State> {
     }
     const biddingTimeLeftInMs = this.state.highestBid.finishTime * 1000 - Date.now()
     this.biddingTimer = setTimeout(() => {
-      console.log('[EVENT] BIDDING FINISHED!!!');
+      // console.log('[EVENT] BIDDING FINISHED!!!');
       this.props.onBiddingFinished(this.props.canvasId)
     }, biddingTimeLeftInMs)
   }
@@ -77,7 +77,7 @@ class HighestBidWatcher extends React.Component<Props, State> {
 
     bidPostedEvent.watch((error, result) => {
       const bid = new Bid(result.args)
-      console.log(`[EVENT] New bid posted: ${bid.amount} by ${bid.bidder}`)
+      // console.log(`[EVENT] New bid posted: ${bid.amount} by ${bid.bidder}`)
       this.updateHighestBid(bid)
       if (!error)
         console.log(result)

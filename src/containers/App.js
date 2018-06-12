@@ -21,6 +21,9 @@ import { Footer } from '../components/Layout/Footer'
 import Contact from './Contact'
 import TermsOfUse from './TermsOfUse'
 import Intro from './Intro'
+import { SelectedPixelsProvider } from '../stores/SelectedPixelsProvider'
+import { GetStarted } from './GetStarted'
+import FbMessenger from '../components/Layout/FbMessenger'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
@@ -40,32 +43,36 @@ class App extends React.Component {
     return (
       <Web3Provider>
         <TransactionsProvider>
-          <Router>
-            <ScrollToTop>
-              <div>
-                <div className="AppContent">
-                  <Header />
-                  <AccountStatus />
+          <SelectedPixelsProvider>
+            <Router>
+              <ScrollToTop>
+                <div>
+                  <div className="AppContent">
+                    <Header />
+                    <AccountStatus />
 
-                  <Route path="/" component={logPageView} />
-                  <Switch>
-                    <Route exact path='/' component={Intro} />
-                    <Route path='/gallery' component={Homepage} />
-                    <Route path='/trade' component={Marketplace} />
-                    <Route path='/about' component={About} />
-                    <Route path='/canvas/:id' component={CanvasPage} />
-                    <Route path='/account/:address' component={Account} />
-                    <Route path='/help' component={Help} />
-                    <Route path='/terms-of-use' component={TermsOfUse} />
-                    <Route path='/contact' component={Contact} />
-                    <Route path='/404' component={ErrorPage404} />
-                    <Route component={ErrorPage404} />
-                  </Switch>
+                    <Route path="/" component={logPageView} />
+                    <Switch>
+                      <Route exact path='/' component={Intro} />
+                      <Route path='/get-started' component={GetStarted} />
+                      <Route path='/gallery' component={Homepage} />
+                      <Route path='/trade' component={Marketplace} />
+                      <Route path='/about' component={About} />
+                      <Route path='/canvas/:id' component={CanvasPage} />
+                      <Route path='/account/:address' component={Account} />
+                      <Route path='/help' component={Help} />
+                      <Route path='/terms-of-use' component={TermsOfUse} />
+                      <Route path='/contact' component={Contact} />
+                      <Route path='/404' component={ErrorPage404} />
+                      <Route component={ErrorPage404} />
+                    </Switch>
+                  </div>
+                  <FbMessenger />
+                  <Footer />
                 </div>
-                <Footer />
-              </div>
-            </ScrollToTop>
-          </Router>
+              </ScrollToTop>
+            </Router>
+          </SelectedPixelsProvider>
         </TransactionsProvider>
       </Web3Provider>
     )

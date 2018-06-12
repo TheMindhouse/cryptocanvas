@@ -24,7 +24,7 @@ type Props = {
 const CanvasSidebarBidding = (props: Props) => {
   const submitBid = (bidAmountInEth) => {
     const bidAmountInWei = props.web3.toWei(bidAmountInEth, 'ether')
-    console.log(`User posting new bid: ${bidAmountInEth} (${bidAmountInWei} Wei)`)
+    // console.log(`User posting new bid: ${bidAmountInEth} (${bidAmountInWei} Wei)`)
 
     props.Contract.makeBid({ canvasId: props.canvasId, bidAmountInWei })
       .then(transaction => {

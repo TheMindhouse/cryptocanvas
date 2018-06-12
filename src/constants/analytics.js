@@ -9,9 +9,9 @@ const ANALYTICS_ACTIONS = {
   },
   painting: {
     colorSelected: 'Color selected',
-    paintPixelConfirm: 'Paint pixel confirm popup',
-    paintPixelSubmit: 'Paint pixel submit',
-    paintPixelFailed: 'Paint pixel failed',
+    pixelSelected: 'Pixel selected',
+    paintPixelsSubmit: 'Paint pixels submit',
+    paintPixelsFailed: 'Paint pixels failed',
   }
 }
 

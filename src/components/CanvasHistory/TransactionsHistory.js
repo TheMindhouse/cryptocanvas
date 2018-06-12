@@ -29,7 +29,7 @@ class TransactionsHistory extends React.PureComponent<TransactionsHistoryProps, 
     transactionsHistory: null,
   }
 
-  eventArgs = [ { canvasId: this.props.canvasId }, { fromBlock: CONFIG.startBlock, toBlock: 'latest' } ]
+  eventArgs = [ { canvasId: this.props.canvasId }, { fromBlock: CONFIG.START_BLOCK, toBlock: 'latest' } ]
 
   componentDidMount () {
     if (this.props.eventsSupported) {
@@ -54,7 +54,7 @@ class TransactionsHistory extends React.PureComponent<TransactionsHistoryProps, 
     this.props.Contract.BidPostedEvent(...this.eventArgs).get((error, results) => {
       if (!error && results) {
         const transactions = results.map((tx, index) => new CanvasHistoryTx({
-          name: (index === results.length - 1) ? 'Highest Bid' : 'Bid',
+          name: (index === results.length - 1) ? 'Auction Winner' : 'Auction Bid',
           fromAddress: tx.args.bidder,
           value: this.props.web3.fromWei(parseInt(tx.args.amount, 10), 'ether'),
           txHash: tx.transactionHash,
