@@ -5,6 +5,7 @@ import { URLHelper } from '../helpers/URLhelper'
 import { Link } from 'react-router-dom'
 import { YoutubePlayer } from '../components/Small/YoutubePlayer'
 import { setDocumentTitle } from '../helpers/utils'
+import { FbMessengerHelper } from '../helpers/FbMessengerHelper'
 
 type Props = {}
 
@@ -13,6 +14,7 @@ class Help extends React.PureComponent<Props> {
 
   componentDidMount () {
     setDocumentTitle('Help')
+    FbMessengerHelper.showHelpDialog()
   }
 
   render () {

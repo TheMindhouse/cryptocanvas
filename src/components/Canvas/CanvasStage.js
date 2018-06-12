@@ -18,6 +18,7 @@ import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../../constants/analytics'
 import * as pluralize from 'pluralize'
 import { withAnalytics } from '../../hoc/withAnalytics'
 import type { WithAnalytics } from '../../types/WithAnalytics'
+import { FbMessengerHelper } from '../../helpers/FbMessengerHelper'
 
 type Props = {
   canvasId: number,
@@ -138,6 +139,8 @@ class CanvasStage extends React.Component<Props, State> {
 
     // Select pixel
     this.props.selectedPixelsStore.selectPixel(selectedPixel)
+
+    FbMessengerHelper.showPixelPaintedDialog()
 
     this.props.analyticsAPI.event({
       category: ANALYTICS_EVENTS.painting,
