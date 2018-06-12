@@ -2,7 +2,7 @@
     position: fixed;
     z-index: 11;
     bottom: 0;
-    right: 110px;
+    left: 20px;
     box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 12px 20px;
     border-top-left-radius: 4px;
