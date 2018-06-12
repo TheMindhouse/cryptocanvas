@@ -40,7 +40,7 @@ class BiddingTimeLeft extends React.PureComponent {
               render={(state) => <CountdownInline {...state} />}
             />
           </h3>
-          <p><Moment date={new Date(this.props.biddingFinishTime * 1000)} format="dddd, MMMM Do YYYY, h:mm:ss a"/></p>
+          <p><Moment date={new Date(this.props.biddingFinishTime * 1000)} format="dddd, MMMM Do YYYY, h:mm:ss a (Z"/> UTC)</p>
         </div>
         }
 
