@@ -29,8 +29,8 @@ const CONFIG_MAIN = {
   MAX_TOTAL_CANVASES: 1000,
   // Maximum number of selected pixels on a single canvas
   MAX_SELECTED_PIXELS: 100,
-  // Canvas Creation block
-  startBlock: 5584261,
+  // Contract Creation block
+  START_BLOCK: 5584261,
   pixelSize: {
     preview: 3,
     canvas: 10,
@@ -66,8 +66,8 @@ const CONFIG_RINKEBY = {
   MAX_TOTAL_CANVASES: 1000,
   // Maximum number of selected pixels on a single canvas
   MAX_SELECTED_PIXELS: 100,
-  // Canvas Creation block
-  startBlock: 5584261,
+  // Contract Creation block
+  START_BLOCK: 0,
   pixelSize: {
     preview: 5,
     canvas: 13,
