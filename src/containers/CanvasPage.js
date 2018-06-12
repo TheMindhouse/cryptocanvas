@@ -75,12 +75,12 @@ class CanvasPage extends React.Component<Props, State> {
   }
 
   onPaintingFinished = () => {
-    console.log('[EVENT] PAINTING FINISHED!')
+    // console.log('[EVENT] PAINTING FINISHED!')
     this.setState({ isLoading: true }, this.getCanvasInfo)
   }
 
   onBiddingFinished = () => {
-    console.log('[EVENT] BIDDING FINISHED!')
+    // console.log('[EVENT] BIDDING FINISHED!')
     this.setState({ isLoading: true }, this.getCanvasInfo)
   }
 

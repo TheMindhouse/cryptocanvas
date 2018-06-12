@@ -30,7 +30,7 @@ class Homepage extends Component {
 
     // watch for changes
     canvasCreatedEvent.watch(() => {
-      console.log('[EVENT] New canvas created')
+      // console.log('[EVENT] New canvas created')
       this.getActiveCanvasIds()
     })
 

@@ -86,7 +86,7 @@ class CanvasPagePainting extends React.Component {
     const hasFinished = getNumberOfPaintedPixels(this.state.pixels) === this.state.pixels.length
     // console.log('--> Checking if painting has finished: ' + hasFinished)
     if (hasFinished) {
-      console.log('[EVENT] - All the pixels have been painted!')
+      // console.log('[EVENT] - All the pixels have been painted!')
       this.props.onPaintingFinished()
     }
   }
@@ -101,7 +101,7 @@ class CanvasPagePainting extends React.Component {
     pixelPaintedEvent.watch((error, result) => {
       const pixelPainted = new PixelPainted(result.args)
       const { index, color } = pixelPainted
-      console.log(`[EVENT] Updated pixel color at (${index}) to ${color}`)
+      // console.log(`[EVENT] Updated pixel color at (${index}) to ${color}`)
       this.updatePixel({ index, color })
     })
 

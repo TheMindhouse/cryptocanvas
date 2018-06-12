@@ -74,7 +74,7 @@ class CanvasSidebarTrading extends React.PureComponent {
 
   submitSellOffer = (offerInEth) => {
     const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
-    console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    // console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.offerForSale(this.props.canvasId, offerInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
@@ -84,7 +84,7 @@ class CanvasSidebarTrading extends React.PureComponent {
 
   submitSellOfferToAddress = (offerInEth, receiverAddress) => {
     const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
-    console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    // console.log(`[USER] New sell offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.offerForSaleToAddress(this.props.canvasId, offerInWei, receiverAddress)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)
@@ -102,7 +102,7 @@ class CanvasSidebarTrading extends React.PureComponent {
 
   submitBuyOffer = (offerInEth) => {
     const offerInWei = this.props.web3.toWei(offerInEth, 'ether')
-    console.log(`[USER] New buy offer: ${offerInWei} WEI (${offerInEth} ETH)`)
+    // console.log(`[USER] New buy offer: ${offerInWei} WEI (${offerInEth} ETH)`)
     this.props.Contract.makeBuyOffer(this.props.canvasId, offerInWei)
       .then(transaction => {
         LocalStorageManager.transactions.updateTransactions(transaction)

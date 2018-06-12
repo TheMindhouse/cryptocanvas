@@ -57,7 +57,7 @@ class PainterRewardCore extends React.Component<Props, PainterRewardCoreState> {
   }
 
   onWithdraw = () => {
-    console.log('[USER] Add painter reward to Account Balance requested');
+    // console.log('[USER] Add painter reward to Account Balance requested');
     this.props.Contract.addRewardToAccountBalance(this.props.canvasId)
       .then(tx => {
         LocalStorageManager.transactions.updateTransactions(tx)
