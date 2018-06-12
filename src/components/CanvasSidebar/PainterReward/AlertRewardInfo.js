@@ -53,7 +53,7 @@ class AlertRewardInfo extends React.PureComponent<Props> {
       <div className="container">
         <Alert
           message={
-            <Row type="flex" align="middle">
+            <Row type="flex" align="middle" style={{ flexWrap: 'nowrap' }}>
               <div className="text-center" style={{ marginRight: 20 }}>
                 <h2 style={{ margin: 0 }}>
                   <b>{ethConverter.wei2eth(this.props.painterReward.rewardValue)} ETH</b>
