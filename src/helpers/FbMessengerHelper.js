@@ -21,12 +21,12 @@ const isSDKLoaded = () =>
   typeof FB.CustomerChat.showDialog === 'function'
 
 const getMessengerData = (): MessengerData => {
-  const messengerData = window.sessionStorage.getItem(STORAGE_KEY) || '{}'
+  const messengerData = window.localStorage.getItem(STORAGE_KEY) || '{}'
   return JSON.parse(messengerData)
 }
 
 const saveMessengerData = (messengerData: MessengerData) =>
-  window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messengerData))
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(messengerData))
 
 
 export const FbMessengerHelper = {
@@ -67,8 +67,8 @@ export const FbMessengerHelper = {
     }
 
     FB.CustomerChat.update({
-      logged_in_greeting: 'Hi, how can we help you?',
-      logged_out_greeting: 'Hi, how can we help you?',
+      logged_in_greeting: 'How can we help you?',
+      logged_out_greeting: 'How can we help you?',
     })
     FB.CustomerChat.showDialog()
 
