@@ -145,6 +145,10 @@ class CanvasSidebarTrading extends React.PureComponent {
 
     return (
       <div className="CanvasSidebar">
+        {
+          this.props.canvasInfo.name &&
+          <h3 className="CanvasSidebar__status">Canvas #{this.props.canvasId}</h3>
+        }
         <h2 className="CanvasSidebar__title">{canvasName}</h2>
         <h3 className="CanvasSidebar__status">Completed</h3>
 
