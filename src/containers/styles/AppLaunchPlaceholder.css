@@ -1,0 +1,20 @@
+.AppLaunchPlaceholder {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 20vh;
+    background: repeat-x top center;
+    background-size: 2000px 200px;
+    text-align: center;
+}
+
+.AppLaunchPlaceholder__logo {
+    width: 500px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.AppLaunchPlaceholder__headline {
+    font-size: 23px;
+    color: #999;
+    margin: 10px 0 40px;
+}
