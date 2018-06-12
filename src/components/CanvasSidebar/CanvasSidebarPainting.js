@@ -34,9 +34,11 @@ const CanvasSidebarPainting = (props) => {
       />
 
       <h3><b>2. Select pixels to paint</b></h3>
-      <SelectedPixelsInfo canvasId={props.canvasId} />
+      <SelectedPixelsInfo canvasId={props.canvasId}
+                          isCanvasEmpty={props.totalPixels > 0 && props.paintedPixels === 0} />
 
-      <SubmitSelectedPixels canvasId={props.canvasId} paintedPixels={props.paintedPixels}
+      <SubmitSelectedPixels canvasId={props.canvasId}
+                            isCanvasEmpty={props.totalPixels > 0 && props.paintedPixels === 0}
                             isSubmitAllowed={props.isEthereumActive}/>
 
       <br />

@@ -14,14 +14,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.SelectedPixel .anticon {
     animation: crescendo 1.5s alternate infinite ease-in;
 }
 
 @keyframes crescendo {
     0% {
-        transform: scale(.8);
+        transform: scale(1);
     }
     100% {
-        transform: scale(1);
+        transform: scale(1.8);
     }
 }

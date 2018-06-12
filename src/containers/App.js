@@ -22,6 +22,7 @@ import Contact from './Contact'
 import TermsOfUse from './TermsOfUse'
 import Intro from './Intro'
 import { SelectedPixelsProvider } from '../stores/SelectedPixelsProvider'
+import { GetStarted } from './GetStarted'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
@@ -52,6 +53,7 @@ class App extends React.Component {
                     <Route path="/" component={logPageView} />
                     <Switch>
                       <Route exact path='/' component={Intro} />
+                      <Route path='/get-started' component={GetStarted} />
                       <Route path='/gallery' component={Homepage} />
                       <Route path='/trade' component={Marketplace} />
                       <Route path='/about' component={About} />

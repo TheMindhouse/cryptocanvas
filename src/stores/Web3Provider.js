@@ -4,6 +4,7 @@ import ABI from '../helpers/ABI.json'
 import { CONFIG } from '../config'
 import { withAnalytics } from '../hoc/withAnalytics'
 import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../constants/analytics'
+import { METAMASK_NETWORKS } from '../constants/metamask'
 
 const Web3Context = React.createContext()
 
@@ -44,23 +45,29 @@ class Web3Provider extends React.Component {
       getBlockNumber: this.getBlockNumber,
       eventsSupported,
       metamaskAvailable,
+      gasPrice: undefined, // Price of one unit of Gas in Wei
+      ethPrice: undefined, // Price of Ethereum in USD
     }
   }
 
   componentDidMount () {
     this.checkAccount()
-    this.checkAccountInterval = setInterval(() => {
-      this.checkAccount()
-    }, CONFIG.CHECK_ACCOUNT_DELAY)
+    this.checkGasPrice()
+    this.checkEthPrice()
+    this.checkAccountInterval = setInterval(this.checkAccount, CONFIG.CHECK_ACCOUNT_DELAY)
+    this.checkGasPriceInterval = setInterval(this.checkGasPrice, CONFIG.CHECK_GAS_PRICE_DELAY)
+    this.checkEthPriceInterval = setInterval(this.checkEthPrice, CONFIG.CHECK_ETH_PRICE_DELAY)
   }
 
   componentWillUnmount () {
     window.clearInterval(this.checkAccountInterval)
+    window.clearInterval(this.checkGasPriceInterval)
+    window.clearInterval(this.checkEthPriceInterval)
   }
 
   checkAccount = () => {
     window.web3.eth.getAccounts((error, accounts = []) => {
-      const account = accounts[0]
+      const account = accounts[ 0 ]
       if (account !== this.state.account) {
         const Contract = new ContractModel(this.ContractInstance.at(CONFIG.CONTRACT_ADDRESS), account)
         this.setState({ account, Contract })
@@ -76,6 +83,38 @@ class Web3Provider extends React.Component {
         }
       }
     })
+  }
+
+  checkGasPrice = () => {
+    window.web3.eth.getGasPrice((error, result) => {
+      const gasPrice = error
+        ? null
+        : parseInt(result, 10)
+      if (gasPrice !== this.state.gasPrice) {
+        console.log('New gas price: ', gasPrice)
+        this.setState({ gasPrice })
+      }
+    })
+  }
+
+  checkEthPrice = () => {
+    if (CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main) {
+      const ethPrice = 0
+      if (ethPrice !== this.state.ethPrice) {
+        this.setState({ ethPrice })
+      }
+      return
+    }
+
+    fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD')
+      .then((response: Response) => response.json())
+      .then((responseJson: { USD: number }) => {
+        const ethPrice = responseJson.USD
+        if (ethPrice !== this.state.ethPrice) {
+          console.log('New ETH price: ', ethPrice)
+          this.setState({ ethPrice })
+        }
+      })
   }
 
   getBlockNumber = () => {

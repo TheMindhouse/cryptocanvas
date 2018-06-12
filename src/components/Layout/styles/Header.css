@@ -14,17 +14,16 @@
 
 .Header__title {
     text-decoration: none !important;
-}
-
-.Header__title > * {
     font-size: 44px;
+    line-height: 1.2em;
     font-weight: bold;
     margin: 0;
+    color: #222 !important;
 }
 
 .Header__subtitle {
     color: #999;
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 400;
     margin: 0;
 }
@@ -104,7 +103,7 @@
         top: -4px;
     }
 
-    .Header__title > * {
+    .Header__title {
         font-size: 30px;
         margin: 0;
     }

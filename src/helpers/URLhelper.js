@@ -2,6 +2,8 @@
 export const URLHelper = {
   account: (address: string): string => `/account/${address}`,
   canvas: (canvasId: number): string => `/canvas/${canvasId}`,
+  intro: '/',
+  getStarted: '/get-started',
   home: '/gallery',
   about: '/about',
   contact: '/contact',

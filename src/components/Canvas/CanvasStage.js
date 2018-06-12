@@ -14,16 +14,21 @@ import { SelectedPixel } from '../../models/SelectedPixel'
 import { CONFIG } from '../../config'
 import { Modal, message } from 'antd'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
+import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../../constants/analytics'
+import * as pluralize from 'pluralize'
+import { withAnalytics } from '../../hoc/withAnalytics'
+import type { WithAnalytics } from '../../types/WithAnalytics'
 
 type Props = {
   canvasId: number,
   pixelSize: number,
   pixels: Array<number>,
   activeColorId: number,
-  changePixelColor: (PixelIndex) => void,
   changeActiveColor: (number) => void,
   // withSelectedPixels
   selectedPixelsStore: SelectedPixelsProviderState,
+  // withAnalytics
+  analyticsAPI: WithAnalytics,
 }
 
 type State = {
@@ -119,20 +124,26 @@ class CanvasStage extends React.Component<Props, State> {
       return
     }
 
-    // Check if number of selected pixels is not already maximum
-    if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
-      this.showCannotSelectPixelModal()
-      return
-    }
-
     // Deselect, if the same pixel is clicked again with the same color
     if(this.props.selectedPixelsStore.pixelExists(selectedPixel)) {
       this.props.selectedPixelsStore.removeSelectedPixel(selectedPixel)
       return
     }
 
+    // Check if number of selected pixels is not already maximum
+    if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
+      this.showCannotSelectPixelModal()
+      return
+    }
+
     // Select pixel
     this.props.selectedPixelsStore.selectPixel(selectedPixel)
+
+    this.props.analyticsAPI.event({
+      category: ANALYTICS_EVENTS.painting,
+      action: ANALYTICS_ACTIONS.painting.pixelSelected,
+      label: `Canvas #${this.props.canvasId}, pixel ${selectedPixel.pixelIndex.x}x${selectedPixel.pixelIndex.y} selected`,
+    })
   }
 
   showCannotSelectPixelModal = () => {
@@ -308,4 +319,4 @@ class CanvasStage extends React.Component<Props, State> {
   }
 }
 
-export default withSelectedPixels(CanvasStage)
+export default withAnalytics(withSelectedPixels(CanvasStage))

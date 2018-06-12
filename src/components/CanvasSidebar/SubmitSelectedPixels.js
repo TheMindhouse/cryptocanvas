@@ -13,12 +13,15 @@ import { withAnalytics } from '../../hoc/withAnalytics'
 import { WithAnalytics } from '../../types/WithAnalytics'
 import { HashLink } from 'react-router-hash-link'
 import { URLHelper } from '../../helpers/URLhelper'
+import { gasCalculator } from '../../helpers/gasCalculator'
+import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../../constants/analytics'
+import * as pluralize from 'pluralize'
 
 type Props = {
   canvasId: number,
-  paintedPixels: number,
   totalPixels: number,
   isSubmitAllowed: boolean,
+  isCanvasEmpty: boolean,
   // withSelectedPixels
   selectedPixelsStore: SelectedPixelsProviderState,
   // withWeb3
@@ -35,12 +38,17 @@ class SubmitSelectedPixels extends React.PureComponent<Props> {
     const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     const pixelIndexes = selectedPixels.map((pixel: SelectedPixel) => pixel.pixelIndex)
     const colorIds = selectedPixels.map((pixel: SelectedPixel) => pixel.colorId)
-    const gasLimit = this.calculateGasPrice(selectedPixels.length)
+    const gasLimit = gasCalculator.setPixels(selectedPixels.length, this.props.isCanvasEmpty)
     this.props.Contract.setPixels({ canvasId, pixelIndexes, colorIds, gasLimit })
       .then((tx) => {
         selectedPixels.forEach((pixel: SelectedPixel) => this.props.selectedPixelsStore.removeSelectedPixel(pixel))
         LocalStorageManager.transactions.updateTransactions(tx)
         message.success('Paint Pixels Transaction sent')
+        this.props.analyticsAPI.event({
+          category: ANALYTICS_EVENTS.painting,
+          action: ANALYTICS_ACTIONS.painting.paintPixelsSubmit,
+          label: `Canvas #${this.props.canvasId}, ${selectedPixels.length} ${pluralize('pixel', selectedPixels.length)}`,
+        })
       })
       .catch((error) => {
         console.error(error)
@@ -48,17 +56,12 @@ class SubmitSelectedPixels extends React.PureComponent<Props> {
           title: 'Could not paint pixels',
           content: 'You either rejected the transaction in MetaMask or another error occurred.',
         })
-        // this.props.analyticsAPI.event({
-        //   category: ANALYTICS_EVENTS.painting,
-        //   action: ANALYTICS_ACTIONS.painting.paintPixelFailed,
-        //   label: `Canvas #${this.props.canvasId}, pixel (${pixelIndex.x}, ${pixelIndex.y})`,
-        // })
+        this.props.analyticsAPI.event({
+          category: ANALYTICS_EVENTS.painting,
+          action: ANALYTICS_ACTIONS.painting.paintPixelsFailed,
+          label: `Canvas #${this.props.canvasId}, ${selectedPixels.length} ${pluralize('pixel', selectedPixels.length)}`,
+        })
       })
-  }
-
-  calculateGasPrice = (pixelsCount) => {
-    const hasFirstPixel = !this.props.paintedPixels
-    return this.props.Contract.calculateSetPixelGas(pixelsCount, hasFirstPixel)
   }
 
   render () {
