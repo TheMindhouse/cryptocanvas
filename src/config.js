@@ -1,5 +1,9 @@
 import { METAMASK_NETWORKS } from './constants/metamask'
 
+const CONFIG_SHARED = {
+  LIVE_LAUNCH_DATE: Date.UTC(2018, 6, 2, 15, 0, 0),
+}
+
 const CONFIG_MAIN = {
   // Contract settings
   CONTRACT_ADDRESS: '0x0c9b5c62e7ddeba23164fefa0ff10676e3b52629', // Main net
@@ -34,6 +38,7 @@ const CONFIG_MAIN = {
   gridColumns: 64,
   COMMISSION: 0.039,
   PAINTERS_REWARD: 0.061,
+  SHARED: CONFIG_SHARED,
 }
 
 const CONFIG_RINKEBY = {
@@ -70,6 +75,7 @@ const CONFIG_RINKEBY = {
   gridColumns: 48,
   COMMISSION: CONFIG_MAIN.COMMISSION,
   PAINTERS_REWARD: CONFIG_MAIN.PAINTERS_REWARD,
+  SHARED: CONFIG_SHARED,
 }
 
 const getConfig = () => {

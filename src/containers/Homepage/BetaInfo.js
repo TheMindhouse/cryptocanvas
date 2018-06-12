@@ -8,8 +8,9 @@ import { CountdownCounter } from '../../hoc/renderProps/CountdownCounter'
 import { Countdown } from '../../components/Small/Countdown'
 import { URLHelper } from '../../helpers/URLhelper'
 import { Link } from 'react-router-dom'
+import { CONFIG } from '../../config'
 
-const LIVE_START_DATE = 1530446400000
+const LIVE_LAUNCH_DATE = CONFIG.SHARED.LIVE_LAUNCH_DATE
 
 const BetaInfo = () => {
   return (
@@ -32,11 +33,11 @@ const BetaInfo = () => {
         <Col xs={{ span: 24 }} md={{ span: 8 }} className="text-center">
           <h2>Live version starts in:</h2>
           <CountdownCounter
-            date={new Date(LIVE_START_DATE)}
+            date={new Date(LIVE_LAUNCH_DATE)}
             render={(state) => <Countdown {...state} />}
           />
           <span className="BetaInfo__CountdownDate">
-          <Moment date={new Date(LIVE_START_DATE)} format="dddd, MMMM Do YYYY, h:mm a" /> UTC
+          <Moment date={new Date(LIVE_LAUNCH_DATE)} format="dddd, MMMM Do YYYY, h:mm A (Z"/> UTC)
         </span>
         </Col>
       </Row>
