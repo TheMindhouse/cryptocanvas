@@ -5,11 +5,17 @@
 }
 
 .HeaderLaunchInfo__Beta {
-    background: orange;
+    background: #2ecc71;
     color: #fff;
     font-weight: bold;
     padding: 4px;
     border-radius: 3px;
     margin-right: 10px;
     font-size: 14px;
+}
+
+@media all and (max-width: 768px) {
+    .HeaderLaunchInfo {
+        margin: 0 0 15px;
+    }
 }

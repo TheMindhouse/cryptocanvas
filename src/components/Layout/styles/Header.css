@@ -12,13 +12,12 @@
     top: 5px;
 }
 
-.Header__title {
+.Header__link {
     text-decoration: none !important;
-    font-size: 44px;
-    line-height: 1.2em;
-    font-weight: bold;
-    margin: 0;
-    color: #222 !important;
+}
+
+.Header__logo {
+    width: 330px;
 }
 
 .Header__subtitle {
@@ -96,16 +95,11 @@
     }
 
     .Header__Mona {
-        width: 60px;
-        height: 60px;
-        margin-right: 10px;
-        position: relative;
-        top: -4px;
+        display: none;
     }
 
-    .Header__title {
-        font-size: 30px;
-        margin: 0;
+    .Header__logo {
+        width: 300px;
     }
 
     .Header__subtitle {
