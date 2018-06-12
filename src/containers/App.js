@@ -23,6 +23,7 @@ import TermsOfUse from './TermsOfUse'
 import Intro from './Intro'
 import { SelectedPixelsProvider } from '../stores/SelectedPixelsProvider'
 import { GetStarted } from './GetStarted'
+import FbMessenger from '../components/Layout/FbMessenger'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
@@ -66,6 +67,7 @@ class App extends React.Component {
                       <Route component={ErrorPage404} />
                     </Switch>
                   </div>
+                  <FbMessenger />
                   <Footer />
                 </div>
               </ScrollToTop>
