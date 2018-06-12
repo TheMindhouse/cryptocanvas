@@ -15,7 +15,7 @@ const Intro = () => {
       }
       <div className="container">
         <div className="Intro__video">
-          <YoutubePlayer videoId="qRbZ_wcWzL0" playing />
+          <YoutubePlayer videoId="qRbZ_wcWzL0" />
         </div>
       </div>
     </div>
