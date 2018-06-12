@@ -4,6 +4,7 @@ import ABI from '../helpers/ABI.json'
 import { CONFIG } from '../config'
 import { withAnalytics } from '../hoc/withAnalytics'
 import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../constants/analytics'
+import { METAMASK_NETWORKS } from '../constants/metamask'
 
 const Web3Context = React.createContext()
 
@@ -44,8 +45,8 @@ class Web3Provider extends React.Component {
       getBlockNumber: this.getBlockNumber,
       eventsSupported,
       metamaskAvailable,
-      gasPrice: null, // Price of one unit of Gas in Wei
-      ethPrice: null, // Price of Ethereum in USD
+      gasPrice: undefined, // Price of one unit of Gas in Wei
+      ethPrice: undefined, // Price of Ethereum in USD
     }
   }
 
@@ -97,6 +98,14 @@ class Web3Provider extends React.Component {
   }
 
   checkEthPrice = () => {
+    if (CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main) {
+      const ethPrice = 0
+      if (ethPrice !== this.state.ethPrice) {
+        this.setState({ ethPrice })
+      }
+      return
+    }
+
     fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD')
       .then((response: Response) => response.json())
       .then((responseJson: { USD: number }) => {

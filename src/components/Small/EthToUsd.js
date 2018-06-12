@@ -12,11 +12,13 @@ class EthToUsd extends React.PureComponent<Props> {
   static defaultProps = {}
 
   render () {
-    if (!this.props.ethPrice) {
+    if (typeof this.props.ethPrice === undefined) {
       return null
     }
 
-    const priceInUSD = this.props.eth * this.props.ethPrice
+    const priceInUSD = this.props.ethPrice
+      ? this.props.eth * this.props.ethPrice
+      : 0
 
     return (
       <span>${priceInUSD.toFixed(2)}</span>
