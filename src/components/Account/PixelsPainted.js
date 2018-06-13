@@ -4,7 +4,6 @@ import withWeb3 from '../../hoc/withWeb3'
 import { ContractModel } from '../../models/ContractModel'
 import { Spin } from 'antd'
 import { URLHelper } from '../../helpers/URLhelper'
-import { HashLink } from 'react-router-hash-link'
 import { Link } from 'react-router-dom'
 
 type PaintedPixelsOnCanvas = {

@@ -1,6 +1,5 @@
 import React from 'react'
 import Moment from 'react-moment'
-import { Countdown } from '../Small/Countdown'
 import { CountdownInline } from '../Small/CountdownInline'
 import { CountdownCounter } from '../../hoc/renderProps/CountdownCounter'
 

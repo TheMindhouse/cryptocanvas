@@ -5,14 +5,14 @@
 import * as React from 'react'
 import { TimeLeft } from '../../types/TimeLeft'
 
+type CountdownCounterState = {
+  timeLeft: TimeLeft,
+  isLoading: boolean,
+}
+
 type Props = {
   date: Date,
   render: CountdownCounterState => any
-}
-
-export type CountdownCounterState = {
-  timeLeft: TimeLeft,
-  isLoading: boolean,
 }
 
 class CountdownCounter extends React.PureComponent<Props, CountdownCounterState> {

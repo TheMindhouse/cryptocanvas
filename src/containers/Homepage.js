@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import Marketplace from './Marketplace'
 import { setDocumentTitle } from '../helpers/utils'
 import './styles/Homepage.css'
-import BetaInfo from './Homepage/BetaInfo'
 
 class Homepage extends Component {
   state = {

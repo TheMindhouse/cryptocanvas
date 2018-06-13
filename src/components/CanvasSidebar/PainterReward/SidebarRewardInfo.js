@@ -1,13 +1,9 @@
 // @flow
 import React from 'react'
-import withWeb3 from '../../../hoc/withWeb3'
-import { message } from 'antd'
 import WithReward from './WithReward'
 import WithoutReward from './WithoutReward'
-import { LocalStorageManager } from '../../../localStorage/index'
 import { Bid } from '../../../models/Bid'
 import { PainterReward } from '../../../models/PainterReward'
-import { ContractModel } from '../../../models/ContractModel'
 import { ethConverter } from '../../../helpers/ethConverter'
 
 type Props = {

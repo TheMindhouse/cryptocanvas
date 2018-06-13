@@ -7,6 +7,12 @@ import { Bid } from '../../models/Bid'
 import { LocalStorageManager } from '../../localStorage'
 import withWeb3 from '../withWeb3'
 
+type PainterRewardCoreState = {
+  painterReward: PainterReward,
+  lastBid: Bid,
+  onWithdraw: () => void,
+}
+
 type Props = {
   canvasId: number,
   render: PainterRewardCoreState => any,
@@ -14,12 +20,6 @@ type Props = {
   Contract: ContractModel,
   account: string,
   web3: Object,
-}
-
-type PainterRewardCoreState = {
-  painterReward: PainterReward,
-  lastBid: Bid,
-  onWithdraw: () => void,
 }
 
 class PainterRewardCore extends React.Component<Props, PainterRewardCoreState> {

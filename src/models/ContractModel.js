@@ -13,7 +13,6 @@ import type { PixelIndex } from '../types/PixelIndex'
 import { TransactionWithPixels } from './TransactionWithPixels'
 
 const GAS_LIMIT = 150000
-const GAS_PRICE = 2000000000
 
 export class ContractModel {
   constructor (Contract, account) {
@@ -21,7 +20,6 @@ export class ContractModel {
     this._account = account
     this._config = {
       gas: GAS_LIMIT,
-      // gasPrice: GAS_PRICE,
       from: account,
     }
     // console.log('New ContractModel with account ', account)
