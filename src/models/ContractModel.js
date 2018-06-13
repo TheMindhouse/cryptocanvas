@@ -482,7 +482,7 @@ export class ContractModel {
 
   getRewardInfo (canvasId, userAddress = '') {
     return new Promise((resolve, reject) => {
-      this.Contract.calculateReward(canvasId, userAddress, {}, (error, result) => {
+      this.Contract.calculateRewardToWithdraw(canvasId, userAddress, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)
