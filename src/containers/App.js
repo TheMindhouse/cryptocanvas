@@ -28,7 +28,7 @@ import FbMessenger from '../components/Layout/FbMessenger'
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
   ReactGA.initialize('UA-117937544-1')
-} else if (hostname === 'rinkeby.cryptocanvas.art') {
+} else if (hostname === 'beta.cryptocanvas.art') {
   ReactGA.initialize('UA-117937544-4')
 }
 
