@@ -17,7 +17,7 @@ class BiddingCanvases extends React.PureComponent {
                 <HighestBidWatcher
                   canvasId={canvasId}
                   onBiddingFinished={onBiddingFinished}
-                  render={(state) => <BiddingCanvasExtras {...state} />} />
+                  render={(state) => <BiddingCanvasExtras {...state} canvasId={canvasId} />} />
               }
             />
           </Col>

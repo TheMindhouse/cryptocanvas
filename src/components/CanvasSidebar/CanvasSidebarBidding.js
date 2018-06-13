@@ -72,6 +72,9 @@ const CanvasSidebarBidding = (props: Props) => {
       <BiddingTimeLeft
         biddingFinishTime={props.highestBid ? props.highestBid.finishTime : null}
         />
+
+      <Divider />
+
     </div>
   )
 }
