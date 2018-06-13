@@ -26,7 +26,7 @@ class SidebarRewardInfo extends React.Component<Props> {
         <h2><b>Painter Reward</b></h2>
         {
           this.props.lastBid &&
-          <p>Canvas was sold during Initial Bidding for <b>{ethConverter.wei2eth(this.props.lastBid.amount)} ETH</b>.</p>
+          <p>Canvas was sold on auction for <b>{ethConverter.wei2eth(this.props.lastBid.amount)} ETH</b>.</p>
         }
         {
           paintedPixels ?

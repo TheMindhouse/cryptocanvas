@@ -93,7 +93,7 @@ export class ContractModel {
 
   makeBid ({ canvasId, bidAmountInWei }) {
     return new Promise((resolve, reject) => {
-      this.Contract.makeBid(canvasId, { ...this.config, value: bidAmountInWei }, (error, txHash) => {
+      this.Contract.makeBid(canvasId, { ...this.config, gas: 250000, value: bidAmountInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Make bid failed')
