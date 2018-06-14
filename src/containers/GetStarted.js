@@ -69,9 +69,9 @@ class GetStarted extends React.PureComponent<{}> {
 
               <br />
 
-              <Link to={URLHelper.canvas(0)}>
+              <Link to={URLHelper.home}>
                 <Button type="primary">
-                  Go to your first Canvas <Icon type="arrow-right" />
+                  Choose a canvas to paint on <Icon type="arrow-right" />
                 </Button>
               </Link>
             </Col>

@@ -39,7 +39,6 @@ class AlertRewardInfo extends React.PureComponent<Props> {
   render () {
     const {
       paintedPixels,
-      rewardValue,
       isWithdrawn,
     } = this.props.painterReward
 

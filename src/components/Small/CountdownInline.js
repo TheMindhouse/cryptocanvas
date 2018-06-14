@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import type { CountdownCounterState } from '../../hoc/renderProps/CountdownCounter'
 import './styles/Countdown.css'
 import * as pluralize from 'pluralize'
 import { TimeLeft } from '../../types/TimeLeft'

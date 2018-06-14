@@ -80,7 +80,7 @@ class CanvasPageBidding extends Component {
           />
         </Row>
         <Row className="container">
-          <Col xs={{ span: 24, offset: 0 }} sm={{ span: 24, offset: 0 }} md={{ span: 20, offset: 2 }}>
+          <Col xs={{ span: 24, offset: 0 }} lg={{ span: 20, offset: 2 }}>
             <TransactionsHistory canvasId={this.props.canvasId} />
           </Col>
         </Row>

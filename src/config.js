@@ -43,7 +43,7 @@ const CONFIG_MAIN = {
 
 const CONFIG_RINKEBY = {
   // Contract settings
-  CONTRACT_ADDRESS: '0xc0b060439080142216171290fb8db84b1b707c04', // Rinkeby testnet
+  CONTRACT_ADDRESS: '0xe06ac2eba65f7184aae3ca2a0cb1cfdc604b765f', // Rinkeby testnet
   WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Browser page title

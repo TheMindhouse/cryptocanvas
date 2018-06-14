@@ -13,6 +13,7 @@ import { WithModal } from '../../types/WithModal'
 import withWeb3 from '../../hoc/withWeb3'
 import { gasCalculator } from '../../helpers/gasCalculator'
 import { EthToUsd } from '../Small/EthToUsd'
+import { Link } from 'react-router-dom'
 
 type Props = {
   canvasId: number,
@@ -66,9 +67,9 @@ class SelectedPixelsInfo extends React.PureComponent<Props> {
           }
         </Row>
         <p>
-          <a href="#" onClick={this.props.modal.show}>
+          <Link to="#" onClick={this.props.modal.show}>
             {selectedPixels.length} {pluralize('pixel', selectedPixels.length)} selected
-          </a>
+          </Link>
           {
             this.props.gasPrice &&
             <Popover title="Who am I paying for painting?" width={100} content={

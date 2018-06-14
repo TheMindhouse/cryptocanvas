@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import { URLHelper } from '../../helpers/URLhelper'
-import { canvasPainters } from '../../localStorage/canvasPainters'
 import { PixelsOwnedInfo } from '../CanvasSidebar/PixelsOwnedInfo'
 
 type Props = {

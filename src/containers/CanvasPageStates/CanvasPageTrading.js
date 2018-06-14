@@ -9,7 +9,6 @@ import { TransactionsHistory } from '../../components/CanvasHistory/Transactions
 import CanvasStagePlaceholder from '../../components/Canvas/CanvasStagePlaceholder'
 import { ContractModel } from '../../models/ContractModel'
 import { CanvasInfo } from '../../models/CanvasInfo'
-import WithdrawReward from '../../components/CanvasSidebar/PainterReward/SidebarRewardInfo'
 import PainterRewardCore from '../../hoc/renderProps/PainterRewardCore'
 import { AlertRewardInfo } from '../../components/CanvasSidebar/PainterReward/AlertRewardInfo'
 

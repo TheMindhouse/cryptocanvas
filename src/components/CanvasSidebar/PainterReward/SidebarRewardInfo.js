@@ -1,13 +1,9 @@
 // @flow
 import React from 'react'
-import withWeb3 from '../../../hoc/withWeb3'
-import { message } from 'antd'
 import WithReward from './WithReward'
 import WithoutReward from './WithoutReward'
-import { LocalStorageManager } from '../../../localStorage/index'
 import { Bid } from '../../../models/Bid'
 import { PainterReward } from '../../../models/PainterReward'
-import { ContractModel } from '../../../models/ContractModel'
 import { ethConverter } from '../../../helpers/ethConverter'
 
 type Props = {
@@ -30,7 +26,7 @@ class SidebarRewardInfo extends React.Component<Props> {
         <h2><b>Painter Reward</b></h2>
         {
           this.props.lastBid &&
-          <p>Canvas was sold during Initial Bidding for <b>{ethConverter.wei2eth(this.props.lastBid.amount)} ETH</b>.</p>
+          <p>Canvas was sold on auction for <b>{ethConverter.wei2eth(this.props.lastBid.amount)} ETH</b>.</p>
         }
         {
           paintedPixels ?

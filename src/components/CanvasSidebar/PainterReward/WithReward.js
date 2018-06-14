@@ -42,15 +42,18 @@ class WithReward extends React.PureComponent<Props> {
           You've painted <b>{this.props.paintedPixels}</b> pixels of this Canvas <span className="emoji-rocket" />
           <span className="emoji-hands" />
         </p>
-        <p>
-          Your reward for painting is <span title={this.props.rewardInEth + ' ETH'}>
-            <b>{parseFloat(Number(this.props.rewardInEth).toFixed(5))} ETH</b>
-          </span>.
-        </p>
+        {
+          this.props.rewardInEth > 0 &&
+          <p>
+            You have <span title={this.props.rewardInEth + ' ETH'}>
+              <b>{parseFloat(Number(this.props.rewardInEth).toFixed(5))} ETH</b>
+            </span> waiting for you to withdraw!
+          </p>
+        }
 
         {
           this.props.isWithdrawn
-            ? <Alert message="Reward for painting has been added to your Account Balance 🎉" type="success" showIcon />
+            ? <Alert message="All rewards for painting have been added to your Account Balance" type="success" showIcon />
             : <Button
               type="primary"
               size="default"
