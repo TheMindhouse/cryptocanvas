@@ -14,7 +14,7 @@ class TermsOfUse extends React.PureComponent<{}> {
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
           <div className="container">
             <h2><b>CryptoCanvas Terms of Use</b></h2>
-            <h3>Last Updated: May 9, 2018</h3>
+            <h3>Last Updated: June 14, 2018</h3>
           </div>
         </div>
         <Row className="container About">
@@ -75,12 +75,9 @@ class TermsOfUse extends React.PureComponent<{}> {
 
             <p>
               <b>“Canvas Author”</b> means the person who painted at least one final pixel of the finished Canvas by
-              sending a
-              transaction to the Smart Contract. A person whose pixel has been painted over by another person loses
-              rights
-              to that pixel. Specifically, Canvas Author means the person with the private key for at least one address
-              in
-              the “painter” field of the “pixels” field of the applicable Canvas in the Smart Contract.
+              sending a transaction to the Smart Contract. Specifically, Canvas Author means the person with the private
+              key for at least one address in the “painter” field of the “pixels” field of the applicable Canvas in the
+              Smart Contract.
             </p>
 
             <p>
@@ -183,19 +180,40 @@ class TermsOfUse extends React.PureComponent<{}> {
 
             <p>
               C. In addition to the Gas Fee, each time you sell a Canvas to another user of the App, you authorize us to
-              collect a commission of 3.9% of the total value of that transaction (a “Commission”). You acknowledge and
-              agree that the Commission will be transferred to us through the Ethereum network as part of the payment.
+              collect a fee of 10% of the total value of that transaction. That fee consists of:
             </p>
+            <ul>
+              <li>
+                3.9% of the total value of that transaction (a “Commission”). You acknowledge and agree that the
+                Commission will be transferred to us through the Ethereum network as a part of the payment.
+              </li>
+              <li>
+                6.1% of the total value of that transaction (a “Reward”). You acknowledge and agree that the Reward
+                will be transferred evenly to all painters of the sold canvas through the Ethereum network as a part
+                of the payment.
+              </li>
+            </ul>
 
             <p>
-              D. If you are the Canvas Author you are eligible to receive a reward for painting a Canvas (a “Reward”)
-              after the Initial Bidding phase is completed. You acknowledge and agree that the Reward for the Canvas
-              Author will be calculated by dividing the value of the highest Bid decreased by our commision of 3.9% of
-              the
-              total value of the Bid, by the total number of pixels of the Canvas and multiplied by the number of pixels
-              of the Canvas that have been painted by the applicable Canvas Author. You acknowledge and agree that in
-              order to withdraw the Reward you first need to add the Reward to your Account Balance by sending a
-              transaction to the Smart Contract.
+              D. If you are the Canvas Author you are eligible to receive a reward for painting a Canvas (a “Reward”). A
+              A Reward is distributed in these scenarios:
+            </p>
+            <ul>
+              <li>
+                After the Initial Bidding phase is completed. You acknowledge and agree that the Reward for the Canvas Author
+                will be calculated by dividing the value of the winning Bid, decreased by our commission of 3.9% of the
+                total value of the Bid, by the total number of pixels of the Canvas and multiplied by the number of
+                pixels of the Canvas that have been painted by applicable Canvas Author.
+              </li>
+              <li>
+                Each time the Canvas is sold. You acknowledge and agree that the Reward for the Canvas Author will be calculated
+                by dividing 6.1% of the total transaction value by the total number of pixels of the Canvas and
+                multiplied by the number of pixels of the Canvas that have been painted by the applicable Canvas Author.
+              </li>
+            </ul>
+            <p>
+              You acknowledge and agree that in order to withdraw the Reward you first need to add the Reward to your
+              Account Balance by sending a transaction to the Smart Contract.
             </p>
 
             {/* ###################################################################################################### */}
