@@ -115,7 +115,7 @@ export class ContractModel {
 
   createCanvas () {
     return new Promise((resolve, reject) => {
-      this.Contract.createCanvas({}, this.config, (error, txHash) => {
+      this.Contract.createCanvas({}, { ...this.config, gas: 200000 }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Create canvas failed')
