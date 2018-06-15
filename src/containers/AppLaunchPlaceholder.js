@@ -15,7 +15,7 @@ class AppLaunchPlaceholder extends React.Component<{}> {
   render () {
     return (
       <div className="AppLaunchPlaceholder" style={{ backgroundImage: `url(${pixelBg})` }}>
-        <img src={logo} className="AppLaunchPlaceholder__logo" />
+        <img src={logo} className="AppLaunchPlaceholder__logo" alt="CryptoCanvas"/>
         <h1 className="AppLaunchPlaceholder__headline">Create, Trade & Collect Blockchain Artworks</h1>
         <div className="text-center">
           <h2>Live version starts in:</h2>

@@ -54,7 +54,7 @@ class TransactionsHistory extends React.PureComponent<TransactionsHistoryProps, 
     this.props.Contract.BidPostedEvent(...this.eventArgs).get((error, results) => {
       if (!error && results) {
         const transactions = results.map((tx, index) => new CanvasHistoryTx({
-          name: (index === results.length - 1) ? 'Auction Winner' : 'Auction Bid',
+          name: (index === results.length - 1) ? 'Highest Auction Bid' : 'Auction Bid',
           fromAddress: tx.args.bidder,
           value: this.props.web3.fromWei(parseInt(tx.args.amount, 10), 'ether'),
           txHash: tx.transactionHash,

@@ -2,7 +2,6 @@
 import * as React from 'react'
 import withTransactions from '../../hoc/withTransactions'
 import { Transaction, TRANSACTION_STATUS } from '../../models/Transaction'
-import { TransactionWithPixel } from '../../models/TransactionWithPixel'
 import { LoadingPixel } from './LoadingPixel'
 import { TransactionWithPixels } from '../../models/TransactionWithPixels'
 import type { PixelIndex } from '../../types/PixelIndex'

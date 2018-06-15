@@ -13,7 +13,6 @@ import type { PixelIndex } from '../types/PixelIndex'
 import { TransactionWithPixels } from './TransactionWithPixels'
 
 const GAS_LIMIT = 150000
-const GAS_PRICE = 2000000000
 
 export class ContractModel {
   constructor (Contract, account) {
@@ -21,7 +20,6 @@ export class ContractModel {
     this._account = account
     this._config = {
       gas: GAS_LIMIT,
-      // gasPrice: GAS_PRICE,
       from: account,
     }
     // console.log('New ContractModel with account ', account)
@@ -95,7 +93,7 @@ export class ContractModel {
 
   makeBid ({ canvasId, bidAmountInWei }) {
     return new Promise((resolve, reject) => {
-      this.Contract.makeBid(canvasId, { ...this.config, value: bidAmountInWei }, (error, txHash) => {
+      this.Contract.makeBid(canvasId, { ...this.config, gas: 250000, value: bidAmountInWei }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Make bid failed')
@@ -117,7 +115,7 @@ export class ContractModel {
 
   createCanvas () {
     return new Promise((resolve, reject) => {
-      this.Contract.createCanvas({}, this.config, (error, txHash) => {
+      this.Contract.createCanvas({}, { ...this.config, gas: 200000 }, (error, txHash) => {
         if (error) {
           console.log(error)
           console.log('[ERROR] Create canvas failed')
@@ -484,7 +482,7 @@ export class ContractModel {
 
   getRewardInfo (canvasId, userAddress = '') {
     return new Promise((resolve, reject) => {
-      this.Contract.calculateReward(canvasId, userAddress, {}, (error, result) => {
+      this.Contract.calculateRewardToWithdraw(canvasId, userAddress, {}, (error, result) => {
         if (error) {
           console.log(error)
           reject(error)

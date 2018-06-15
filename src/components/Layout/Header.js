@@ -22,7 +22,7 @@ const Header = (props: Props) => {
   return (
     <Row className="Header" justify="space-between" type="flex" align="middle">
       <Row justify="space-between" type="flex" align="middle">
-        <img src={Mona} className="Header__Mona" />
+        <img src={Mona} className="Header__Mona" alt="" />
         <div>
           <Link to={URLHelper.intro} className="Header__link">
             <img src={logo} className="Header__logo" alt="" />
