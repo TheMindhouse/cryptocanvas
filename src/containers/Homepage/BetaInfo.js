@@ -21,7 +21,7 @@ const BetaInfo = () => {
         Running on Test Network. Completely free, no transaction fees.
       </p>
 
-      <div style={{ margin: 50 }}>
+      <div style={{ margin: '50px 0' }}>
         <Link to={URLHelper.getStarted}>
           <Button type="primary" size="large" className="Intro__button">
             Get started for free <Icon type="arrow-right" />

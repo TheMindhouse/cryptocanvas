@@ -146,7 +146,7 @@ class Intro extends React.PureComponent<{}> {
         <section className="containerWrapper">
           <div className="container">
             <Row type="flex" align="middle" justify="center">
-              <Col xs={16} md={12} lg={24}>
+              <Col xs={22} sm={14} md={12} lg={24}>
                 <Row type="flex" align="middle" justify="center" gutter={120}>
                   <Col xs={24} lg={8}>
                     <Row type="flex" align="middle" justify="center" className="IntroSectionBlockchainFeature">
