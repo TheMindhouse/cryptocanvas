@@ -1,10 +1,139 @@
-.Intro__video {
-    max-width: 800px;
-    margin: 30px auto;
+.IntroSection--Welcome {
+    margin-bottom: 50px;
+    padding: 50px 0;
+    background-repeat: repeat-x;
+    background-size: 2000px 200px;
+}
+
+.IntroSection--no-padding {
+    padding: 0;
 }
 
 .Intro__button {
     font-size: 20px;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.Intro__Header--large {
+    font-size: 35px;
+    color: #404040;
+}
+
+.Intro__Header--medium {
+    font-size: 30px;
+    color: #404040;
+}
+
+.Intro__Header--small {
+    font-size: 24px;
+    color: #404040;
+    margin-bottom: 0;
+}
+
+.Intro__Icon--large {
+    height: 50px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.Intro__text {
+    font-size: 16px;
+    line-height: 1.7em;
+    margin: 0 0 1em;
+    color: #555;
+}
+
+.IntroSectionParticipate {
+    display: flex;
+}
+
+.IntroSectionParticipate__photo {
+    max-height: 442px;
+    image-rendering: pixelated;
+}
+
+.IntroSectionParticipate__content {
+    background: repeat-y left;
+    padding: 50px 0 50px 50px;
+    max-height: 442px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media all and (max-width: 991px) {
+    .IntroSectionParticipate {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .IntroSectionParticipate__photo {
+        width: 100%;
+        max-height: 60vh;
+        object-fit: cover;
+    }
+
+    .IntroSectionParticipate__content {
+        width: 80%;
+        background-image: none !important;
+        max-height: none;
+        padding: 50px 0;
+    }
+}
+
+
+.IntroSectionGetRewarded {
+    padding: 100px 0;
+}
+
+.IntroSectionGetRewarded-Charts {
+    margin: 40px 0 15px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.IntroSectionGetRewarded-Charts .ant-progress-text {
+    font-size: 1.2em;
+    color: #999;
+}
+
+.IntroSectionGetRewarded-Charts__Small {
+    width: 100%;
+}
+
+.IntroSectionGetRewarded-Charts__Small .ant-progress {
+    margin: 5px;
+}
+
+
+.IntroSectionBuyArtworks__Gallery {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+
+.IntroSectionEthereum {
+    padding: 100px 0;
+}
+
+.IntroSectionEthereum__Logo {
+    width: 400px;
+    max-width: 80%;
+}
+
+
+.IntroSectionBlockchainFeature {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 20px 0;
+}
+
+.IntroSectionBlockchainFeature__Icon {
+    width: 50px;
+    margin: 0 10px
 }
