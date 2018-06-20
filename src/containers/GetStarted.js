@@ -14,9 +14,9 @@ class GetStarted extends React.PureComponent<{}> {
 
   render () {
     return (
-      <div className="BetaInfo" style={{ backgroundImage: `url(${pixelBg})` }}>
+      <div className="IntroSection--Welcome" style={{ backgroundImage: `url(${pixelBg})` }}>
         <div className="container">
-          <h1><b>Get Started With BETA</b></h1>
+          <h1><b>Getting Started With BETA</b></h1>
 
           <h3 style={{ maxWidth: 700 }}>
             Beta runs exactly the same code as Live version will.
@@ -31,7 +31,10 @@ class GetStarted extends React.PureComponent<{}> {
               <Row type="flex">
                 <h2><b>1.&nbsp;</b></h2>
                 <div>
-                  <h2 style={{ margin: 0 }}><b>Install MetaMask</b></h2>
+                  <h2 style={{ margin: 0 }}><b>
+                    Click <a href="https://metamask.io" target="_blank"
+                             rel="noopener noreferrer">here</a> to install MetaMask
+                  </b></h2>
                   <p className="text-smaller">
                     <HashLink to={URLHelper.help.installingMetamask}>Help: Installing MetaMask</HashLink>
                   </p>
@@ -42,14 +45,12 @@ class GetStarted extends React.PureComponent<{}> {
                 <div>
                   <h2 style={{ margin: 0 }}>
                     <b>
-                      Get free Test Ether&nbsp;
-                      <a href="https://faucet.rinkeby.io/" target="_blank" rel="noopener noreferrer">
-                        here
-                      </a>
+                      Click <a href="https://faucet.rinkeby.io/" target="_blank"
+                               rel="noopener noreferrer">here</a> to get free Test Ether
                     </b>
                   </h2>
                   <p className="text-smaller">
-                    Follow instructions on the website to receive Test Ether to your wallet in MetaMask.
+                    Follow instructions on the website to have Test Ether sent to your MetaMask wallet.
                   </p>
                 </div>
               </Row>
@@ -70,7 +71,7 @@ class GetStarted extends React.PureComponent<{}> {
               <br />
 
               <Link to={URLHelper.home}>
-                <Button type="primary">
+                <Button type="primary" size="large" className="Intro__button">
                   Choose a canvas to paint on <Icon type="arrow-right" />
                 </Button>
               </Link>
