@@ -24,6 +24,9 @@ import Intro from './Intro'
 import { SelectedPixelsProvider } from '../stores/SelectedPixelsProvider'
 import { GetStarted } from './GetStarted'
 import FbMessenger from '../components/Layout/FbMessenger'
+import { CONFIG } from '../config'
+import { METAMASK_NETWORKS } from '../constants/metamask'
+import { HelpBeta } from './HelpBeta'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
@@ -60,7 +63,14 @@ class App extends React.Component {
                       <Route path='/about' component={About} />
                       <Route path='/canvas/:id' component={CanvasPage} />
                       <Route path='/account/:address' component={Account} />
-                      <Route path='/help' component={Help} />
+                      {
+                        CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main &&
+                        <Route path='/help' component={Help} />
+                      }
+                      {
+                        CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
+                        <Route path='/help' component={HelpBeta} />
+                      }
                       <Route path='/terms-of-use' component={TermsOfUse} />
                       <Route path='/contact' component={Contact} />
                       <Route path='/404' component={ErrorPage404} />
