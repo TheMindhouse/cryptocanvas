@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  Route, Switch,
+  Route, Switch
 } from 'react-router-dom'
 import ScrollToTop from 'react-router-scroll-top'
 
@@ -54,10 +54,9 @@ class App extends React.Component {
                     <Header />
                     <AccountStatus />
 
-                    <Route path="/" component={logPageView} />
+                    <Route path='/' component={logPageView} />
                     <Switch>
                       <Route exact path='/' component={Intro} />
-                      <Route path='/get-started' component={GetStarted} />
                       <Route path='/gallery' component={Homepage} />
                       <Route path='/trade' component={Marketplace} />
                       <Route path='/about' component={About} />
@@ -69,7 +68,8 @@ class App extends React.Component {
                       }
                       {
                         CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
-                        <Route path='/help' component={HelpBeta} />
+                        <Route path='/help' component={HelpBeta} /> &&
+                        <Route path='/get-started' component={GetStarted} />
                       }
                       <Route path='/terms-of-use' component={TermsOfUse} />
                       <Route path='/contact' component={Contact} />

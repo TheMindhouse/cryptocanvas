@@ -32,21 +32,21 @@ class Intro extends React.PureComponent<{}> {
           <div className="container text-center">
             <Row type="flex" align="top" gutter={50}>
               <Col xs={{ span: 24 }} md={{ span: 8 }}>
-                <img src={iconCreate} className="Intro__Icon--large" />
+                <img src={iconCreate} className="Intro__Icon--large" alt=""/>
                 <p className="Intro__Header--large"><b>Create.</b></p>
                 <p className="Intro__text">
                   Co-create a painting and have a share of the royalties.
                 </p>
               </Col>
               <Col xs={{ span: 24 }} md={{ span: 8 }}>
-                <img src={iconTrade} className="Intro__Icon--large" />
+                <img src={iconTrade} className="Intro__Icon--large" alt=""/>
                 <p className="Intro__Header--large"><b>Trade.</b></p>
                 <p className="Intro__text">
                   Buy and sell paintings on the open marketplace.
                 </p>
               </Col>
               <Col xs={{ span: 24 }} md={{ span: 8 }}>
-                <img src={iconCollect} className="Intro__Icon--large" />
+                <img src={iconCollect} className="Intro__Icon--large" alt=""/>
                 <p className="Intro__Header--large"><b>Collect.</b></p>
                 <p className="Intro__text">
                   Cryptographically prove ownership of the artworks in your collection.
@@ -55,18 +55,29 @@ class Intro extends React.PureComponent<{}> {
             </Row>
 
             <div style={{ marginTop: 60 }}>
-              <Link to={URLHelper.getStarted}>
-                <Button type="primary" size="large" className="Intro__button">
-                  Get started for free <Icon type="arrow-right" />
-                </Button>
-              </Link>
+              {
+                CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
+                <Link to={URLHelper.getStarted}>
+                  <Button type="primary" size="large" className="Intro__button">
+                    Get started for free <Icon type="arrow-right" />
+                  </Button>
+                </Link>
+              }
+              {
+                CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main &&
+                <Link to={URLHelper.home}>
+                  <Button type="primary" size="large" className="Intro__button">
+                    Get started <Icon type="arrow-right" />
+                  </Button>
+                </Link>
+              }
             </div>
           </div>
         </section>
 
         <section className="IntroSection--no-padding containerWrapper">
           <div className="container IntroSectionParticipate">
-            <img src={photoMarilyn} className="IntroSectionParticipate__photo" />
+            <img src={photoMarilyn} className="IntroSectionParticipate__photo" alt=""/>
             <div className="IntroSectionParticipate__content" style={{ backgroundImage: `url(${bgGradient})` }}>
               <p className="Intro__Header--medium">
                 <b>Participate in<br />
@@ -123,7 +134,7 @@ class Intro extends React.PureComponent<{}> {
             <p className="Intro__Header--medium">
               <b>Buy Unique Pixel Artworks.</b>
             </p>
-            <img src={photoArtworks} className="IntroSectionBuyArtworks__Gallery" />
+            <img src={photoArtworks} className="IntroSectionBuyArtworks__Gallery" alt=""/>
             <Row type="flex" justify="center">
               <Col xs={24} md={12} lg={10}>
                 <p className="Intro__text">
@@ -139,7 +150,7 @@ class Intro extends React.PureComponent<{}> {
 
         <section className="IntroSectionEthereum container text-center">
           <a href="https://ethereum.org" target="_blank" rel="noopener noreferrer">
-            <img src={poweredByEthereum} className="IntroSectionEthereum__Logo" />
+            <img src={poweredByEthereum} className="IntroSectionEthereum__Logo" alt=""/>
           </a>
         </section>
 
@@ -150,7 +161,7 @@ class Intro extends React.PureComponent<{}> {
                 <Row type="flex" align="middle" justify="center" gutter={120}>
                   <Col xs={24} lg={8}>
                     <Row type="flex" align="middle" justify="center" className="IntroSectionBlockchainFeature">
-                      <img src={iconSecure} className="IntroSectionBlockchainFeature__Icon" />
+                      <img src={iconSecure} className="IntroSectionBlockchainFeature__Icon" alt=""/>
                       <div>
                         <p className="Intro__Header--small">
                           <b>Secure</b>
@@ -164,7 +175,7 @@ class Intro extends React.PureComponent<{}> {
                   </Col>
                   <Col xs={24} lg={8}>
                     <Row type="flex" align="middle" justify="center" className="IntroSectionBlockchainFeature">
-                      <img src={iconPerson} className="IntroSectionBlockchainFeature__Icon" />
+                      <img src={iconPerson} className="IntroSectionBlockchainFeature__Icon" alt=""/>
                       <div>
                         <p className="Intro__Header--small">
                           <b>Anonymous</b>
@@ -178,7 +189,7 @@ class Intro extends React.PureComponent<{}> {
                   </Col>
                   <Col xs={24} lg={8}>
                     <Row type="flex" align="middle" justify="center" className="IntroSectionBlockchainFeature">
-                      <img src={iconCode} className="IntroSectionBlockchainFeature__Icon" />
+                      <img src={iconCode} className="IntroSectionBlockchainFeature__Icon" alt=""/>
                       <div>
                         <p className="Intro__Header--small">
                           <b>Open-source</b>
