@@ -14,6 +14,7 @@ import withWeb3 from '../../hoc/withWeb3'
 import { gasCalculator } from '../../helpers/gasCalculator'
 import { EthToUsd } from '../Small/EthToUsd'
 import { Link } from 'react-router-dom'
+import { CONFIG } from "../../config"
 
 type Props = {
   canvasId: number,
@@ -40,11 +41,16 @@ class SelectedPixelsInfo extends React.PureComponent<Props> {
     return null
   }
 
+  calculateNumberOfTransactions = (selectedPixelsCount: number): number =>
+    Math.ceil(selectedPixelsCount / CONFIG.MAX_PIXELS_IN_BATCH)
+
+
   render () {
     const selectedPixels = this.props.selectedPixelsStore.getSelectedPixels(this.props.canvasId)
     const pixelsCutFromPreview = selectedPixels.length - COLOR_PREVIEW_LIMIT
 
     const estimatedGasPriceInEth = this.calculateEstimatedGasPrice(selectedPixels.length)
+    const numberOfTx = this.calculateNumberOfTransactions(selectedPixels.length)
 
     if (!selectedPixels.length) {
       return <p>Click on a pixel to select</p>
@@ -82,6 +88,12 @@ class SelectedPixelsInfo extends React.PureComponent<Props> {
             }>
               <span>&nbsp;(max. <EthToUsd eth={estimatedGasPriceInEth} /> <Icon type="question-circle" />)</span>
             </Popover>
+          }
+          {
+            numberOfTx > 1 &&
+            <small style={{ margin: 0, display: 'block' }}>
+              (sending in {numberOfTx} transactions)
+            </small>
           }
         </p>
       </div>

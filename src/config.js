@@ -64,8 +64,8 @@ const CONFIG_RINKEBY = {
   MAX_ACTIVE_CANVASES: 12,
   // Maximum number of canvases in total
   MAX_TOTAL_CANVASES: 1000,
-  // Maximum number of selected pixels on a single canvas
-  MAX_SELECTED_PIXELS: 100,
+  // Maximum number of pixels sent in a single batch
+  MAX_PIXELS_IN_BATCH: 100,
   // Contract Creation block
   START_BLOCK: 0,
   pixelSize: {
