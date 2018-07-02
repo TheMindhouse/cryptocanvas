@@ -1,7 +1,7 @@
 import { METAMASK_NETWORKS } from './constants/metamask'
 
 const CONFIG_SHARED = {
-  LIVE_LAUNCH_DATE: Date.UTC(2018, 6, 2, 15, 0, 0),
+  LIVE_LAUNCH_DATE: Date.UTC(2018, 6, 9, 15, 0, 0),
 }
 
 const CONFIG_MAIN = {

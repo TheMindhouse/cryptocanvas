@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { Button, Icon } from 'antd'
+import { Button, Divider, Icon } from 'antd'
 import Moment from 'react-moment'
 import './styles/BetaInfo.css'
 import { CountdownCounter } from '../../hoc/renderProps/CountdownCounter'
@@ -29,14 +29,28 @@ const BetaInfo = () => {
         </Link>
       </div>
 
-      <p className="Intro__text">Live version starts in:</p>
-      <CountdownCounter
-        date={new Date(LIVE_LAUNCH_DATE)}
-        render={(state) => <Countdown {...state} />}
-      />
-      <span className="IntroSectionBeta__CountdownDate">
-          <Moment date={new Date(LIVE_LAUNCH_DATE)} format="dddd, MMMM Do YYYY, h:mm A (Z" /> UTC)
-        </span>
+      {
+        new Date() < new Date(LIVE_LAUNCH_DATE)
+          ?
+          <div>
+            <p className="Intro__text">Live version starts in:</p>
+            <CountdownCounter
+              date={new Date(LIVE_LAUNCH_DATE)}
+              render={(state) => <Countdown {...state} />}
+            />
+            <span className="IntroSectionBeta__CountdownDate">
+              <Moment date={new Date(LIVE_LAUNCH_DATE)} format="dddd, MMMM Do YYYY, h:mm A (Z" /> UTC)
+            </span>
+          </div>
+          :
+          <div>
+            <Divider />
+            <p className="Intro__Header--medium"><b>Live version available at:</b></p>
+            <p className="Intro__text">
+              <a href="https://cryptocanvas.art"><b>https://cryptocanvas.art</b></a>
+            </p>
+          </div>
+      }
     </div>
   )
 }
