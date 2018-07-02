@@ -130,12 +130,6 @@ class CanvasStage extends React.Component<Props, State> {
       return
     }
 
-    // Check if number of selected pixels is not already maximum
-    if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
-      this.showCannotSelectPixelModal()
-      return
-    }
-
     // Select pixel
     this.props.selectedPixelsStore.selectPixel(selectedPixel)
 
@@ -145,13 +139,6 @@ class CanvasStage extends React.Component<Props, State> {
       category: ANALYTICS_EVENTS.painting,
       action: ANALYTICS_ACTIONS.painting.pixelSelected,
       label: `Canvas #${this.props.canvasId}, pixel ${selectedPixel.pixelIndex.x}x${selectedPixel.pixelIndex.y} selected`,
-    })
-  }
-
-  showCannotSelectPixelModal = () => {
-    Modal.error({
-      title: 'Cannot Select Pixel',
-      content: `Maximum ${CONFIG.MAX_SELECTED_PIXELS} pixels can be submitted at once.`,
     })
   }
 
