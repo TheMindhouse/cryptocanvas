@@ -68,10 +68,10 @@ class App extends React.Component {
                       }
                       {
                         CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
-                        <div>
-                          <Route path='/help' component={HelpBeta} />
-                          <Route path='/get-started' component={GetStarted} />
-                        </div>
+                          [
+                          <Route path='/help' component={HelpBeta} key={0}/>,
+                          <Route path='/get-started' component={GetStarted} key={1}/>
+                          ]
                       }
                       <Route path='/terms-of-use' component={TermsOfUse} />
                       <Route path='/contact' component={Contact} />
