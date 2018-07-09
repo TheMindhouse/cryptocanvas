@@ -7,7 +7,7 @@ type Props = {
   hash: string,
 }
 
-const getEtherscanUrl = () => {
+export const getEtherscanUrl = () => {
   switch (CONFIG.ETHEREUM_NETWORK) {
     case METAMASK_NETWORKS.rinkeby:
       return 'rinkeby.etherscan.io'

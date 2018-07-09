@@ -6,6 +6,7 @@ import { HashLink } from 'react-router-hash-link'
 import { setDocumentTitle } from '../helpers/utils'
 import { CONFIG } from '../config'
 import { METAMASK_NETWORKS } from '../constants/metamask'
+import { getEtherscanUrl } from '../components/Small/EtherscanLink'
 
 class About extends React.PureComponent {
   componentDidMount () {
@@ -13,9 +14,6 @@ class About extends React.PureComponent {
   }
 
   render () {
-    const etherscanUrl = CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main
-      ? 'etherscan.io'
-      : 'rinkeby.etherscan.io'
     return (
       <div>
         <div className="containerWrapper" style={{ marginBottom: 50 }}>
@@ -247,7 +245,7 @@ class About extends React.PureComponent {
               GitHub page</a>.
             </p>
             <p>Smart Contract is also verified and available
-              at <a href={`https://${etherscanUrl}/address/${CONFIG.CONTRACT_ADDRESS}`} target="_blank"
+              at <a href={`https://${getEtherscanUrl()}/address/${CONFIG.CONTRACT_ADDRESS}`} target="_blank"
                     rel="noopener noreferrer">Etherscan</a>.
             </p>
 
