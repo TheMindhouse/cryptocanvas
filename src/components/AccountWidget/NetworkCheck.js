@@ -37,10 +37,12 @@ class NetworkCheck extends React.PureComponent<Props, State> {
     }
 
     const currentNetworkName = METAMASK_NETWORK_NAMES[ networkId ] || 'Unknown Network'
+    const desiredNetworkName = METAMASK_NETWORK_NAMES[CONFIG.ETHEREUM_NETWORK]
     return (
       <div className="NetworkCheck">
         <span>
           {
+            // User on Main version of the page but connected to Rinkeby
             CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main &&
             networkId === METAMASK_NETWORKS.rinkeby &&
             <span>
@@ -50,11 +52,21 @@ class NetworkCheck extends React.PureComponent<Props, State> {
               </span>
           }
           {
+            // User on Main version of the page but connected to the network other than Rinkeby
+            CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main &&
+            networkId !== METAMASK_NETWORKS.rinkeby &&
+            <span>
+                Your wallet is connected to the {currentNetworkName}.
+                To use CryptoCanvas, please switch to the {desiredNetworkName}.
+              </span>
+          }
+          {
+            // User on Rinkeby version of the page but connected to the network other than Rinkeby
             CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.rinkeby &&
             networkId === METAMASK_NETWORKS.main &&
               <span>
-               You are visiting Rinkeby version of the page but your wallet is connected to the {currentNetworkName}.
-                To use CryptoCanvas, please switch to <a
+               You are visiting Rinkeby version of the page but your wallet is connected to the {currentNetworkName}.<br/>
+                To use CryptoCanvas, please switch the network to the {desiredNetworkName} or visit <a
               href="https://cryptocanvas.art">cryptocanvas.art</a>
               </span>
           }
