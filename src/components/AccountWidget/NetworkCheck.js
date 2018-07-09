@@ -42,7 +42,7 @@ class NetworkCheck extends React.PureComponent<Props, State> {
       <div className="NetworkCheck">
         <span>
           {
-            // User on Main version of the page but connected to Rinkeby
+            // User on Main version of the page and connected to Rinkeby
             CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main &&
             networkId === METAMASK_NETWORKS.rinkeby &&
             <span>
@@ -52,7 +52,7 @@ class NetworkCheck extends React.PureComponent<Props, State> {
               </span>
           }
           {
-            // User on Main version of the page but connected to the network other than Rinkeby
+            // User on Main version of the page and connected to the network other than Rinkeby
             CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main &&
             networkId !== METAMASK_NETWORKS.rinkeby &&
             <span>
@@ -61,11 +61,20 @@ class NetworkCheck extends React.PureComponent<Props, State> {
               </span>
           }
           {
-            // User on Rinkeby version of the page but connected to the network other than Rinkeby
+            // User on Rinkeby version of the page and connected to the Main Network
             CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.rinkeby &&
             networkId === METAMASK_NETWORKS.main &&
               <span>
-               You are visiting Rinkeby version of the page but your wallet is connected to the {currentNetworkName}.<br/>
+               Your wallet is connected to the {currentNetworkName}. To use CryptoCanvas,
+                please switch to <a href="https://cryptocanvas.art">cryptocanvas.art</a>
+              </span>
+          }
+          {
+            // User on Rinkeby version of the page and connected to the network other than Main
+            CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.rinkeby &&
+            networkId !== METAMASK_NETWORKS.main &&
+              <span>
+               Your wallet is connected to the {currentNetworkName}.<br/>
                 To use CryptoCanvas, please switch the network to the {desiredNetworkName} or visit <a
               href="https://cryptocanvas.art">cryptocanvas.art</a>
               </span>
