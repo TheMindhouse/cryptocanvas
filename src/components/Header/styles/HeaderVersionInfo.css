@@ -1,0 +1,44 @@
+.HeaderVersionInfo {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #444;
+}
+
+.HeaderVersionInfo__Version {
+    color: #fff;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 3px;
+    margin-right: 7px;
+    font-size: 12px;
+}
+
+.HeaderVersionInfo__Version--main {
+    background: #2ecc71;
+}
+
+.HeaderVersionInfo__Version--testnet {
+    background: #d35400;
+}
+
+.HeaderVersionInfo__Caption {
+    color: #999;
+    font-size: 11px;
+}
+
+.HeaderVersionInfo__Caption a {
+    color: #999;
+}
+
+.HeaderVersionInfo__Caption a:hover {
+    color: #999;
+    text-decoration: underline;
+}
+
+
+
+@media all and (max-width: 768px) {
+    .HeaderVersionInfo {
+        margin: 0 0 15px;
+    }
+}

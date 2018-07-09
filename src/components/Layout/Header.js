@@ -12,6 +12,7 @@ import logo from '../../assets/images/logo-wide.png'
 import { CONFIG } from '../../config'
 import { HeaderLaunchInfo } from '../Header/HeaderLaunchInfo'
 import { METAMASK_NETWORKS } from '../../constants/metamask'
+import { HeaderVersionInfo } from '../Header/HeaderVersionInfo'
 
 type Props = {
   // from withWeb3
@@ -31,9 +32,14 @@ const Header = (props: Props) => {
 
           {
             CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main &&
+            new Date() < new Date(CONFIG.SHARED.LIVE_LAUNCH_DATE) &&
             <HeaderLaunchInfo />
           }
-          {/*{CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main && <HeaderTestNet />}*/}
+
+          {
+            new Date() >= new Date(CONFIG.SHARED.LIVE_LAUNCH_DATE) &&
+            <HeaderVersionInfo />
+          }
         </div>
       </Row>
       <ul className="Header__menu">
