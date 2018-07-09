@@ -6,7 +6,7 @@ const CONFIG_SHARED = {
 
 const CONFIG_MAIN = {
   // Contract settings
-  CONTRACT_ADDRESS: '', // Main net
+  CONTRACT_ADDRESS: '0xBfaD2ceE086D21a0b75847Cc0BF2C3c58023a844', // Main net
   WEB3_HTTP_PROVIDER: 'https://mainnet.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
   // Browser page title
