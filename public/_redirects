@@ -1,1 +1,4 @@
+# Redirect domain aliases to primary domain
+https://beta.cryptocanvas.art/* https://rinkeby.cryptocanvas.art/:splat 301!
+
 /*    /index.html   200

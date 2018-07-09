@@ -203,11 +203,11 @@ class About extends React.PureComponent {
 
             <h2 id="how-do-you-calculate-rewards"><b>How do you calculate Rewards for painting?</b></h2>
             <p>The reward is evenly distributed across all the painters, based on how many pixels of the canvas they have painted.</p>
-            <p><b>Painters Reward consists of:
+            <p><b>Painters Reward consists of:</b></p>
               <ul>
-                <li>96.1% from the winning bid in the Initial Bidding phase</li>
-                <li>6.1% from each trading transaction (when a canvas is sold)</li>
-              </ul></b></p>
+                <li><b>96.1% from the winning bid in the Initial Bidding phase</b></li>
+                <li><b>6.1% from each trading transaction (when a canvas is sold)</b></li>
+              </ul>
             <p><i><b>Example 1:</b><br />
               The canvas was sold during Initial Bidding for 1 ETH. Painters will receive 0.961 ETH (96.1%) to share.
               If you painted 1152 pixels&mdash;that is half the pixels of the canvas&mdash;you
