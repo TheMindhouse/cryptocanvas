@@ -45,7 +45,7 @@ const BetaInfo = () => {
           :
           <div>
             <Divider />
-            <p className="Intro__Header--medium"><b>Live version available at:</b></p>
+            <p className="Intro__Header--medium"><b>Main Network version available at:</b></p>
             <p className="Intro__text">
               <a href="https://cryptocanvas.art"><b>https://cryptocanvas.art</b></a>
             </p>

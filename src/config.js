@@ -6,7 +6,7 @@ const CONFIG_SHARED = {
 
 const CONFIG_MAIN = {
   // Contract settings
-  CONTRACT_ADDRESS: '', // Main net
+  CONTRACT_ADDRESS: '0xBfaD2ceE086D21a0b75847Cc0BF2C3c58023a844', // Main net
   WEB3_HTTP_PROVIDER: 'https://mainnet.infura.io/ML50g9METlqvSTgwiJTm',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
   // Browser page title
@@ -27,8 +27,8 @@ const CONFIG_MAIN = {
   MAX_ACTIVE_CANVASES: 12,
   // Maximum number of canvases in total
   MAX_TOTAL_CANVASES: 1000,
-  // Maximum number of selected pixels on a single canvas
-  MAX_SELECTED_PIXELS: 100,
+  // Maximum number of pixels sent in a single batch
+  MAX_PIXELS_IN_BATCH: 100,
   // Contract Creation block
   START_BLOCK: 0,
   pixelSize: {
@@ -64,8 +64,8 @@ const CONFIG_RINKEBY = {
   MAX_ACTIVE_CANVASES: 12,
   // Maximum number of canvases in total
   MAX_TOTAL_CANVASES: 1000,
-  // Maximum number of selected pixels on a single canvas
-  MAX_SELECTED_PIXELS: 100,
+  // Maximum number of pixels sent in a single batch
+  MAX_PIXELS_IN_BATCH: 100,
   // Contract Creation block
   START_BLOCK: 0,
   pixelSize: {

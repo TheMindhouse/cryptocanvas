@@ -6,11 +6,17 @@
     width: 100vw;
     font-weight: 400;
     color: #fafafa;
-    background: #e74c3c;
-    font-size: 14px;
-    padding: 10px 30px;
+    background: #f39c12;
+    font-size: 12px;
+    padding: 20px 30px;
+    text-align: center;
 }
 
 .NetworkCheck__Icon {
     margin-right: 10px;
+}
+
+.NetworkCheck a {
+    color: inherit;
+    text-decoration: underline;
 }

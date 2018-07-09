@@ -1,10 +1,9 @@
 // @flow
 import * as React from 'react'
-import { Icon } from 'antd'
 import './styles/NetworkCheck.css'
 import withWeb3 from '../../hoc/withWeb3'
 import { CONFIG } from '../../config'
-import { METAMASK_NETWORK_NAMES } from '../../constants/metamask'
+import { METAMASK_NETWORK_NAMES, METAMASK_NETWORKS } from '../../constants/metamask'
 
 type Props = {
   web3: {
@@ -32,18 +31,33 @@ class NetworkCheck extends React.PureComponent<Props, State> {
   }
 
   render () {
-    if (!this.state.networkId || this.state.networkId === CONFIG.ETHEREUM_NETWORK) {
+    const { networkId } = this.state
+    if (!networkId || networkId === CONFIG.ETHEREUM_NETWORK) {
       return null
     }
 
-    const currentNetworkName = METAMASK_NETWORK_NAMES[this.state.networkId] || 'Unknown Network'
-    const desiredNetworkName = METAMASK_NETWORK_NAMES[CONFIG.ETHEREUM_NETWORK]
+    const currentNetworkName = METAMASK_NETWORK_NAMES[ networkId ] || 'Unknown Network'
     return (
       <div className="NetworkCheck">
-        <Icon type="exclamation-circle" className="NetworkCheck__Icon" />
         <span>
-          Error: You're connected to the <b>{currentNetworkName}</b>.
-          Connect MetaMask to the <b>{desiredNetworkName}</b>.
+          {
+            CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main &&
+            networkId === METAMASK_NETWORKS.rinkeby &&
+            <span>
+                Your wallet is connected to the {currentNetworkName}.
+                To play with CryptoCanvas on Rinkeby, please switch to <a
+              href="https://rinkeby.cryptocanvas.art">rinkeby.cryptocanvas.art</a>
+              </span>
+          }
+          {
+            CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.rinkeby &&
+            networkId === METAMASK_NETWORKS.main &&
+              <span>
+               You are visiting Rinkeby version of the page but your wallet is connected to the {currentNetworkName}.
+                To use CryptoCanvas, please switch to <a
+              href="https://cryptocanvas.art">cryptocanvas.art</a>
+              </span>
+          }
         </span>
       </div>
     )

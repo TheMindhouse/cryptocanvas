@@ -11,8 +11,7 @@ import UserSelectedPixels from './UserSelectedPixels'
 import { withSelectedPixels } from '../../hoc/withSelectedPixels'
 import type { SelectedPixelsProviderState } from '../../stores/SelectedPixelsProvider'
 import { SelectedPixel } from '../../models/SelectedPixel'
-import { CONFIG } from '../../config'
-import { message, Modal } from 'antd'
+import { message } from 'antd'
 import UserPaintedLoadingPixels from './UserPaintedLoadingPixels'
 import { ANALYTICS_ACTIONS, ANALYTICS_EVENTS } from '../../constants/analytics'
 import { withAnalytics } from '../../hoc/withAnalytics'
@@ -130,12 +129,6 @@ class CanvasStage extends React.Component<Props, State> {
       return
     }
 
-    // Check if number of selected pixels is not already maximum
-    if (selectedPixels.length === CONFIG.MAX_SELECTED_PIXELS) {
-      this.showCannotSelectPixelModal()
-      return
-    }
-
     // Select pixel
     this.props.selectedPixelsStore.selectPixel(selectedPixel)
 
@@ -145,13 +138,6 @@ class CanvasStage extends React.Component<Props, State> {
       category: ANALYTICS_EVENTS.painting,
       action: ANALYTICS_ACTIONS.painting.pixelSelected,
       label: `Canvas #${this.props.canvasId}, pixel ${selectedPixel.pixelIndex.x}x${selectedPixel.pixelIndex.y} selected`,
-    })
-  }
-
-  showCannotSelectPixelModal = () => {
-    Modal.error({
-      title: 'Cannot Select Pixel',
-      content: `Maximum ${CONFIG.MAX_SELECTED_PIXELS} pixels can be submitted at once.`,
     })
   }
 
