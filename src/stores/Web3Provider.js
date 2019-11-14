@@ -19,7 +19,8 @@ class Web3Provider extends React.Component {
     let eventsSupported = false
     let metamaskAvailable = false
 
-    if (typeof window.web3 !== 'undefined') {
+    if (window.ethereum) {
+      window.ethereum.enable()
       window.web3 = new Web3(window.web3.currentProvider)
       eventsSupported = true
       metamaskAvailable = true

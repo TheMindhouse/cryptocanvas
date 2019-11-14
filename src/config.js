@@ -7,7 +7,7 @@ const CONFIG_SHARED = {
 const CONFIG_MAIN = {
   // Contract settings
   CONTRACT_ADDRESS: '0xBfaD2ceE086D21a0b75847Cc0BF2C3c58023a844', // Main net
-  WEB3_HTTP_PROVIDER: 'https://mainnet.infura.io/ML50g9METlqvSTgwiJTm',
+  WEB3_HTTP_PROVIDER: 'https://mainnet.infura.io/v3/4e9bcb4154874a5b947661b973f75347',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
   // Browser page title
   PAGE_TITLE: 'CryptoCanvas - Create, Trade & Collect Blockchain Artworks',
@@ -44,7 +44,7 @@ const CONFIG_MAIN = {
 const CONFIG_RINKEBY = {
   // Contract settings
   CONTRACT_ADDRESS: '0xe06ac2eba65f7184aae3ca2a0cb1cfdc604b765f', // Rinkeby testnet
-  WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm',
+  WEB3_HTTP_PROVIDER: 'https://rinkeby.infura.io/v3/4e9bcb4154874a5b947661b973f75347',
   ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Browser page title
   PAGE_TITLE: 'CryptoCanvas BETA - Create, Trade & Collect Blockchain Artworks',
