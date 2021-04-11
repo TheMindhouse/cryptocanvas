@@ -132,7 +132,7 @@ class CanvasStage extends React.Component<Props, State> {
     // Select pixel
     this.props.selectedPixelsStore.selectPixel(selectedPixel)
 
-    FbMessengerHelper.showPixelPaintedDialog()
+    // FbMessengerHelper.showPixelPaintedDialog()
 
     this.props.analyticsAPI.event({
       category: ANALYTICS_EVENTS.painting,

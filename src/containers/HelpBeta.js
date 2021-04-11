@@ -14,7 +14,7 @@ class HelpBeta extends React.PureComponent<Props> {
 
   componentDidMount () {
     setDocumentTitle('Help')
-    FbMessengerHelper.showHelpDialog()
+    // FbMessengerHelper.showHelpDialog()
   }
 
   render () {

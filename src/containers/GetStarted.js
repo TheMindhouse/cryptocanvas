@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom'
 import { FbMessengerHelper } from '../helpers/FbMessengerHelper'
 
 class GetStarted extends React.PureComponent<{}> {
-  componentDidMount () {
-    FbMessengerHelper.showGetStartedDialog()
-  }
+  // componentDidMount () {
+  //   FbMessengerHelper.showGetStartedDialog()
+  // }
 
   render () {
     return (
