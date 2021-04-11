@@ -1,7 +1,8 @@
 // @flow
 import { SelectedPixel } from '../models/SelectedPixel'
+import { CONFIG } from '../config'
 
-const STORAGE_KEY = 'USER_SELECTED_PIXELS'
+const STORAGE_KEY = 'USER_SELECTED_PIXELS_' + CONFIG.ETHEREUM_NETWORK
 
 const getSelectedPixels = (): Array<SelectedPixel> => {
   const selectedPixelsJson = window.localStorage.getItem(STORAGE_KEY) || '[]'

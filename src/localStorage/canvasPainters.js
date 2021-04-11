@@ -1,7 +1,8 @@
 // @flow
 import { CanvasPaintersCache } from '../models/CanvasPaintersCache'
+import { CONFIG } from '../config'
 
-const STORAGE_KEY = 'CANVAS_PAINTERS_CACHE'
+const STORAGE_KEY = 'CANVAS_PAINTERS_CACHE_' + CONFIG.ETHEREUM_NETWORK
 
 const getSavedCanvasPaintersCache = () => {
   const canvases = window.localStorage.getItem(STORAGE_KEY) || '[]'

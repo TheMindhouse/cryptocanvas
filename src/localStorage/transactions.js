@@ -2,8 +2,9 @@ import { Transaction, TRANSACTION_TYPE } from '../models/Transaction'
 import { TransactionWithPixel } from '../models/TransactionWithPixel'
 import { TransactionWithCanvasId } from '../models/transactions/TransactionWithCanvasId'
 import { TransactionWithPixels } from '../models/TransactionWithPixels'
+import { CONFIG } from '../config'
 
-const STORAGE_KEY = 'USER_TX'
+const STORAGE_KEY = 'USER_TX_' + CONFIG.ETHEREUM_NETWORK;
 
 const getTransactions = () => {
   const transactions = window.localStorage.getItem(STORAGE_KEY)

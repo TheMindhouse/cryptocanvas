@@ -3,7 +3,7 @@ import { CanvasPixelsCache } from '../models/CanvasPixelsCache'
 import moment from 'moment'
 import { CONFIG } from '../config'
 
-const STORAGE_KEY = 'CANVAS_CACHE'
+const STORAGE_KEY = 'CANVAS_CACHE_' + CONFIG.ETHEREUM_NETWORK
 
 const getSavedCanvases = () => {
   const canvases = window.localStorage.getItem(STORAGE_KEY) || '[]'
