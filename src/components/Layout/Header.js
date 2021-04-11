@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import { Popover, Row } from 'antd'
-
 import './styles/Header.css'
 import { Link, NavLink } from 'react-router-dom'
 import withWeb3 from '../../hoc/withWeb3'
@@ -9,7 +8,7 @@ import { URLHelper } from '../../helpers/URLhelper'
 import { HashLink } from 'react-router-hash-link'
 import Mona from '../../assets/images/mona.png'
 import logo from '../../assets/images/logo-wide.png'
-import { CONFIG } from '../../config'
+import { CONFIG, isTEST } from '../../config'
 import { HeaderLaunchInfo } from '../Header/HeaderLaunchInfo'
 import { METAMASK_NETWORKS } from '../../constants/metamask'
 import { HeaderVersionInfo } from '../Header/HeaderVersionInfo'
@@ -43,13 +42,16 @@ const Header = (props: Props) => {
         </div>
       </Row>
       <ul className="Header__menu">
-        <li>
-          <NavLink to={URLHelper.home} exact
-                   className="Header__menu-link"
-                   activeClassName="Header__menu-link--active">
-            <span className="hidden-mobile">Canvas</span> Gallery
-          </NavLink>
-        </li>
+        {
+          isTEST &&
+          <li>
+            <NavLink to={URLHelper.home} exact
+                     className="Header__menu-link"
+                     activeClassName="Header__menu-link--active">
+              <span className="hidden-mobile">Canvas</span> Gallery
+            </NavLink>
+          </li>
+        }
         <li>
           <NavLink to="/about"
                    className="Header__menu-link"

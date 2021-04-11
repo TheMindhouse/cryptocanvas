@@ -48,14 +48,13 @@ class Homepage extends Component {
           <Row className="Homepage__header container">
             <h1><b>Canvases Available for Painting</b></h1>
             <h3>
-              <b>Paint a portion of a canvas for <Tooltip placement="top" title="You only need to cover a transaction fee required by the
-              Ethereum Network">FREE*</Tooltip></b> and get a share of its price after it's sold on an auction.<br/>
-              You can also read more <Link to="/about">how it works</Link>.</h3>
+              Paint a portion of a canvas and get a share of its price after it's sold on an auction.<br />
+              <Link to="/about">How it works?</Link></h3>
           </Row>
         </div>
         <Row className="container text-center">
-          {!this.state.activeCanvasIds && <div style={{ margin: '70px 0 100px'}}><Spin /></div> }
-          {this.state.activeCanvasIds && <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} /> }
+          {!this.state.activeCanvasIds && <div style={{ margin: '70px 0 100px' }}><Spin /></div>}
+          {this.state.activeCanvasIds && <ActiveCanvases activeCanvasIds={this.state.activeCanvasIds} />}
         </Row>
         <Marketplace />
       </div>

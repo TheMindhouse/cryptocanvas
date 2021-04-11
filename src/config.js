@@ -89,3 +89,6 @@ const getConfig = () => {
 }
 
 export const CONFIG = getConfig()
+
+export const isMAIN = CONFIG.ETHEREUM_NETWORK === METAMASK_NETWORKS.main
+export const isTEST = CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main

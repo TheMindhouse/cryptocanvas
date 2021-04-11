@@ -20,6 +20,7 @@ import { CanvasInfo } from '../models/CanvasInfo'
 type Props = {
   // withWeb3
   Contract: ContractModel,
+  canvasId?: number,
 }
 
 type State = {
@@ -37,9 +38,9 @@ class CanvasPage extends React.Component<Props, State> {
   constructor (props) {
     super(props)
 
-    this.canvasId = parseInt(props.match.params.id, 10)
+    this.canvasId = typeof props.canvasId !== 'undefined' ? props.canvasId : parseInt(props.match.params.id, 10)
 
-    const isInvalidId = isNaN(props.match.params.id) ||
+    const isInvalidId = isNaN(this.canvasId) ||
       this.canvasId < 0 ||
       this.canvasId > CONFIG.MAX_TOTAL_CANVASES
 

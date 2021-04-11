@@ -61,10 +61,6 @@ class Account extends React.PureComponent<Props> {
 
           <PixelsPainted accountAddress={urlAccountAddress}/>
 
-          <br /><br />
-
-          <i className="text-info">More stats coming soon!</i>
-
         </Row>
       </div>
     )

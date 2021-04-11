@@ -1,0 +1,39 @@
+.IntroSection--Welcome {
+    margin-bottom: 50px;
+    padding: 50px 0;
+    background-repeat: repeat-x;
+    background-size: 2000px 200px;
+}
+
+.IntroSection--no-padding {
+    padding: 0;
+}
+
+.Intro__button {
+    font-size: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.Intro__Header--large {
+    font-size: 30px;
+    color: #404040;
+}
+
+.Intro__Header--medium {
+    font-size: 22px;
+    color: #404040;
+}
+
+.Intro__Icon--large {
+    height: 50px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.Intro__text {
+    font-size: 18px;
+    line-height: 1.7em;
+    margin: 0 0 1em;
+    color: #555;
+}

@@ -27,6 +27,7 @@ import FbMessenger from '../components/Layout/FbMessenger'
 import { CONFIG } from '../config'
 import { METAMASK_NETWORKS } from '../constants/metamask'
 import { HelpBeta } from './HelpBeta'
+import IntroNew from './IntroNew'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'cryptocanvas.art') {
@@ -56,7 +57,8 @@ class App extends React.Component {
 
                     <Route path='/' component={logPageView} />
                     <Switch>
-                      <Route exact path='/' component={Intro} />
+                      {/*<Route exact path='/' component={Intro} />*/}
+                      <Route exact path='/' component={IntroNew} />
                       <Route path='/gallery' component={Homepage} />
                       <Route path='/trade' component={Marketplace} />
                       <Route path='/about' component={About} />
@@ -79,7 +81,7 @@ class App extends React.Component {
                       <Route component={ErrorPage404} />
                     </Switch>
                   </div>
-                  <FbMessenger />
+                  {/*<FbMessenger />*/}
                   <Footer />
                 </div>
               </ScrollToTop>

@@ -25,12 +25,12 @@ class Footer extends React.PureComponent<Props> {
         <Col xs={24} sm={24} md={8} style={{ textAlign: 'center' }}>
           Made with &hearts; by <a href="https://mindhouse.io" target="_blank" rel="noopener noreferrer">The Mindhouse</a>
         </Col>
-        <Col xs={24} sm={24} md={8} style={{ textAlign: 'right' }}>
-          <a href="https://www.facebook.com/CryptoCanvas.art/" target="_blank" rel="noopener noreferrer"
-             className="Footer__facebook">
-            <Icon type="facebook" style={{ fontSize: 17, marginRight: 5 }}/>@CryptoCanvas.art
-          </a>
-        </Col>
+        {/*<Col xs={24} sm={24} md={8} style={{ textAlign: 'right' }}>*/}
+        {/*  <a href="https://www.facebook.com/CryptoCanvas.art/" target="_blank" rel="noopener noreferrer"*/}
+        {/*     className="Footer__facebook">*/}
+        {/*    <Icon type="facebook" style={{ fontSize: 17, marginRight: 5 }}/>@CryptoCanvas.art*/}
+        {/*  </a>*/}
+        {/*</Col>*/}
       </Row>
     )
   }
