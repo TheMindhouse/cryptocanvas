@@ -1,25 +1,12 @@
 // @flow
 import * as React from 'react'
 import './styles/IntroNew.css'
-import BetaInfo from './Homepage/BetaInfo'
-import { CONFIG, isMAIN } from '../config'
-import { METAMASK_NETWORKS } from '../constants/metamask'
 import { setDocumentTitle } from '../helpers/utils'
-import { Button, Col, Icon, Progress, Row } from 'antd'
-import pixelBg from '../assets/images/pixels.png'
-import photoMarilyn from '../assets/images/home-marilyn.png'
-import photoArtworks from '../assets/images/home-gallery.png'
-import bgGradient from '../assets/images/bg-gradient.png'
-import iconCreate from '../assets/images/icon-create.png'
-import iconTrade from '../assets/images/icon-trade.png'
-import iconCollect from '../assets/images/icon-collect.png'
-import iconSecure from '../assets/images/icon-secure.png'
-import iconPerson from '../assets/images/icon-person.png'
-import iconCode from '../assets/images/icon-code.png'
-import poweredByEthereum from '../assets/images/powered-by-ethereum.png'
+import { Col, Icon, Row } from 'antd'
 import { URLHelper } from '../helpers/URLhelper'
-import { Link } from 'react-router-dom'
 import CanvasPage from './CanvasPage'
+import discordLogo from '../assets/images/discord.svg'
+import { SOCIAL_LINKS } from '../constants'
 
 class Intro extends React.PureComponent<{}> {
   componentDidMount () {
@@ -84,6 +71,38 @@ class Intro extends React.PureComponent<{}> {
               <Col xs={{ span: 24 }} md={{ span: 8 }} className="ContributeStep">
                 <div className="ContributeStep__Number">3</div>
                 <p className="Intro__text">On canvas auction, you will receive a % of the proceeds.</p>
+              </Col>
+            </Row>
+          </div>
+        </section>
+
+
+        <section style={{ margin: '50px 0 40px' }}>
+          <div className="container">
+            <Row type="flex" align="middle" gutter={50} className="text-center">
+              <Col xs={{ span: 24 }} md={{ span: 8, offset: 4 }}>
+                <a
+                  href={SOCIAL_LINKS.Discord}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={discordLogo}
+                    alt="Discord"
+                    style={{ width: 250, maxWidth: '80%', opacity: 0.8 }}
+                  />
+                </a>
+              </Col>
+              <Col xs={{ span: 24 }} md={{ span: 8 }}>
+                <a
+                  href={SOCIAL_LINKS.Twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: 30 }}
+                >
+                  <Icon type="twitter" style={{ marginRight: 10 }} />
+                  Twitter
+                </a>
               </Col>
             </Row>
           </div>
