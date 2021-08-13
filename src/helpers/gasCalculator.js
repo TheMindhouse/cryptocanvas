@@ -7,6 +7,10 @@ export const gasCalculator = {
     const EXTRA_OPERATIONS = 30000
     let totalGas = pixelsCount * REGULAR_PIXEL + EXTRA_OPERATIONS
     if (hasFirstPixel) totalGas += FIRST_PIXEL
-    return totalGas
+
+    // Add % for calculated gas for extra protection against out of gas situations
+    const SAFETY_MARGIN_MULTIPLIER = 1.2;
+
+    return totalGas * SAFETY_MARGIN_MULTIPLIER
   },
 }
