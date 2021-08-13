@@ -9,7 +9,7 @@ export const gasCalculator = {
     if (hasFirstPixel) totalGas += FIRST_PIXEL
 
     // Add % for calculated gas for extra protection against out of gas situations
-    const SAFETY_MARGIN_MULTIPLIER = 1.2;
+    const SAFETY_MARGIN_MULTIPLIER = 1.4;
 
     return totalGas * SAFETY_MARGIN_MULTIPLIER
   },
